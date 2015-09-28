@@ -1,0 +1,19 @@
+\frametitle{\bf Readings} 
+\begin{itemize}
+\myref{http://scratchapixel.com/lessons/3d-basic-lessons/lesson-1-writing-a-simple-raytracer/}
+\myref{http://en.wikipedia.org/wiki/Ray_tracing_(graphics)}
+\myref{http://www.cs.unc.edu/~rademach/xroads-RT/RTarticle.html}
+\myref{http://en.wikipedia.org/wiki/Phong_lighting}
+\myreff{http://www.wiziq.com/tutorial/162719-6-837-7-Ray-Tracing-Computer-Graphics}
+\myreff{http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/}
+\end{itemize}
+{\bf Software:}
+\begin{itemize}
+\myref{http://pbrt.org/}
+\myref{http://www.luxrender.net/en_GB/index}
+\myref{http://www.povray.org/}
+\myref{http://www.yafaray.org/}
+\myref{http://radsite.lbl.gov/radiance/HOME.html}
+\myref{http://www-graphics.stanford.edu/~cek/rayshade/rayshade.html}
+\end{itemize}
+

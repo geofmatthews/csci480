@@ -1,0 +1,12 @@
+\frametitle{Further Reading} 
+\begin{itemize}
+\item
+\url{https://www.siggraph.org/education/materials/HyperGraph/raytrace/rtinter0.htm}
+\item \url{https://en.wikipedia.org/wiki/Quadric}
+\item \url{http://marctenbosch.com/photon/mbosch_intersection.pdf}
+\item\url{http://www.emeyex.com/site/projects/raytorus.pdf}
+\item
+\url{http://www.geisswerks.com/ryan/BLOBS/blobs.html}
+\item
+ \url{http://www.cs.cornell.edu/courses/cs465/2003fa/homeworks/raytri.pdf}
+\end{itemize}

@@ -1,0 +1,308 @@
+% latex foo.tex 
+% dvips -Poutline -G0 foo.dvi -o 
+% ps2pdf -dPDFSETTINGS#/prepress foo.ps
+\documentclass[slidestop,xcolor=pst]{beamer}
+\usepackage{etex}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+%\usepackage{pstricks,pst-tree,pst-node,pst-plot,pst-3dplot}
+\usepackage{graphicx}
+
+\newcommand{\mygraph}[2]{\includegraphics[width=#1\textwidth]{figures/#2}}
+\newcommand{\mygraphc}[2]{\centerline{\includegraphics[width=#1\textwidth]{figures/#2}}}
+
+\newcommand{\sect}[1]{
+\section{#1}
+\begin{frame}[fragile]\frametitle{#1}
+}
+
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\myref}[1]{\small\item\url{#1}}
+\newcommand{\myreff}[1]{\scriptsize\item\url{#1}}
+
+\mode<presentation>
+{
+  \usetheme{Madrid}
+  % or ...
+
+%  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+
+\usepackage[english]{babel}
+
+\usepackage[latin1]{inputenc}
+
+\title[Computer Graphics, CSCI 480, Ray Tracing II]
+{
+Ray Tracing, Part II
+}
+
+\subtitle{} % (optional)
+
+\author[Geoffrey Matthews]
+{Geoffrey Matthews}
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[WWU/CS]
+{
+  Department of Computer Science\\
+  Western Washington University
+}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date{Fall 2015}
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+\pgfdeclareimage[height=0.5cm]{university-logo}{WWULogoProColor}
+\logo{\pgfuseimage{university-logo}}
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+\begin{document}
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+
+\sect{Shading: Phong Reflection}
+
+\mygraphc{1}{Phong_components_version_4.png}
+
+
+
+\begin{itemize}
+\item Phong reflection model, a combination of three simple shaders
+\item A {\em phenomenological} model, not a {\em physical } one.
+\end{itemize}
+
+
+\end{frame}
+
+\sect{Phong reflection}
+\mygraphc{1}{Phong_components_version_4.png}
+
+
+
+ Colors calculated using three vectors:
+
+\bi
+\item Orientation of the surface (the {\em normal})
+\item Direction toward {\em light}
+\item Direction toward camera (or {\em eye})
+\ei
+
+\end{frame}
+
+\sect{Spheres: finding the normal at a point}
+\mygraphc{.5}{findingnormalonsphere.png}
+\begin{itemize}
+\item How do we find the normal?\pause
+\item $n = p-c$
+  \hfill (may need to normalize)
+\end{itemize}
+
+\end{frame}
+
+\sect{Spheres: finding the eye vector and the light vector}
+\begin{itemize}
+\item How do we find the vector pointing toward the camera?
+\pause
+\\  {\em camera\_position} - {\em point\_on\_sphere}
+\pause
+\item How do we find the vector pointing toward the light?
+\pause
+\item Depends on the kind of light.
+  \bi
+\item {\em Distant lights}, like the sun, are a fixed direction.
+\item {\em Point lights}, are located at a point:
+   {\em light\_position} - {\em point\_on\_sphere}
+\ei
+\end{itemize}
+\end{frame}
+
+\sect{Shading: Phong Reflection}
+
+\mygraphc{1}{Phong_components_version_4.png}
+
+
+\begin{itemize}
+\item Given {\bf normal}, {\bf light}, and {\bf eye} vectors, how do
+  we compute each of these factors?
+\end{itemize}
+
+
+\end{frame}
+
+\sect{The Ambient Term}
+\mygraphc{1}{Phong_components_version_4.png}
+
+\begin{itemize}
+\item Light comes reflected and mixed from all objects in the environment.
+\item Approximate this with a small amount of white light.
+\item Without this we would get totally black shadows.
+\item Doesn't use any of the vectors---totally flat.
+\end{itemize}
+\end{frame}
+
+\sect{The Diffuse Term}
+\mygraphc{1}{Phong_components_version_4.png}
+\bi
+\item Gives the shading falloff of light.
+  \item Side oriented toward light:  full object color.
+\item Side oriented away from light: black.
+\ei
+\end{frame}
+
+\sect{The Diffuse Term:  Lambertian Reflection}
+
+\mygraphc{0.5}{diffuseterm02.png}
+
+
+\begin{itemize}
+\item Objects with rough surfaces reflect light equally in all directions.
+\item Light energy {\bf coming off} surface in any direction will be
+  proportional to the amount of light {\bf falling on} the surface.
+\end{itemize}
+\end{frame}
+
+\sect{The Diffuse Term:  Lambertian Reflection}
+
+\mygraphc{}{diffuseterm.png}
+
+\begin{itemize}
+\item Light energy falling on a surface is proportional to the cosine
+  of the angle of incidence of the light source.
+\item Therefore the diffuse term will be proportional to the cosine of the
+  angle of incidence of the light source.
+\item Depends only on the {\bf light} and {\bf normal} vectors.
+\end{itemize}
+
+\end{frame}
+
+\sect{The Specular Term}
+\mygraphc{1}{Phong_components_version_4.png}
+\bi
+\item Shiny spots are tiny blurry images of the light source.
+\item They depend on {\bf normal}, {\bf light}, and {\bf eye} vectors.
+\item If you move your head, the shiny spots will move, but the
+  lambertian shade will stay the same.
+\ei
+\end{frame}
+
+\sect{The Specular Term}
+\mygraph{}{specularterm.png}
+\begin{itemize}
+\item Smooth surfaces act a bit like mirrors.
+\item Intensity of light will fall off more or less rapidly from the
+  ideal (mirror) reflection vector.
+\item How do you calculate the reflection vector?
+\end{itemize}
+\end{frame}
+
+\sect{The Reflection Vector}
+\mygraphc{}{reflectionvector.png}
+\begin{itemize}
+\item Assume all vectors are normalized, find $r$
+\pause 
+\item $r = \ell - 2(\ell - (n\cdot \ell)n)$
+\pause
+\item Use $\cos(\phi) = r\cdot e$
+\end{itemize}
+\end{frame}
+
+\sect{Shininess}
+\mygraphc{}{shininess.png}
+\begin{itemize}
+\item $\cos(x)^i$ for $i \in \{1,2,4,8,16,32\}$
+\end{itemize}
+\end{frame}
+
+\sect{Specular reflection}
+\mygraphc{.7}{specularballs.png}
+\begin{itemize}
+\item Specular coefficient in $(0.25, 0.5, 0.75)$
+\item Shininess in $(3,9,200)$
+\end{itemize}
+
+\end{frame}
+
+\sect{The Halfway Vector: a speed hack}
+\mygraphc{.75}{halfwayvector.png}
+\begin{itemize}
+\item Use vector halfway between $e$ and $\ell$
+\item If $n = h$, we get the brightest possible reflection.
+\item Use $\cos(\beta) = h\cdot n$ for the falloff.
+\item This angle $\beta$ is about half the angle $\phi$ found before.
+\item We can adjust the shininess to handle that.
+\end{itemize}
+\end{frame}
+
+\sect{The Halfway Vector}
+\mygraphc{}{Blinn_phong_comparison.png}
+\end{frame}
+
+
+
+
+\sect{Add up all the terms}
+\[
+k_a C_a + \sum_{m \in \mbox{lights}} (k_d(L_m\cdot N)C_{m,d}
+                + k_s(R_m\cdot E)^\alpha C_{m,s})
+\]
+\begin{eqnarray*}
+C_a,C_s,C_d &=& \mbox{ambient, specular, diffuse colors}\\
+k_a,k_s,k_d &=& \mbox{ambient, specular, diffuse reflection constants}\\
+\alpha &=& \mbox{shininess}\\
+L_m &=& \mbox{light vector}\\
+N &=& \mbox{surface normal}\\
+E &=& \mbox{eye vector}\\
+R_m &=& \mbox{light vector reflected about normal}\\
+  &=& 2(L_m\cdot N)N - L_m
+\end{eqnarray*}
+\end{frame}
+
+
+\sect{Phong reflection}
+\mygraphc{}{Phong_components_version_4.png}
+\[
+k_a C_a + \sum_{m \in \mbox{lights}} (k_d(L_m\cdot N)C_{m,d}
+                + k_s(R_m\cdot E)^\alpha C_{m,s})
+\]
+\end{frame}
+
+
+\sect{Phong examples}
+\mygraphc{0.8}{phongexamples.png}
+\end{frame}
+
+
+\sect{Microfacets}
+
+\mygraphc{.5}{microfacets.png}
+\begin{itemize}
+\item Assume a surface is made up of tiny mirrors.
+\item The statistical distribution of these facets will determine the
+  reflection in each direction.
+\item More sophisticated stochastic models
+  such as these give better approximations to some
+  surfaces than Phong reflection.
+\end{itemize}
+
+\end{frame}
+
+\end{document}
+
+\end{document}

@@ -1,0 +1,20 @@
+\psset{arrowscale=2,arrows=->,linecolor=blue,drawCoor=true,showpoints=true}
+\begin{pspicture}[showgrid=false](-2,-2)(5,5)
+\psset{Alpha=60,showpoints=true,arrows=->,drawCoor=true}
+\pstThreeDCoor
+\pstThreeDDot(0.5,2.0,-0.5)
+\pstThreeDLine(0,0,0)(0.5,2.0,-0.5)
+\pstThreeDDot(-1.0, 1.5, 0.5)
+\pstThreeDLine(0,0,0)(-1.0, 1.5, 0.5)
+\pstThreeDDot(1.75, 0.25, 2.75)
+\pstThreeDLine(0,0,0)(1.75, 0.25, 2.75)
+\pstThreeDPut(0.6,2.1,-0.7){$u$}
+\pstThreeDPut(-1.1,1.6,0.6){$v$}
+\pstThreeDPut(2,0,3){$u \times v$}
+
+\end{pspicture}
+
+%\newcommand{\myvec}[1]{
+%\pstThreeDDot[showpoints=true,drawCoor=true](#1)
+%\pstThreeDLine[arrows=->,linecolor=blue](0,0,0)(#1)
+%}

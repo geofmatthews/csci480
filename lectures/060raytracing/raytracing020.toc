@@ -1,0 +1,22 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Shading: Phong Reflection}{2}{0}{1}
+\beamer@sectionintoc {2}{Phong reflection}{3}{0}{2}
+\beamer@sectionintoc {3}{Spheres: finding the normal at a point}{4}{0}{3}
+\beamer@sectionintoc {4}{Spheres: finding the eye vector and the light vector}{6}{0}{4}
+\beamer@sectionintoc {5}{Shading: Phong Reflection}{10}{0}{5}
+\beamer@sectionintoc {6}{The Ambient Term}{11}{0}{6}
+\beamer@sectionintoc {7}{The Diffuse Term}{12}{0}{7}
+\beamer@sectionintoc {8}{The Diffuse Term: Lambertian Reflection}{13}{0}{8}
+\beamer@sectionintoc {9}{The Diffuse Term: Lambertian Reflection}{14}{0}{9}
+\beamer@sectionintoc {10}{The Specular Term}{15}{0}{10}
+\beamer@sectionintoc {11}{The Specular Term}{16}{0}{11}
+\beamer@sectionintoc {12}{The Reflection Vector}{17}{0}{12}
+\beamer@sectionintoc {13}{Shininess}{20}{0}{13}
+\beamer@sectionintoc {14}{Specular reflection}{21}{0}{14}
+\beamer@sectionintoc {15}{The Halfway Vector: a speed hack}{22}{0}{15}
+\beamer@sectionintoc {16}{The Halfway Vector}{23}{0}{16}
+\beamer@sectionintoc {17}{Add up all the terms}{24}{0}{17}
+\beamer@sectionintoc {18}{Phong reflection}{25}{0}{18}
+\beamer@sectionintoc {19}{Phong examples}{26}{0}{19}
+\beamer@sectionintoc {20}{Microfacets}{27}{0}{20}

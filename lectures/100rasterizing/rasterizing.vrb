@@ -1,0 +1,14 @@
+\frametitle{Interpolating other quantities} 
+
+Note that as we step $x$ from its initial value to its final value, we
+also step $y$ from its initial value to its final value.  We could
+also step some other value, such as
+\begin{itemize}
+\item  $z$
+\item a greyscale or color value
+\item a normal vector
+\item texture coordinates
+\end{itemize}
+or anything else from an initial value to a final value, thus
+LERPing all values from one endpoint to the other.
+

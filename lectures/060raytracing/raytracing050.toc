@@ -1,0 +1,25 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {english}
+\beamer@sectionintoc {1}{A simple scene}{2}{0}{1}
+\beamer@sectionintoc {2}{Textures and UV mapping}{4}{0}{2}
+\beamer@sectionintoc {3}{2D and 3D mapping}{5}{0}{3}
+\beamer@sectionintoc {4}{A simple scene}{6}{0}{4}
+\beamer@sectionintoc {5}{Shadows}{8}{0}{5}
+\beamer@sectionintoc {6}{False Self-intersections}{10}{0}{6}
+\beamer@sectionintoc {7}{Noise texture}{11}{0}{7}
+\beamer@sectionintoc {8}{Alternate scene}{12}{0}{8}
+\beamer@sectionintoc {9}{Noise texture bumpmapped}{13}{0}{9}
+\beamer@sectionintoc {10}{Aliasing}{14}{0}{10}
+\beamer@sectionintoc {11}{Aliasing in the simple scene}{15}{0}{11}
+\beamer@sectionintoc {12}{Reflections: Whitted Raytracing}{16}{0}{12}
+\beamer@sectionintoc {13}{Reflections: Recursion Limit}{17}{0}{13}
+\beamer@sectionintoc {14}{Reflections: Recursion Limit}{18}{0}{14}
+\beamer@sectionintoc {15}{Reflections: Recursion Limit}{19}{0}{15}
+\beamer@sectionintoc {16}{Reflections: Recursion Limit}{20}{0}{16}
+\beamer@sectionintoc {17}{Reflections: Recursion Limit}{21}{0}{17}
+\beamer@sectionintoc {18}{Reflections: Recursion Limit}{22}{0}{18}
+\beamer@sectionintoc {19}{Reflections: Recursion Limit}{23}{0}{19}
+\beamer@sectionintoc {20}{Refractions: Whitted Raytracing}{24}{0}{20}
+\beamer@sectionintoc {21}{The Ray Tree}{26}{0}{21}
+\beamer@sectionintoc {22}{Speeding up ray tracing}{27}{0}{22}
+\beamer@sectionintoc {23}{\bf Readings}{28}{0}{23}

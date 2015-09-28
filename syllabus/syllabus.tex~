@@ -1,0 +1,132 @@
+\documentclass[]{article}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\title{Syllabus, CSCI 480, Computer Graphics}
+\author{Geoffrey Matthews, CF469, x3797}
+\date{Fall 2014}
+\begin{document}
+\maketitle
+
+
+\begin{description}
+
+\item[Office hours:] MTWF 10:00
+\item[Lectures:] MTWF 9:00-9:50, CF 226
+
+\item[Goals:]  This class is an introduction to fundamental algorithms
+  of computer graphics, and to programming in OpenGL.  We will 
+  implement several  algorithms for the generation of images in a
+  general purpose programming language, and then we will
+  study how those methods, and others, have been implemented in
+  hardware in the OpenGL pipeline.
+
+By the end of this course the student should be able to:
+\begin{itemize}
+\item Use basic linear algebra in applications to computer
+  graphics. 
+\item Use homogeneous coordinates to represent points and vectors.
+\item Produce and use geometric transformations
+  represented as matrices.
+\item Understand the spaces and projections used in 3D graphics.
+\item Understand the basic difference between physically based
+  rendering and direct rendering, and program each kind of renderer.
+\item Program graphical applications in 3D using OpenGL.
+\item Understand the OpenGL pipeline.
+\item Understand vertex and fragment shaders, and program
+  them in GLSL, the OpenGL Shader Language.
+\end{itemize}
+\item[Text:] There is no text for the class.  Online notes and web
+  pages will be used. 
+
+\item[Homework:] Usually paper\&pencil math type homework, as assigned
+  through the quarter.
+
+\item[Programs:] As assigned through the quarter.  Programming
+  language for the course is python.  All assignments
+  must be in git repositories on \url{www.bitbucket.org}.
+
+\item[Quizzes and Exams:] Except for holidays, and the first and last
+  weeks of class, there will be a short quiz every Friday.
+
+  One midterm and one final, as on the schedule below.
+
+  Exams and quizzes are closed book, with the exception that you may
+  consult two pieces of paper during the exam.  You may write or print
+  whatever you wish on these pages.
+
+\item[Grading:] ~
+
+\begin{tabular}{|c|c|c|c|c|}\hline
+Homework & Programs & Quizzes & Midterm & Final \\\hline
+20\% & 30\% & 10\% & 15\% & 25\%  \\\hline
+\end{tabular}
+
+\item[Letter grades:] ~
+
+A $\geq$ 90\%  $>$ B  $\geq$ 80\% $>$ C $\geq$
+  70\% $>$ D  $\geq$ 60\% $>$ F
+
+  Plus and minus is at the discretion of the instructor.
+
+\item[Special projects:] Students may optionally complete one extra
+  credit project for a maximum of 10 percentage points of extra
+  credit.  Special projects must: (a) be proposed to the instructor,
+  in writing, at least three weeks before the last day of classes,
+  (b) be approved by the instructor at that time, (c) must include a
+  substantial programming component, (d) must include a writeup with
+  an introduction outlining the purpose of the project, a section
+  discussing the results, conclusions, {\em etc.}, (e) must include
+  well annotated source code, a user's guide, and a programmer's guide
+  to the software, and (f) must be complete and turned in before the
+  last week of class.  There are no other extra credit opportunities
+  for this class.
+
+\item[Academic dishonesty:] Academic dishonesty policy and procedure
+  is discussed in the University Catalog, Appendix D.  All students
+  should read this section of the catalog.  It consists of
+  misrepresentation by deception or other fraudulent means.  In
+  computer science courses this frequently takes the form of copying
+  another's program, either a fellow student's program, or copying one
+  from the web.  Due diligence should be exercised in the labs at all
+  times, since both copying and letting someone else copy your program
+  are equally culpable.  Do not walk away from your computer in the
+  lab without logging out or locking the screen.  Do not share files,
+  even if it is just to ``show them something.''  Describe it in
+  words, or talk to them in person; never share code.
+
+\item[Collaboration:] Collaboration with your fellow students is a
+  good way to learn.  Feel free to share ideas, solve problems, and
+  discuss your programs with other students.  However, collaboration
+  is {\em not} copying.  All code should be original.  Remember {\bf
+    the Simpson's Rule:} after discussing homework with another
+  student, you must erase the board and destroy all written notes,
+  pictures, files, {\em etc.} that you shared.  After that, you must
+  watch a rerun of {\em the Simpson's}, or do something else
+  unrelated, for half an hour.  Then you can take the knowledge you
+  gained from another student and put it to work, since it is now not
+  copying, but learning.  You have made it your own.
+
+\item[Schedule:]  rough guide to the weeks ahead:
+  \begin{enumerate}
+\item Sept 24-26:    introduction, python, pygame, bitbucket, git
+\item Sept 29-Oct 3: noise, linear algebra
+\item Oct 6-10:      raytracing: intersection tests, Phong reflection
+  model, normals, Whitted raytracing, texture coordinates, implicit
+  surfaces, parametric surfaces, derivatives, 
+\item Oct 13-17:     raytracing continued
+\item Oct 20-21:     transforms, direct rendering, line rendering,
+  polygon filling, Phong shading
+\item Oct 27-31:     Midterm Wednesday
+\item Nov 3-7:       OpenGL
+\item Nov 10-14:     OpenGL
+\item Nov 17-21:     OpenGL
+\item Nov 24-28:     OpenGL
+\item Dec 1-5: Dead week.  Review
+\item Dec 8:  Final exam, Monday, 8:00am.
+\end{enumerate}
+
+
+\end{description}
+
+\end{document}

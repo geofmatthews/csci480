@@ -1,0 +1,52 @@
+\newcommand{\myvec}[1]{
+\pstThreeDDot[showpoints=true,drawCoor=true](#1)
+\pstThreeDLine[arrows=->,linecolor=blue](0,0,0)(#1)
+}
+
+
+\newcommand{\myframe}[4]{
+\pstThreeDLine[arrows=->](#1)(#2)
+\pstThreeDLine[arrows=->](#1)(#3)
+\pstThreeDLine[arrows=->](#1)(#4)
+}
+
+\psset{arrowscale=2}
+\psset{Alpha=120}
+\psset{nameY=$z$}
+\psset{nameZ=$y$}
+\psset{yMax=9}
+
+
+\psset{xyzLight=-5 0 5}
+
+\psset{yMax=4}
+
+{\footnotesize
+\psset{levelsep=1cm}
+\pstree{\Tcircle{$E$}}{
+  \pstree{\Tcircle{$O_1$}}{
+    \Tcircle{$S_i$}
+    \pstree{\Tcircle{$T_1$}}{
+        \pstree{\Tcircle{$O_2$}}{
+           \Tcircle{$S_i$}
+           \pstree{\Tcircle{$T_2$}}{
+             \pstree{\Tcircle{$O_3$}}{\Tcircle{}\Tcircle{}\Tcircle{}}
+           }
+           \pstree{\Tcircle{$R_2$}}{
+             \pstree{\Tcircle{$O_4$}}{\Tcircle{}\Tcircle{}\Tcircle{}}
+           }
+        }
+    }
+    \pstree{\Tcircle{$R_1$}}{
+        \pstree{\Tcircle{$O_5$}}{
+           \Tcircle{$S_i$}
+           \pstree{\Tcircle{$T_3$}}{
+             \pstree{\Tcircle{$O_6$}}{\Tcircle{}\Tcircle{}\Tcircle{}}
+           }
+           \pstree{\Tcircle{$R_4$}}{
+             \pstree{\Tcircle{$O_7$}}{\Tcircle{}\Tcircle{}\Tcircle{}}
+           }
+        }
+    }
+}
+}}

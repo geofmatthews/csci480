@@ -1,0 +1,16 @@
+\frametitle{Tubes along 3D curves} 
+
+\includegraphics[width=0.3\textwidth]{images/extrudedtube.png}
+\hfill
+\includegraphics[width=0.4\textwidth]{images/vpythoncurveframe.png}
+
+\begin{itemize}
+\item Assume the curve is parameterized by $f(s)$, $s\in[a,b]$
+\item Find the tangent, normal, and binormal to the curve: $t,n,b$
+\item The parametric surface, parameterized by $s\in[a,b]$, $t\in[0,2\pi]$:
+\[
+f(s) + \cos(t)n + \sin(t)b
+\]
+\item Could you extrude an arbitrary shape instead of a circle?
+\end{itemize}
+

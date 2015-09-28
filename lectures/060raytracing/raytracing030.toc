@@ -1,0 +1,24 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Many things can be done with just spheres}{2}{0}{1}
+\beamer@sectionintoc {2}{Many things can be done with just spheres}{3}{0}{2}
+\beamer@sectionintoc {3}{Many things can be done with just spheres}{4}{0}{3}
+\beamer@sectionintoc {4}{Many things can be done with just spheres}{5}{0}{4}
+\beamer@sectionintoc {5}{Random spheres}{6}{0}{5}
+\beamer@sectionintoc {6}{Fog: depth cueing with distance}{7}{0}{6}
+\beamer@sectionintoc {7}{Colored Fog for Effects}{8}{0}{7}
+\beamer@sectionintoc {8}{George de La Tour, St. Joseph}{9}{0}{8}
+\beamer@sectionintoc {9}{Gerrit Van Honthorst, de Koppelaarster}{10}{0}{9}
+\beamer@sectionintoc {10}{Rembrandt World}{11}{0}{10}
+\beamer@sectionintoc {11}{It would be nice to have some shapes other than spheres.}{12}{0}{11}
+\beamer@sectionintoc {12}{Intersecting a ray and a plane}{13}{0}{12}
+\beamer@sectionintoc {13}{Intersecting a ray and a plane}{15}{0}{13}
+\beamer@sectionintoc {14}{Intersecting a ray and a plane}{17}{0}{14}
+\beamer@sectionintoc {15}{Intersecting a ray and a plane}{18}{0}{15}
+\beamer@sectionintoc {16}{Intersecting a ray and a plane}{19}{0}{16}
+\beamer@sectionintoc {17}{Intersecting a ray and a plane}{20}{0}{17}
+\beamer@sectionintoc {18}{Intersecting a ray and a plane}{21}{0}{18}
+\beamer@sectionintoc {19}{Intersecting a ray and a plane}{22}{0}{19}
+\beamer@sectionintoc {20}{Plane delimited shapes}{23}{0}{20}
+\beamer@sectionintoc {21}{Plane delimited shapes}{24}{0}{21}
+\beamer@sectionintoc {22}{Further Reading}{25}{0}{22}

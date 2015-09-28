@@ -1,0 +1,19 @@
+\beamer@endinputifotherversion {3.24pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Online Resources}{2}{0}{1}
+\beamer@sectionintoc {2}{Parametric Curves}{3}{0}{2}
+\beamer@sectionintoc {3}{Parametric Curves: Tangent, Normal, Binormal}{4}{0}{3}
+\beamer@sectionintoc {4}{Parametric Surfaces}{5}{0}{4}
+\beamer@sectionintoc {5}{Parametric Surfaces: Normal, Tangent, Binormal}{8}{0}{5}
+\beamer@sectionintoc {6}{Parametric Surfaces: Sphere}{9}{0}{6}
+\beamer@sectionintoc {7}{Parametric Surfaces: Normal, Tangent, Binormal}{10}{0}{7}
+\beamer@sectionintoc {8}{Approximations to Tangent, Normal, Binormal}{11}{0}{8}
+\beamer@sectionintoc {9}{Quadrics}{12}{0}{9}
+\beamer@sectionintoc {10}{Ellipsoid}{13}{0}{10}
+\beamer@sectionintoc {11}{Hyperboloid of one sheet}{14}{0}{11}
+\beamer@sectionintoc {12}{Hyperboloid of two sheets}{15}{0}{12}
+\beamer@sectionintoc {13}{Elliptic cone}{16}{0}{13}
+\beamer@sectionintoc {14}{Elliptic paraboloid}{17}{0}{14}
+\beamer@sectionintoc {15}{Hyperbolic paraboloid}{18}{0}{15}
+\beamer@sectionintoc {16}{Surfaces of Revolution}{19}{0}{16}
+\beamer@sectionintoc {17}{Tubes along 3D curves}{20}{0}{17}

@@ -1,0 +1,5 @@
+\begin{pspicture}[showgrid=true](0,0)(10,3)
+\psellipse(2,2)(1,1)
+\psellipse(5,2)(1.5,.5)
+\psellipse(8,2)(2,.25)
+\end{pspicture}

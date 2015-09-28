@@ -1,0 +1,260 @@
+% latex foo.tex 
+% dvips -Poutline -G0 foo.dvi -o 
+% ps2pdf -dPDFSETTINGS#/prepress foo.ps
+\documentclass[slidestop,xcolor=pst]{beamer}
+\usepackage{etex}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+%\usepackage{pstricks,pst-tree,pst-node,pst-plot,pst-3dplot}
+\usepackage{graphicx}
+
+\newcommand{\mygraph}[2]{\includegraphics[width=#1\textwidth]{figures/#2}}
+\newcommand{\mygraphc}[2]{\centerline{\includegraphics[width=#1\textwidth]{figures/#2}}}
+
+\newcommand{\sect}[1]{
+\section{#1}
+\begin{frame}[fragile]\frametitle{#1}
+}
+
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+
+\mode<presentation>
+{
+  \usetheme{Madrid}
+  % or ...
+
+%  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+
+\usepackage[english]{babel}
+
+\usepackage[latin1]{inputenc}
+
+\title[Computer Graphics, CSCI 480, Ray Tracing I]
+{
+Ray Tracing, Part I
+}
+
+\subtitle{} % (optional)
+
+\author[Geoffrey Matthews]
+{Geoffrey Matthews}
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[WWU/CS]
+{
+  Department of Computer Science\\
+  Western Washington University
+}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date{Fall 2015}
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+\pgfdeclareimage[height=0.5cm]{university-logo}{WWULogoProColor}
+\logo{\pgfuseimage{university-logo}}
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+\newcommand{\myref}[1]{\small\item\url{#1}}
+\newcommand{\myreff}[1]{\scriptsize\item\url{#1}}
+
+\begin{document}
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\sect{Readings}
+\bi
+\item
+  \url{https://www.siggraph.org/education/materials/HyperGraph/raytrace/rtrace0.htm}
+\item
+  \url{https://www.cs.unc.edu/~rademach/xroads-RT/RTarticle.html}
+\item \url{http://www.cs.utah.edu/~shirley/books/fcg2/rt.pdf}
+\item \url{http://www.povray.org/}
+\item \url{http://www.pbrt.org/}
+  \ei
+  
+\end{frame}
+
+\sect{Ray Traced Images Achieve Maximal Realism}
+\mygraph{1}{800px-Glasses_800_edit.png}
+\end{frame}
+
+
+
+%\begin{frame}
+%  \frametitle{Outline}
+%  \tableofcontents
+%  % You might wish to add the option [pausesections]
+%\end{frame}
+\sect{Two ways of rendering a picture: object order}
+\mygraph{}{objectorderrendering.png}
+
+\begin{itemize}
+\item For each object in the world, find the colors it would put on the screen.
+\end{itemize}
+\end{frame}
+
+\sect{Two ways of rendering a picture: image order}
+\mygraph{}{imageorderrendering.png}
+\begin{itemize}
+\item For each pixel on the screen, find the objects that would color it.
+\end{itemize}
+\end{frame}
+
+\sect{Ray casting, a simplified ray tracing}
+\mygraph{}{imagecasting.png}
+\begin{itemize}
+\item Given an eye position and a pixel position, construct a ray.
+\item Project the ray into the scene and find the closest intersection.
+\item Use object to compute color.
+\end{itemize}
+\end{frame}
+
+\sect{Camera}
+\mygraph{.5}{camera01.png}
+\begin{minipage}[b]{2.25in}
+\begin{itemize}
+\item A frame: {\bf origin} point, and {\bf right}, {\bf up}, {\bf forward} vectors.
+\item A distance, width and height for the image plane.
+\end{itemize}
+\[ \langle p,r,u,f,d,w,h \rangle \]
+\begin{itemize}
+\item Would it matter if $d,w,h$ were all doubled?
+\end{itemize}
+\end{minipage}
+\end{frame}
+
+\sect{Finding vectors from the eye to the image plane}
+\mygraph{.5}{mapping02.png}
+\begin{minipage}[b]{2.25in}
+\begin{itemize}
+\item Give an expression for the upper left corner.
+  \item Give an expression for the upper right corner.
+\item Give an expression for a point 30\% of the way across the image
+  plane and 10\% up from the bottom.
+\end{itemize}
+\end{minipage}
+
+\[ \langle p,r,u,f,w,h \rangle \]
+\end{frame}
+
+
+\sect{Other camera representations}
+\mygraph{.5}{camera01.png}
+\begin{minipage}[b]{2.25in}
+\begin{itemize}
+\item Lookat:  eye point, lookat point, up vector, width, aspect ratio.
+\item Eye and four points
+\item Eye, lower left corner, two vectors
+\item Eye and four vectors
+\end{itemize}
+\end{minipage}
+\end{frame}
+
+
+\sect{Normalized screen coordinates}
+\mygraph{.35}{mapping01.png}\hfill
+\mygraph{.35}{normalsquare.png}
+\begin{itemize}
+\item {\em Normalized} screen coordinates map the entire surface to
+  the $(0,1)\times(0,1)$ square.
+\item Suppose the screen is $640\times480$, with origin in the upper
+  left, and we have a point at $(300,400)$ on the screen.
+\item What are the point's normalized screen coordinates? \pause
+  \[
+  \left(\frac{300}{640}, 1-\frac{400}{480}\right)
+  \]
+  \pause
+  \item Why did I use $s$ and $t$ and not $w$ and $h$?
+\end{itemize}
+\end{frame}
+
+\sect{Mapping from Pixel to Camera Ray}
+\mygraph{.4}{mapping01.png}
+\hfill
+\mygraph{.5}{mapping02.png}
+
+\begin{itemize}
+\item Given a pixel position on the screen, find the ray in the camera.
+\item Map screen position to normalized position in $(0,1)\times(0,1)$
+\item Map normalized position in $(0,1)\times(0,1)$ to vector in world space.
+\end{itemize}
+\end{frame}
+
+\sect{Ray tracing process}
+\bi
+\item Input: a camera and a set of objects
+\item Output: an image
+\item For each pixel in the image:
+  \bi
+  \item Find the ray in the camera for that pixel.
+  \item For all objects in the set:
+    \bi
+    \item find the closest in front of the camera that intersects the ray
+    \ei
+  \item Find the color of that object at the intersection point.
+  \item Color the pixel in the image with that color.
+  \ei
+\ei
+\end{frame}
+
+\sect{Intersecting a ray and a sphere}
+\mygraph{.9}{intersectingraysphere.png}
+\begin{itemize}
+  \item Sphere defined by center and radius.
+\item Ray defined by point and vector.
+\item Assume sphere is centered at origin (replace $p$ with $p-c$).
+\item Equation to solve?
+\pause
+\item Solve for $t$:  $|p+tv|^2 = r^2$
+\end{itemize}
+\end{frame}
+
+\sect{Solving quadratic}
+\begin{eqnarray*}
+|p+tv|^2 &=& (p+tv)\cdot(p+tv)\\
+&=& \sum_i (p_i + tv_i)(p_i + tv_i)\\
+&=& \sum_i \left(p_i^2 + 2p_iv_it + v_i^2t^2\right)\\
+&=& \sum_i p_i^2 + 2\sum_ip_iv_it + \sum_iv_i^2t^2\\
+&=& (p\cdot p) + 2(p\cdot v) t+ (v\cdot v) t^2
+\end{eqnarray*}
+So, in the quadratic $at^2 + bt + c = 0$,
+\begin{eqnarray*}
+a &=& v\cdot v \ \ \ (= 1 \mbox{~if you normalized your rays})\\
+b &=& 2p\cdot v\\
+c &=& p\cdot p - r^2
+\end{eqnarray*}
+\end{frame}
+
+\sect{Intersecting a ray and a sphere}
+\mygraph{}{intersectingraysphere.png}
+\begin{itemize}
+  \item What equation would we have to solve if we did this in world
+    coordinates? 
+\pause
+\item $|(p+tv) - c|^2 = r^2$
+\item Much simpler in object coordinates (replace $p$ with $p-c$).
+\end{itemize}
+\end{frame}
+
+\sect{Still something missing ...}
+\mygraph{0.5}{threespheresflat.png}
+\mygraph{0.5}{threespheres.png}
+
+\end{frame}
+
+\end{document}

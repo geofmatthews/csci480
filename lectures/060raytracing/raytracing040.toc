@@ -1,0 +1,10 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Ellipsoids}{2}{0}{1}
+\beamer@sectionintoc {2}{Intersect a ray with an ellipsoid}{3}{0}{2}
+\beamer@sectionintoc {3}{What about the normal for an ellipsoid?}{4}{0}{3}
+\beamer@sectionintoc {4}{Calculus to the rescue!}{5}{0}{4}
+\beamer@sectionintoc {5}{Calculus to the rescue!}{6}{0}{5}
+\beamer@sectionintoc {6}{Normals for the ellipsoid}{7}{0}{6}
+\beamer@sectionintoc {7}{Other quadrics}{8}{0}{7}
+\beamer@sectionintoc {8}{What about rotating quadrics?}{9}{0}{8}

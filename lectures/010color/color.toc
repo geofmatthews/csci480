@@ -1,0 +1,18 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Online Resources}{2}{0}{1}
+\beamer@sectionintoc {2}{Color spectrum}{3}{0}{2}
+\beamer@sectionintoc {3}{Color spectrum}{4}{0}{3}
+\beamer@sectionintoc {4}{Outdoor light spectral power curve}{5}{0}{4}
+\beamer@sectionintoc {5}{Incandescent spectral power curve}{6}{0}{5}
+\beamer@sectionintoc {6}{Flourescent spectral power curve}{7}{0}{6}
+\beamer@sectionintoc {7}{Reflectance properties of objects}{8}{0}{7}
+\beamer@sectionintoc {8}{Color functions in the eye}{9}{0}{8}
+\beamer@sectionintoc {9}{Tristimulus color space}{10}{0}{9}
+\beamer@sectionintoc {10}{CIE XYZ colors}{11}{0}{10}
+\beamer@sectionintoc {11}{CIE RGB colors}{12}{0}{11}
+\beamer@sectionintoc {12}{Color cube}{13}{0}{12}
+\beamer@sectionintoc {13}{Color cube RGB and CMY axes}{14}{0}{13}
+\beamer@sectionintoc {14}{Additive and Subtractive Color}{15}{0}{14}
+\beamer@sectionintoc {15}{HSV and HSL models}{16}{0}{15}
+\beamer@sectionintoc {16}{Nervous system postprocessing}{17}{0}{16}

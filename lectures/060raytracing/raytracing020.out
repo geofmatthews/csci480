@@ -1,0 +1,20 @@
+\BOOKMARK [2][]{Outline0.1}{Shading: Phong Reflection}{}% 1
+\BOOKMARK [2][]{Outline0.2}{Phong reflection}{}% 2
+\BOOKMARK [2][]{Outline0.3}{Spheres: finding the normal at a point}{}% 3
+\BOOKMARK [2][]{Outline0.4}{Spheres: finding the eye vector and the light vector}{}% 4
+\BOOKMARK [2][]{Outline0.5}{Shading: Phong Reflection}{}% 5
+\BOOKMARK [2][]{Outline0.6}{The Ambient Term}{}% 6
+\BOOKMARK [2][]{Outline0.7}{The Diffuse Term}{}% 7
+\BOOKMARK [2][]{Outline0.8}{The Diffuse Term: Lambertian Reflection}{}% 8
+\BOOKMARK [2][]{Outline0.9}{The Diffuse Term: Lambertian Reflection}{}% 9
+\BOOKMARK [2][]{Outline0.10}{The Specular Term}{}% 10
+\BOOKMARK [2][]{Outline0.11}{The Specular Term}{}% 11
+\BOOKMARK [2][]{Outline0.12}{The Reflection Vector}{}% 12
+\BOOKMARK [2][]{Outline0.13}{Shininess}{}% 13
+\BOOKMARK [2][]{Outline0.14}{Specular reflection}{}% 14
+\BOOKMARK [2][]{Outline0.15}{The Halfway Vector: a speed hack}{}% 15
+\BOOKMARK [2][]{Outline0.16}{The Halfway Vector}{}% 16
+\BOOKMARK [2][]{Outline0.17}{Add up all the terms}{}% 17
+\BOOKMARK [2][]{Outline0.18}{Phong reflection}{}% 18
+\BOOKMARK [2][]{Outline0.19}{Phong examples}{}% 19
+\BOOKMARK [2][]{Outline0.20}{Microfacets}{}% 20

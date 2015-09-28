@@ -1,0 +1,13 @@
+\psset{arrowscale=2}
+\begin{pspicture}[showgrid=false](-2,-2)(5,5)
+\psline[linestyle=dotted](-2,-1)(5,2.5)
+\psline[showpoints=true,linestyle=none](0,0)(2,1)(4,2)
+\psline[arrows=->,linecolor=blue](0,0)(2,1)
+\uput[135](0,0){$P$}
+\uput[135](2,1){$Q$}
+\uput[135](4,2){$\alpha_1 P + \alpha_2 Q$}
+\uput[0](3,-1){$O$}
+\psline[arrows=->,linecolor=red](3,-1)(0,0)
+\psline[arrows=->,linecolor=red](3,-1)(2,1)
+
+\end{pspicture}

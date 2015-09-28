@@ -1,0 +1,34 @@
+\BOOKMARK [2][]{Outline0.1}{Transforms}{}% 1
+\BOOKMARK [2][]{Outline0.2}{Simple transformations}{}% 2
+\BOOKMARK [2][]{Outline0.3}{Transformations are used}{}% 3
+\BOOKMARK [2][]{Outline0.4}{Rigid-body \(Euclidean\) Transforms}{}% 4
+\BOOKMARK [2][]{Outline0.5}{Similitudes / Similarity Transforms}{}% 5
+\BOOKMARK [2][]{Outline0.6}{Linear transforms}{}% 6
+\BOOKMARK [2][]{Outline0.7}{Affine Transforms}{}% 7
+\BOOKMARK [2][]{Outline0.8}{Projective Transforms}{}% 8
+\BOOKMARK [2][]{Outline0.9}{Homogeneous coordinates}{}% 9
+\BOOKMARK [2][]{Outline0.10}{Representing transforms with matrices}{}% 10
+\BOOKMARK [2][]{Outline0.11}{Homogeneous coordinates}{}% 11
+\BOOKMARK [2][]{Outline0.12}{Homogeneous coordinates}{}% 12
+\BOOKMARK [2][]{Outline0.13}{Homogeneous coordinates}{}% 13
+\BOOKMARK [2][]{Outline0.14}{Translate}{}% 14
+\BOOKMARK [2][]{Outline0.15}{Scale}{}% 15
+\BOOKMARK [2][]{Outline0.16}{Rotation}{}% 16
+\BOOKMARK [2][]{Outline0.17}{Rotation}{}% 17
+\BOOKMARK [2][]{Outline0.18}{Rotation about an arbitrary axis}{}% 18
+\BOOKMARK [2][]{Outline0.19}{How are tranforms combined?}{}% 19
+\BOOKMARK [2][]{Outline0.20}{Matrix multiplication is not commutative: TS=ST}{}% 20
+\BOOKMARK [2][]{Outline0.21}{Easy inverses}{}% 21
+\BOOKMARK [2][]{Outline0.22}{Easy inverses}{}% 22
+\BOOKMARK [2][]{Outline0.23}{Decomposable Transforms}{}% 23
+\BOOKMARK [2][]{Outline0.24}{Decomposable Transforms}{}% 24
+\BOOKMARK [2][]{Outline0.25}{More Easy Inverses}{}% 25
+\BOOKMARK [2][]{Outline0.26}{More Easy Inverses}{}% 26
+\BOOKMARK [2][]{Outline0.27}{The Modelview Matrix}{}% 27
+\BOOKMARK [2][]{Outline0.28}{Finding a frame}{}% 28
+\BOOKMARK [2][]{Outline0.29}{Change of frame}{}% 29
+\BOOKMARK [2][]{Outline0.30}{Change of frame}{}% 30
+\BOOKMARK [2][]{Outline0.31}{Change of Frame}{}% 31
+\BOOKMARK [2][]{Outline0.32}{Camera transforms}{}% 32
+\BOOKMARK [2][]{Outline0.33}{Transforming normals}{}% 33
+\BOOKMARK [2][]{Outline0.34}{Online Resources}{}% 34

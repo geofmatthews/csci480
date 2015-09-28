@@ -1,0 +1,118 @@
+% latex foo.tex 
+% dvips -Poutline -G0 foo.dvi -o 
+% ps2pdf -dPDFSETTINGS#/prepress foo.ps
+\documentclass{beamer}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+
+\usepackage{graphicx}
+
+
+\newcommand{\sect}[1]{
+\section{#1}
+\begin{frame}[fragile]\frametitle{#1}
+}
+
+
+\mode<presentation>
+{
+  \usetheme{Madrid}
+  % or ...
+
+%  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+
+\usepackage[english]{babel}
+
+\usepackage[latin1]{inputenc}
+
+\title
+{
+Raster Operations
+}
+
+\subtitle{} % (optional)
+
+\author[Geoffrey Matthews]
+{Geoffrey Matthews}
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[WWU/CS]
+{
+  Department of Computer Science\\
+  Western Washington University
+}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date{Fall 2012}
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+\pgfdeclareimage[height=0.5cm]{university-logo}{WWULogoProColor}
+\logo{\pgfuseimage{university-logo}}
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+\begin{document}
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\newcommand{\myref}[1]{\small\item\url{#1}}
+\newcommand{\myreft}[1]{\footnotesize\item\url{#1}}
+
+%\begin{frame}
+%  \frametitle{Outline}
+%  \tableofcontents
+%  % You might wish to add the option [pausesections]
+%\end{frame}
+
+
+\sect{Reading}
+
+\begin{itemize}
+\myref{http://en.wikipedia.org/wiki/Bresenham's_line_algorithm}
+\myref{http://www.cs.helsinki.fi/group/goa/mallinnus/lines/bresenh.html}
+\end{itemize}
+
+\end{frame}
+
+\sect{Filling in a triangle}
+\begin{itemize}
+\item Keep a table of {\bf min} and {\bf max} values for each row of the 
+projection.
+\item As each point of the line is calculated by the line algorithm,
+update min and max for that row.
+\item After the lines have been drawn, fill in between the min and max.
+\end{itemize}
+\end{frame}
+
+\sect{Interpolating other quantities}
+
+Note that as we step $x$ from its initial value to its final value, we
+also step $y$ from its initial value to its final value.  We could
+also step some other value, such as
+\begin{itemize}
+\item  $z$
+\item a greyscale or color value
+\item a normal vector
+\item texture coordinates
+\end{itemize}
+or anything else from an initial value to a final value, thus
+LERPing all values from one endpoint to the other.
+
+\end{frame}
+
+
+\end{document}

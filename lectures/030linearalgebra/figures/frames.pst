@@ -1,0 +1,6 @@
+\psset{arrowscale=2}
+\begin{pspicture}[showgrid=true](-2,-2)(5,5)
+\psline[showpoints=true,linestyle=none](-1,1)(2,3)(1,0)(4,2)(1,4)
+\psline[linecolor=blue,showpoints=true,arrows=->](0,0)(0,1)
+\psline[linecolor=red,showpoints=true,arrows=->](0,0)(1,0)
+\end{pspicture}

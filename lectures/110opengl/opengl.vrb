@@ -1,0 +1,18 @@
+\frametitle{Reading} 
+
+
+\centerline{\fbox{\begin{minipage}{3in}
+{\bf Warning!}  Many (most?) tutorials on the web are obsolete.
+Make sure anything you read deals with OpenGL 3.X or later.
+\end{minipage}}}
+
+\begin{itemize}
+
+\myref{http://openglbook.com/}
+\myref{http://www.opengl-tutorial.org/}
+\myref{http://www.arcsynthesis.org/gltut/}
+\myref{http://duriansoftware.com/joe/An-intro-to-modern-OpenGL.-Table-of-Contents.html}
+\myref{https://open.gl/}
+\myref{http://ogldev.atspace.co.uk/index.html}
+\end{itemize}
+

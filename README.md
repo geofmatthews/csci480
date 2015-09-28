@@ -1,2 +1,3 @@
-# csci480
-Files in support of csci480 at WWU
+# CSCI 480 #
+
+Files and uploads for csci 480

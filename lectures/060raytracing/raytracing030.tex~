@@ -1,0 +1,271 @@
+% latex foo.tex 
+% dvips -Poutline -G0 foo.dvi -o 
+% ps2pdf -dPDFSETTINGS#/prepress foo.ps
+\documentclass[slidestop,xcolor=pst]{beamer}
+\usepackage{etex}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+%\usepackage{pstricks,pst-tree,pst-node,pst-plot,pst-3dplot}
+\usepackage{graphicx}
+
+\newcommand{\mygraph}[2]{\includegraphics[width=#1\textwidth]{figures/#2}}
+\newcommand{\mygraphc}[2]{\centerline{\includegraphics[width=#1\textwidth]{figures/#2}}}
+
+\newcommand{\sect}[1]{
+\section{#1}
+\begin{frame}[fragile]\frametitle{#1}
+}
+
+\mode<presentation>
+{
+  \usetheme{Madrid}
+  % or ...
+
+%  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+
+\usepackage[english]{babel}
+
+\usepackage[latin1]{inputenc}
+
+\title[Computer Graphics, CSCI 480, Ray Tracing III]
+{
+Ray Tracing, Part III
+}
+
+\subtitle{} % (optional)
+
+\author[Geoffrey Matthews]
+{Geoffrey Matthews}
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[WWU/CS]
+{
+  Department of Computer Science\\
+  Western Washington University
+}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date{Fall 2015}
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+%\pgfdeclareimage[height=0.5cm]{university-logo}{WWULogoProColor}
+%\logo{\pgfuseimage{university-logo}}
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\myref}[1]{\small\item\url{#1}}
+\newcommand{\myreff}[1]{\scriptsize\item\url{#1}}
+
+\begin{document}
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\sect{Many things can be done with just spheres}
+\mygraphc{.75}{ring00.png}
+\end{frame}
+
+\sect{Many things can be done with just spheres}
+\mygraphc{.75}{ring01.png}
+\end{frame}
+
+\sect{Many things can be done with just spheres}
+\mygraphc{.75}{ring02.png}
+\end{frame}
+
+\sect{Many things can be done with just spheres}
+\mygraphc{.75}{ring03.png}
+\end{frame}
+
+\sect{Random spheres}
+\mygraphc{.75}{randomspheres32.png}
+\end{frame}
+
+\sect{Fog: depth cueing with distance}
+\mygraphc{.75}{randomspheresgreyfog.png}
+\end{frame}
+
+\sect{Colored Fog for Effects}
+\mygraphc{.75}{randomspheresbluefog.png}
+\end{frame}
+
+\sect{George de La Tour, St. Joseph}
+\mygraphc{.5}{La_Tour.jpg}
+\end{frame}
+
+\sect{Gerrit Van Honthorst, de Koppelaarster}
+\mygraphc{}{gerrit_van_honthorst_-_de_koppelaarster.jpg}
+\end{frame}
+
+\sect{Rembrandt World}
+\mygraphc{.75}{rembrandtworld.png}
+\end{frame}
+\sect{It would be nice to have some shapes other than spheres.}
+\mygraphc{.75}{rembrandtworld.png}
+\end{frame}
+
+
+\sect{Ellipsoids}
+\begin{columns}
+  \begin{column}{0.5\textwidth}
+\mygraphc{0.6}{Ellipsoid_Quadric.png}
+  \end{column}
+  \begin{column}[b]{0.5\textwidth}
+\[
+\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1
+\]
+  \end{column}
+\end{columns}
+
+\vfill
+
+\bi
+\item How can we intersect a ray with this surface?\pause
+\item How can we move and rotate this shape?\pause
+\item \url{https://en.wikipedia.org/wiki/Quadric}
+  \ei
+
+
+\end{frame}
+
+
+
+\sect{Intersecting a ray and a plane}
+\mygraphc{}{intersectingrayplane.png}
+\begin{itemize}
+\item Plane defined by point and normal.
+\item Use same strategy as sphere?  What is the equation to solve? \pause
+\item Solve for $t$: $n \cdot ((p+tv)-q) = 0$
+\end{itemize}
+\end{frame}
+
+\sect{Intersecting a ray and a plane}
+\begin{eqnarray*}
+ n\cdot (p+tv - q) &=& 0\\
+n\cdot p + t(n\cdot v) - n\cdot q &=& 0\\
+t(n\cdot v) + n\cdot(p-q) &=& 0 \\
+t &=& \frac{n\cdot (q-p)}{n\cdot v}
+\end{eqnarray*}
+\begin{itemize}
+\item The intersection point is $p + tv$
+\pause\item But there's other ways.
+\end{itemize}
+
+\end{frame}
+
+\sect{Intersecting a ray and a plane}
+\mygraph{}{intersectingrayplane.png}
+\begin{itemize}
+\item
+$v\cdot n < 0$ tests for intersection (one-sided plane).
+\item
+Need to find the distance from $p$ to intersection point.
+\item Can we find the sides of the triangle?  What is the height?
+\end{itemize}
+\end{frame}
+
+
+\sect{Intersecting a ray and a plane}
+\mygraph{}{intersectingrayplane02.png}
+\begin{itemize}
+\item $h = (p-q)\cdot n$ gives us the height $h$ of $p$ from the plane.
+\end{itemize}
+\end{frame}
+
+
+\sect{Intersecting a ray and a plane}
+\mygraphc{}{intersectingrayplane03.png}
+\begin{itemize}
+\item Any ideas?
+\end{itemize}
+\end{frame}
+
+
+\sect{Intersecting a ray and a plane}
+\mygraph{}{intersectingrayplane04.png}
+\begin{itemize}
+\item $v\cdot -n = \cos{\theta}$
+\end{itemize}
+\end{frame}
+
+
+\sect{Intersecting a ray and a plane}
+\mygraph{}{intersectingrayplane05.png}
+\begin{itemize}
+\item $v\cdot -n$ gives us: $\cos{\theta} = 1/\sec{\theta}$
+\end{itemize}
+\end{frame}
+
+
+
+\sect{Intersecting a ray and a plane}
+\mygraph{}{intersectingrayplane06.png}
+
+\[ t = h\sec(\theta) = \frac{h}{\cos{\theta}} = \frac{(q-p)\cdot n}{v\cdot n}\]
+
+\begin{itemize}
+\item Desired point is $p+tv$
+\item The same result as the other method.
+\end{itemize}
+\end{frame}
+
+\sect{Plane delimited shapes}
+\mygraphc{0.6}{planedelimited.png}
+\end{frame}
+
+\sect{Plane delimited shapes}
+\mygraph{0.3}{planedelimited.png}
+\begin{minipage}{3in}
+  \bi
+\item Plane normals all point outward.
+\item Intersect the ray with all planes of the object.
+\item Ray should hit every plane.  (And if not?).
+\item Note entering and exiting planes.
+  \item Ray hits object if it enters all entering planes before
+    leaving first exit plane.
+\item If the farthest plane entered is closer than the closest plane exited,
+  the ray hits the object. 
+  \ei
+\end{minipage}
+\end{frame}
+
+\sect{Other primitives}
+\begin{itemize}
+\item Quadric surfaces:
+\begin{itemize}
+\item \url{https://en.wikipedia.org/wiki/Quadric}
+\item \url{http://marctenbosch.com/photon/mbosch_intersection.pdf}
+\end{itemize}
+\item Torus
+\begin{itemize}
+\item\url{http://www.emeyex.com/site/projects/raytorus.pdf}
+\end{itemize}
+\item Metaballs
+\begin{itemize}\item
+\url{http://www.geisswerks.com/ryan/BLOBS/blobs.html}
+\end{itemize}
+\item Arbitrary shapes are approximated by unions of triangles
+\item Intersect a single triangle:
+\begin{itemize}
+\item M\"oller-Trumbore
+\item \url{http://www.cs.cornell.edu/courses/cs465/2003fa/homeworks/raytri.pdf}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document}
+

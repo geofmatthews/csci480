@@ -1,0 +1,160 @@
+% latex foo.tex 
+% dvips -Poutline -G0 foo.dvi -o 
+% ps2pdf -dPDFSETTINGS#/prepress foo.ps
+\documentclass[slidestop,xcolor=pst]{beamer}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+
+
+
+\usepackage[english]{babel}
+
+\usepackage[latin1]{inputenc}
+
+\newcommand{\sect}[1]{\begin{frame}\frametitle{#1}}
+
+\title[Computer Graphics, CSCI 480]
+{Computer Graphics, CSCI 480
+}
+
+\subtitle{} % (optional)
+
+\author[Geoffrey Matthews]
+{Geoffrey Matthews}
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[WWU/CS]
+{
+  Department of Computer Science\\
+  Western Washington University
+}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date{Fall 2014}
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+%\pgfdeclareimage[height=0.5cm]{university-logo}{WWULogoProColor}
+%\logo{\pgfuseimage{university-logo}}
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+\begin{document}
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+%\begin{frame}
+%  \frametitle{Outline}
+%  \tableofcontents
+%  % You might wish to add the option [pausesections]
+%\end{frame}
+
+\sect{Outline}
+\begin{itemize}
+\item Introduction to fundamental algorithms of computer graphics.
+\item Study implementations in general purpose language (python).
+\item Study both raytracing and direct rendering.
+\item See how important algorithms have been built into hardware and
+  accessed by a special purpose library, OpenGL.
+\end{itemize}
+
+\end{frame}
+
+\sect{Grading}
+\begin{itemize}
+\item 25\%: Homework assignments.  Pencil and paper, math work.  
+\item 25\%: Programming assignments.  Turn in on Canvas.
+\item 20\%: Midterm.  Wednesday, October 28
+\item 30\%: Final.  Tuesday, December 8, 8:00am.
+\end{itemize}
+\end{frame}
+
+\sect{Extra Credit}
+\begin{itemize}
+\item Up to 10 extra credit points can be earned by doing a project.
+\item Project must be proposed, in writing, to the instructor three
+  weeks before the last day of class.
+\item Project must be approved by the instructor, possibly with
+  modifications, within 72 hours.
+\item Must include a substantial programming component.
+\item Must include a writeup.
+\item Must include well annotated source code.
+\item Must be complete and turned in before the last day of class.
+\end{itemize}
+\end{frame}
+
+\sect{Academic Dishonesty}
+\begin{itemize}
+\item Read Appendix D of the University Catalog.
+\item Do not share code.
+\item Follow the {\bf Simpson's Rule}
+\end{itemize}
+\end{frame}
+
+\sect{Python, pygame, numpy, pyopengl}
+\begin{itemize}
+\item Programming language for the course: {\bf python}
+\item {\bf Pygame}:  a python package to facilitate game programming
+\item {\bf Numpy}:  a python package for numerical operations, including
+  linear algebra
+\item {\bf Pyopengl}:  a python package wrapping the OpenGL language
+\end{itemize}
+\end{frame}
+
+\sect{Why python?}
+\begin{itemize}
+
+\item It is easy.
+\item It is easy to do hard things; many data structures and
+  programming styles out of the box. 
+\item It is OS neutral.
+\item It has easy access to numerical libraries.
+\item It has easier interface to OpenGL.
+\item It has pygame, so 3D applications can be given game-like controls.
+
+\end{itemize}
+
+\end{frame}
+
+\sect{Learning python and pygame}
+\begin{itemize}
+  \item Work through a python tutorial, {\em e.g.}:\\ \url{http://interactivepython.org/courselib/static/thinkcspy/index.html}
+\item Work through some of the pygame examples (installed with
+  download),
+  especially:\\
+  \url{https://www.pygame.org/docs/tut/chimp/ChimpLineByLine.html}
+  \item Structure of {\tt pygamecolors.py}
+  \end{itemize}
+\end{frame}
+
+\sect{Schedule}
+  \begin{itemize}
+\item Week 1: Introduction, python, pygame
+\item Week 2: noise, linear algebra
+\item Week 3-4: raytracing: intersection tests, Phong reflection
+  model, normals, Whitted raytracing, texture coordinates, implicit
+  surfaces, parametric surfaces, derivatives, 
+\item Week 5:     transforms, direct rendering, line rendering,
+  polygon filling, Phong shading
+\item Wednesday, October 28:     Midterm
+\item Weeks 6-10:       OpenGL
+\item Tuesday, Dec 8:  Final exam, 8:00am.
+\end{itemize}
+%\begin{columns}
+%\column{0.5\textwidth}
+%\column{0.5\textwidth}
+%\end{columns}
+\end{frame}
+
+
+\end{document}

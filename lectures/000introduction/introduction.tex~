@@ -1,0 +1,163 @@
+% latex foo.tex 
+% dvips -Poutline -G0 foo.dvi -o 
+% ps2pdf -dPDFSETTINGS#/prepress foo.ps
+\documentclass[slidestop,xcolor=pst]{beamer}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+
+
+
+\usepackage[english]{babel}
+
+\usepackage[latin1]{inputenc}
+
+\newcommand{\sect}[1]{\begin{frame}\frametitle{#1}}
+
+\title[Computer Graphics, CSCI 480]
+{Computer Graphics, CSCI 480
+}
+
+\subtitle{} % (optional)
+
+\author[Geoffrey Matthews]
+{Geoffrey Matthews}
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[WWU/CS]
+{
+  Department of Computer Science\\
+  Western Washington University
+}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date{Fall 2014}
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+%\pgfdeclareimage[height=0.5cm]{university-logo}{WWULogoProColor}
+%\logo{\pgfuseimage{university-logo}}
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+\begin{document}
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+%\begin{frame}
+%  \frametitle{Outline}
+%  \tableofcontents
+%  % You might wish to add the option [pausesections]
+%\end{frame}
+
+\sect{Outline}
+\begin{itemize}
+\item Introduction to fundamental algorithms of computer graphics.
+\item Study implementations in general purpose language (python).
+\item Study both raytracing and direct rendering.
+\item See how important algorithms have been built into hardware and
+  accessed by a special purpose library, OpenGL.
+\end{itemize}
+
+\end{frame}
+
+\sect{Grading}
+\begin{itemize}
+\item 20\%: Homework assignments.  Pencil and paper, math work.  
+\item 30\%: Programming assignments.  Must be on bitbucket.org
+\item 10\%: Quizzes.  Every Friday except vacations and first and last week.
+\item 15\%: Midterm.  Wednesday, October 29.
+\item 25\%: Final.  Monday, December 8, 8:00am.
+\end{itemize}
+\end{frame}
+
+\sect{Extra Credit}
+\begin{itemize}
+\item Up to 10 extra credit points can be earned by doing a project.
+\item Project must be proposed, in writing, to the instructor three
+  weeks before the last day of class.
+\item Project must be approved by the instructor, possibly with
+  modifications, within 72 hours.
+\item Must include a substantial programming component.
+\item Must include a writeup.
+\item Must include well annotated source code.
+\item Must be complete and turned in before the last day of class.
+\end{itemize}
+\end{frame}
+
+\sect{Academic Dishonesty}
+\begin{itemize}
+\item Read Appendix D of the University Catalog.
+\item Do not share code.
+\item Follow the {\bf Simpson's Rule}
+\end{itemize}
+\end{frame}
+
+\sect{Bitbucket}
+\begin{itemize}
+\item All programs must be projects on \url{bitbucket.org}
+\item Get yourself a free account immediately.
+\item Add your bitbucket username to the list of names on the 
+{\bf Bitbucket usernames} page on canvas.
+\item Run through the tutorial
+  \\\url{https://confluence.atlassian.com/display/BITBUCKET/Bitbucket+101} 
+\item Note: I will be testing your programs with scripts, so
+the names of projects, files, functions, {\em etc.} in your code must
+match exactly that specified in the instructions.
+\end{itemize}
+\end{frame}
+
+\sect{Python, pygame, numpy, pyopengl}
+\begin{itemize}
+\item Programming language for the course: {\bf python}
+\item {\bf Pygame}:  a python package to facilitate game programming
+\item {\bf Numpy}:  a python package for numerical operations, including
+  linear algebra
+\item {\bf Pyopengl}:  a python package wrapping the OpenGL language
+\end{itemize}
+\end{frame}
+
+\sect{Schedule}
+\begin{columns}
+\column{0.5\textwidth}
+1. Sept 24-26:    introduction, python, pygame, bitbucket, git
+
+2. Sept 29-Oct 3: noise, linear algebra
+
+3. Oct 6-10:      raytracing: intersection tests, Phong reflection
+  model, normals, Whitted raytracing, texture coordinates, implicit
+  surfaces, parametric surfaces, derivatives
+
+4. Oct 13-17:     raytracing continued
+\column{0.5\textwidth}
+5. Oct 20-21:     transforms, direct rendering, line rendering,
+  polygon filling, Phong shading
+
+6. Oct 27-31:     Midterm Wednesday
+
+7. Nov 3-7:       OpenGL
+
+8. Nov 10-14:     OpenGL
+
+9. Nov 17-21:     OpenGL
+
+10. Nov 24-28:     OpenGL
+
+11. Dec 1-5: Dead week.  Review
+
+12. Dec 8:  Final exam, Monday, 8:00am.
+
+\end{columns}
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,36 @@
+\beamer@endinputifotherversion {3.24pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Transforms}{2}{0}{1}
+\beamer@sectionintoc {2}{Simple transformations}{3}{0}{2}
+\beamer@sectionintoc {3}{Transformations are used}{4}{0}{3}
+\beamer@sectionintoc {4}{Rigid-body (Euclidean) Transforms}{5}{0}{4}
+\beamer@sectionintoc {5}{Similitudes / Similarity Transforms}{6}{0}{5}
+\beamer@sectionintoc {6}{Linear transforms}{7}{0}{6}
+\beamer@sectionintoc {7}{Affine Transforms}{8}{0}{7}
+\beamer@sectionintoc {8}{Projective Transforms}{9}{0}{8}
+\beamer@sectionintoc {9}{Homogeneous coordinates}{10}{0}{9}
+\beamer@sectionintoc {10}{Representing transforms with matrices}{11}{0}{10}
+\beamer@sectionintoc {11}{Homogeneous coordinates}{12}{0}{11}
+\beamer@sectionintoc {12}{Homogeneous coordinates}{13}{0}{12}
+\beamer@sectionintoc {13}{Homogeneous coordinates}{14}{0}{13}
+\beamer@sectionintoc {14}{Translate}{15}{0}{14}
+\beamer@sectionintoc {15}{Scale}{16}{0}{15}
+\beamer@sectionintoc {16}{Rotation}{17}{0}{16}
+\beamer@sectionintoc {17}{Rotation}{18}{0}{17}
+\beamer@sectionintoc {18}{Rotation about an arbitrary axis}{19}{0}{18}
+\beamer@sectionintoc {19}{How are tranforms combined?}{20}{0}{19}
+\beamer@sectionintoc {20}{Matrix multiplication is not commutative: $TS\not =ST$}{21}{0}{20}
+\beamer@sectionintoc {21}{Easy inverses}{22}{0}{21}
+\beamer@sectionintoc {22}{Easy inverses}{23}{0}{22}
+\beamer@sectionintoc {23}{Decomposable Transforms}{29}{0}{23}
+\beamer@sectionintoc {24}{Decomposable Transforms}{33}{0}{24}
+\beamer@sectionintoc {25}{More Easy Inverses}{37}{0}{25}
+\beamer@sectionintoc {26}{More Easy Inverses}{41}{0}{26}
+\beamer@sectionintoc {27}{The Modelview Matrix}{45}{0}{27}
+\beamer@sectionintoc {28}{Finding a frame}{46}{0}{28}
+\beamer@sectionintoc {29}{Change of frame}{48}{0}{29}
+\beamer@sectionintoc {30}{Change of frame}{52}{0}{30}
+\beamer@sectionintoc {31}{Change of Frame}{54}{0}{31}
+\beamer@sectionintoc {32}{Camera transforms}{57}{0}{32}
+\beamer@sectionintoc {33}{Transforming normals}{58}{0}{33}
+\beamer@sectionintoc {34}{Online Resources}{59}{0}{34}

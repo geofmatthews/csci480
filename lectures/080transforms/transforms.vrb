@@ -1,0 +1,14 @@
+\frametitle{Online Resources} 
+{\bf Readings}
+\begin{itemize}
+\myref{http://en.wikipedia.org/wiki/Transformation_matrix}
+\myref{http://xkcd.com/184/}
+\myreff{http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/}, Computer graphics
+
+\myref{http://www.songho.ca/opengl/index.html}
+\end{itemize}
+
+\vfill
+
+\centerline{\includegraphics[scale=0.5]{figures/matrix_transform.eps}}
+

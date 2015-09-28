@@ -1,0 +1,15 @@
+\BOOKMARK [2][]{Outline0.1}{Readings}{}% 1
+\BOOKMARK [2][]{Outline0.2}{Ray Traced Images Achieve Maximal Realism}{}% 2
+\BOOKMARK [2][]{Outline0.3}{Two ways of rendering a picture: object order}{}% 3
+\BOOKMARK [2][]{Outline0.4}{Two ways of rendering a picture: image order}{}% 4
+\BOOKMARK [2][]{Outline0.5}{Ray casting, a simplified ray tracing}{}% 5
+\BOOKMARK [2][]{Outline0.6}{Camera}{}% 6
+\BOOKMARK [2][]{Outline0.7}{Finding vectors from the eye to the image plane}{}% 7
+\BOOKMARK [2][]{Outline0.8}{Other camera representations}{}% 8
+\BOOKMARK [2][]{Outline0.9}{Normalized screen coordinates}{}% 9
+\BOOKMARK [2][]{Outline0.10}{Mapping from Pixel to Camera Ray}{}% 10
+\BOOKMARK [2][]{Outline0.11}{Ray tracing process}{}% 11
+\BOOKMARK [2][]{Outline0.12}{Intersecting a ray and a sphere}{}% 12
+\BOOKMARK [2][]{Outline0.13}{Solving quadratic}{}% 13
+\BOOKMARK [2][]{Outline0.14}{Intersecting a ray and a sphere}{}% 14
+\BOOKMARK [2][]{Outline0.15}{Still something missing ...}{}% 15

@@ -1,0 +1,34 @@
+\beamer@endinputifotherversion {3.24pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Noise}{2}{0}{1}
+\beamer@sectionintoc {2}{Adding up sin curves}{3}{0}{2}
+\beamer@sectionintoc {3}{Adding up sin curves}{4}{0}{3}
+\beamer@sectionintoc {4}{Adding up scaled sin curves}{5}{0}{4}
+\beamer@sectionintoc {5}{Adding up scaled sin curves}{6}{0}{5}
+\beamer@sectionintoc {6}{Defining a lattice over screen space.}{7}{0}{6}
+\beamer@sectionintoc {7}{latticeNoise: A white noise value for lattice points}{8}{0}{7}
+\beamer@sectionintoc {8}{latticeNoise: a Simple Implementation}{9}{0}{8}
+\beamer@sectionintoc {9}{latticeNoise: A white noise value for lattice points}{11}{0}{9}
+\beamer@sectionintoc {10}{lerpNoise: filling in between the lattice points}{12}{0}{10}
+\beamer@sectionintoc {11}{smerpNoise: Smoothly Interpolate Between the Integers}{13}{0}{11}
+\beamer@sectionintoc {12}{S-curve}{14}{0}{12}
+\beamer@sectionintoc {13}{S-curve}{15}{0}{13}
+\beamer@sectionintoc {14}{smerpNoise: Smoothly Interpolate Between the Integers}{16}{0}{14}
+\beamer@sectionintoc {15}{Pink Noise}{17}{0}{15}
+\beamer@sectionintoc {16}{Pink Noise}{18}{0}{16}
+\beamer@sectionintoc {17}{Pink Noise}{19}{0}{17}
+\beamer@sectionintoc {18}{Pink Noise without repeats}{20}{0}{18}
+\beamer@sectionintoc {19}{Pink Noise without repeats}{21}{0}{19}
+\beamer@sectionintoc {20}{Lattice Noise in 2D}{22}{0}{20}
+\beamer@sectionintoc {21}{Lattice Noise in 2D}{23}{0}{21}
+\beamer@sectionintoc {22}{Smooth Noise in 2D}{24}{0}{22}
+\beamer@sectionintoc {23}{Smooth Noise in 2D}{25}{0}{23}
+\beamer@sectionintoc {24}{Smooth Noise in 2D}{26}{0}{24}
+\beamer@sectionintoc {25}{Pink Noise in 2D}{27}{0}{25}
+\beamer@sectionintoc {26}{Pink Noise in 2D}{28}{0}{26}
+\beamer@sectionintoc {27}{Colorizing noise for different effects}{29}{0}{27}
+\beamer@sectionintoc {28}{Effects of starting wavelength and number of octaves}{30}{0}{28}
+\beamer@sectionintoc {29}{Tilable noise}{31}{0}{29}
+\beamer@sectionintoc {30}{Tilable noise}{32}{0}{30}
+\beamer@sectionintoc {31}{3D noise: solid textures and animations }{33}{0}{31}
+\beamer@sectionintoc {32}{Online Resources}{34}{0}{32}

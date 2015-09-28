@@ -1,0 +1,15 @@
+
+\psset{arrowscale=2}
+\begin{pspicture}[showgrid=false](-3,-2)(4,4)
+\psset{Alpha=60}
+\pstThreeDCoor[leftHanded=false]
+\pstThreeDBox(1,-1,1)(1,0,0)(0,1,0)(0,0,1)
+\pstThreeDBox(0,2,2)(2,0,0)(0,1.5,0)(0,0,1)
+\pstThreeDPut(2,-1.2,1){$a$}
+\pstThreeDPut(1,0.2,2){$b$}
+\pstThreeDPut(0,3.75,3){$d$}
+\pstThreeDPut(2,2,1.75){$c$}
+\pstThreeDDot(1.5,-.5,1.5)
+\pstThreeDDot(1,2.75,2.5)
+\end{pspicture}
+

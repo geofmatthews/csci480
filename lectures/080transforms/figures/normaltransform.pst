@@ -1,0 +1,9 @@
+\begin{pspicture}[showgrid=false](0,0)(12,3)
+\psellipse(2,1)(1,1)
+\psellipse(6,1)(1.5,.5)
+\psellipse(10,1)(1.5,.5)
+
+\psline{*->}(2.7,1.7)(3.7,2.7)
+\psline{*->}(7,1.35)(8.2,1.7)
+\psline{*->}(11,1.35)(11.3,2.4)
+\end{pspicture}

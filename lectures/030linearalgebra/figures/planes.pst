@@ -1,0 +1,15 @@
+\psset{arrowscale=2}
+\begin{pspicture}[showgrid=false](-2,-2)(5,5)
+\psline[linestyle=dotted](-2,-1)(5,2.5)
+\psline[linestyle=dotted](0,-2)(0,5)
+\psline[linestyle=dotted](3,1.5)(3,4)
+\psline[linestyle=dotted](0,2.5)(3,4)
+\psline[showpoints=true,linestyle=none](0,0)(3,4)
+\psline[arrows=->,linecolor=blue](0,0)(2,1)
+\psline[arrows=->,linecolor=blue](0,0)(0,2)
+\uput[45](0,0){$P$}
+\uput[45](1,.5){$\vec{v}$}
+\uput[45](0,1){$\vec{w}$}
+\uput[45](2,4){$P + \alpha\vec{v} + \beta\vec{w}$}
+
+\end{pspicture}

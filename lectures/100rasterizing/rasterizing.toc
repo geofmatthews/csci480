@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.24pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Reading}{2}{0}{1}
+\beamer@sectionintoc {2}{Filling in a triangle}{3}{0}{2}
+\beamer@sectionintoc {3}{Interpolating other quantities}{4}{0}{3}

@@ -1,0 +1,12 @@
+\frametitle{Microfacets} 
+
+\mygraphc{.5}{microfacets.png}
+\begin{itemize}
+\item Assume a surface is made up of tiny mirrors.
+\item The statistical distribution of these facets will determine the
+  reflection in each direction.
+\item More sophisticated stochastic models
+  such as these give better approximations to some
+  surfaces than Phong reflection.
+\end{itemize}
+

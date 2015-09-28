@@ -1,0 +1,9 @@
+\frametitle{Basic graphics system} 
+
+\begin{psmatrix}
+\rnode{A}{\psframebox{Input Devices}} \\
+ \rnode{B}{\psframebox{CPU}} \\
+ \rnode{C}{\psframebox{GPU}} \\ \rnode{D}{\psframebox{Frame Buffers}}\\
+\rnode{E}{\psframebox{Screen}}
+\end{psmatrix}
+
