@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  18 SEP 2015 11:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  28 SEP 2015 13:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**color
+**color.tex
 (./color.tex
 LaTeX2e <2014/05/01>
 Babel <3.9l> and hyphenation patterns for 4 languages loaded.
@@ -950,19 +950,19 @@ thkerncmss.
 ]
 \openout4 = `color.vrb'.
 
- (./color.vrb <rainbow.jpg, id=148, 803.0pt x 534.99875pt>
-File: rainbow.jpg Graphic file (type jpg)
+ (./color.vrb <IMG_5026.JPG, id=140, 3661.68pt x 2746.26pt>
+File: IMG_5026.JPG Graphic file (type jpg)
 
-<use rainbow.jpg>
-Package pdftex.def Info: rainbow.jpg used on input line 2.
-(pdftex.def)             Requested size: 307.28987pt x 204.73839pt.
+<use IMG_5026.JPG>
+Package pdftex.def Info: IMG_5026.JPG used on input line 2.
+(pdftex.def)             Requested size: 307.28987pt x 230.43285pt.
 ) [3
 
- <./rainbow.jpg>]
+ <./IMG_5026.JPG>]
 \openout4 = `color.vrb'.
 
  (./color.vrb
-<Linear_visible_spectrum.png, id=175, 482.603pt x 86.724pt>
+<Linear_visible_spectrum.png, id=167, 482.603pt x 86.724pt>
 File: Linear_visible_spectrum.png Graphic file (type png)
 
 <use Linear_visible_spectrum.png>
@@ -974,7 +974,7 @@ Package pdftex.def Info: Linear_visible_spectrum.png used on input line 2.
 \openout4 = `color.vrb'.
 
 
-(./color.vrb <outdoor_daylight.jpg, id=204, 446.66875pt x 300.12125pt>
+(./color.vrb <outdoor_daylight.jpg, id=196, 446.66875pt x 300.12125pt>
 File: outdoor_daylight.jpg Graphic file (type jpg)
 
 <use outdoor_daylight.jpg>
@@ -986,7 +986,7 @@ Package pdftex.def Info: outdoor_daylight.jpg used on input line 2.
 \openout4 = `color.vrb'.
 
  (./color.vrb
-<incandescent.jpg, id=230, 446.66875pt x 300.12125pt>
+<incandescent.jpg, id=222, 446.66875pt x 300.12125pt>
 File: incandescent.jpg Graphic file (type jpg)
  <use incandescent.jpg>
 Package pdftex.def Info: incandescent.jpg used on input line 2.
@@ -998,7 +998,7 @@ Package pdftex.def Info: incandescent.jpg used on input line 2.
 \openout4 = `color.vrb'.
 
  (./color.vrb
-<SP65.jpg, id=256, 446.66875pt x 300.12125pt>
+<SP65.jpg, id=248, 446.66875pt x 300.12125pt>
 File: SP65.jpg Graphic file (type jpg)
  <use SP65.jpg>
 Package pdftex.def Info: SP65.jpg used on input line 2.
@@ -1009,7 +1009,7 @@ Package pdftex.def Info: SP65.jpg used on input line 2.
 \openout4 = `color.vrb'.
 
 
-(./color.vrb <lemonskin.png, id=284, 758.835pt x 493.845pt>
+(./color.vrb <lemonskin.png, id=276, 758.835pt x 493.845pt>
 File: lemonskin.png Graphic file (type png)
 
 <use lemonskin.png>
@@ -1021,7 +1021,7 @@ Package pdftex.def Info: lemonskin.png used on input line 2.
 \openout4 = `color.vrb'.
 
  (./color.vrb
-<CIE_eye_response.png, id=311, 326.21875pt x 197.73875pt>
+<CIE_eye_response.png, id=303, 326.21875pt x 197.73875pt>
 File: CIE_eye_response.png Graphic file (type png)
 
 <use CIE_eye_response.png>
@@ -1033,7 +1033,7 @@ Package pdftex.def Info: CIE_eye_response.png used on input line 2.
 \openout4 = `color.vrb'.
 
  (./color.vrb
-<Gamut_full.png, id=338, 174.35138pt x 247.52475pt>
+<Gamut_full.png, id=330, 174.35138pt x 247.52475pt>
 File: Gamut_full.png Graphic file (type png)
  <use Gamut_full.png>
 Package pdftex.def Info: Gamut_full.png used on input line 2.
@@ -1045,7 +1045,7 @@ Package pdftex.def Info: Gamut_full.png used on input line 2.
 \openout4 = `color.vrb'.
 
  (./color.vrb
-<CIE_chromaticity.png, id=364, 301.125pt x 333.245pt>
+<CIE_chromaticity.png, id=356, 301.125pt x 333.245pt>
 File: CIE_chromaticity.png Graphic file (type png)
 
 <use CIE_chromaticity.png>
@@ -1057,7 +1057,7 @@ Package pdftex.def Info: CIE_chromaticity.png used on input line 2.
 \openout4 = `color.vrb'.
 
  (./color.vrb
-<CIE_RGB.png, id=391, 326.21875pt x 346.29375pt>
+<CIE_RGB.png, id=383, 326.21875pt x 346.29375pt>
 File: CIE_RGB.png Graphic file (type png)
  <use CIE_RGB.png>
 Package pdftex.def Info: CIE_RGB.png used on input line 2.
@@ -1067,7 +1067,7 @@ Package pdftex.def Info: CIE_RGB.png used on input line 2.
  <./CIE_RGB.png>]
 \openout4 = `color.vrb'.
 
- (./color.vrb <colorcube.png, id=418, 431.6125pt x 451.6875pt>
+ (./color.vrb <colorcube.png, id=410, 431.6125pt x 451.6875pt>
 File: colorcube.png Graphic file (type png)
 
 <use colorcube.png>
@@ -1079,7 +1079,7 @@ Package pdftex.def Info: colorcube.png used on input line 2.
 \openout4 = `color.vrb'.
 
  (./color.vrb
-<colorcubeaxes.png, id=446, 431.6125pt x 451.6875pt>
+<colorcubeaxes.png, id=438, 431.6125pt x 451.6875pt>
 File: colorcubeaxes.png Graphic file (type png)
  <use colorcubeaxes.png>
 Package pdftex.def Info: colorcubeaxes.png used on input line 2.
@@ -1091,14 +1091,14 @@ Package pdftex.def Info: colorcubeaxes.png used on input line 2.
 \openout4 = `color.vrb'.
 
  (./color.vrb
-<400px-AdditiveColor.png, id=473, 401.5pt x 401.5pt>
+<400px-AdditiveColor.png, id=465, 401.5pt x 401.5pt>
 File: 400px-AdditiveColor.png Graphic file (type png)
 
 <use 400px-AdditiveColor.png>
 Package pdftex.def Info: 400px-AdditiveColor.png used on input line 2.
 (pdftex.def)             Requested size: 153.64493pt x 153.64983pt.
 
-<SubtractiveColor.png, id=474, 402.50375pt x 401.5pt>
+<SubtractiveColor.png, id=466, 402.50375pt x 401.5pt>
 File: SubtractiveColor.png Graphic file (type png)
 
 <use SubtractiveColor.png>
@@ -1109,7 +1109,7 @@ Package pdftex.def Info: SubtractiveColor.png used on input line 3.
  <./400px-AdditiveColor.png> <./SubtractiveColor.png>]
 \openout4 = `color.vrb'.
 
- (./color.vrb <hsl-hsv.png, id=503, 602.25pt x 602.25pt>
+ (./color.vrb <hsl-hsv.png, id=495, 602.25pt x 602.25pt>
 File: hsl-hsv.png Graphic file (type png)
 
 <use hsl-hsv.png>
@@ -1121,7 +1121,7 @@ Package pdftex.def Info: hsl-hsv.png used on input line 2.
 \openout4 = `color.vrb'.
 
  (./color.vrb
-<orange-grey-illusion.png, id=530, 345.29pt x 270.00874pt>
+<orange-grey-illusion.png, id=521, 345.29pt x 270.00874pt>
 File: orange-grey-illusion.png Graphic file (type png)
 
 <use orange-grey-illusion.png>
@@ -1144,14 +1144,8 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 170.
  (./color.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 170.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 170.
-
-Package rerunfilecheck Warning: File `color.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `color.out':
-(rerunfilecheck)             Before: 27BB2D8C91388603293FA7C71ABEB05D;1052
-(rerunfilecheck)             After:  FEA07F64C1A0A42E15D150D38725FCAD;941.
+Package rerunfilecheck Info: File `color.out' has not changed.
+(rerunfilecheck)             Checksum: FEA07F64C1A0A42E15D150D38725FCAD;941.
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
@@ -1159,35 +1153,23 @@ LaTeX Font Warning: Size substitutions with differences
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 170.
  ) 
 Here is how much of TeX's memory you used:
- 17515 strings out of 494977
- 329090 string characters out of 6180183
- 402944 words of memory out of 5000000
- 20225 multiletter control sequences out of 15000+600000
+ 17500 strings out of 494977
+ 328947 string characters out of 6180183
+ 402943 words of memory out of 5000000
+ 20213 multiletter control sequences out of 15000+600000
  14514 words of font info for 54 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 56i,14n,55p,402b,549s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Navigation18} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{Navigation19} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{Outline0.18} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{Outline0.17} has been referenced but does not exist
-, replaced by a fixed one
-
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on color.pdf (17 pages, 1006920 bytes).
+ 56i,14n,55p,406b,549s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on color.pdf (17 pages, 3575791 bytes).
 PDF statistics:
- 594 PDF objects out of 1000 (max. 8388607)
- 531 compressed objects within 6 object streams
- 55 named destinations out of 1000 (max. 500000)
- 267 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 583 PDF objects out of 1000 (max. 8388607)
+ 520 compressed objects within 6 object streams
+ 51 named destinations out of 1000 (max. 500000)
+ 251 words of extra memory for PDF output out of 10000 (max. 10000000)
 

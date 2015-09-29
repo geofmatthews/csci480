@@ -1,0 +1,12 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\title{Assignment \# 1, CSCI 480\\Fall 2015}
+
+\date{Due date: Wednesday, Oct 14, midnight.}
+\begin{document}
+\maketitle
+
+Implement a value noise function in python as outlined in the lecture
+notes and on the ``Perlin Noise'' website which actually discusses
+value noise, and not true Perlin noise.
+

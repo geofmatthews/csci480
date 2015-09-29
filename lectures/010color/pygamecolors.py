@@ -8,6 +8,7 @@ Created on Tue Sep 23 09:07:41 2014
 import os, pygame
 from pygame.locals import *
 import random
+import numpy as np
 
 if __name__ == "__main__":
     main_dir = os.getcwd() 
@@ -57,10 +58,10 @@ def main():
     # main loop
     while going:
         going = not(handleInput(screen))
-        #clock.tick(60)
         # start drawing loop
         while pixelsize > 0:
             print(pixelsize)
+            clock.tick(1)
             for x in range(0,width,pixelsize):
                 xx = x/float(width)
                 for y in range(0,height,pixelsize):
@@ -70,6 +71,7 @@ def main():
                     r = random.randint(0,255)
                     color = (r,r,r)
                     color = [int(255*n) for n in (xx,yy,1-xx)]
+                    color = 255*np.array((xx,yy,1-xx))
                     background.fill(color, ((x,y),(pixelsize,pixelsize)))
                     
                     #draw background into screen
