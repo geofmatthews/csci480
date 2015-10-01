@@ -1,7 +1,8 @@
 % latex foo.tex 
 % dvips -Poutline -G0 foo.dvi -o 
 % ps2pdf -dPDFSETTINGS#/prepress foo.ps
-\documentclass[slidestop,xcolor=pst,dvips]{beamer}
+\documentclass[slidestop,xcolor=pst]{beamer}
+\usepackage{etex}
 \usepackage{fancyvrb}
 \usepackage{hyperref}
 \usepackage{pstricks,pst-tree,pst-node,pst-plot}
@@ -21,7 +22,7 @@
 
 \mode<presentation>
 {
-  \usetheme{Madrid}
+%  \usetheme{Madrid}
   % or ...
 
 %  \setbeamercovered{transparent}
@@ -52,14 +53,14 @@ Noise
 % - Use the \inst command only if there are several affiliations.
 % - Keep it simple, no one is interested in your street address.
 
-\date{Fall 2012}
+%\date{Fall 2012}
 
 % If you have a file called "university-logo-filename.xxx", where xxx
 % is a graphic format that can be processed by latex or pdflatex,
 % resp., then you can add a logo as follows:
 
-\pgfdeclareimage[height=0.5cm]{university-logo}{WWULogoProColor}
-\logo{\pgfuseimage{university-logo}}
+%\pgfdeclareimage[height=0.5cm]{university-logo}{WWULogoProColor}
+%\logo{\pgfuseimage{university-logo}}
 
 % If you wish to uncover everything in a step-wise fashion, uncomment
 % the following command: 
@@ -83,6 +84,22 @@ Noise
 %  \tableofcontents
 %  % You might wish to add the option [pausesections]
 %\end{frame}
+
+\sect{Readings}
+
+\begin{itemize}
+\myref{http://www.noisemachine.com/talk1/}
+\myref{http://freespace.virgin.net/hugo.elias/models/m_perlin.htm}
+\myref{http://mrl.nyu.edu/~perlin/doc/oscar.html}
+\myref{http://legakis.net/justin/MarbleApplet/}
+\myref{http://www.planetside.co.uk/}
+\myreft{http://webstaff.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf}
+\item Also the Wikipedia articles collected for the course:
+\url{https://en.wikipedia.org/wiki/Book:CSCI_480_Computer_Graphics}
+\end{itemize}
+
+\end{frame}
+
 
 \sect{Noise}
 \begin{columns}[T]
@@ -110,18 +127,18 @@ It is much smoother, as seen at lower right.
 \end{columns}
 \end{frame}
 
-\sect{Adding up sin curves}
+\sect{Adding up sin curves: white noise}
 \centerline{\includegraphics[width=4in]{figures/sincurves.eps}}
 \end{frame}
-\sect{Adding up sin curves}
+\sect{Adding up sin curves: white noise}
 \centerline{\includegraphics[width=4in]{figures/whitenoisecurves.eps}}
 \end{frame}
 
 
-\sect{Adding up scaled sin curves}
+\sect{Adding up scaled sin curves: pink noise}
 \centerline{\includegraphics[width=4in]{figures/scaledsincurves.eps}}
 \end{frame}
-\sect{Adding up scaled sin curves}
+\sect{Adding up scaled sin curves: pink noise}
 \centerline{\includegraphics[width=4in]{figures/pinknoisecurves.eps}}
 \end{frame}
 
@@ -146,7 +163,8 @@ It is much smoother, as seen at lower right.
 \includegraphics[width=\textwidth]{randompoints.eps}
 
 \begin{itemize}
-\item We start with just a single dimension, $x$ (scaled to lattice space).
+\item We start with just a single dimension, $x$.
+\item $x$ is scaled; originally the range of $x$ is much larger.
 \item \verb|latticeNoise| only defined at integers.
 \item White noise values between 0 and 1
 \item Our space is generally too big for an array for all those
@@ -486,24 +504,5 @@ Sky \hfill Terrain
 \includegraphics[width=\textwidth]{noise3d.eps}
 
 \end{frame}
-
-\sect{Online Resources}
-{\bf Readings}
-\begin{itemize}
-\myref{http://www.noisemachine.com/talk1/}
-\myref{http://freespace.virgin.net/hugo.elias/models/m_perlin.htm}
-\myref{http://en.wikipedia.org/wiki/White_noise}
-\myref{http://en.wikipedia.org/wiki/Pink_noise}
-\myref{http://mrl.nyu.edu/~perlin/doc/oscar.html}
-\myref{http://legakis.net/justin/MarbleApplet/}
-\myref{http://www.planetside.co.uk/}
-\end{itemize}
-{\bf Grad students:}
-\begin{itemize}
-\myreft{http://webstaff.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf}
-\end{itemize}
-
-\end{frame}
-
 
 \end{document}

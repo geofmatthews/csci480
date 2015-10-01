@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\newcommand{\vect}[1]{\langle #1 \rangle}
+\begin{document}
+\noindent{\bf CSCI 480, Fall 2015, Math Homework \# 1}
+\bigskip
+
+\noindent Name\hrulefill Number \hrulefill
+
+Show your work.  Explain, in each case, how you got a particular
+numerical result.  You may, of course, use a computer for numeric
+computations, but which expressions you used to get each result must
+be made clear.  For example, you can't just put down 12, you must put
+down $2^2 + 2^2 + 2^2 = 12$.  You can't just put down 4.443, you
+must put down $\pi\cdot\sqrt{2} = 4.443$
+
+If you have trouble writing neat math, consider learning and using \LaTeX.
+
+\begin{enumerate}
+\item Let $v=\vect{2,2,1}$ and $w=\vect{1,-2,0}$.  Find the following:
+  \begin{enumerate}
+  \item $v\cdot w$
+\vfill
+  \item $v\times w$
+\vfill
+  \item The vector projection of $w$ on $v$.
+\vfill
+  \end{enumerate}
+
+\item Orthogonalize each of the following vectors:
+  \begin{enumerate}
+  \item $v_1 = \vect{\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, 0}$
+\vfill
+  \item $v_2 = \vect{-1,1,-1}$
+\vfill
+  \item $v_3 = \vect{0,-2,-2}$
+\vfill
+  \end{enumerate}
+
+\item Find the cosine of the angle between the vectors
+  $v=\vect{1,2,3}$ and $w=\vect{3,2,1}$
+\vfill
+
+\item Let $v = \vect{4,3,-1}$.  Decompose $v$ into the sum of two
+    vectors, one of which is parallel to $n=\vect{\frac{\sqrt{2}}{2},
+      \frac{\sqrt{2}}{2}, 0}$, and the other is perpendicular.
+\begin{enumerate}
+\item Parallel:
+\vfill
+\item Perpendicular:
+  \vfill
+  \end{enumerate}
+    \newpage
+  \item 
+    For the picture below, find:
+    \begin{enumerate}
+      \item The coordinates of $q$ in the frame $\langle p, u, v\rangle$
+\vfill
+      \item The coordinates of $q$ in the frame $\langle p, u, w\rangle$
+\vfill
+      \item The coordinates of $q$ in the frame $\langle p, v, w\rangle$
+\vfill
+      \item The coordinates of $p$ in the frame $\langle q, u, v\rangle$
+\vfill
+      \item The coordinates of $p$ in the frame $\langle q, u, w\rangle$
+\vfill
+      \item The coordinates of $p$ in the frame $\langle q, v, w\rangle$
+\vfill
+    \end{enumerate}
+
+    \tikzset{>=latex}
+    \begin{tikzpicture}
+      \draw[dotted] (0,0) grid (9.9,9.9);
+      \draw[thick,<->] (10,0) node[anchor=north west] {$x$ axis}
+      -- (0,0) -- (0,10) node[anchor=south east] {$y$ axis};
+      \foreach \x in {0,1,2,3,4,5,6,7,8,9}
+        \draw (\x cm,2pt) -- (\x cm,-2pt) node[anchor=north] {$\x$};
+      \foreach \y in {0,1,2,3,4,5,6,7,8,9}
+        \draw (2pt,\y) -- (-2pt,\y cm) node[anchor=east] {$\y$};
+
+      \fill (3,7) circle (3pt) node[anchor=north west] {$p$};
+      \fill (9,3) circle (3pt) node[anchor=north west] {$q$};
+
+      \draw[->,thick] (2,1) -- (4,1) node[midway,anchor=south] {$u$};
+      \draw[->,thick] (5,3) -- (7,5) node[midway,anchor=south] {$w$};
+      \draw[->,thick] (5,9) -- (9,5) node[midway,anchor=south] {$v$};
+
+    \end{tikzpicture}
+
+\end{enumerate}
+\end{document}

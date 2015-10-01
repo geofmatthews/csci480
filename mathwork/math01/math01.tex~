@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\title{CSCI 480, Fall 2015\\Math Homework \# 1}
+\newcommand{\vect}[1]{\langle #1 \rangle}
+\begin{document}
+\maketitle
+
+Show your work.  Explain, in each case, how you got a particular
+numerical result.  You may, of course, use a computer for numeric
+computations, but which expressions you used to get each result must
+be made clear.  For example, you can't just put down 12, you must put
+down $2^2 + 2^2 + 2^2 = 12$.  You can't just put down 4.443, you
+must put down $\pi\cdot\sqrt{2} = 4.443$
+
+\begin{enumerate}
+\item Let $v=\vect{2,2,1}$ and $w=\vect{1,-2,0}$.  Find the following:
+  \begin{enumerate}
+  \item $v\cdot w$
+  \item $v\times w$
+  \item The vector projection of $w$ on $v$.
+  \end{enumerate}
+
+\item Orthogonalize each of the following vectors:
+  \begin{enumerate}
+  \item $v_1 = \vect{\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, 0}$
+  \item $v_2 = \vect{-1,1,-1}$
+  \item $v_3 = \vect{0,-2,-2}$
+  \end{enumerate}
+
+\item Find the cosine of the angle between the vectors
+  $v=\vect{1,2,3}$ and $w=\vect{3,2,1}$
+
+  \item Let $v = \vect{4,3,-1}$.  Decompose $v$ into the sum of two
+    vectors, one of which is parallel to $n=\vect{\frac{\sqrt{2}}{2},
+      \frac{\sqrt{2}}{2}, 0}$, and the other is perpendicular.
+
+\end{enumerate}
+\end{document}

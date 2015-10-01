@@ -1,32 +1,32 @@
-\BOOKMARK [2][]{Outline0.1}{Noise}{}% 1
-\BOOKMARK [2][]{Outline0.2}{Adding up sin curves}{}% 2
-\BOOKMARK [2][]{Outline0.3}{Adding up sin curves}{}% 3
-\BOOKMARK [2][]{Outline0.4}{Adding up scaled sin curves}{}% 4
-\BOOKMARK [2][]{Outline0.5}{Adding up scaled sin curves}{}% 5
-\BOOKMARK [2][]{Outline0.6}{Defining a lattice over screen space.}{}% 6
-\BOOKMARK [2][]{Outline0.7}{latticeNoise: A white noise value for lattice points}{}% 7
-\BOOKMARK [2][]{Outline0.8}{latticeNoise: a Simple Implementation}{}% 8
-\BOOKMARK [2][]{Outline0.9}{latticeNoise: A white noise value for lattice points}{}% 9
-\BOOKMARK [2][]{Outline0.10}{lerpNoise: filling in between the lattice points}{}% 10
-\BOOKMARK [2][]{Outline0.11}{smerpNoise: Smoothly Interpolate Between the Integers}{}% 11
-\BOOKMARK [2][]{Outline0.12}{S-curve}{}% 12
+\BOOKMARK [2][]{Outline0.1}{Readings}{}% 1
+\BOOKMARK [2][]{Outline0.2}{Noise}{}% 2
+\BOOKMARK [2][]{Outline0.3}{Adding up sin curves: white noise}{}% 3
+\BOOKMARK [2][]{Outline0.4}{Adding up sin curves: white noise}{}% 4
+\BOOKMARK [2][]{Outline0.5}{Adding up scaled sin curves: pink noise}{}% 5
+\BOOKMARK [2][]{Outline0.6}{Adding up scaled sin curves: pink noise}{}% 6
+\BOOKMARK [2][]{Outline0.7}{Defining a lattice over screen space.}{}% 7
+\BOOKMARK [2][]{Outline0.8}{latticeNoise: A white noise value for lattice points}{}% 8
+\BOOKMARK [2][]{Outline0.9}{latticeNoise: a Simple Implementation}{}% 9
+\BOOKMARK [2][]{Outline0.10}{latticeNoise: A white noise value for lattice points}{}% 10
+\BOOKMARK [2][]{Outline0.11}{lerpNoise: filling in between the lattice points}{}% 11
+\BOOKMARK [2][]{Outline0.12}{smerpNoise: Smoothly Interpolate Between the Integers}{}% 12
 \BOOKMARK [2][]{Outline0.13}{S-curve}{}% 13
-\BOOKMARK [2][]{Outline0.14}{smerpNoise: Smoothly Interpolate Between the Integers}{}% 14
-\BOOKMARK [2][]{Outline0.15}{Pink Noise}{}% 15
+\BOOKMARK [2][]{Outline0.14}{S-curve}{}% 14
+\BOOKMARK [2][]{Outline0.15}{smerpNoise: Smoothly Interpolate Between the Integers}{}% 15
 \BOOKMARK [2][]{Outline0.16}{Pink Noise}{}% 16
 \BOOKMARK [2][]{Outline0.17}{Pink Noise}{}% 17
-\BOOKMARK [2][]{Outline0.18}{Pink Noise without repeats}{}% 18
+\BOOKMARK [2][]{Outline0.18}{Pink Noise}{}% 18
 \BOOKMARK [2][]{Outline0.19}{Pink Noise without repeats}{}% 19
-\BOOKMARK [2][]{Outline0.20}{Lattice Noise in 2D}{}% 20
+\BOOKMARK [2][]{Outline0.20}{Pink Noise without repeats}{}% 20
 \BOOKMARK [2][]{Outline0.21}{Lattice Noise in 2D}{}% 21
-\BOOKMARK [2][]{Outline0.22}{Smooth Noise in 2D}{}% 22
+\BOOKMARK [2][]{Outline0.22}{Lattice Noise in 2D}{}% 22
 \BOOKMARK [2][]{Outline0.23}{Smooth Noise in 2D}{}% 23
 \BOOKMARK [2][]{Outline0.24}{Smooth Noise in 2D}{}% 24
-\BOOKMARK [2][]{Outline0.25}{Pink Noise in 2D}{}% 25
+\BOOKMARK [2][]{Outline0.25}{Smooth Noise in 2D}{}% 25
 \BOOKMARK [2][]{Outline0.26}{Pink Noise in 2D}{}% 26
-\BOOKMARK [2][]{Outline0.27}{Colorizing noise for different effects}{}% 27
-\BOOKMARK [2][]{Outline0.28}{Effects of starting wavelength and number of octaves}{}% 28
-\BOOKMARK [2][]{Outline0.29}{Tilable noise}{}% 29
+\BOOKMARK [2][]{Outline0.27}{Pink Noise in 2D}{}% 27
+\BOOKMARK [2][]{Outline0.28}{Colorizing noise for different effects}{}% 28
+\BOOKMARK [2][]{Outline0.29}{Effects of starting wavelength and number of octaves}{}% 29
 \BOOKMARK [2][]{Outline0.30}{Tilable noise}{}% 30
-\BOOKMARK [2][]{Outline0.31}{3D noise: solid textures and animations }{}% 31
-\BOOKMARK [2][]{Outline0.32}{Online Resources}{}% 32
+\BOOKMARK [2][]{Outline0.31}{Tilable noise}{}% 31
+\BOOKMARK [2][]{Outline0.32}{3D noise: solid textures and animations }{}% 32
