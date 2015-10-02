@@ -1,0 +1,13 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Online Resources}{2}{0}{1}
+\beamer@sectionintoc {2}{Matrices}{3}{0}{2}
+\beamer@sectionintoc {3}{Matrix addition, subtraction, multiplication}{4}{0}{3}
+\beamer@sectionintoc {4}{Multiplication is {\em not} commutative! $MN \not =NM$}{5}{0}{4}
+\beamer@sectionintoc {5}{Mathematical Vectors}{6}{0}{5}
+\beamer@sectionintoc {6}{Matrices as transforms}{7}{0}{6}
+\beamer@sectionintoc {7}{Matrix inverses}{8}{0}{7}
+\beamer@sectionintoc {8}{Determinant of a matrix}{9}{0}{8}
+\beamer@sectionintoc {9}{Determinant of a matrix}{10}{0}{9}
+\beamer@sectionintoc {10}{Cross product (vector product)}{11}{0}{10}
+\beamer@sectionintoc {11}{Inverse of a matrix}{12}{0}{11}

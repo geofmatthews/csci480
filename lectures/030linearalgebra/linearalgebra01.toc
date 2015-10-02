@@ -1,0 +1,26 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Online Resources}{2}{0}{1}
+\beamer@sectionintoc {2}{Points in space}{3}{0}{2}
+\beamer@sectionintoc {3}{Vectors}{4}{0}{3}
+\beamer@sectionintoc {4}{Points {\em vs.} Vectors}{5}{0}{4}
+\beamer@sectionintoc {5}{Vector Addition}{6}{0}{5}
+\beamer@sectionintoc {6}{Vectors do not have positions}{7}{0}{6}
+\beamer@sectionintoc {7}{Vectors multiplied by scalars}{8}{0}{7}
+\beamer@sectionintoc {8}{Lines defined by point and vector}{9}{0}{8}
+\beamer@sectionintoc {9}{Planes defined by point and two vectors}{10}{0}{9}
+\beamer@sectionintoc {10}{Frames}{11}{0}{10}
+\beamer@sectionintoc {11}{Affine sums of vectors}{12}{0}{11}
+\beamer@sectionintoc {12}{Affine sums of vectors}{13}{0}{12}
+\beamer@sectionintoc {13}{Trigonometry}{14}{0}{13}
+\beamer@sectionintoc {14}{More Trigonometry}{15}{0}{14}
+\beamer@sectionintoc {15}{Dot product}{16}{0}{15}
+\beamer@sectionintoc {16}{Projection of one vector on another}{17}{0}{16}
+\beamer@sectionintoc {17}{Same direction, opposite direction}{20}{0}{17}
+\beamer@sectionintoc {18}{{\em AMAZING} theorem about the dot product.}{21}{0}{18}
+\beamer@sectionintoc {19}{Example use of dot product: reflected ray}{22}{0}{19}
+\beamer@sectionintoc {20}{Reflected ray}{23}{0}{20}
+\beamer@sectionintoc {21}{Example use of the dot product}{26}{0}{21}
+\beamer@sectionintoc {22}{How far away is the wall?}{27}{0}{22}
+\beamer@sectionintoc {23}{How far away is the wall?}{28}{0}{23}
+\beamer@sectionintoc {24}{How far away is the wall?}{29}{0}{24}

@@ -1,8 +1,0 @@
-\psset{arrowscale=2}
-\begin{pspicture}[showgrid=true](-2,-2)(5,5)
-\psline[arrows=->](-1,-1)(2,3)
-\psline[arrows=->](1,-1)(4,3)
-\psline[arrows=->](-1,1)(2,5)
-\psline[arrows=->](0,0)(3,4)
-
-\end{pspicture}

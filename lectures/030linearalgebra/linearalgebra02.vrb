@@ -1,0 +1,11 @@
+\frametitle{Inverse of a matrix} 
+\[
+\left[\begin{array}{cccccc}a&b&c&1&0&0\\
+d&e&f&0&1&0\\
+g&h&i&0&0&1\end{array}\right]
+\]
+\begin{itemize}
+\item Stick the identity on the right.
+\item Add multiples of one row to another until the identity is on the left.
+\item The inverse is now on the right
+\end{itemize}
