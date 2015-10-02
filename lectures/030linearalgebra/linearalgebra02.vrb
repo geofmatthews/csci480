@@ -1,11 +1,11 @@
-\frametitle{Inverse of a matrix} 
-\[
-\left[\begin{array}{cccccc}a&b&c&1&0&0\\
-d&e&f&0&1&0\\
-g&h&i&0&0&1\end{array}\right]
-\]
-\begin{itemize}
-\item Stick the identity on the right.
-\item Add multiples of one row to another until the identity is on the left.
-\item The inverse is now on the right
-\end{itemize}
+\frametitle{Properties of the cross product} 
+\begin{eqnarray*}
+  i \times j &=& k\\
+  j \times k &=& i\\
+  k \times i &=& j\\
+  a \times b &=& -b\times a\\
+  a\times (b+c) &=& a\times b + a \times c\\
+  (sa) \times b &=& s(a \times b), s\in \mathbb{R}\\
+a\times (b \times c) & \not =& (a\times b)\times c\\
+|a\times b| &=& \sin(\theta)|a||b|
+\end{eqnarray*}

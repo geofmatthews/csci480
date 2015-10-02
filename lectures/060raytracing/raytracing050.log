@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  17 SEP 2015 14:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  2 OCT 2015 12:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**raytracing050.tex
+**raytracing050
 (./raytracing050.tex
 LaTeX2e <2014/05/01>
 Babel <3.9l> and hyphenation patterns for 4 languages loaded.
@@ -489,12 +489,6 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))
-(/usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/sansmathaccent.sty
-Package: sansmathaccent 2013/03/28
-
-(/usr/share/texlive/texmf-dist/tex/latex/filehook/filehook.sty
-Package: filehook 2011/10/12 v0.5d Hooks for input files
 )))
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasetranslator.sty
 Package: beamerbasetranslator 2010/06/11  (rcs-revision 85fd1cc7fc42)
@@ -721,27 +715,7 @@ Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix
 \c@FancyVerbLine=\count155
 \FV@StepNumber=\count156
 \FV@OutFile=\write5
-)
-(/usr/share/texlive/texmf-dist/tex/latex/beamer/themes/theme/beamerthemeMadrid.
-sty
-Package: beamerthemeMadrid 2010/06/17  (rcs-revision d02a7cf4d8ae)
-
-(/usr/share/texlive/texmf-dist/tex/latex/beamer/themes/color/beamercolorthemewh
-ale.sty
-Package: beamercolorthemewhale 2010/06/17  (rcs-revision d02a7cf4d8ae)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/beamer/themes/color/beamercolorthemeor
-chid.sty
-Package: beamercolorthemeorchid 2010/06/17  (rcs-revision d02a7cf4d8ae)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/beamer/themes/inner/beamerinnerthemero
-unded.sty
-Package: beamerinnerthemerounded 2010/06/17  (rcs-revision d02a7cf4d8ae)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/beamer/themes/outer/beamerouterthemein
-folines.sty
-Package: beamerouterthemeinfolines 2012/10/16  (rcs-revision 51a8c72084af)
-)) (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+) (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2014/09/25 3.9l The Babel package
 
 (/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
@@ -764,17 +738,7 @@ Package: inputenc 2014/04/30 v1.2b Input encoding file
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def
 File: latin1.def 2014/04/30 v1.2b Input encoding file
-))
-
-Package pgf Warning: File "WWULogoProColor" not found when defining image "univ
-ersity-logo". Tried all extensions in ".pdf:.jpg:.jpeg:.png:" on input line 58.
-
-
-
-Package pgf Warning: Missing width for image "university-logo" ("WWULogoProColo
-r") in draft mode. Using 1cm instead on input line 58.
-
-(./raytracing050.aux)
+)) (./raytracing050.aux)
 \openout1 = `raytracing050.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
@@ -800,14 +764,14 @@ LaTeX Font Info:    ... okay on input line 71.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: includehead includefoot 
-* h-part:(L,W,R)=(10.95003pt, 342.2953pt, 10.95003pt)
+* h-part:(L,W,R)=(28.45274pt, 307.28987pt, 28.45274pt)
 * v-part:(T,H,B)=(0.0pt, 273.14662pt, 0.0pt)
 * \paperwidth=364.19536pt
 * \paperheight=273.14662pt
-* \textwidth=342.2953pt
+* \textwidth=307.28987pt
 * \textheight=244.6939pt
-* \oddsidemargin=-61.31996pt
-* \evensidemargin=-61.31996pt
+* \oddsidemargin=-43.81725pt
+* \evensidemargin=-43.81725pt
 * \topmargin=-72.26999pt
 * \headheight=14.22636pt
 * \headsep=0.0pt
@@ -916,16 +880,6 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/cmtt/bx/n on input line 71.
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 71.
-LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
-(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 7
-1.
-LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/bx/it --> OT1/mathkerncmss/m/sl on input line 
-71.
-LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on inp
-ut line 71.
 
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/dicts/translator-bas
 ic-dictionary/translator-basic-dictionary-English.dict
@@ -954,502 +908,312 @@ Dictionary: translator-theorem-dictionary, Language: English
 LaTeX Info: Redefining \includegraphics on input line 71.
 
 (./raytracing050.nav)
-Overfull \hbox (2.87163pt too wide) in paragraph at lines 71--71
- [][][][]  
- []
-
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
 (Font)              size <5> substituted on input line 76.
 
+[1
 
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
-]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 \openout4 = `raytracing050.vrb'.
 
  (./raytracing050.vrb
-<figures/simplescene.png, id=144, 642.4pt x 481.8pt>
+<figures/simplescene.png, id=136, 642.4pt x 481.8pt>
 File: figures/simplescene.png Graphic file (type png)
 
 <use figures/simplescene.png>
 Package pdftex.def Info: figures/simplescene.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+LaTeX Font Info:    Try loading font information for U+msa on input line 5.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-Overfull \vbox (2.73254pt too high) detected at line 84
- []
+LaTeX Font Info:    Try loading font information for U+msb on input line 5.
 
-
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[2
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)) [2
 
  <./figures/simplescene.png>] (./raytracing050.vrb
 File: figures/simplescene.png Graphic file (type png)
-
-<use figures/simplescene.png>
+ <use figures/simplescene.png>
 Package pdftex.def Info: figures/simplescene.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
-)
-Overfull \vbox (2.73254pt too high) detected at line 84
- []
-
-
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[3
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+) [3
 
 ]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb <figures/UVMapping.png, id=202, 803.0pt x 421.575pt>
+
+(./raytracing050.vrb <figures/UVMapping.png, id=191, 803.0pt x 421.575pt>
 File: figures/UVMapping.png Graphic file (type png)
 
 <use figures/UVMapping.png>
 Package pdftex.def Info: figures/UVMapping.png used on input line 2.
-(pdftex.def)             Requested size: 342.2953pt x 179.71056pt.
-)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[4
+(pdftex.def)             Requested size: 307.28987pt x 161.3323pt.
+) [4
 
  <./figures/UVMapping.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
-<figures/UV_mapping_checkered_sphere.png, id=229, 803.0pt x 602.25pt>
+ (./raytracing050.vrb <figures/UV_mapping_checkered_sphere.png, id=217, 803.0pt
+ x 602.25pt>
 File: figures/UV_mapping_checkered_sphere.png Graphic file (type png)
 
 <use figures/UV_mapping_checkered_sphere.png>
 Package pdftex.def Info: figures/UV_mapping_checkered_sphere.png used on input 
 line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.37799pt.
-)
-Overfull \vbox (2.72704pt too high) detected at line 99
- []
-
-
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[5
+(pdftex.def)             Requested size: 245.83282pt x 184.3706pt.
+) [5
 
  <./figures/UV_mapping_checkered_sphere.png>]
 \openout4 = `raytracing050.vrb'.
 
  (./raytracing050.vrb
 File: figures/simplescene.png Graphic file (type png)
-
-<use figures/simplescene.png>
+ <use figures/simplescene.png>
 Package pdftex.def Info: figures/simplescene.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
-)
-Overfull \vbox (2.73254pt too high) detected at line 106
- []
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+) [6
 
-
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[6
-
-] (./raytracing050.vrb
+]
+(./raytracing050.vrb
 File: figures/simplescene.png Graphic file (type png)
  <use figures/simplescene.png>
 Package pdftex.def Info: figures/simplescene.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
-)
-Overfull \vbox (2.73254pt too high) detected at line 106
- []
-
-
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[7
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+) [7
 
 ]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb <figures/shadowscene.png, id=311, 642.4pt x 481.8pt>
+ (./raytracing050.vrb
+<figures/shadowscene.png, id=296, 642.4pt x 481.8pt>
 File: figures/shadowscene.png Graphic file (type png)
 
 <use figures/shadowscene.png>
 Package pdftex.def Info: figures/shadowscene.png used on input line 2.
-(pdftex.def)             Requested size: 239.60567pt x 179.70413pt.
-)
-Overfull \vbox (2.12402pt too high) detected at line 115
- []
+(pdftex.def)             Requested size: 215.10196pt x 161.32497pt.
+) [8
 
-
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[8
-
- <./figures/shadowscene.png>] (./raytracing050.vrb
+ <./figures/shadowscene.png>]
+(./raytracing050.vrb
 File: figures/shadowscene.png Graphic file (type png)
-
-<use figures/shadowscene.png>
+ <use figures/shadowscene.png>
 Package pdftex.def Info: figures/shadowscene.png used on input line 2.
-(pdftex.def)             Requested size: 239.60567pt x 179.70413pt.
-)
-Overfull \vbox (2.12402pt too high) detected at line 115
- []
-
-
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[9
+(pdftex.def)             Requested size: 215.10196pt x 161.32497pt.
+) [9
 
 ]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb <figures/speckles.png, id=365, 642.4pt x 481.8pt>
+ (./raytracing050.vrb
+<figures/speckles.png, id=348, 642.4pt x 481.8pt>
 File: figures/speckles.png Graphic file (type png)
-
-<use figures/speckles.png>
+ <use figures/speckles.png>
 Package pdftex.def Info: figures/speckles.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
 )
-Overfull \vbox (2.73254pt too high) detected at line 122
- []
-
-
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
 [10
 
  <./figures/speckles.png>]
 \openout4 = `raytracing050.vrb'.
 
  (./raytracing050.vrb
-<figures/noisescene.png, id=394, 642.4pt x 481.8pt>
+<figures/noisescene.png, id=375, 642.4pt x 481.8pt>
 File: figures/noisescene.png Graphic file (type png)
 
 <use figures/noisescene.png>
 Package pdftex.def Info: figures/noisescene.png used on input line 2.
-(pdftex.def)             Requested size: 290.9531pt x 218.21951pt.
-)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[11
+(pdftex.def)             Requested size: 261.19826pt x 195.89984pt.
+) [11
 
  <./figures/noisescene.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
-<figures/alternatescene.png, id=422, 642.4pt x 481.8pt>
+
+(./raytracing050.vrb <figures/alternatescene.png, id=403, 642.4pt x 481.8pt>
 File: figures/alternatescene.png Graphic file (type png)
 
 <use figures/alternatescene.png>
 Package pdftex.def Info: figures/alternatescene.png used on input line 2.
-(pdftex.def)             Requested size: 290.9531pt x 218.21951pt.
-)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[12
+(pdftex.def)             Requested size: 261.19826pt x 195.89984pt.
+) [12
 
  <./figures/alternatescene.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
-<figures/bumpnoise.png, id=450, 642.4pt x 481.8pt>
-File: figures/bumpnoise.png Graphic file (type png)
- <use figures/bumpnoise.png>
-Package pdftex.def Info: figures/bumpnoise.png used on input line 2.
-(pdftex.def)             Requested size: 290.9531pt x 218.21951pt.
-)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
 
-[13
+(./raytracing050.vrb <figures/bumpnoise.png, id=430, 642.4pt x 481.8pt>
+File: figures/bumpnoise.png Graphic file (type png)
+
+<use figures/bumpnoise.png>
+Package pdftex.def Info: figures/bumpnoise.png used on input line 2.
+(pdftex.def)             Requested size: 261.19826pt x 195.89984pt.
+) [13
 
  <./figures/bumpnoise.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
-<figures/aliasingplot.png, id=479, 560.0925pt x 255.95625pt>
+
+(./raytracing050.vrb
+<figures/aliasingplot.png, id=458, 560.0925pt x 255.95625pt>
 File: figures/aliasingplot.png Graphic file (type png)
 
 <use figures/aliasingplot.png>
 Package pdftex.def Info: figures/aliasingplot.png used on input line 2.
-(pdftex.def)             Requested size: 239.60567pt x 109.49663pt.
-)
-Overfull \vbox (2.04572pt too high) detected at line 152
- []
-
-
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[14
+(pdftex.def)             Requested size: 215.10196pt x 98.29935pt.
+) [14
 
  <./figures/aliasingplot.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
+
+(./raytracing050.vrb
 File: figures/simplescene.png Graphic file (type png)
-
-<use figures/simplescene.png>
+ <use figures/simplescene.png>
 Package pdftex.def Info: figures/simplescene.png used on input line 2.
-(pdftex.def)             Requested size: 171.14764pt x 128.36009pt.
-)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[15
+(pdftex.def)             Requested size: 153.64493pt x 115.23001pt.
+) [15
 
 ]
 \openout4 = `raytracing050.vrb'.
 
  (./raytracing050.vrb
-<figures/reflectionscene.png, id=537, 642.4pt x 481.8pt>
+<figures/reflectionscene.png, id=513, 642.4pt x 481.8pt>
 File: figures/reflectionscene.png Graphic file (type png)
 
 <use figures/reflectionscene.png>
 Package pdftex.def Info: figures/reflectionscene.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
-)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[16
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+) [16
 
  <./figures/reflectionscene.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
-<figures/reflection00.png, id=565, 642.4pt x 481.8pt>
+
+(./raytracing050.vrb <figures/reflection00.png, id=540, 642.4pt x 481.8pt>
 File: figures/reflection00.png Graphic file (type png)
 
 <use figures/reflection00.png>
 Package pdftex.def Info: figures/reflection00.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
-)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[17
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+) [17
 
  <./figures/reflection00.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
-<figures/reflection01.png, id=593, 642.4pt x 481.8pt>
+
+(./raytracing050.vrb <figures/reflection01.png, id=567, 642.4pt x 481.8pt>
 File: figures/reflection01.png Graphic file (type png)
 
 <use figures/reflection01.png>
 Package pdftex.def Info: figures/reflection01.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
-)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[18
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+) [18
 
  <./figures/reflection01.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
-<figures/reflection02.png, id=622, 642.4pt x 481.8pt>
+
+(./raytracing050.vrb <figures/reflection02.png, id=594, 642.4pt x 481.8pt>
 File: figures/reflection02.png Graphic file (type png)
 
 <use figures/reflection02.png>
 Package pdftex.def Info: figures/reflection02.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
-)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[19
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+) [19
 
  <./figures/reflection02.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
-<figures/reflection03.png, id=651, 642.4pt x 481.8pt>
+
+(./raytracing050.vrb <figures/reflection03.png, id=623, 642.4pt x 481.8pt>
 File: figures/reflection03.png Graphic file (type png)
 
 <use figures/reflection03.png>
 Package pdftex.def Info: figures/reflection03.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
-)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[20
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+) [20
 
  <./figures/reflection03.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
-<figures/reflection04.png, id=679, 642.4pt x 481.8pt>
+
+(./raytracing050.vrb <figures/reflection04.png, id=650, 642.4pt x 481.8pt>
 File: figures/reflection04.png Graphic file (type png)
 
 <use figures/reflection04.png>
 Package pdftex.def Info: figures/reflection04.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
-)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[21
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+) [21
 
  <./figures/reflection04.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
-<figures/reflection05.png, id=707, 642.4pt x 481.8pt>
+
+(./raytracing050.vrb <figures/reflection05.png, id=677, 642.4pt x 481.8pt>
 File: figures/reflection05.png Graphic file (type png)
 
 <use figures/reflection05.png>
 Package pdftex.def Info: figures/reflection05.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
-)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[22
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+) [22
 
  <./figures/reflection05.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
-<figures/reflection06.png, id=736, 642.4pt x 481.8pt>
+
+(./raytracing050.vrb <figures/reflection06.png, id=704, 642.4pt x 481.8pt>
 File: figures/reflection06.png Graphic file (type png)
 
 <use figures/reflection06.png>
 Package pdftex.def Info: figures/reflection06.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
-)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[23
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+) [23
 
  <./figures/reflection06.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
-<figures/refraction12.png, id=764, 642.4pt x 481.8pt>
+
+(./raytracing050.vrb <figures/refraction12.png, id=732, 642.4pt x 481.8pt>
 File: figures/refraction12.png Graphic file (type png)
 
 <use figures/refraction12.png>
 Package pdftex.def Info: figures/refraction12.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
-)
-Overfull \vbox (2.73254pt too high) detected at line 211
- []
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+) [24
 
-
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[24
-
- <./figures/refraction12.png>] (./raytracing050.vrb
+ <./figures/refraction12.png>]
+(./raytracing050.vrb
 File: figures/refraction12.png Graphic file (type png)
-
-<use figures/refraction12.png>
+ <use figures/refraction12.png>
 Package pdftex.def Info: figures/refraction12.png used on input line 2.
-(pdftex.def)             Requested size: 273.83728pt x 205.3835pt.
-)
-Overfull \vbox (2.73254pt too high) detected at line 211
- []
-
-
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[25
+(pdftex.def)             Requested size: 245.83282pt x 184.37244pt.
+) [25
 
 ]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb <figures/raytree.png, id=819, 1373.13pt x 730.73pt>
+ (./raytracing050.vrb
+<figures/raytree.png, id=785, 1373.13pt x 730.73pt>
 File: figures/raytree.png Graphic file (type png)
-
-<use figures/raytree.png>
+ <use figures/raytree.png>
 Package pdftex.def Info: figures/raytree.png used on input line 2.
-(pdftex.def)             Requested size: 342.2953pt x 182.14685pt.
+(pdftex.def)             Requested size: 307.28987pt x 163.52629pt.
 )
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
 [26
 
  <./figures/raytree.png>]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb)
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
-[27
+ (./raytracing050.vrb) [27
 
 ]
 \openout4 = `raytracing050.vrb'.
 
- (./raytracing050.vrb
-LaTeX Font Info:    Try loading font information for U+msa on input line 3.
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 3.
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    Try loading font information for OT1+mathkerncmss on input 
-line 3.
-
-(/usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
-File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
-thkerncmss.
-))
-Overfull \hbox (2.87163pt too wide) has occurred while \output is active
- [][][][]  
- []
-
+ (./raytracing050.vrb)
 [28
 
 ]
@@ -1477,24 +1241,26 @@ LaTeX Font Warning: Size substitutions with differences
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 246.
  ) 
 Here is how much of TeX's memory you used:
- 17875 strings out of 494977
- 338663 string characters out of 6180183
- 413888 words of memory out of 5000000
- 20511 multiletter control sequences out of 15000+600000
- 13516 words of font info for 50 fonts, out of 8000000 for 9000
+ 17558 strings out of 494977
+ 329521 string characters out of 6180183
+ 407987 words of memory out of 5000000
+ 20223 multiletter control sequences out of 15000+600000
+ 13296 words of font info for 50 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 56i,16n,63p,410b,562s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,14n,51p,406b,553s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on raytracing050.pdf (28 pages, 1965858 bytes).
+onts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/symbols/msam7.pfb>
+Output written on raytracing050.pdf (28 pages, 1954013 bytes).
 PDF statistics:
- 957 PDF objects out of 1000 (max. 8388607)
- 864 compressed objects within 9 object streams
+ 930 PDF objects out of 1000 (max. 8388607)
+ 841 compressed objects within 9 object streams
  80 named destinations out of 1000 (max. 500000)
- 352 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 322 words of extra memory for PDF output out of 10000 (max. 10000000)
 

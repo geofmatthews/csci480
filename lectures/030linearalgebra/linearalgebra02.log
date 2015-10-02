@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  2 OCT 2015 08:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  2 OCT 2015 16:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1056,25 +1056,30 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 ]
 \openout4 = `linearalgebra02.vrb'.
 
- (./linearalgebra02.vrb
-<figures/crossprod.png, id=330, 706.64pt x 642.4pt>
+ (./linearalgebra02.vrb) [11
+
+]
+\openout4 = `linearalgebra02.vrb'.
+
+
+(./linearalgebra02.vrb <figures/crossprod.png, id=365, 706.64pt x 642.4pt>
 File: figures/crossprod.png Graphic file (type png)
 
 <use figures/crossprod.png>
 Package pdftex.def Info: figures/crossprod.png used on input line 4.
 (pdftex.def)             Requested size: 176.65956pt x 160.59961pt.
 
-Overfull \hbox (2.97502pt too wide) detected at line 17
+Overfull \hbox (2.97502pt too wide) detected at line 18
 \OT1/cmss/m/it/10.95 u \OMS/cmsy/m/n/10.95 ^^B \OT1/cmss/m/it/10.95 v \OT1/cmss
 /m/n/10.95 = []
  []
 
-) [11
+) [12
 
  <./figures/crossprod.png>]
 \openout4 = `linearalgebra02.vrb'.
 
- (./linearalgebra02.vrb) [12
+ (./linearalgebra02.vrb) [13
 
 ]
 \tf@nav=\write7
@@ -1086,32 +1091,26 @@ Overfull \hbox (2.97502pt too wide) detected at line 17
 \tf@snm=\write9
 \openout9 = `linearalgebra02.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 348.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 348.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 365.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 365.
 
 (./linearalgebra02.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 348.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 348.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 365.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 365.
+Package rerunfilecheck Info: File `linearalgebra02.out' has not changed.
+(rerunfilecheck)             Checksum: 231CECB19996C56749F597E7CD1DC27D;720.
 
-
-Package rerunfilecheck Warning: File `linearalgebra02.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `linearalgebra02.out':
-(rerunfilecheck)             Before: 283E994FADD8EC0C43C71BF74FCA7DC0;583
-(rerunfilecheck)             After:  F2A966A9EEF874A5B578D9363FAC2585;652.
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 348.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 365.
  ) 
 Here is how much of TeX's memory you used:
- 20612 strings out of 494977
- 405531 string characters out of 6180183
+ 20629 strings out of 494977
+ 405707 string characters out of 6180183
  478891 words of memory out of 5000000
- 23315 multiletter control sequences out of 15000+600000
+ 23327 multiletter control sequences out of 15000+600000
  15856 words of font info for 60 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  48i,14n,54p,412b,595s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1128,11 +1127,12 @@ public/amsfonts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 nts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.p
-fb>
-Output written on linearalgebra02.pdf (12 pages, 164408 bytes).
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
+b>
+Output written on linearalgebra02.pdf (13 pages, 169445 bytes).
 PDF statistics:
- 436 PDF objects out of 1000 (max. 8388607)
- 397 compressed objects within 4 object streams
- 36 named destinations out of 1000 (max. 500000)
- 128 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 477 PDF objects out of 1000 (max. 8388607)
+ 435 compressed objects within 5 object streams
+ 39 named destinations out of 1000 (max. 500000)
+ 144 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -280,6 +280,22 @@ ea+fc & ... \\
 
 \end{frame}
 
+
+\sect{Inverse of a matrix}
+\[
+\left[\begin{array}{cccccc}a&b&c&1&0&0\\
+d&e&f&0&1&0\\
+g&h&i&0&0&1\end{array}\right]
+\]
+\begin{itemize}
+\item Stick the identity on the right.
+\item Add multiples of one row to another until the identity is on the left.
+\item The inverse is now on the right
+\end{itemize}
+\end{frame}
+
+
+
 \sect{Determinant of a matrix}
 \begin{eqnarray*}
 A &=& \left[\begin{array}{cc}
@@ -307,6 +323,7 @@ a\left|\begin{array}{cc}e&f\\h&i\end{array}\right|
 \end{eqnarray*}
 \end{frame}
 
+
 \sect{Cross product (vector product)}
 \begin{columns}
   \begin{column}{0.6\textwidth}
@@ -315,6 +332,7 @@ a\left|\begin{array}{cc}e&f\\h&i\end{array}\right|
   \begin{column}{0.4\textwidth}
     \begin{itemize}
     \item A vector at right angles to $u$ and $v$.
+\item Right-hand rule.
     \item $u \times v = $\\
       $(u_2v_3 - u_3v_2,$\\$ u_3v_1 - u_1v_3,$\\$ u_1v_2 - u_2v_1)$
       
@@ -328,21 +346,20 @@ a\left|\begin{array}{cc}e&f\\h&i\end{array}\right|
     \end{itemize}
   \end{column}
 \end{columns}
-
+Application:  find the normal to a surface.
 \end{frame}
 
-\sect{Inverse of a matrix}
-\[
-\left[\begin{array}{cccccc}a&b&c&1&0&0\\
-d&e&f&0&1&0\\
-g&h&i&0&0&1\end{array}\right]
-\]
-\begin{itemize}
-\item Stick the identity on the right.
-\item Add multiples of one row to another until the identity is on the left.
-\item The inverse is now on the right
-\end{itemize}
+\sect{Properties of the cross product}
+\begin{eqnarray*}
+  i \times j &=& k\\
+  j \times k &=& i\\
+  k \times i &=& j\\
+  a \times b &=& -b\times a\\
+  a\times (b+c) &=& a\times b + a \times c\\
+  (sa) \times b &=& s(a \times b), s\in \mathbb{R}\\
+a\times (b \times c) & \not =& (a\times b)\times c\\
+|a\times b| &=& \sin(\theta)|a||b|
+\end{eqnarray*}
 \end{frame}
-
 
 \end{document}
