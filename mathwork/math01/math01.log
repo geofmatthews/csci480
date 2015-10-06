@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  1 OCT 2015 11:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  6 OCT 2015 08:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**math01
+**math01.
 (./math01.tex
 LaTeX2e <2014/05/01>
 Babel <3.9l> and hyphenation patterns for 4 languages loaded.
@@ -484,13 +484,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./math01.aux) ) 
 Here is how much of TeX's memory you used:
- 12279 strings out of 494977
- 251792 string characters out of 6180183
+ 12280 strings out of 494977
+ 251793 string characters out of 6180183
  284160 words of memory out of 5000000
  15298 multiletter control sequences out of 15000+600000
  3948 words of font info for 15 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 55i,6n,54p,406b,709s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,6n,54p,407b,709s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texliv
@@ -498,7 +498,7 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmsy7.pfb>
-Output written on math01.pdf (2 pages, 71086 bytes).
+Output written on math01.pdf (2 pages, 71004 bytes).
 PDF statistics:
  38 PDF objects out of 1000 (max. 8388607)
  27 compressed objects within 1 object stream

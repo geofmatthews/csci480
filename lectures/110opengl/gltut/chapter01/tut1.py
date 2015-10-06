@@ -28,7 +28,7 @@ vertexPositions = N.array([
      0.75,  0.75,  0.0,  1.0,
      0.75, -0.75,  0.0,  1.0,
      0.0, 0.0, 0.0, 1.0,
- #   -0.75, -0.75,  0.0,  1.0,
+#    -0.75, -0.75,  0.0,  1.0,
 ],dtype=N.float32)
 vertexComponents = 4
 
@@ -90,10 +90,10 @@ def initialize_vertex_buffer():
 def init():
     initialize_program()
     initialize_vertex_buffer()
-#    n = 1
-#    vao_array = N.zeros(n, dtype=N.uint)
-#    vao_array = GL.glGenVertexArrays(n)
-#    GL.glBindVertexArray( vao_array )
+    n = 1
+    vao_array = N.zeros(n, dtype=N.uint)
+    vao_array = GL.glGenVertexArrays(n)
+    GL.glBindVertexArray( vao_array )
 
 
 # Called to redraw the contents of the window
