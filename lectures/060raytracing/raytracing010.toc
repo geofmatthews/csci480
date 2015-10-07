@@ -10,7 +10,7 @@
 \beamer@sectionintoc {8}{Other camera representations}{9}{0}{8}
 \beamer@sectionintoc {9}{Normalized screen coordinates}{10}{0}{9}
 \beamer@sectionintoc {10}{Mapping from Pixel to Camera Ray}{13}{0}{10}
-\beamer@sectionintoc {11}{Ray tracing process}{14}{0}{11}
+\beamer@sectionintoc {11}{Ray casting process}{14}{0}{11}
 \beamer@sectionintoc {12}{Intersecting a ray and a sphere}{15}{0}{12}
 \beamer@sectionintoc {13}{Solving quadratic}{17}{0}{13}
 \beamer@sectionintoc {14}{Intersecting a ray and a sphere}{18}{0}{14}
