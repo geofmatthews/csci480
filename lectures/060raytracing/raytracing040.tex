@@ -213,5 +213,46 @@ calculating the normal.
 
 \end{frame}
 
+\sect{How do we find the intersection point?}
+
+\begin{tikzpicture}
+%\draw[help lines] (0,0) grid (10,4);
+  \draw[thick] (8,0) -- (8,2) -- (10,2) -- (10,0) -- (8,0);
+  \draw[thick,*->] (0,1) -- (2,1);
+  \draw[thick,gray,|->] (-0.2,1) arc [radius=9.2, start angle=180, end angle=160];
+  \draw[thick,red,*->] (0.5,4) -- (2.5,3.5);
+\end{tikzpicture}
+
+\pause
+\begin{itemize}
+\item Translate the ray point (subtract the object center).
+\item Rotate the ray point by the {\em inverse} rotation of the object.
+\item Rotate the ray vector by the same rotation.
+\item Find $t$, the distance along the ray to the intersection.
+\item Use $t$ with the untransformed ray to find the point in world coordinates. 
+\end{itemize}
+
+\end{frame}
+
+\sect{How do we find the normal?}
+
+\begin{tikzpicture}
+%\draw[help lines] (0,0) grid (10,4);
+  \draw[thick] (8,0) -- (8,2) -- (10,2) -- (10,0) -- (8,0);
+  \draw[thick,*->] (0,1) -- (2,1);
+  \draw[thick,gray,|->] (-0.2,1) arc [radius=9.2, start angle=180, end angle=160];
+  \draw[thick,red,*->] (0.5,4) -- (2.5,3.5);
+\end{tikzpicture}
+
+\pause
+\begin{itemize}
+\item Find the point on the {\em untransformed} object (use {\em transformed } ray).
+\item Find the normal at that point using the gradient, as before.
+\item Rotate this normal using the original rotation matrix.
+\end{itemize}
+
+
+\end{frame}
+
 \end{document}
 

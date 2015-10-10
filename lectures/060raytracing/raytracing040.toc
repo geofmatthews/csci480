@@ -8,3 +8,5 @@
 \beamer@sectionintoc {6}{Normals for the ellipsoid}{7}{0}{6}
 \beamer@sectionintoc {7}{Other quadrics}{8}{0}{7}
 \beamer@sectionintoc {8}{What about rotating quadrics?}{9}{0}{8}
+\beamer@sectionintoc {9}{How do we find the intersection point?}{11}{0}{9}
+\beamer@sectionintoc {10}{How do we find the normal?}{13}{0}{10}
