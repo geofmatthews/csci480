@@ -77,6 +77,14 @@ Ray Tracing, Part IV
   \titlepage
 \end{frame}
 
+\sect{Readings}
+\bi
+\item\url{https://en.wikipedia.org/wiki/Gradient}
+\item  \url{https://en.wikipedia.org/wiki/Quadric}
+\item\url{http://www.win.tue.nl/~sterk/Bouwkunde/hoofdstuk3.pdf}
+\ei
+\end{frame}
+
 \sect{Ellipsoids}
 \begin{columns}
   \begin{column}{0.5\textwidth}
@@ -125,13 +133,12 @@ Collect terms to get our quadratic to solve:
 \]
 \end{frame}
 
-\sect{What about the normal for an ellipsoid?}
-\mygraphc{0.7}{randomellipsoids02.png}
+\sect{How do we move ellipsoids away from the origin?}
+\mygraphc{0.7}{randomellipsoids03.png}
 \end{frame}
 
-
-\sect{Calculus to the rescue!}
-\url{https://en.wikipedia.org/wiki/Gradient}
+\sect{What about the normal for an ellipsoid?}
+\mygraphc{0.7}{randomellipsoids02.png}
 \end{frame}
 
 \sect{Calculus to the rescue!}
@@ -150,8 +157,8 @@ to the directions in which it is not changing at all.
   The gradient is defined as
 \[
 \nabla f(x,y,z) = \left(
-\frac{\partial f}{\partial x} +
-\frac{\partial f}{\partial y} +
+\frac{\partial f}{\partial x} ,
+\frac{\partial f}{\partial y} ,
 \frac{\partial f}{\partial z}
 \right)
 \]
@@ -166,11 +173,11 @@ except $x$ as a constant.
 \bi
 \item For the ellipsoid, the function is
 \[
-f(x,y,z) = \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1
+f(x,y,z) = \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2}
 \]
-\item For this function, the gradient is easy to compute:
+\item What is the gradient of this function? \pause
 \[
-\nabla f(x,y,z) = \frac{2x}{a^2} + \frac{2y}{b^2} + \frac{2z}{c^2}
+\nabla f(x,y,z) = \left(\frac{2x}{a^2} , \frac{2y}{b^2} , \frac{2z}{c^2}\right)
 \]
 \item Since we want to normalize this anyway, we can drop the factor of 2.
 \item
@@ -178,7 +185,13 @@ Note that this is in coordinates where the ellipsoid has not been
 translated.  After we find our translated intersection point, we have
 to translate it back by subtracting the ellipsoid's center before
 calculating the normal.
+\item Or just use the translated ray to find the $(x,y,z)$ for the
+  gradient while calculating the intersection.  
 \ei
+\end{frame}
+
+\sect{Can use ellipsoids for lots of things}
+\mygraphc{0.7}{axesworld.png}
 \end{frame}
 
 \sect{Other quadrics}
@@ -189,13 +202,88 @@ calculating the normal.
   \ei
 \end{frame}
 
+\sect{Rotating ellipsoids}
+\mygraphc{0.7}{ellipsoidworld.png}
+\end{frame}
+
+\sect{How do we rotate quadrics?}
+\mygraphc{0.7}{rotatedellipsoids.png}
+\end{frame}
+
+\sect{Rotating points}
+\begin{columns}
+  \column{0.5\textwidth}
+  \begin{tikzpicture}[>=latex,baseline=(current bounding box.north)]
+    %\draw[help lines] (-1,-1) grid (6,6);
+    \draw[<->,thick] (5,0) node[anchor=west] {$x$}-- (0,0) -- (0,5) node[anchor=south] {$y$};
+    \draw (5.19,3) -- (0,0) -- (4.24,4.24);
+    \fill (4.33,2.5) circle (2pt) node[anchor=north west] {$p$};
+    \fill (3.53,3.53) circle (2pt) node[anchor=south east] {$p'$};
+    \draw[|->,thick] (30:5) arc (30:45:5);
+    \draw (1.3,1) node {$\theta$};
+  \end{tikzpicture}
+  \column{0.5\textwidth}
+  \begin{eqnarray*}
+    x' &=& x\cos(\theta) - y\sin(\theta)\\
+    y' &=& x\sin(\theta) + y\cos(\theta)
+  \end{eqnarray*}
+  \pause
+  \begin{itemize}
+    \item What if we want to rotate in the opposite direction? \pause
+  \item If $z$ is pointing in, is this a
+    \begin{itemize}
+    \item right-handed frame?
+    \item right-handed rotation?
+    \end{itemize}
+    \pause
+  \item What about $z$ pointing out?
+    \pause
+  \item What about rotating vectors?
+    \pause
+  \end{itemize}
+\end{columns}
+
+\vfill
+For derivation of equation:
+\url{https://engineering.purdue.edu/~bethel/rot2.pdf}
+
+\end{frame}
+
+\sect{Rotating in 3D}
+\bi
+\item Rotating around the $z$ axis:
+  \[
+  p' = (x\cos(\theta) - y\sin(\theta), x\sin(\theta) + y\cos(\theta), z)
+  \]
+\item Rotating around the $y$ axis:
+  \[
+  p' = (x\cos(\theta) - z\sin(\theta), y, x\sin(\theta) + z\cos(\theta))
+  \]
+\item Rotating around the $x$ axis:
+  \[
+  p' = (x, y\cos(\theta) - z\sin(\theta), y\sin(\theta) + z\cos(\theta))
+  \]
+\item General rotations can be built up as sequences of $x$, $y$ and
+  $z$ rotations.
+  \ei
+\end{frame}
+
+\sect{Rotating quadrics}
+\mygraphc{0.7}{rotatedellipsoids02.png}
+\end{frame}
+
+\sect{Rotating quadrics}
+\mygraphc{0.7}{ellipsoidworld.png}
+\end{frame}
+
+
 \sect{What about rotating quadrics?}
 \begin{tikzpicture}
 %  \draw[help lines] (0,0) grid (10,2);
   \draw[thick] (8,0) -- (8,2) -- (10,2) -- (10,0) -- (8,0);
 \draw[thick,gray,|->] (10.5,1) arc [radius=1.5, start angle=0, end angle=30];
   \draw[thick,*->] (0,1) -- (2,1);
-\draw[thick,red] (7.8,1.8) -- (8.2,-0.2) -- (10.2,0.2) -- (9.8, 2.2) -- (7.8,1.8);
+\draw[thick,blue] (8.63, -0.37) -- (7.63, 1.37) -- (9.37, 2.37) -- (10.37, 0.63) -- cycle;
 \end{tikzpicture}
 
 \pause
@@ -208,7 +296,7 @@ calculating the normal.
   \draw[thick] (8,0) -- (8,2) -- (10,2) -- (10,0) -- (8,0);
   \draw[thick,*->] (0,1) -- (2,1);
   \draw[thick,gray,|->] (-0.2,1) arc [radius=9.2, start angle=180, end angle=160];
-  \draw[thick,red,*->] (0.5,4) -- (2.5,3.5);
+  \draw[thick,red,*->] (0.5,4) -- (2.5,3.28);
 \end{tikzpicture}
 
 \end{frame}
@@ -220,38 +308,59 @@ calculating the normal.
   \draw[thick] (8,0) -- (8,2) -- (10,2) -- (10,0) -- (8,0);
   \draw[thick,*->] (0,1) -- (2,1);
   \draw[thick,gray,|->] (-0.2,1) arc [radius=9.2, start angle=180, end angle=160];
-  \draw[thick,red,*->] (0.5,4) -- (2.5,3.5);
+  \draw[thick,red,*->] (0.5,4) -- (2.5,3.28);
+  \draw[dotted,red] (0.5,4) -- (9,1);
+  \fill[red] (8,1.328) circle (2pt);
+\draw[thick,blue] (8.63, -0.37) -- (7.63, 1.37) -- (9.37, 2.37) -- (10.37, 0.63) -- cycle;
+\draw[dotted,blue] (0,1) -- (9,1);
+\draw[thick,gray,|->] (10.5,1) arc [radius=1.5, start angle=0, end angle=30];
+  \fill[blue] (7.85,1) circle (2pt);
 \end{tikzpicture}
 
 \pause
 \begin{itemize}
 \item Translate the ray point (subtract the object center).
 \item Rotate the ray point by the {\em inverse} rotation of the object.
-\item Rotate the ray vector by the same rotation.
+\item Rotate the ray vector by the {\em inverse} rotation of the object.
 \item Find $t$, the distance along the ray to the intersection.
-\item Use $t$ with the untransformed ray to find the point in world coordinates. 
+\item Use $t$ with the original ray to find the point in world coordinates. 
 \end{itemize}
 
 \end{frame}
 
 \sect{How do we find the normal?}
 
+
 \begin{tikzpicture}
 %\draw[help lines] (0,0) grid (10,4);
   \draw[thick] (8,0) -- (8,2) -- (10,2) -- (10,0) -- (8,0);
   \draw[thick,*->] (0,1) -- (2,1);
   \draw[thick,gray,|->] (-0.2,1) arc [radius=9.2, start angle=180, end angle=160];
-  \draw[thick,red,*->] (0.5,4) -- (2.5,3.5);
+  \draw[thick,red,*->] (0.5,4) -- (2.5,3.28);
+  \draw[dotted,red] (0.5,4) -- (9,1);
+  \fill[red] (8,1.328) circle (2pt);
+\draw[red,->,thick] (8,1.328) -- (7,1.328);
+\draw[thick,blue] (8.63, -0.37) -- (7.63, 1.37) -- (9.37, 2.37) -- (10.37, 0.63) -- cycle;
+\draw[thick,gray,|->] (10.5,1) arc [radius=1.5, start angle=0, end angle=30];
+  \fill[blue] (7.85,1) circle (2pt);
+\draw[blue,->,thick] (7.85,1) -- (6.8, .4);
+\draw[dotted] (1,1) -- (9,1);
 \end{tikzpicture}
+
 
 \pause
 \begin{itemize}
-\item Find the point on the {\em untransformed} object (use {\em transformed } ray).
-\item Find the normal at that point using the gradient, as before.
-\item Rotate this normal using the original rotation matrix.
+\item Translate and rotate the ray to find the hit point.
+  \item Use the {\em inverse} rotation of the object to rotate the ray.
+  \item Find the normal at the hit point.\\Use the gradient as the quadric is untransformed.
+\item Rotate this normal using the {\em original} rotation matrix.
 \end{itemize}
 
 
+\end{frame}
+
+\sect{Putting it all together}
+\mygraphc{0.7}{randomellipsoids.png}
 \end{frame}
 
 \end{document}

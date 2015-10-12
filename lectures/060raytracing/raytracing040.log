@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  9 OCT 2015 16:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  12 OCT 2015 13:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -996,22 +996,29 @@ LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
 \openout4 = `raytracing040.vrb'.
 
  (./raytracing040.vrb
-<figures/Ellipsoid_Quadric.png, id=84, 752.8125pt x 832.10875pt>
+LaTeX Font Info:    Try loading font information for U+msa on input line 3.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 3.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)) [2
+
+]
+\openout4 = `raytracing040.vrb'.
+
+
+(./raytracing040.vrb
+<figures/Ellipsoid_Quadric.png, id=151, 752.8125pt x 832.10875pt>
 File: figures/Ellipsoid_Quadric.png Graphic file (type png)
 
 <use figures/Ellipsoid_Quadric.png>
 Package pdftex.def Info: figures/Ellipsoid_Quadric.png used on input line 4.
 (pdftex.def)             Requested size: 92.18788pt x 101.89294pt.
-LaTeX Font Info:    Try loading font information for U+msa on input line 7.
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 7.
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)) [2
+) [3
 
  <./figures/Ellipsoid_Quadric.png (PNG copy)>]
 \openout4 = `raytracing040.vrb'.
@@ -1022,35 +1029,36 @@ Overfull \hbox (20.39955pt too wide) detected at line 24
 1/cmss/m/n/10.95 + []
  []
 
-) [3
+) [4
 
 ]
 \openout4 = `raytracing040.vrb'.
 
  (./raytracing040.vrb
-<figures/randomellipsoids02.png, id=139, 642.4pt x 642.4pt>
+<figures/randomellipsoids03.png, id=206, 642.4pt x 642.4pt>
+File: figures/randomellipsoids03.png Graphic file (type png)
+
+<use figures/randomellipsoids03.png>
+Package pdftex.def Info: figures/randomellipsoids03.png used on input line 2.
+(pdftex.def)             Requested size: 215.10196pt x 215.09996pt.
+) [5
+
+ <./figures/randomellipsoids03.png (PNG copy)>]
+\openout4 = `raytracing040.vrb'.
+
+ (./raytracing040.vrb
+<figures/randomellipsoids02.png, id=232, 642.4pt x 642.4pt>
 File: figures/randomellipsoids02.png Graphic file (type png)
 
 <use figures/randomellipsoids02.png>
 Package pdftex.def Info: figures/randomellipsoids02.png used on input line 2.
 (pdftex.def)             Requested size: 215.10196pt x 215.09996pt.
-) [4
+) [6
 
  <./figures/randomellipsoids02.png (PNG copy)>]
 \openout4 = `raytracing040.vrb'.
 
- (./raytracing040.vrb) [5
-
-]
-\openout4 = `raytracing040.vrb'.
-
- (./raytracing040.vrb) [6
-
-]
-\openout4 = `raytracing040.vrb'.
-
-
-(./raytracing040.vrb) [7
+ (./raytracing040.vrb) [7
 
 ]
 \openout4 = `raytracing040.vrb'.
@@ -1058,28 +1066,158 @@ Package pdftex.def Info: figures/randomellipsoids02.png used on input line 2.
  (./raytracing040.vrb) [8
 
 ]
+(./raytracing040.vrb) [9
+
+]
+\openout4 = `raytracing040.vrb'.
+
+ (./raytracing040.vrb
+<figures/axesworld.png, id=338, 513.92pt x 513.92pt>
+File: figures/axesworld.png Graphic file (type png)
+
+<use figures/axesworld.png>
+Package pdftex.def Info: figures/axesworld.png used on input line 2.
+(pdftex.def)             Requested size: 215.10196pt x 215.09995pt.
+) [10
+
+ <./figures/axesworld.png (PNG copy)>]
+\openout4 = `raytracing040.vrb'.
+
+
+(./raytracing040.vrb) [11
+
+]
+\openout4 = `raytracing040.vrb'.
+
+ (./raytracing040.vrb
+<figures/ellipsoidworld.png, id=391, 513.92pt x 513.92pt>
+File: figures/ellipsoidworld.png Graphic file (type png)
+
+<use figures/ellipsoidworld.png>
+Package pdftex.def Info: figures/ellipsoidworld.png used on input line 2.
+(pdftex.def)             Requested size: 215.10196pt x 215.09995pt.
+) [12
+
+ <./figures/ellipsoidworld.png (PNG copy)>]
+\openout4 = `raytracing040.vrb'.
+
+ (./raytracing040.vrb
+<figures/rotatedellipsoids.png, id=417, 513.92pt x 513.92pt>
+File: figures/rotatedellipsoids.png Graphic file (type png)
+
+<use figures/rotatedellipsoids.png>
+Package pdftex.def Info: figures/rotatedellipsoids.png used on input line 2.
+(pdftex.def)             Requested size: 215.10196pt x 215.09995pt.
+) [13
+
+ <./figures/rotatedellipsoids.png (PNG copy)>]
+\openout4 = `raytracing040.vrb'.
+
+ (./raytracing040.vrb
+Overfull \hbox (9.13863pt too wide) in paragraph at lines 3--13
+[][]  
+ []
+
+) [14
+
+] (./raytracing040.vrb
+Overfull \hbox (9.13863pt too wide) in paragraph at lines 3--13
+[][]  
+ []
+
+) [15
+
+] (./raytracing040.vrb
+Overfull \hbox (9.13863pt too wide) in paragraph at lines 3--13
+[][]  
+ []
+
+) [16
+
+] (./raytracing040.vrb
+Overfull \hbox (9.13863pt too wide) in paragraph at lines 3--13
+[][]  
+ []
+
+) [17
+
+] (./raytracing040.vrb
+Overfull \hbox (9.13863pt too wide) in paragraph at lines 3--13
+[][]  
+ []
+
+) [18
+
+] (./raytracing040.vrb
+Overfull \hbox (9.13863pt too wide) in paragraph at lines 3--13
+[][]  
+ []
+
+) [19
+
+]
+\openout4 = `raytracing040.vrb'.
+
+ (./raytracing040.vrb) [20
+
+]
+\openout4 = `raytracing040.vrb'.
+
+ (./raytracing040.vrb
+<figures/rotatedellipsoids02.png, id=630, 513.92pt x 513.92pt>
+File: figures/rotatedellipsoids02.png Graphic file (type png)
+
+<use figures/rotatedellipsoids02.png>
+Package pdftex.def Info: figures/rotatedellipsoids02.png used on input line 2.
+(pdftex.def)             Requested size: 215.10196pt x 215.09995pt.
+) [21
+
+ <./figures/rotatedellipsoids02.png (PNG copy)>]
+\openout4 = `raytracing040.vrb'.
+
+ (./raytracing040.vrb
+File: figures/ellipsoidworld.png Graphic file (type png)
+ <use figures/ellipsoidworld.png>
+Package pdftex.def Info: figures/ellipsoidworld.png used on input line 2.
+(pdftex.def)             Requested size: 215.10196pt x 215.09995pt.
+) [22
+
+]
+\openout4 = `raytracing040.vrb'.
+
+
+(./raytracing040.vrb) [23
+
+] (./raytracing040.vrb) [24
+
+]
 \openout4 = `raytracing040.vrb'.
 
  (./raytracing040.vrb)
-[9
+[25
 
-] (./raytracing040.vrb) [10
-
-]
-\openout4 = `raytracing040.vrb'.
-
- (./raytracing040.vrb) [11
-
-] (./raytracing040.vrb) [12
+] (./raytracing040.vrb) [26
 
 ]
 \openout4 = `raytracing040.vrb'.
 
- (./raytracing040.vrb) [13
+ (./raytracing040.vrb) [27
 
-] (./raytracing040.vrb) [14
+] (./raytracing040.vrb) [28
 
 ]
+\openout4 = `raytracing040.vrb'.
+
+ (./raytracing040.vrb
+<figures/randomellipsoids.png, id=833, 642.4pt x 642.4pt>
+File: figures/randomellipsoids.png Graphic file (type png)
+
+<use figures/randomellipsoids.png>
+Package pdftex.def Info: figures/randomellipsoids.png used on input line 2.
+(pdftex.def)             Requested size: 215.10196pt x 215.09996pt.
+) [29
+
+ <./figures/randomellipsoids.png (PNG copy)>]
 \tf@nav=\write7
 \openout7 = `raytracing040.nav'.
 
@@ -1089,29 +1227,34 @@ Package pdftex.def Info: figures/randomellipsoids02.png used on input line 2.
 \tf@snm=\write9
 \openout9 = `raytracing040.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 257.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 257.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 366.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 366.
+ (./raytracing040.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 366.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 366.
 
-(./raytracing040.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 257.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 257.
-Package rerunfilecheck Info: File `raytracing040.out' has not changed.
-(rerunfilecheck)             Checksum: FE9CC85962A691F951C10990D158CBD5;612.
 
+Package rerunfilecheck Warning: File `raytracing040.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `raytracing040.out':
+(rerunfilecheck)             Before: D799EDE25A00EC2EA9D41FCB73EECBE3;1141
+(rerunfilecheck)             After:  48C55F71B2F884C1514D135B65A674C7;1145.
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 257.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 366.
  ) 
 Here is how much of TeX's memory you used:
- 20777 strings out of 494977
- 408835 string characters out of 6180183
- 477157 words of memory out of 5000000
- 23471 multiletter control sequences out of 15000+600000
- 11422 words of font info for 43 fonts, out of 8000000 for 9000
+ 21012 strings out of 494977
+ 413076 string characters out of 6180183
+ 481158 words of memory out of 5000000
+ 23631 multiletter control sequences out of 15000+600000
+ 11727 words of font info for 44 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 48i,14n,54p,406b,696s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,14n,54p,406b,979s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texli
@@ -1121,12 +1264,14 @@ t/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-symbols/msam10.pfb>
-Output written on raytracing040.pdf (14 pages, 385360 bytes).
+fonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols
+/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/
+msam7.pfb>
+Output written on raytracing040.pdf (29 pages, 743266 bytes).
 PDF statistics:
- 473 PDF objects out of 1000 (max. 8388607)
- 433 compressed objects within 5 object streams
- 39 named destinations out of 1000 (max. 500000)
- 133 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 920 PDF objects out of 1000 (max. 8388607)
+ 853 compressed objects within 9 object streams
+ 78 named destinations out of 1000 (max. 500000)
+ 235 words of extra memory for PDF output out of 10000 (max. 10000000)
 

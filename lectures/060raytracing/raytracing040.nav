@@ -1,58 +1,103 @@
 \beamer@endinputifotherversion {3.33pt}
 \headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
-\headcommand {\sectionentry {1}{Ellipsoids}{2}{Ellipsoids}{0}}
+\headcommand {\sectionentry {1}{Readings}{2}{Readings}{0}}
 \headcommand {\beamer@sectionpages {1}{1}}
 \headcommand {\beamer@subsectionpages {1}{1}}
 \headcommand {\slideentry {1}{0}{2}{2/2}{}{0}}
 \headcommand {\beamer@framepages {2}{2}}
-\headcommand {\sectionentry {2}{Intersect a ray with an ellipsoid}{3}{Intersect a ray with an ellipsoid}{0}}
+\headcommand {\sectionentry {2}{Ellipsoids}{3}{Ellipsoids}{0}}
 \headcommand {\beamer@sectionpages {2}{2}}
 \headcommand {\beamer@subsectionpages {2}{2}}
 \headcommand {\slideentry {2}{0}{3}{3/3}{}{0}}
 \headcommand {\beamer@framepages {3}{3}}
-\headcommand {\sectionentry {3}{What about the normal for an ellipsoid?}{4}{What about the normal for an ellipsoid?}{0}}
+\headcommand {\sectionentry {3}{Intersect a ray with an ellipsoid}{4}{Intersect a ray with an ellipsoid}{0}}
 \headcommand {\beamer@sectionpages {3}{3}}
 \headcommand {\beamer@subsectionpages {3}{3}}
 \headcommand {\slideentry {3}{0}{4}{4/4}{}{0}}
 \headcommand {\beamer@framepages {4}{4}}
-\headcommand {\sectionentry {4}{Calculus to the rescue!}{5}{Calculus to the rescue!}{0}}
+\headcommand {\sectionentry {4}{How do we move ellipsoids away from the origin?}{5}{How do we move ellipsoids away from the origin?}{0}}
 \headcommand {\beamer@sectionpages {4}{4}}
 \headcommand {\beamer@subsectionpages {4}{4}}
 \headcommand {\slideentry {4}{0}{5}{5/5}{}{0}}
 \headcommand {\beamer@framepages {5}{5}}
-\headcommand {\sectionentry {5}{Calculus to the rescue!}{6}{Calculus to the rescue!}{0}}
+\headcommand {\sectionentry {5}{What about the normal for an ellipsoid?}{6}{What about the normal for an ellipsoid?}{0}}
 \headcommand {\beamer@sectionpages {5}{5}}
 \headcommand {\beamer@subsectionpages {5}{5}}
 \headcommand {\slideentry {5}{0}{6}{6/6}{}{0}}
 \headcommand {\beamer@framepages {6}{6}}
-\headcommand {\sectionentry {6}{Normals for the ellipsoid}{7}{Normals for the ellipsoid}{0}}
+\headcommand {\sectionentry {6}{Calculus to the rescue!}{7}{Calculus to the rescue!}{0}}
 \headcommand {\beamer@sectionpages {6}{6}}
 \headcommand {\beamer@subsectionpages {6}{6}}
 \headcommand {\slideentry {6}{0}{7}{7/7}{}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\sectionentry {7}{Other quadrics}{8}{Other quadrics}{0}}
+\headcommand {\sectionentry {7}{Normals for the ellipsoid}{8}{Normals for the ellipsoid}{0}}
 \headcommand {\beamer@sectionpages {7}{7}}
 \headcommand {\beamer@subsectionpages {7}{7}}
-\headcommand {\slideentry {7}{0}{8}{8/8}{}{0}}
-\headcommand {\beamer@framepages {8}{8}}
-\headcommand {\sectionentry {8}{What about rotating quadrics?}{9}{What about rotating quadrics?}{0}}
-\headcommand {\beamer@sectionpages {8}{8}}
-\headcommand {\beamer@subsectionpages {8}{8}}
-\headcommand {\slideentry {8}{0}{9}{9/10}{}{0}}
-\headcommand {\beamer@framepages {9}{10}}
-\headcommand {\sectionentry {9}{How do we find the intersection point?}{11}{How do we find the intersection point?}{0}}
-\headcommand {\beamer@sectionpages {9}{10}}
-\headcommand {\beamer@subsectionpages {9}{10}}
-\headcommand {\slideentry {9}{0}{10}{11/12}{}{0}}
-\headcommand {\beamer@framepages {11}{12}}
-\headcommand {\sectionentry {10}{How do we find the normal?}{13}{How do we find the normal?}{0}}
-\headcommand {\beamer@sectionpages {11}{12}}
-\headcommand {\beamer@subsectionpages {11}{12}}
-\headcommand {\slideentry {10}{0}{11}{13/14}{}{0}}
-\headcommand {\beamer@framepages {13}{14}}
-\headcommand {\beamer@partpages {1}{14}}
-\headcommand {\beamer@subsectionpages {13}{14}}
-\headcommand {\beamer@sectionpages {13}{14}}
-\headcommand {\beamer@documentpages {14}}
-\headcommand {\def \inserttotalframenumber {11}}
+\headcommand {\slideentry {7}{0}{8}{8/9}{}{0}}
+\headcommand {\beamer@framepages {8}{9}}
+\headcommand {\sectionentry {8}{Can use ellipsoids for lots of things}{10}{Can use ellipsoids for lots of things}{0}}
+\headcommand {\beamer@sectionpages {8}{9}}
+\headcommand {\beamer@subsectionpages {8}{9}}
+\headcommand {\slideentry {8}{0}{9}{10/10}{}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\sectionentry {9}{Other quadrics}{11}{Other quadrics}{0}}
+\headcommand {\beamer@sectionpages {10}{10}}
+\headcommand {\beamer@subsectionpages {10}{10}}
+\headcommand {\slideentry {9}{0}{10}{11/11}{}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\sectionentry {10}{Rotating ellipsoids}{12}{Rotating ellipsoids}{0}}
+\headcommand {\beamer@sectionpages {11}{11}}
+\headcommand {\beamer@subsectionpages {11}{11}}
+\headcommand {\slideentry {10}{0}{11}{12/12}{}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\sectionentry {11}{How do we rotate quadrics?}{13}{How do we rotate quadrics?}{0}}
+\headcommand {\beamer@sectionpages {12}{12}}
+\headcommand {\beamer@subsectionpages {12}{12}}
+\headcommand {\slideentry {11}{0}{12}{13/13}{}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\sectionentry {12}{Rotating points}{14}{Rotating points}{0}}
+\headcommand {\beamer@sectionpages {13}{13}}
+\headcommand {\beamer@subsectionpages {13}{13}}
+\headcommand {\slideentry {12}{0}{13}{14/19}{}{0}}
+\headcommand {\beamer@framepages {14}{19}}
+\headcommand {\sectionentry {13}{Rotating in 3D}{20}{Rotating in 3D}{0}}
+\headcommand {\beamer@sectionpages {14}{19}}
+\headcommand {\beamer@subsectionpages {14}{19}}
+\headcommand {\slideentry {13}{0}{14}{20/20}{}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\sectionentry {14}{Rotating quadrics}{21}{Rotating quadrics}{0}}
+\headcommand {\beamer@sectionpages {20}{20}}
+\headcommand {\beamer@subsectionpages {20}{20}}
+\headcommand {\slideentry {14}{0}{15}{21/21}{}{0}}
+\headcommand {\beamer@framepages {21}{21}}
+\headcommand {\sectionentry {15}{Rotating quadrics}{22}{Rotating quadrics}{0}}
+\headcommand {\beamer@sectionpages {21}{21}}
+\headcommand {\beamer@subsectionpages {21}{21}}
+\headcommand {\slideentry {15}{0}{16}{22/22}{}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\sectionentry {16}{What about rotating quadrics?}{23}{What about rotating quadrics?}{0}}
+\headcommand {\beamer@sectionpages {22}{22}}
+\headcommand {\beamer@subsectionpages {22}{22}}
+\headcommand {\slideentry {16}{0}{17}{23/24}{}{0}}
+\headcommand {\beamer@framepages {23}{24}}
+\headcommand {\sectionentry {17}{How do we find the intersection point?}{25}{How do we find the intersection point?}{0}}
+\headcommand {\beamer@sectionpages {23}{24}}
+\headcommand {\beamer@subsectionpages {23}{24}}
+\headcommand {\slideentry {17}{0}{18}{25/26}{}{0}}
+\headcommand {\beamer@framepages {25}{26}}
+\headcommand {\sectionentry {18}{How do we find the normal?}{27}{How do we find the normal?}{0}}
+\headcommand {\beamer@sectionpages {25}{26}}
+\headcommand {\beamer@subsectionpages {25}{26}}
+\headcommand {\slideentry {18}{0}{19}{27/28}{}{0}}
+\headcommand {\beamer@framepages {27}{28}}
+\headcommand {\sectionentry {19}{Putting it all together}{29}{Putting it all together}{0}}
+\headcommand {\beamer@sectionpages {27}{28}}
+\headcommand {\beamer@subsectionpages {27}{28}}
+\headcommand {\slideentry {19}{0}{20}{29/29}{}{0}}
+\headcommand {\beamer@framepages {29}{29}}
+\headcommand {\beamer@partpages {1}{29}}
+\headcommand {\beamer@subsectionpages {29}{29}}
+\headcommand {\beamer@sectionpages {29}{29}}
+\headcommand {\beamer@documentpages {29}}
+\headcommand {\def \inserttotalframenumber {20}}
