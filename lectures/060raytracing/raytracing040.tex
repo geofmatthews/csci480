@@ -88,7 +88,7 @@ Ray Tracing, Part IV
 \sect{Ellipsoids}
 \begin{columns}
   \begin{column}{0.5\textwidth}
-\mygraphc{0.6}{Ellipsoid_Quadric.png}
+\mygraphc{0.8}{Ellipsoid_Quadric.png}
   \end{column}
   \begin{column}[b]{0.5\textwidth}
 \[
@@ -253,18 +253,23 @@ For derivation of equation:
 \bi
 \item Rotating around the $z$ axis:
   \[
-  p' = (x\cos(\theta) - y\sin(\theta), x\sin(\theta) + y\cos(\theta), z)
+  rotZ(x,y,z) = (x\cos(\theta) - y\sin(\theta), x\sin(\theta) + y\cos(\theta), z)
   \]
 \item Rotating around the $y$ axis:
   \[
-  p' = (x\cos(\theta) - z\sin(\theta), y, x\sin(\theta) + z\cos(\theta))
+  rotY(x,y,z) = (x\cos(\theta) - z\sin(\theta), y, x\sin(\theta) + z\cos(\theta))
   \]
 \item Rotating around the $x$ axis:
   \[
-  p' = (x, y\cos(\theta) - z\sin(\theta), y\sin(\theta) + z\cos(\theta))
+  rotX(x,y,z) = (x, y\cos(\theta) - z\sin(\theta), y\sin(\theta) + z\cos(\theta))
   \]
 \item General rotations can be built up as sequences of $x$, $y$ and
-  $z$ rotations.
+  $z$ rotations:
+  \begin{verbatim}
+    newp = rotZ(angle3,
+                rotY(angle2,
+                     rotX(angle1, p)))}
+\end{verbatim}
   \ei
 \end{frame}
 
@@ -272,9 +277,6 @@ For derivation of equation:
 \mygraphc{0.7}{rotatedellipsoids02.png}
 \end{frame}
 
-\sect{Rotating quadrics}
-\mygraphc{0.7}{ellipsoidworld.png}
-\end{frame}
 
 
 \sect{What about rotating quadrics?}
@@ -299,6 +301,7 @@ For derivation of equation:
   \draw[thick,red,*->] (0.5,4) -- (2.5,3.28);
 \end{tikzpicture}
 
+How do you invert a general rotation?
 \end{frame}
 
 \sect{How do we find the intersection point?}
@@ -351,8 +354,9 @@ For derivation of equation:
 \pause
 \begin{itemize}
 \item Translate and rotate the ray to find the hit point.
-  \item Use the {\em inverse} rotation of the object to rotate the ray.
-  \item Find the normal at the hit point.\\Use the gradient as the quadric is untransformed.
+\bi  \item Use the {\em inverse} rotation of the object to rotate the ray.\ei
+\item Find the normal at the hit point.
+  \bi\item Use the gradient as the quadric is untransformed.\ei
 \item Rotate this normal using the {\em original} rotation matrix.
 \end{itemize}
 

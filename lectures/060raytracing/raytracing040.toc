@@ -14,8 +14,7 @@
 \beamer@sectionintoc {12}{Rotating points}{14}{0}{12}
 \beamer@sectionintoc {13}{Rotating in 3D}{20}{0}{13}
 \beamer@sectionintoc {14}{Rotating quadrics}{21}{0}{14}
-\beamer@sectionintoc {15}{Rotating quadrics}{22}{0}{15}
-\beamer@sectionintoc {16}{What about rotating quadrics?}{23}{0}{16}
-\beamer@sectionintoc {17}{How do we find the intersection point?}{25}{0}{17}
-\beamer@sectionintoc {18}{How do we find the normal?}{27}{0}{18}
-\beamer@sectionintoc {19}{Putting it all together}{29}{0}{19}
+\beamer@sectionintoc {15}{What about rotating quadrics?}{22}{0}{15}
+\beamer@sectionintoc {16}{How do we find the intersection point?}{24}{0}{16}
+\beamer@sectionintoc {17}{How do we find the normal?}{26}{0}{17}
+\beamer@sectionintoc {18}{Putting it all together}{28}{0}{18}
