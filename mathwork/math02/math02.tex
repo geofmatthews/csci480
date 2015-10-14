@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\newcommand{\vect}[1]{\langle #1 \rangle}
+\begin{document}
+\noindent{\bf CSCI 480, Fall 2015, Math Homework \# 2}
+\bigskip
+
+\noindent Name\hrulefill Number \hrulefill
+
+Typeset your homework using \LaTeX.
+
+\begin{enumerate}
+
+\item
+  In the picture below, $A$, $B$, and $C$ are arbitrary points, and the
+dotted line is perpendicular to the line from $A$ to $C$.  Give
+pseudocode for an algorithm to find the distances $x$, $y$, and
+$z$ as a function of the points $A$, $B$, and $C$.  Use point
+subtraction and dot products.
+
+\includegraphics[scale=0.25]{fig01.png}
+
+\newpage
+
+\item For each of the following implicitly defined quadric surfaces, find a formula
+  to determine the value of $t$ where a ray defined by $p + tv$ intersects the surface.
+  \begin{enumerate}
+  \item Elliptic paraboloid \[\frac{x^2}{a^2} + \frac{y^2}{b^2} - z = 0\]
+\vfill
+  \item Hyperbolic paraboloid \[\frac{x^2}{a^2} - \frac{y^2}{b^2} - z\ = 0\]
+\vfill
+  \item Elliptic hyperboloid of one sheet \[\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2}\ = 1\]
+\vfill
+  \item Elliptic hyperboloid of two sheets
+    \[ \frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = -1\]
+  \end{enumerate}
+  \vfill
+  \newpage
+  
+\item Find a formula for a vector normal to each of the following surfaces.
+  \begin{enumerate}
+  \item Elliptic paraboloid \[\frac{x^2}{a^2} + \frac{y^2}{b^2} - z = 0\]
+\vfill
+  \item Hyperbolic paraboloid \[\frac{x^2}{a^2} - \frac{y^2}{b^2} - z\ = 0\]
+\vfill
+  \item Elliptic hyperboloid of one sheet \[\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2}\ = 1\]
+\vfill
+  \item Elliptic hyperboloid of two sheets
+    \[ \frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = -1\]
+  \end{enumerate}
+\vfill
+
+  \newpage
+  
+\item Suppose we specify a camera by five points: the eye point and the four corners of
+  the image plane (upper left, upper right, lower left, lower right),
+  as in the figure below (the left side of the image plane is deeper
+  into the picture than the right side). 
+
+    \tikzset{>=latex}
+    \begin{tikzpicture}
+      \fill (1,2) circle (2pt) node[anchor=east] {$eye$};
+      \fill (7,5) circle (2pt) node[anchor=south east] {$ul$};
+      \fill (7,3) circle (2pt) node[anchor=north] {$ll$};
+      \fill (9,4) circle (2pt) node[anchor=west] {$ur$};
+      \fill (9,2) circle (2pt) node[anchor=west] {$lr$};
+
+      \draw (1,2) -- (7,5) -- (9,4) -- cycle;
+      \draw (1,2) -- (7,3) -- (9,2) -- cycle;
+      \draw (7,3) -- (7,5) -- (9,4) -- (9,2) -- cycle;
+    \end{tikzpicture}
+
+Given a position in the image plane defined by $x$ and $y$, each
+scaled to $[0,1]$, and with the origin of the image plane understood
+as the lower left corner, write an expression giving the vector for a
+ray from the eye to that point in the image plane.  You do not need to
+normalize the vector.
+
+\vfill
+
+\item Given a camera specified as in the lecture notes, with an eye
+  point, normalized right, up, and foward vectors, and scalars depth,
+  width and height, $\langle p, r, u, f, d, w, h\rangle$, write
+  expressions for each of the five points in the camera representation
+  from the previous problem.
+  \begin{enumerate}
+  \item $eye =$
+\vfill
+    \item $ul = $
+\vfill
+    \item $ur = $
+\vfill
+    \item $ll = $
+\vfill
+    \item $lr = $
+\vfill
+  \end{enumerate}
+  
+\end{enumerate}
+\end{document}
