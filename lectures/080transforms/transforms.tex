@@ -42,7 +42,7 @@
 
 \mode<presentation>
 {
-  \usetheme{Madrid}
+%  \usetheme{Madrid}
   % or ...
 
 %  \setbeamercovered{transparent}
@@ -441,7 +441,8 @@ Mp &=& p'
 \rput(.5,.5){$\theta$}
 \end{pspicture}
 \begin{itemize}
-\item Righthand rotation about the $z$ axis.
+\item Righthand rotation about the $z$ axis in a righthand frame.
+\item Lefthand rotation about the $z$ axis in a lefthand frame.
 \begin{eqnarray*}
 \phomo{x'\\y'\\z'} &=& \mhomo{\cos(\theta)&-\sin(\theta)&0&0}{\sin(\theta)&\cos(\theta)&0&0}{0&0&1&0}\phomo{x\\y\\z}
 \end{eqnarray*}
@@ -482,6 +483,7 @@ Rodrigues rotation matrix
 
 \url{http://en.wikipedia.org/wiki/Rotation_matrix}
 
+\item Fairly easy derivation using vectors.
 \item Can also use quaternions.
 \item
 We will find other ways to deal with arbitrary rotations.
@@ -497,7 +499,7 @@ We will find other ways to deal with arbitrary rotations.
 
 
 \sect{How are tranforms combined?}
-\psset{unit=0.25cm}
+\psset{unit=0.2cm}
 \begin{pspicture}(-1,0)(8,5)
 \psline[arrows=<->](8,0)(0,0)(0,5)
 \bluebox 0011
@@ -527,7 +529,7 @@ TS = \mthree 103011001 \mthree 200020001 = \mthree 203021001
 \end{frame}
 
 \sect{Matrix multiplication is not commutative: $TS\not=ST$}
-\psset{unit=0.25cm}
+\psset{unit=0.2cm}
 \begin{pspicture}(-1,0)(8,5)
 \psline[arrows=<->](8,0)(0,0)(0,5)
 \bluebox 0011

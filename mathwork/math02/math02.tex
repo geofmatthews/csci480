@@ -7,41 +7,80 @@
 \newcommand{\vect}[1]{\langle #1 \rangle}
 \begin{document}
 \noindent{\bf CSCI 480, Fall 2015, Math Homework \# 2}
+\\Due date:  Friday, October 23, midnight
 \bigskip
 
 \noindent Name\hrulefill Number \hrulefill
 
-Typeset your homework using \LaTeX.
+Typeset this homework using \LaTeX.
 
 \begin{enumerate}
 
 \item
-  In the picture below, $A$, $B$, and $C$ are arbitrary points, and the
-dotted line is perpendicular to the line from $A$ to $C$.  Give
-pseudocode for an algorithm to find the distances $x$, $y$, and
-$z$ as a function of the points $A$, $B$, and $C$.  Use point
-subtraction and dot products.
+  In the picture below, $a$, $b$, and $c$ are arbitrary points, and
+  the dotted line from $b$ to $x$ is perpendicular to the line from
+  $a$ to $c$.  Give formulas to find each of the
+  distances from 
+  $a$, $b$, and $c$ to $x$ as a function of the points $a$, $b$, and $c$.
+  Use point subtraction and dot products.  Each formula should stand
+  on its own and not depend on the other formulas.
 
-\includegraphics[scale=0.25]{fig01.png}
+\newcommand{\mypoint}[3] {
+  \node (#1) at (#2) {};
+  \fill (#2) circle (2pt);
+  \node[anchor=#3] (label#1) at (#2) {$#1$};
+  }
+\begin{tikzpicture}
+%  \draw[help lines] (0,0) grid (8,5);
+  \mypoint{a}{1,3}{east};
+  \mypoint{b}{5,5}{south};
+  \mypoint{c}{8,1}{west};
+  \mypoint{x}{4.2,2.1}{north};
+\draw (a) -- (b) -- (c) -- (a);
+\draw[dotted] (b) -- (x);
+\end{tikzpicture}
+
+\begin{description}
+\item Distance $a$ to $x$:
+  \vfill
+\item Distance $b$ to $x$:
+  \vfill
+\item Distance $c$ to $x$:
+  \vfill
+  
+\end{description}
+
 
 \newpage
 
-\item For each of the following implicitly defined quadric surfaces, find a formula
-  to determine the value of $t$ where a ray defined by $p + tv$ intersects the surface.
+\item For each of the following implicitly defined quadric surfaces,
+  find fomulas for  the coefficients  for the quadratic equation,
+  $at^2 + bt + c = 0$
+  to determine the value of $t$ where a ray defined by $p + tv$
+  intersects the surface. 
   \begin{enumerate}
   \item Elliptic paraboloid \[\frac{x^2}{a^2} + \frac{y^2}{b^2} - z = 0\]
-\vfill
+    \begin{description}
+    \item $a=$\vfill      \item $b=$\vfill      \item $c=$\vfill
+      \end{description}
   \item Hyperbolic paraboloid \[\frac{x^2}{a^2} - \frac{y^2}{b^2} - z\ = 0\]
-\vfill
+    \begin{description}
+    \item $a=$\vfill      \item $b=$\vfill      \item $c=$\vfill
+      \end{description}
   \item Elliptic hyperboloid of one sheet \[\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2}\ = 1\]
-\vfill
+    \begin{description}
+    \item $a=$\vfill      \item $b=$\vfill      \item $c=$\vfill
+      \end{description}
   \item Elliptic hyperboloid of two sheets
     \[ \frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = -1\]
   \end{enumerate}
-  \vfill
+    \begin{description}
+    \item $a=$\vfill      \item $b=$\vfill      \item $c=$\vfill
+      \end{description}
   \newpage
   
-\item Find a formula for a vector normal to each of the following surfaces.
+\item Find a formula for a vector normal to each of the following
+  surfaces, given a point $(x,y,z)$ on the surface.
   \begin{enumerate}
   \item Elliptic paraboloid \[\frac{x^2}{a^2} + \frac{y^2}{b^2} - z = 0\]
 \vfill
