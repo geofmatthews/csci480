@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\title{Assignment \# 1, CSCI 480\\Fall 2015}
+
+\date{Due date: Wednesday, Oct 14, midnight.}
+\begin{document}
+\maketitle
+
+\begin{itemize}
+
+\item Implement a value noise function in python as outlined in the lecture
+notes and on the ``Perlin Noise'' website which actually discusses
+value noise, and not true Perlin noise:
+\url{http://freespace.virgin.net/hugo.elias/models/m_perlin.htm}
+
+  \item Use a shuffled array for random numbers rather than a
+    pseudo-random number generator like the one on the website.
+
+\item Implement a pink noise function which uses your value noise
+  function.
+
+
+\item Use the pink noise function, together with the framework for
+  making images I gave you in {\tt pygamecolors.py}, to make some
+  cool pictures.
+  
+  Try to be creative!  Make marble, dirt, clouds,
+  landscapes, something interesting!
+  
+\item Write modular, well-documented code.  Some of you are new at
+  Python, so I don't expect objects/etc.  However, decomposing the
+  main algorithm into intelligible pieces is mandatory.
+
+\item Create a {\tt main.py} folder (it can be your entire program, if
+  you like), which, when run, will open a pygame window and create
+  your most interesting image.  This will save me time grading and
+  trying to figure out the parameters I need to call your function,
+  etc.
+
+\item Zip your code and best images together (don't use tar or
+  anything else--I will be writing scripts to unzip and then run
+  {\tt main.py}) and submit to Canvas by the due date.
+
+\end{itemize}
+
+\end{document}
+
