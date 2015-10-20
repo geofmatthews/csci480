@@ -2,8 +2,6 @@ import random, numpy
 
 from vectors import *
 from camera import *
-from rotations import *
-
 from light import *
 from shape import *
 
@@ -91,6 +89,9 @@ class ThreeSpheres(World):
         if not(camera):
             camera = Camera()
         World.__init__(self, objects, lights, camera)
+
+class MyWorld(World):
+    pass
 
 
 if __name__ == "__main__":

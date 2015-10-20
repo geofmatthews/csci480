@@ -3,7 +3,6 @@ from vectors import *
 from ray import *
 import numpy as N
 from material import *
-from rotations import *
 
 EPSILON = 0.1
 

@@ -6,8 +6,6 @@
 \usepackage{fancyvrb}
 \usepackage{pstricks,pst-tree,pst-node,pst-plot,pst-3dplot}
 
-
-
 \newcommand{\bi}{\begin{enumerate}}
 \newcommand{\ei}{\end{enumerate}}
 \newcommand{\sect}[1]{
@@ -16,7 +14,7 @@
 }
 
 \newcommand{\grph}[2]{
-\begin{columns}
+\begin{columns}[c]
 \column{0.01\textwidth}
 \column{0.6\textwidth}
 \begin{pspicture}[showgrid=#1](-2,-2)(5,5)
@@ -222,7 +220,7 @@ Transforms
 
 \sect{Linear transforms}
 
-\begin{pspicture}[showgrid=false](0,0)(10,6.5)
+\begin{pspicture}[showgrid=false](1,0)(10,6)
 \psellipse(4,3)(3.25,1.5)
 \psellipse(6,3)(3,1.5)
 \psellipse(3,3)(2,.75)
@@ -249,7 +247,7 @@ Transforms
 
 \sect{Affine Transforms}
 
-\begin{pspicture}[showgrid=false](0,0)(10,6.5)
+\begin{pspicture}[showgrid=false](1,0)(10,6.5)
 
 \psellipse(5,3)(4.75,2.25)
 \psellipse(4,3)(3.25,1.5)
@@ -278,7 +276,7 @@ Transforms
 
 \sect{Projective Transforms}
 
-\begin{pspicture}[showgrid=false](0,0)(10,6.5)
+\begin{pspicture}[showgrid=false](1,0)(10,6.5)
 \psellipse(5,3)(5,3)
 \psellipse(5,3)(4.75,2.25)
 \psellipse(4,3)(3.25,1.5)
@@ -574,6 +572,16 @@ ST = \mthree 200020001 \mthree 103011001 = \mthree 206022001
 \sect{Easy inverses}
 \begin{itemize}
 \item The inverse of a rotation matrix is its transpose.
+\item Easy to see with rotation about an axis:
+\[{ \mhomo{\cos(\theta) & \sin(\theta) & 0 & 0}
+{-\sin(\theta) & \cos(\theta) & 0 & 0}
+{0 & 0 & 1 & 0}}^T
+=
+  \mhomo{\cos(\theta) & -\sin(\theta) & 0 & 0}
+{\sin(\theta) & \cos(\theta) & 0 & 0}
+{0 & 0 & 1 & 0}
+\]
+\item Also holds true of any pure rotation.
 \end{itemize}
 \end{frame}
 \sect{Easy inverses}
@@ -772,22 +780,25 @@ $\bf v_1, v_2, v_3$
 
 \sect{Change of frame}
 \centerline{\includegraphics{figures/framevsobject.eps}}
-\begin{itemize}
-\item Does a transform move the object or the frame?\pause
-\item Transform for the above:
+
+\begin{columns}[c]
+  \column{0.5\textwidth}
 \[
 \left[\begin{array}{cccc}
 1 & 0 & 0 & 2\\ 0 & 1 & 0 & 1\\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1
 \end{array}\right]
 \]
+  \column{0.5\textwidth}
 \pause
-\item Note that these are {\em not} inverses!  Just a different vocabulary.
-\pause
-\item However, if you want to {\em move a frame}, you need an inverse.
+  \begin{itemize}
+\item Does a transform move the object or the frame?\pause
+  \item If you move the {\em object}, just use the transform.
+\item However, if you want to {\em move the frame}, you need the inverse.
 \end{itemize}
+\end{columns}
 \end{frame}
 
-\sect{Change of frame}
+\sect{Effect of a transform on frame vectors and origin}
 \begin{columns}
 \column{0.5\textwidth}
 {\small
@@ -842,7 +853,7 @@ $\bf v_1, v_2, v_3$
 \pstThreeDPut(-0.67,2.7,3.2){$\vec{v_3}$}
 }
 \column{0.4\textwidth}
-\rput[bl](0,0){\parbox{\textwidth}{
+%\rput[bl](0,0){\parbox{\textwidth}{
 \begin{eqnarray*}
 (\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{x} &=& \vec{v_1}\\\\
 (\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{y} &=& \vec{v_2}\\\\
@@ -855,7 +866,7 @@ $\bf v_1, v_2, v_3$
 \pause
 \item Use inverse to put the world in camera coords.
 \end{itemize}
-}}
+%}}
 \end{columns}
 \end{frame}
 
@@ -872,13 +883,17 @@ $\bf v_1, v_2, v_3$
 \pstThreeDPut(-0.67,2.7,3.2){$\vec{v_3}$}
 }
 \column{0.4\textwidth}
-\rput[bl](0,0){\parbox{\textwidth}{
+\begin{eqnarray*}
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{x} &=& \vec{v_1}\\\\
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{y} &=& \vec{v_2}\\\\
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{z} &=& \vec{v_3}\\\\
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{o} &=& \vec{p}
+\end{eqnarray*}
+%\rput[bl](0,0){\parbox{\textwidth}{
 \begin{itemize}
-\item Cameras and objects
-generally use only rotation and translation.
 \item Can use ``easy inverse'' for cameras.
 \end{itemize}
-}}
+%}}
 \end{columns}
 \end{frame}
 

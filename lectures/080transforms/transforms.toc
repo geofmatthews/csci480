@@ -29,8 +29,8 @@
 \beamer@sectionintoc {27}{The Modelview Matrix}{45}{0}{27}
 \beamer@sectionintoc {28}{Finding a frame}{46}{0}{28}
 \beamer@sectionintoc {29}{Change of frame}{48}{0}{29}
-\beamer@sectionintoc {30}{Change of frame}{52}{0}{30}
-\beamer@sectionintoc {31}{Change of Frame}{54}{0}{31}
-\beamer@sectionintoc {32}{Camera transforms}{57}{0}{32}
-\beamer@sectionintoc {33}{Transforming normals}{58}{0}{33}
-\beamer@sectionintoc {34}{Online Resources}{59}{0}{34}
+\beamer@sectionintoc {30}{Effect of a transform on frame vectors and origin}{51}{0}{30}
+\beamer@sectionintoc {31}{Change of Frame}{53}{0}{31}
+\beamer@sectionintoc {32}{Camera transforms}{56}{0}{32}
+\beamer@sectionintoc {33}{Transforming normals}{57}{0}{33}
+\beamer@sectionintoc {34}{Online Resources}{58}{0}{34}
