@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  13 OCT 2015 09:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  22 OCT 2015 14:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1024,9 +1024,9 @@ Package pdftex.def Info: figures/Ellipsoid_Quadric.png used on input line 4.
 \openout4 = `raytracing040.vrb'.
 
  (./raytracing040.vrb
-Overfull \hbox (20.39955pt too wide) detected at line 24
-[] \OT1/cmss/m/it/10.95 t[] \OT1/cmss/m/n/10.95 + [] \OT1/cmss/m/it/10.95 t \OT
-1/cmss/m/n/10.95 + []
+Overfull \hbox (5.07251pt too wide) detected at line 24
+[] \OT1/cmss/m/it/10 t[] \OT1/cmss/m/n/10 + [] \OT1/cmss/m/it/10 t \OT1/cmss/m/
+n/10 + [] \OMS/cmsy/m/n/10 ^^@ \OT1/cmss/m/n/10 1
  []
 
 ) [4
@@ -1035,7 +1035,7 @@ Overfull \hbox (20.39955pt too wide) detected at line 24
 \openout4 = `raytracing040.vrb'.
 
  (./raytracing040.vrb
-<figures/randomellipsoids03.png, id=202, 642.4pt x 642.4pt>
+<figures/randomellipsoids03.png, id=203, 642.4pt x 642.4pt>
 File: figures/randomellipsoids03.png Graphic file (type png)
 
 <use figures/randomellipsoids03.png>
@@ -1047,7 +1047,7 @@ Package pdftex.def Info: figures/randomellipsoids03.png used on input line 2.
 \openout4 = `raytracing040.vrb'.
 
  (./raytracing040.vrb
-<figures/randomellipsoids02.png, id=228, 642.4pt x 642.4pt>
+<figures/randomellipsoids02.png, id=229, 642.4pt x 642.4pt>
 File: figures/randomellipsoids02.png Graphic file (type png)
 
 <use figures/randomellipsoids02.png>
@@ -1232,11 +1232,11 @@ LaTeX Font Warning: Size substitutions with differences
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 370.
  ) 
 Here is how much of TeX's memory you used:
- 21002 strings out of 494977
- 412970 string characters out of 6180183
+ 21009 strings out of 494977
+ 413059 string characters out of 6180183
  481158 words of memory out of 5000000
- 23626 multiletter control sequences out of 15000+600000
- 12083 words of font info for 45 fonts, out of 8000000 for 9000
+ 23633 multiletter control sequences out of 15000+600000
+ 13788 words of font info for 52 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  48i,14n,54p,406b,979s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
@@ -1252,7 +1252,7 @@ fonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols
 /msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/
 msam7.pfb>
-Output written on raytracing040.pdf (28 pages, 743955 bytes).
+Output written on raytracing040.pdf (28 pages, 744049 bytes).
 PDF statistics:
  891 PDF objects out of 1000 (max. 8388607)
  825 compressed objects within 9 object streams

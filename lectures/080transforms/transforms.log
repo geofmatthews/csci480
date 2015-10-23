@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=latex 2015.6.12)  20 OCT 2015 09:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=latex 2015.6.12)  21 OCT 2015 09:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1395,7 +1395,7 @@ Overfull \hbox (11.97456pt too wide) in alignment at lines 5--30
  []
 
 )
-Overfull \vbox (15.61919pt too high) detected at line 841
+Overfull \vbox (15.61919pt too high) detected at line 842
  []
 
 [51
@@ -1406,7 +1406,7 @@ Overfull \hbox (11.97456pt too wide) in alignment at lines 5--30
  []
 
 )
-Overfull \vbox (15.61919pt too high) detected at line 841
+Overfull \vbox (15.61919pt too high) detected at line 842
  []
 
 [52
@@ -1473,33 +1473,27 @@ File: figures/matrix_transform.eps Graphic file (type eps)
 \tf@snm=\write9
 \openout9 = `transforms.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 930.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 930.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 934.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 934.
  (./transforms.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 930.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 930.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 934.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 934.
+Package rerunfilecheck Info: File `transforms.out' has not changed.
+(rerunfilecheck)             Checksum: 329EFDF09B778A819D43EE2CFE48AA46;1961.
 
-
-Package rerunfilecheck Warning: File `transforms.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `transforms.out':
-(rerunfilecheck)             Before: 735FB7D78E0F8D4D63776742E48B1310;1927
-(rerunfilecheck)             After:  329EFDF09B778A819D43EE2CFE48AA46;1961.
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 930.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 934.
  ) 
 Here is how much of TeX's memory you used:
  20941 strings out of 494978
  384294 string characters out of 6180209
- 594342 words of memory out of 5000000
+ 593487 words of memory out of 5000000
  23558 multiletter control sequences out of 15000+600000
  17494 words of font info for 66 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 48i,16n,51p,603b,754s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,16n,51p,603b,698s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on transforms.dvi (58 pages, 777512 bytes).
+Output written on transforms.dvi (58 pages, 777812 bytes).

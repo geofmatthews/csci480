@@ -24,13 +24,13 @@
 
 
 \newcommand{\txt}[1]{
-\column{0.4\textwidth}
-\rput[bl](0,0){\parbox{\textwidth}{
+\column[c]{0.4\textwidth}
 \small
 \begin{itemize}
 #1
-\end{itemize}}}
-\end{columns}}
+\end{itemize}
+\end{columns}
+}
 
 \newcommand{\myvec}[1]{
 \pstThreeDDot[showpoints=true,drawCoor=true](#1)
@@ -793,7 +793,8 @@ $\bf v_1, v_2, v_3$
   \begin{itemize}
 \item Does a transform move the object or the frame?\pause
   \item If you move the {\em object}, just use the transform.
-\item However, if you want to {\em move the frame}, you need the inverse.
+  \item However, if you want to {\em move the frame} by a given transform,
+    you need the inverse.
 \end{itemize}
 \end{columns}
 \end{frame}
@@ -832,10 +833,10 @@ $\bf v_1, v_2, v_3$
 \pause
 \column{0.5\textwidth}
 \begin{eqnarray*}
-(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{x} &=& \vec{v_1}\\\\
-(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{y} &=& \vec{v_2}\\\\
-(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{z} &=& \vec{v_3}\\\\
-(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{o} &=& \vec{p}
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, {p})\cdot\vec{e_1} &=& \vec{v_1}\\\\
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, {p})\cdot\vec{e_2} &=& \vec{v_2}\\\\
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, {p})\cdot\vec{e_3} &=& \vec{v_3}\\\\
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, {p})\cdot{o} &=& \vec{p}
 \end{eqnarray*}
 \end{columns}
 \end{frame}
@@ -855,16 +856,17 @@ $\bf v_1, v_2, v_3$
 \column{0.4\textwidth}
 %\rput[bl](0,0){\parbox{\textwidth}{
 \begin{eqnarray*}
-(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{x} &=& \vec{v_1}\\\\
-(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{y} &=& \vec{v_2}\\\\
-(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{z} &=& \vec{v_3}\\\\
-(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{o} &=& \vec{p}
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, {p})\cdot\vec{e_1} &=& \vec{v_1}\\
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, {p})\cdot\vec{e_2} &=& \vec{v_2}\\
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, {p})\cdot\vec{e_3} &=& \vec{v_3}\\
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, {p})\cdot{o} &=& {p}
 \end{eqnarray*}
 \pause
 \begin{itemize}
 \item Use to put model points into the world.
 \pause
 \item Use inverse to put the world in camera coords.
+\item Multiply to get modelview matrix.
 \end{itemize}
 %}}
 \end{columns}
@@ -884,14 +886,16 @@ $\bf v_1, v_2, v_3$
 }
 \column{0.4\textwidth}
 \begin{eqnarray*}
-(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{x} &=& \vec{v_1}\\\\
-(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{y} &=& \vec{v_2}\\\\
-(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{z} &=& \vec{v_3}\\\\
-(\vec{v_1}, \vec{v_2}, \vec{v_3}, \vec{p})\cdot\vec{o} &=& \vec{p}
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, {p})\cdot\vec{e_1} &=& \vec{v_1}\\
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, {p})\cdot\vec{e_2} &=& \vec{v_2}\\
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, {p})\cdot\vec{e_3} &=& \vec{v_3}\\
+(\vec{v_1}, \vec{v_2}, \vec{v_3}, {p})\cdot{o} &=& {p}
 \end{eqnarray*}
 %\rput[bl](0,0){\parbox{\textwidth}{
 \begin{itemize}
+\item If both frames are orthonormal, it is a rigid transformation.
 \item Can use ``easy inverse'' for cameras.
+  \item Only one matrix multiply needed.
 \end{itemize}
 %}}
 \end{columns}

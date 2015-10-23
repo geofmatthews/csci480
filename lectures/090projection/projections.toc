@@ -15,20 +15,21 @@
 \beamer@sectionintoc {13}{Problems projecting onto $z=-d$ plane.}{22}{0}{13}
 \beamer@sectionintoc {14}{Problems projecting onto $z=-d$ plane.}{23}{0}{14}
 \beamer@sectionintoc {15}{Problems projecting onto $z=-d$ plane.}{24}{0}{15}
-\beamer@sectionintoc {16}{Linear mapping between frames, one dimension}{25}{0}{16}
-\beamer@sectionintoc {17}{Linear mapping between frames, three dimensions}{30}{0}{17}
-\beamer@sectionintoc {18}{Orthographic Projection in OpenGL}{32}{0}{18}
+\beamer@sectionintoc {16}{Problems projecting onto $z=-d$ plane.}{25}{0}{16}
+\beamer@sectionintoc {17}{Linear mapping between frames, one dimension}{26}{0}{17}
+\beamer@sectionintoc {18}{Linear mapping between frames, three dimensions}{31}{0}{18}
 \beamer@sectionintoc {19}{Orthographic Projection in OpenGL}{33}{0}{19}
-\beamer@sectionintoc {20}{Orthographic Projection in OpenGL}{35}{0}{20}
+\beamer@sectionintoc {20}{Orthographic Projection in OpenGL}{34}{0}{20}
 \beamer@sectionintoc {21}{Orthographic Projection in OpenGL}{36}{0}{21}
-\beamer@sectionintoc {22}{Projective Transforms in OpenGL}{37}{0}{22}
+\beamer@sectionintoc {22}{Orthographic Projection in OpenGL}{37}{0}{22}
 \beamer@sectionintoc {23}{Projective Transforms in OpenGL}{38}{0}{23}
 \beamer@sectionintoc {24}{Projective Transforms in OpenGL}{39}{0}{24}
-\beamer@sectionintoc {25}{Projective Transforms in OpenGL}{41}{0}{25}
-\beamer@sectionintoc {26}{Projective Transforms in OpenGL}{43}{0}{26}
-\beamer@sectionintoc {27}{Projective Transforms in OpenGL}{45}{0}{27}
+\beamer@sectionintoc {25}{Projective Transforms in OpenGL}{40}{0}{25}
+\beamer@sectionintoc {26}{Projective Transforms in OpenGL}{42}{0}{26}
+\beamer@sectionintoc {27}{Projective Transforms in OpenGL}{44}{0}{27}
 \beamer@sectionintoc {28}{Projective Transforms in OpenGL}{46}{0}{28}
-\beamer@sectionintoc {29}{Projective Transforms in OpenGL}{48}{0}{29}
+\beamer@sectionintoc {29}{Projective Transforms in OpenGL}{47}{0}{29}
 \beamer@sectionintoc {30}{Projective Transforms in OpenGL}{49}{0}{30}
 \beamer@sectionintoc {31}{Projective Transforms in OpenGL}{50}{0}{31}
-\beamer@sectionintoc {32}{Z fighting in OpenGL}{51}{0}{32}
+\beamer@sectionintoc {32}{Projective Transforms in OpenGL}{51}{0}{32}
+\beamer@sectionintoc {33}{Z fighting in OpenGL}{52}{0}{33}

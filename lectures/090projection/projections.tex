@@ -318,6 +318,16 @@ This is an $O(n)$ algorithm.
 \end{itemize}
 \end{frame}
 
+\sect{Problems projecting onto $z=-d$ plane.}
+\includegraphics[width=1\textwidth]{perspective.png}
+\begin{itemize}
+\item We will retain the code to get $x'$ and $y'$ into the $\pm 1$
+  cube, but instead of mapping $z$ to $-d$, we will map $z$ between
+  {\em far} and {\em near} to $\pm 1$.
+\item We will then use this depth in the z-buffer algorithm.
+\end{itemize}
+\end{frame}
+
 \sect{Linear mapping between frames, one dimension}
 \graphc{1}{onedlinear.png}
 \begin{eqnarray*}
@@ -382,6 +392,9 @@ z' &=& \frac{-2}{f-n}z - \frac{f+n}{f-n}
 &=&
 \phomo{x'\\y'\\z'}
 \end{eqnarray*}
+\begin{itemize}
+\item If symmetric around $z$-axis, $r=-l$ and $t=-b$.
+\end{itemize}
 \end{frame}
 
 \sect{Orthographic Projection in OpenGL}

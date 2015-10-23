@@ -76,37 +76,37 @@
 \headcommand {\beamer@subsectionpages {23}{23}}
 \headcommand {\slideentry {15}{0}{16}{24/24}{}{0}}
 \headcommand {\beamer@framepages {24}{24}}
-\headcommand {\sectionentry {16}{Linear mapping between frames, one dimension}{25}{Linear mapping between frames, one dimension}{0}}
+\headcommand {\sectionentry {16}{Problems projecting onto $z=-d$ plane.}{25}{Problems projecting onto $z=-d$ plane.}{0}}
 \headcommand {\beamer@sectionpages {24}{24}}
 \headcommand {\beamer@subsectionpages {24}{24}}
-\headcommand {\slideentry {16}{0}{17}{25/29}{}{0}}
-\headcommand {\beamer@framepages {25}{29}}
-\headcommand {\sectionentry {17}{Linear mapping between frames, three dimensions}{30}{Linear mapping between frames, three dimensions}{0}}
-\headcommand {\beamer@sectionpages {25}{29}}
-\headcommand {\beamer@subsectionpages {25}{29}}
-\headcommand {\slideentry {17}{0}{18}{30/31}{}{0}}
-\headcommand {\beamer@framepages {30}{31}}
-\headcommand {\sectionentry {18}{Orthographic Projection in OpenGL}{32}{Orthographic Projection in OpenGL}{0}}
-\headcommand {\beamer@sectionpages {30}{31}}
-\headcommand {\beamer@subsectionpages {30}{31}}
-\headcommand {\slideentry {18}{0}{19}{32/32}{}{0}}
-\headcommand {\beamer@framepages {32}{32}}
+\headcommand {\slideentry {16}{0}{17}{25/25}{}{0}}
+\headcommand {\beamer@framepages {25}{25}}
+\headcommand {\sectionentry {17}{Linear mapping between frames, one dimension}{26}{Linear mapping between frames, one dimension}{0}}
+\headcommand {\beamer@sectionpages {25}{25}}
+\headcommand {\beamer@subsectionpages {25}{25}}
+\headcommand {\slideentry {17}{0}{18}{26/30}{}{0}}
+\headcommand {\beamer@framepages {26}{30}}
+\headcommand {\sectionentry {18}{Linear mapping between frames, three dimensions}{31}{Linear mapping between frames, three dimensions}{0}}
+\headcommand {\beamer@sectionpages {26}{30}}
+\headcommand {\beamer@subsectionpages {26}{30}}
+\headcommand {\slideentry {18}{0}{19}{31/32}{}{0}}
+\headcommand {\beamer@framepages {31}{32}}
 \headcommand {\sectionentry {19}{Orthographic Projection in OpenGL}{33}{Orthographic Projection in OpenGL}{0}}
-\headcommand {\beamer@sectionpages {32}{32}}
-\headcommand {\beamer@subsectionpages {32}{32}}
-\headcommand {\slideentry {19}{0}{20}{33/34}{}{0}}
-\headcommand {\beamer@framepages {33}{34}}
-\headcommand {\sectionentry {20}{Orthographic Projection in OpenGL}{35}{Orthographic Projection in OpenGL}{0}}
-\headcommand {\beamer@sectionpages {33}{34}}
-\headcommand {\beamer@subsectionpages {33}{34}}
-\headcommand {\slideentry {20}{0}{21}{35/35}{}{0}}
-\headcommand {\beamer@framepages {35}{35}}
+\headcommand {\beamer@sectionpages {31}{32}}
+\headcommand {\beamer@subsectionpages {31}{32}}
+\headcommand {\slideentry {19}{0}{20}{33/33}{}{0}}
+\headcommand {\beamer@framepages {33}{33}}
+\headcommand {\sectionentry {20}{Orthographic Projection in OpenGL}{34}{Orthographic Projection in OpenGL}{0}}
+\headcommand {\beamer@sectionpages {33}{33}}
+\headcommand {\beamer@subsectionpages {33}{33}}
+\headcommand {\slideentry {20}{0}{21}{34/35}{}{0}}
+\headcommand {\beamer@framepages {34}{35}}
 \headcommand {\sectionentry {21}{Orthographic Projection in OpenGL}{36}{Orthographic Projection in OpenGL}{0}}
-\headcommand {\beamer@sectionpages {35}{35}}
-\headcommand {\beamer@subsectionpages {35}{35}}
+\headcommand {\beamer@sectionpages {34}{35}}
+\headcommand {\beamer@subsectionpages {34}{35}}
 \headcommand {\slideentry {21}{0}{22}{36/36}{}{0}}
 \headcommand {\beamer@framepages {36}{36}}
-\headcommand {\sectionentry {22}{Projective Transforms in OpenGL}{37}{Projective Transforms in OpenGL}{0}}
+\headcommand {\sectionentry {22}{Orthographic Projection in OpenGL}{37}{Orthographic Projection in OpenGL}{0}}
 \headcommand {\beamer@sectionpages {36}{36}}
 \headcommand {\beamer@subsectionpages {36}{36}}
 \headcommand {\slideentry {22}{0}{23}{37/37}{}{0}}
@@ -119,36 +119,36 @@
 \headcommand {\sectionentry {24}{Projective Transforms in OpenGL}{39}{Projective Transforms in OpenGL}{0}}
 \headcommand {\beamer@sectionpages {38}{38}}
 \headcommand {\beamer@subsectionpages {38}{38}}
-\headcommand {\slideentry {24}{0}{25}{39/40}{}{0}}
-\headcommand {\beamer@framepages {39}{40}}
-\headcommand {\sectionentry {25}{Projective Transforms in OpenGL}{41}{Projective Transforms in OpenGL}{0}}
-\headcommand {\beamer@sectionpages {39}{40}}
-\headcommand {\beamer@subsectionpages {39}{40}}
-\headcommand {\slideentry {25}{0}{26}{41/42}{}{0}}
-\headcommand {\beamer@framepages {41}{42}}
-\headcommand {\sectionentry {26}{Projective Transforms in OpenGL}{43}{Projective Transforms in OpenGL}{0}}
-\headcommand {\beamer@sectionpages {41}{42}}
-\headcommand {\beamer@subsectionpages {41}{42}}
-\headcommand {\slideentry {26}{0}{27}{43/44}{}{0}}
-\headcommand {\beamer@framepages {43}{44}}
-\headcommand {\sectionentry {27}{Projective Transforms in OpenGL}{45}{Projective Transforms in OpenGL}{0}}
-\headcommand {\beamer@sectionpages {43}{44}}
-\headcommand {\beamer@subsectionpages {43}{44}}
-\headcommand {\slideentry {27}{0}{28}{45/45}{}{0}}
-\headcommand {\beamer@framepages {45}{45}}
+\headcommand {\slideentry {24}{0}{25}{39/39}{}{0}}
+\headcommand {\beamer@framepages {39}{39}}
+\headcommand {\sectionentry {25}{Projective Transforms in OpenGL}{40}{Projective Transforms in OpenGL}{0}}
+\headcommand {\beamer@sectionpages {39}{39}}
+\headcommand {\beamer@subsectionpages {39}{39}}
+\headcommand {\slideentry {25}{0}{26}{40/41}{}{0}}
+\headcommand {\beamer@framepages {40}{41}}
+\headcommand {\sectionentry {26}{Projective Transforms in OpenGL}{42}{Projective Transforms in OpenGL}{0}}
+\headcommand {\beamer@sectionpages {40}{41}}
+\headcommand {\beamer@subsectionpages {40}{41}}
+\headcommand {\slideentry {26}{0}{27}{42/43}{}{0}}
+\headcommand {\beamer@framepages {42}{43}}
+\headcommand {\sectionentry {27}{Projective Transforms in OpenGL}{44}{Projective Transforms in OpenGL}{0}}
+\headcommand {\beamer@sectionpages {42}{43}}
+\headcommand {\beamer@subsectionpages {42}{43}}
+\headcommand {\slideentry {27}{0}{28}{44/45}{}{0}}
+\headcommand {\beamer@framepages {44}{45}}
 \headcommand {\sectionentry {28}{Projective Transforms in OpenGL}{46}{Projective Transforms in OpenGL}{0}}
-\headcommand {\beamer@sectionpages {45}{45}}
-\headcommand {\beamer@subsectionpages {45}{45}}
-\headcommand {\slideentry {28}{0}{29}{46/47}{}{0}}
-\headcommand {\beamer@framepages {46}{47}}
-\headcommand {\sectionentry {29}{Projective Transforms in OpenGL}{48}{Projective Transforms in OpenGL}{0}}
-\headcommand {\beamer@sectionpages {46}{47}}
-\headcommand {\beamer@subsectionpages {46}{47}}
-\headcommand {\slideentry {29}{0}{30}{48/48}{}{0}}
-\headcommand {\beamer@framepages {48}{48}}
+\headcommand {\beamer@sectionpages {44}{45}}
+\headcommand {\beamer@subsectionpages {44}{45}}
+\headcommand {\slideentry {28}{0}{29}{46/46}{}{0}}
+\headcommand {\beamer@framepages {46}{46}}
+\headcommand {\sectionentry {29}{Projective Transforms in OpenGL}{47}{Projective Transforms in OpenGL}{0}}
+\headcommand {\beamer@sectionpages {46}{46}}
+\headcommand {\beamer@subsectionpages {46}{46}}
+\headcommand {\slideentry {29}{0}{30}{47/48}{}{0}}
+\headcommand {\beamer@framepages {47}{48}}
 \headcommand {\sectionentry {30}{Projective Transforms in OpenGL}{49}{Projective Transforms in OpenGL}{0}}
-\headcommand {\beamer@sectionpages {48}{48}}
-\headcommand {\beamer@subsectionpages {48}{48}}
+\headcommand {\beamer@sectionpages {47}{48}}
+\headcommand {\beamer@subsectionpages {47}{48}}
 \headcommand {\slideentry {30}{0}{31}{49/49}{}{0}}
 \headcommand {\beamer@framepages {49}{49}}
 \headcommand {\sectionentry {31}{Projective Transforms in OpenGL}{50}{Projective Transforms in OpenGL}{0}}
@@ -156,13 +156,18 @@
 \headcommand {\beamer@subsectionpages {49}{49}}
 \headcommand {\slideentry {31}{0}{32}{50/50}{}{0}}
 \headcommand {\beamer@framepages {50}{50}}
-\headcommand {\sectionentry {32}{Z fighting in OpenGL}{51}{Z fighting in OpenGL}{0}}
+\headcommand {\sectionentry {32}{Projective Transforms in OpenGL}{51}{Projective Transforms in OpenGL}{0}}
 \headcommand {\beamer@sectionpages {50}{50}}
 \headcommand {\beamer@subsectionpages {50}{50}}
 \headcommand {\slideentry {32}{0}{33}{51/51}{}{0}}
 \headcommand {\beamer@framepages {51}{51}}
-\headcommand {\beamer@partpages {1}{51}}
-\headcommand {\beamer@subsectionpages {51}{51}}
+\headcommand {\sectionentry {33}{Z fighting in OpenGL}{52}{Z fighting in OpenGL}{0}}
 \headcommand {\beamer@sectionpages {51}{51}}
-\headcommand {\beamer@documentpages {51}}
-\headcommand {\def \inserttotalframenumber {33}}
+\headcommand {\beamer@subsectionpages {51}{51}}
+\headcommand {\slideentry {33}{0}{34}{52/52}{}{0}}
+\headcommand {\beamer@framepages {52}{52}}
+\headcommand {\beamer@partpages {1}{52}}
+\headcommand {\beamer@subsectionpages {52}{52}}
+\headcommand {\beamer@sectionpages {52}{52}}
+\headcommand {\beamer@documentpages {52}}
+\headcommand {\def \inserttotalframenumber {34}}

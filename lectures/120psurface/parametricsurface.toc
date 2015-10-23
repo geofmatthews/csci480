@@ -1,4 +1,4 @@
-\beamer@endinputifotherversion {3.24pt}
+\beamer@endinputifotherversion {3.33pt}
 \select@language {english}
 \beamer@sectionintoc {1}{Online Resources}{2}{0}{1}
 \beamer@sectionintoc {2}{Parametric Curves}{3}{0}{2}

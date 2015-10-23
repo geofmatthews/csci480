@@ -13,13 +13,13 @@
 \BOOKMARK [2][]{Outline0.13}{Problems projecting onto z=-d plane.}{}% 13
 \BOOKMARK [2][]{Outline0.14}{Problems projecting onto z=-d plane.}{}% 14
 \BOOKMARK [2][]{Outline0.15}{Problems projecting onto z=-d plane.}{}% 15
-\BOOKMARK [2][]{Outline0.16}{Linear mapping between frames, one dimension}{}% 16
-\BOOKMARK [2][]{Outline0.17}{Linear mapping between frames, three dimensions}{}% 17
-\BOOKMARK [2][]{Outline0.18}{Orthographic Projection in OpenGL}{}% 18
+\BOOKMARK [2][]{Outline0.16}{Problems projecting onto z=-d plane.}{}% 16
+\BOOKMARK [2][]{Outline0.17}{Linear mapping between frames, one dimension}{}% 17
+\BOOKMARK [2][]{Outline0.18}{Linear mapping between frames, three dimensions}{}% 18
 \BOOKMARK [2][]{Outline0.19}{Orthographic Projection in OpenGL}{}% 19
 \BOOKMARK [2][]{Outline0.20}{Orthographic Projection in OpenGL}{}% 20
 \BOOKMARK [2][]{Outline0.21}{Orthographic Projection in OpenGL}{}% 21
-\BOOKMARK [2][]{Outline0.22}{Projective Transforms in OpenGL}{}% 22
+\BOOKMARK [2][]{Outline0.22}{Orthographic Projection in OpenGL}{}% 22
 \BOOKMARK [2][]{Outline0.23}{Projective Transforms in OpenGL}{}% 23
 \BOOKMARK [2][]{Outline0.24}{Projective Transforms in OpenGL}{}% 24
 \BOOKMARK [2][]{Outline0.25}{Projective Transforms in OpenGL}{}% 25
@@ -29,4 +29,5 @@
 \BOOKMARK [2][]{Outline0.29}{Projective Transforms in OpenGL}{}% 29
 \BOOKMARK [2][]{Outline0.30}{Projective Transforms in OpenGL}{}% 30
 \BOOKMARK [2][]{Outline0.31}{Projective Transforms in OpenGL}{}% 31
-\BOOKMARK [2][]{Outline0.32}{Z fighting in OpenGL}{}% 32
+\BOOKMARK [2][]{Outline0.32}{Projective Transforms in OpenGL}{}% 32
+\BOOKMARK [2][]{Outline0.33}{Z fighting in OpenGL}{}% 33
