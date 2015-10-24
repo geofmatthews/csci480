@@ -141,13 +141,25 @@ def display(time):
     glEnableVertexAttribArray(positionAttrib)
     
     # Tell the shader program what the data in the buffer look like
-    glVertexAttribPointer(positionAttrib, 4, GL_FLOAT, GL_FALSE, 8*sizeOfFloat, null)
+    glVertexAttribPointer(positionAttrib,
+                          4,                            # components per position
+                          GL_FLOAT,
+                          GL_FALSE,
+                          vertexComponents*sizeOfFloat, # components per vertex
+                          c_void_p(0)                   # start at beginning of buffer
+                          )
 #COLOR
     # Tell the shader program which attribute to use for this buffer
     glEnableVertexAttribArray(colorAttrib)
 
     # Tell the shader what the data in the buffer look like
-    glVertexAttribPointer(colorAttrib, 4, GL_FLOAT, GL_FALSE, 8*sizeOfFloat, c_void_p(4*sizeOfFloat))
+    glVertexAttribPointer(colorAttrib,
+                          4,                            # components per color
+                          GL_FLOAT,
+                          GL_FALSE,
+                          vertexComponents*sizeOfFloat, # components per vertex  
+                          c_void_p(4*sizeOfFloat)       # start 4 floats from beginning of buffer 
+                          )
 #DRAW    
     # Use that data to draw triangles
     glDrawArrays(GL_TRIANGLES, 0, len(triangleVertices) / vertexComponents)

@@ -1,6 +1,5 @@
 #Tetrahedron
-# examine enable backface, depth
-# clear depth buffer
+# phong lighting
 
 from ctypes import c_void_p
 
@@ -18,58 +17,82 @@ sizeOfShort = 2
 strVertexShader = """
 #version 330
 in vec4 position;
-in vec4 vertexColor;
-out vec4 fragmentColor;
-uniform mat4 rotation;
+in vec4 normal;
+uniform vec4 light;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+out vec4 fragnormal;
+out vec4 fragreflect;
+out vec4 fraglight;
+out vec4 frageye;
 void main()
 {
-   fragmentColor = vertexColor;
-   gl_Position = rotation * position;
+  // Let's do the lighting calculations in world space
+  fragnormal =  model * normal;
+  fraglight =  light;
+  fragreflect = reflect(fraglight, fragnormal);
+  frageye = -(model * vec4(0.0, 0.0, 0.0, 1.0));
+  gl_Position = projection * view * model * position;
 }
 """
 
 strFragmentShader = """
 #version 330
-in vec4 fragmentColor;
+uniform vec4 color;
+in vec4 fragnormal, fragreflect, fraglight, frageye;
 out vec4 outputColor;
 void main()
 {
-   outputColor = fragmentColor;
+  vec4 light, reflect, normal, eye;
+  // need to normalize interpolated vectors
+  light = normalize(fraglight);
+  reflect = normalize(fragreflect);
+  normal = normalize(fragnormal);
+  eye = normalize(frageye);
+   float ambient = 0.2;
+   float diffuse = clamp(dot(light, normal), 0.0, 1.0);
+   outputColor = max(ambient, diffuse)* color;
+   float specular = pow(clamp(dot(reflect, eye), 0.0, 1.0), 16);
+   if (specular > 0.0) {
+     outputColor += vec4(specular, specular, specular, 1.0);
+   }
+   outputColor = vec4(1.0, 0.0, 0.0, 1.0);
 }
 """
-
-# Some global variables to be filled in later:
-
-# Integer handle identifying our compiled shader program
-theShaders = None
-# Handle to the position attribute in the vertex shader:
-positionAttrib = None
-rotationAttrib = None
 
 # Use PyOpenLG's compile shader programs, which simplify this task.
 # Assign the compiled program to theShaders.
 def initializeShaders():
-    global theShaders, positionAttrib, rotationUniform, colorAttrib
+    global theShaders, positionAttrib, colorUnif, \
+           modelUnif, viewUnif, projUnif, lightUnif, normalAttrib
     theShaders = compileProgram(
         compileShader(strVertexShader, GL_VERTEX_SHADER),
         compileShader(strFragmentShader, GL_FRAGMENT_SHADER)
     )
     positionAttrib = glGetAttribLocation(theShaders, "position")
-    rotationUniform = glGetUniformLocation(theShaders, "rotation")
-    colorAttrib = glGetAttribLocation(theShaders, "vertexColor")
-    print "Attribs:", positionAttrib, colorAttrib
-    print "Uniforms:", rotationUniform
+    normalAttrib = glGetAttribLocation(theShaders, "normal")
+    
+    lightUnif = glGetUniformLocation(theShaders, "light")
+    colorUnif = glGetUniformLocation(theShaders, "color")
+    modelUnif = glGetUniformLocation(theShaders, "model")
+    viewUnif = glGetUniformLocation(theShaders, "view")
+    projUnif = glGetUniformLocation(theShaders, "projection")
+    
+    print "Attribs:", positionAttrib, normalAttrib
+    print "Uniforms:", modelUnif, viewUnif, projUnif, colorUnif, lightUnif
 
-# Vertex Data
+# Vertex Data, positions and normals
 tetraVertices = N.array([
     0.35, 0.5, 0.0, 1.0,
-    1.0, 0.0, 0.0, 1.0,
+    0.707, 0.707, 0.0, 0.0,
     0.35, -0.5, 0.0, 1.0,
-    0.0, 1.0, 0.0, 1.0,
+    0.707, -0.707, 0.0, 0.0,
     -0.35, 0.0, 0.5, 1.0,
-    0.0, 0.0, 1.0, 1.0,
+    -0.707, 0.0, 0.707, 0.0,
     -0.35, 0.0, -0.5, 1.0,
-    1.0, 1.0, 0.0, 1.0], dtype=N.float32)
+    -0.707, 0.0, -0.707], dtype=N.float32)
 
 vertexComponents = 8
 
@@ -113,6 +136,7 @@ def initializeVAO():
 # Must be called after we have an OpenGL context, i.e. after the pygame
 # window is created
 def init():
+    global camera
     initializeShaders()
     initializeVertexBuffer()
     initializeVAO()
@@ -129,8 +153,36 @@ def display(time):
 
     # Set the shader program
     glUseProgram(theShaders)
+
+    # compute camera matrix
+    # Leave the objects in the +-1 cube
+    # Make the camera circle around the +-1 cube
     
-    # compute rotation matrix:
+    # still camera
+    view = N.identity(4, dtype=N.float32)
+    
+    # send matrix to the graphics card
+    glUniformMatrix4fv(viewUnif, 1, GL_TRUE, view)
+    
+    # compute projection
+    n = 1.0
+    f = 100.0
+    r = 0.5*n
+    t = 0.5*n
+
+    # we're using row-major order, so if we're not doing any
+    # matrix manipulation here, we can lay out the matrix as
+    # a single dimensional array.  Otherwise, numpy has to know
+    # the shape of the array, so don't do this in general
+    proj = N.array((n/r, 0, 0, 0,
+                    0, n/t, 0, 0,
+                    0, 0, -(f+n)/(f-n), -2*f*n/(f-n),
+                    0, 0, -1, 0), dtype=N.float32)
+                    
+    # send projection to the graphics card
+    glUniformMatrix4fv(projUnif, 1, GL_TRUE, proj)
+       
+    # compute model rotation matrix:
     s = N.sin(time)
     c = N.cos(time)
     zrot = N.array(((c,-s,0,0),
@@ -146,8 +198,15 @@ def display(time):
                     (0,s,c,0),
                     (0,0,0,1)), dtype=N.float32)
     rot = N.dot(zrot, N.dot(yrot, xrot))
-    # send rotation matrix to the shader program
-    glUniformMatrix4fv(rotationUniform, 1, GL_TRUE, rot)
+    # send model matrix 
+    glUniformMatrix4fv(modelUnif, 1, GL_TRUE, rot)
+
+    # send color
+    glUniform4f(colorUnif, 0, 1, 0, 1)
+
+    # send light direction
+    glUniform4f(lightUnif, 0.577, 0.577, 0.577, 0.0)
+    
 #BUFFERS
     # Use the tirangle data
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)
@@ -163,12 +222,12 @@ def display(time):
                           GL_FALSE,
                           vertexComponents*sizeOfFloat,
                           c_void_p(0))
-#COLOR
+#NORMAL
     # Tell the shader program which attribute to use for this buffer
-    glEnableVertexAttribArray(colorAttrib)
+    glEnableVertexAttribArray(normalAttrib)
 
     # Tell the shader what the data in the buffer look like
-    glVertexAttribPointer(colorAttrib,
+    glVertexAttribPointer(normalAttrib,
                           4,
                           GL_FLOAT,
                           GL_FALSE,
@@ -176,10 +235,10 @@ def display(time):
                           c_void_p(4*sizeOfFloat))
 #DRAW    
     # Use that data and the elements to draw triangles
-    glDrawElements(GL_TRIANGLES, len(tetraElements)*sizeOfShort,
-                   GL_UNSIGNED_SHORT, c_void_p(0))
+    glDrawElements(
+        GL_TRIANGLES, len(tetraElements)*sizeOfShort,
+        GL_UNSIGNED_SHORT, c_void_p(0))
     
-
     # Stop using the shader program
     glUseProgram(0)
 

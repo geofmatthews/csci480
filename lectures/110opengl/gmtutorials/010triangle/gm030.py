@@ -120,7 +120,11 @@ def display(time):
                    (0,0,1,0),
                    (0,0,0,1)), dtype=N.float32)
     # send rotation matrix to the shader program
-    glUniformMatrix4fv(rotationAttrib, 1, GL_TRUE, rot)
+    glUniformMatrix4fv(rotationAttrib, # attrib location
+                       1,              # how many are we sending?
+                       GL_TRUE,        # row-major?
+                       rot             # the array
+                       )
 
     # Use the buffered data
     glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject)
@@ -129,7 +133,13 @@ def display(time):
     glEnableVertexAttribArray(positionAttrib)
     
     # Tell the shader program what the data in the buffer look like
-    glVertexAttribPointer(positionAttrib, vertexComponents, GL_FLOAT, GL_FALSE, 0, null)
+    glVertexAttribPointer(positionAttrib,   # attrib location
+                          vertexComponents, # elements per vertex
+                          GL_FLOAT,         # type of element
+                          GL_FALSE,         # normalize 0-256 to 0.0-1.0?
+                          0,                # stride
+                          c_void_p(0)       # offset
+                          )
     
     # Use that data to draw triangles
     glDrawArrays(GL_TRIANGLES, 0, len(vertexPositions) / vertexComponents)

@@ -73,6 +73,9 @@ def initializeShaders():
     # The opengl compiler will optimize away an attrib or
     # uniform that is not used, giving errors in programs
     # that attempt to set them
+    # In addition to checking this here when debugging,
+    # I also like to use "if (attrib >=0) ..." whenever I'm going
+    # to use it.
     print "Attribs:", positionAttrib
 
 # Vertex Data
@@ -136,7 +139,13 @@ def display():
     glEnableVertexAttribArray(positionAttrib)
     
     # Tell the shader program what the data in the buffer look like
-    glVertexAttribPointer(positionAttrib, vertexComponents, GL_FLOAT, GL_FALSE, 0, null)
+    glVertexAttribPointer(positionAttrib,   # attrib location
+                          vertexComponents, # elements per vertex
+                          GL_FLOAT,         # type of element
+                          GL_FALSE,         # normalize 0-256 to 0.0-1.0?
+                          0,                # stride
+                          c_void_p(0)       # offset
+                          )
     
     # Use that data to draw triangles
     glDrawArrays(GL_TRIANGLES, 0, len(vertexPositions) / vertexComponents)
