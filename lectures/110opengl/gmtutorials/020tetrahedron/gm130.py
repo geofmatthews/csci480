@@ -16,6 +16,7 @@ sizeOfShort = 2
 
 strVertexShader = """
 #version 330
+
 in vec4 position;
 in vec4 normal;
 uniform vec4 light;
@@ -27,6 +28,7 @@ out vec4 fragnormal;
 out vec4 fragreflect;
 out vec4 fraglight;
 out vec4 frageye;
+
 void main()
 {
   // Let's do the lighting calculations in world space
@@ -62,6 +64,10 @@ void main()
 }
 """
 
+def check(name, val):
+    if val < 0:
+        print "Warning:", name, "has value", val
+        
 # Use PyOpenLG's compile shader programs, which simplify this task.
 # Assign the compiled program to theShaders.
 def initializeShaders():
@@ -80,8 +86,13 @@ def initializeShaders():
     viewUnif = glGetUniformLocation(theShaders, "view")
     projUnif = glGetUniformLocation(theShaders, "projection")
     
-    print "Attribs:", positionAttrib, normalAttrib
-    print "Uniforms:", modelUnif, viewUnif, projUnif, colorUnif, lightUnif
+    check("positionAttrib", positionAttrib)
+    check("normalAttrib", normalAttrib)
+    check("modelUnif", modelUnif)
+    check("viewUnif", viewUnif)
+    check("projUnif", projUnif)
+    check("colorUnif", colorUnif)
+    check("lightUnif", lightUnif)
 
 # Vertex Data, positions and normals
 tetraVertices = N.array([
