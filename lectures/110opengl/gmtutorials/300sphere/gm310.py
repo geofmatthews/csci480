@@ -1,5 +1,8 @@
-#Tetrahedron
+#sphere
+# normals
 # phong lighting
+# using parametric surface generator
+# change number of lat/longs
 
 from ctypes import c_void_p
 
@@ -10,59 +13,17 @@ import pygame
 from pygame.locals import *
 import numpy as N
 
+from shapes import sphere
+from transforms import *
+
 null = c_void_p(0)
 sizeOfFloat = 4
 sizeOfShort = 2
 
-strVertexShader = """
-#version 330
-
-in vec4 position;
-in vec4 normal;
-uniform vec4 light;
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
-
-out vec4 fragnormal;
-out vec4 fragreflect;
-out vec4 fraglight;
-out vec4 frageye;
-
-void main()
-{
-  // Let's do the lighting calculations in world space
-  fragnormal =  model * normal;
-  fraglight =  light;
-  fragreflect = reflect(fraglight, fragnormal);
-  frageye = -(model * vec4(0.0, 0.0, 0.0, 1.0));
-  gl_Position = projection * view * model * position;
-}
-"""
-
-strFragmentShader = """
-#version 330
-uniform vec4 color;
-in vec4 fragnormal, fragreflect, fraglight, frageye;
-out vec4 outputColor;
-void main()
-{
-  vec4 light, reflect, normal, eye;
-  // need to normalize interpolated vectors
-  light = normalize(fraglight);
-  reflect = normalize(fragreflect);
-  normal = normalize(fragnormal);
-  eye = normalize(frageye);
-   float ambient = 0.2;
-   float diffuse = clamp(dot(light, normal), 0.0, 1.0);
-   outputColor = max(ambient, diffuse)* color;
-   float specular = pow(clamp(dot(reflect, eye), 0.0, 1.0), 16);
-   if (specular > 0.0) {
-     outputColor += vec4(specular, specular, specular, 1.0);
-   }
-   outputColor = vec4(1.0, 0.0, 0.0, 1.0);
-}
-"""
+with open("gouraudshader.vert") as fp:
+    strVertexShader = fp.read()
+with open("gouraudshader.frag") as fp:
+    strFragmentShader = fp.read()
 
 def check(name, val):
     if val < 0:
@@ -71,8 +32,8 @@ def check(name, val):
 # Use PyOpenLG's compile shader programs, which simplify this task.
 # Assign the compiled program to theShaders.
 def initializeShaders():
-    global theShaders, positionAttrib, colorUnif, \
-           modelUnif, viewUnif, projUnif, lightUnif, normalAttrib
+    global theShaders, positionAttrib, normalAttrib, \
+           modelUnif, viewUnif, projUnif, lightUnif, colorUnif
     theShaders = compileProgram(
         compileShader(strVertexShader, GL_VERTEX_SHADER),
         compileShader(strFragmentShader, GL_FRAGMENT_SHADER)
@@ -85,7 +46,7 @@ def initializeShaders():
     modelUnif = glGetUniformLocation(theShaders, "model")
     viewUnif = glGetUniformLocation(theShaders, "view")
     projUnif = glGetUniformLocation(theShaders, "projection")
-    
+ 
     check("positionAttrib", positionAttrib)
     check("normalAttrib", normalAttrib)
     check("modelUnif", modelUnif)
@@ -94,25 +55,11 @@ def initializeShaders():
     check("colorUnif", colorUnif)
     check("lightUnif", lightUnif)
 
-# Vertex Data, positions and normals
-tetraVertices = N.array([
-    0.35, 0.5, 0.0, 1.0,
-    0.707, 0.707, 0.0, 0.0,
-    0.35, -0.5, 0.0, 1.0,
-    0.707, -0.707, 0.0, 0.0,
-    -0.35, 0.0, 0.5, 1.0,
-    -0.707, 0.0, 0.707, 0.0,
-    -0.35, 0.0, -0.5, 1.0,
-    -0.707, 0.0, -0.707], dtype=N.float32)
-
-vertexComponents = 8
-
-# 3 indices into the buffer per triangle
-# use unsigned short (16 bit) integers, usually plenty
-tetraElements = N.array((0,2,1,
-                         0,1,3,
-                         0,3,2,
-                         1,2,3),dtype=N.uint16)
+# Vertex Data, positions and normals and texture coords
+mysphere = sphere(0.75, 64, 32)
+sphereVertices = mysphere[0]
+sphereElements = mysphere[1]
+vertexComponents = 10 # 4 position, 4 normal, 2 texture
 
 # Ask the graphics card to create a buffer for our vertex data
 def getFloatBuffer(arr):
@@ -129,11 +76,11 @@ def getElementBuffer(arr):
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
     return buff
 
-# Get a buffer for positions and colors
+# Get a buffers for vertices and elements
 def initializeVertexBuffer():
     global vertexBuffer, elementBuffer
-    vertexBuffer = getFloatBuffer(tetraVertices)
-    elementBuffer = getElementBuffer(tetraElements)
+    vertexBuffer = getFloatBuffer(sphereVertices)
+    elementBuffer = getElementBuffer(sphereElements)
 
 # Ask the graphics card to create a VAO object.
 # A VAO object stores one or more vertex buffer objects.
@@ -169,8 +116,8 @@ def display(time):
     # Leave the objects in the +-1 cube
     # Make the camera circle around the +-1 cube
     
-    # still camera
-    view = N.identity(4, dtype=N.float32)
+    # move the camera in positive z
+    view = translation(0,0,-2)
     
     # send matrix to the graphics card
     glUniformMatrix4fv(viewUnif, 1, GL_TRUE, view)
@@ -180,34 +127,15 @@ def display(time):
     f = 100.0
     r = 0.5*n
     t = 0.5*n
-
-    # we're using row-major order, so if we're not doing any
-    # matrix manipulation here, we can lay out the matrix as
-    # a single dimensional array.  Otherwise, numpy has to know
-    # the shape of the array, so don't do this in general
-    proj = N.array((n/r, 0, 0, 0,
-                    0, n/t, 0, 0,
-                    0, 0, -(f+n)/(f-n), -2*f*n/(f-n),
-                    0, 0, -1, 0), dtype=N.float32)
+    proj = projection(n,f,r,t)
                     
     # send projection to the graphics card
     glUniformMatrix4fv(projUnif, 1, GL_TRUE, proj)
        
     # compute model rotation matrix:
-    s = N.sin(time)
-    c = N.cos(time)
-    zrot = N.array(((c,-s,0,0),
-                    (s,c,0,0),
-                    (0,0,1,0),
-                    (0,0,0,1)),dtype = N.float32)
-    yrot = N.array(((c,0,-s,0),
-                    (0,1,0,0),
-                    (s,0,c,0),
-                    (0,0,0,1)), dtype=N.float32)
-    xrot = N.array(((1,0,0,0),
-                    (0,c,-s,0),
-                    (0,s,c,0),
-                    (0,0,0,1)), dtype=N.float32)
+    xrot = Xrot(time)
+    yrot = Yrot(time)
+    zrot = Zrot(time)
     rot = N.dot(zrot, N.dot(yrot, xrot))
     # send model matrix 
     glUniformMatrix4fv(modelUnif, 1, GL_TRUE, rot)
@@ -216,7 +144,9 @@ def display(time):
     glUniform4f(colorUnif, 0, 1, 0, 1)
 
     # send light direction
-    glUniform4f(lightUnif, 0.577, 0.577, 0.577, 0.0)
+    light = N.array((0,1,0,0), dtype=N.float32)
+    light = N.dot(yrot, N.dot(xrot, light))
+    glUniform4fv(lightUnif, 1, light)
     
 #BUFFERS
     # Use the tirangle data
@@ -247,7 +177,7 @@ def display(time):
 #DRAW    
     # Use that data and the elements to draw triangles
     glDrawElements(
-        GL_TRIANGLES, len(tetraElements)*sizeOfShort,
+        GL_TRIANGLES, len(sphereElements)*sizeOfShort,
         GL_UNSIGNED_SHORT, c_void_p(0))
     
     # Stop using the shader program
