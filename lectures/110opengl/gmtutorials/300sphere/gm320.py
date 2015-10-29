@@ -2,6 +2,7 @@
 # flat phong lighting
 
 from ctypes import c_void_p
+import os
 
 from OpenGL.GL import *
 from OpenGL.GL.shaders import compileShader, compileProgram
@@ -17,10 +18,11 @@ null = c_void_p(0)
 sizeOfFloat = 4
 sizeOfShort = 2
 
-with open("phongshaderflat.vert") as fp:
-    strVertexShader = fp.read()
-with open("phongshaderflat.frag") as fp:
-    strFragmentShader = fp.read()
+def readShader(filename):
+    with open(os.path.join("..", "shaders", filename)) as fp:
+        return fp.read()
+strVertexShader = readShader("phongshaderflat.vert")
+strFragmentShader = readShader("phongshaderflat.frag")
 
 def check(name, val):
     if val < 0:
@@ -53,7 +55,7 @@ def initializeShaders():
     check("lightUnif", lightUnif)
 
 # Vertex Data, positions and normals and texture coords
-mysphere = sphere(0.75, 64, 32)
+mysphere = sphere(0.75, 16, 8)
 sphereVertices = mysphere[0]
 sphereElements = mysphere[1]
 vertexComponents = 10 # 4 position, 4 normal, 2 texture

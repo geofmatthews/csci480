@@ -57,8 +57,6 @@ def sphere(radius, nlongs, nlats):
     # remember to include the extra step in the ranges:
     twopi = 2.0*N.pi
     halfpi = 0.5*N.pi
-    sinc = twopi/nlongs
-    tinc = N.pi/nlats
     return pSurface(lambda s,t:spherePoint(radius,s,t),
                     sphereNormal,
                     sphereTexture,

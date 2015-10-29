@@ -5,6 +5,7 @@
 # change number of lat/longs
 
 from ctypes import c_void_p
+import os
 
 from OpenGL.GL import *
 from OpenGL.GL.shaders import compileShader, compileProgram
@@ -20,10 +21,12 @@ null = c_void_p(0)
 sizeOfFloat = 4
 sizeOfShort = 2
 
-with open("gouraudshader.vert") as fp:
-    strVertexShader = fp.read()
-with open("gouraudshader.frag") as fp:
-    strFragmentShader = fp.read()
+def readShader(filename):
+    with open(os.path.join("..","shaders", filename)) as fp:
+        return fp.read()
+strVertexShader = readShader("gouraudshader.vert")
+strFragmentShader = readShader("gouraudshader.frag")
+
 
 def check(name, val):
     if val < 0:

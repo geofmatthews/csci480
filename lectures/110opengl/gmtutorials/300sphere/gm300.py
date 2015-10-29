@@ -4,6 +4,7 @@
 # using parametric surface generator
 # change number of lat/longs
 
+import os
 from ctypes import c_void_p
 
 from OpenGL.GL import *
@@ -20,10 +21,11 @@ null = c_void_p(0)
 sizeOfFloat = 4
 sizeOfShort = 2
 
-with open("phongshader.vert") as fp:
-    strVertexShader = fp.read()
-with open("phongshader.frag") as fp:
-    strFragmentShader = fp.read()
+def readShader(filename):
+    with open(os.path.join("..","shaders", filename)) as fp:
+        return fp.read()
+strVertexShader = readShader("phongshader.vert")
+strFragmentShader = readShader("phongshader.frag")
 
 def check(name, val):
     if val < 0:
