@@ -42,15 +42,6 @@ void main()
 }
 """
 
-# Some global variables to be filled in later:
-
-# Integer handle identifying our compiled shader program
-theShaders = None
-# Handle to the position attribute in the vertex shader:
-positionAttrib = None
-# Integer handle identifying the GPU memory storing our vertex position array
-positionBufferObject = None
-
 # Use PyOpenLG's compile shader programs, which simplify this task.
 # Assign the compiled program to theShaders.
 def initializeShaders():

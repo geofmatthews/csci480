@@ -1,7 +1,9 @@
 #sphere
-# bump mapping
+# use two textures
+# one for noise and discard
+# don't cull backfaces for this one
 
-import os
+import os, sys
 from ctypes import c_void_p
 
 from OpenGL.GL import *
@@ -11,6 +13,7 @@ import pygame
 from pygame.locals import *
 import numpy as N
 
+sys.path.append(os.path.join("..","utilities"))
 from shapes import sphere
 from transforms import *
 from loadtexture import loadTexture
@@ -22,8 +25,8 @@ sizeOfShort = 2
 def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
         return fp.read()
-strVertexShader = readShader("bumpmap.vert")
-strFragmentShader = readShader("bumpmap.frag")
+strVertexShader = readShader("textured.vert")
+strFragmentShader = readShader("erosion.frag")
 
 def check(name, val):
     if val < 0:
@@ -32,45 +35,44 @@ def check(name, val):
 # Use PyOpenLG's compile shader programs, which simplify this task.
 # Assign the compiled program to theShaders.
 def initializeShaders():
-    global theShaders, positionAttrib, normalAttrib, tangentAttrib,\
-        binormalAttrib, uvAttrib, \
-        modelUnif, viewUnif, projUnif, lightUnif, \
-        colorSamplerUnif, bumpSamplerUnif
+    global theShaders, positionAttrib, normalAttrib, uvAttrib, \
+           modelUnif, viewUnif, projUnif, lightUnif, \
+           samplerColorUnif, samplerNoiseUnif, thresholdUnif
     theShaders = compileProgram(
         compileShader(strVertexShader, GL_VERTEX_SHADER),
         compileShader(strFragmentShader, GL_FRAGMENT_SHADER)
     )
     positionAttrib = glGetAttribLocation(theShaders, "position")
     normalAttrib = glGetAttribLocation(theShaders, "normal")
-    tangentAttrib = glGetAttribLocation(theShaders, "tangent")
-    binormalAttrib = glGetAttribLocation(theShaders, "binormal")
     uvAttrib = glGetAttribLocation(theShaders, "uv")
     
     lightUnif = glGetUniformLocation(theShaders, "light")
     modelUnif = glGetUniformLocation(theShaders, "model")
     viewUnif = glGetUniformLocation(theShaders, "view")
     projUnif = glGetUniformLocation(theShaders, "projection")
-    colorSamplerUnif = glGetUniformLocation(theShaders, "colorsampler")
-    bumpSamplerUnif = glGetUniformLocation(theShaders, "bumpsampler")
+    samplerColorUnif = glGetUniformLocation(theShaders, "samplercolor")
+    samplerNoiseUnif = glGetUniformLocation(theShaders, "samplernoise")
+    thresholdUnif = glGetUniformLocation(theShaders, "threshold")
 
     check("positionAttrib", positionAttrib)
     check("normalAttrib", normalAttrib)
-    check("tangentAttrib", tangentAttrib)
-    check("binormalAttrib", binormalAttrib)
     check("uvAttrib", uvAttrib)
     
     check("modelUnif", modelUnif)
     check("viewUnif", viewUnif)
     check("projUnif", projUnif)
     check("lightUnif", lightUnif)
-    check("colorSamplerUnif", colorSamplerUnif)
-    check("bumpSamplerUnif", bumpSamplerUnif)
+    check("samplerColorUnif", samplerColorUnif)
+    check("samplerNoiseUnif", samplerNoiseUnif)
+    check("thresholdUnif", thresholdUnif)
 
 # Vertex Data, positions and normals and texture coords
-mysphere = sphere(0.75, 64, 32)
+mysphere = sphere(0.75, 16, 8)
 sphereVertices = mysphere[0]
 sphereElements = mysphere[1]
 vertexComponents = 18 # 4 position, 4 normal, 4 tangent, 4 binormal, 2 texture
+print "Vertices:", len(sphereVertices)/ vertexComponents
+print "Triangles:", len(sphereElements)/3
 
 # Ask the graphics card to create a buffer for our vertex data
 def getFloatBuffer(arr):
@@ -105,19 +107,18 @@ def initializeVAO():
 # Must be called after we have an OpenGL context, i.e. after the pygame
 # window is created
 def init():
-    global colorTexture, bumpTexture
+    global colorTexture, noiseTexture
     initializeShaders()
     initializeVertexBuffer()
     initializeVAO()
-    glEnable(GL_CULL_FACE)
+    #glEnable(GL_CULL_FACE)
     glEnable(GL_DEPTH_TEST)
     # this has to be done here because we need an opengl context.
     # reading the file could be done without the context,
     # but loadTexture bundles reading the file and creating
     # a texture all in one.
-    colorTexture = loadTexture("brickwork-texture.jpg")
-    bumpTexture = loadTexture("brickwork-bump-map.jpg")
-    #colorTexture = loadTexture("grid.png")
+    colorTexture = loadTexture("texture_earth_clouds.jpg")
+    noiseTexture = loadTexture("noise.png")
 
 # Called to redraw the contents of the window
 def display(time):
@@ -162,65 +163,76 @@ def display(time):
     # we bind to a texture unit
     # and then tell our sampler to use that unit
 
-    # bind our color texture units
-    colorUnit = 0
-    glActiveTexture(GL_TEXTURE0 + colorUnit)
+    # bind our texture to unit 0
+    # You can have as many textures in memory as will fit,
+    # but there are a fixed number of texture units
+    # which limits how many textures you can use
+    # at one time, i.e., in one shader.
+    # Texture units are named
+    # GL_TEXTURE0, GL_TEXTURE1, GL_TEXTURE2, ...
+    # or
+    # GL_TEXTURE0, GL_TEXTURE0 + 1, GL_TEXTURE0 + 2, ...
+    # the later form is more useful since we need
+    # that integer later in setting our sampler
+    # uniform, and that way it can be a variable.
+    glActiveTexture(GL_TEXTURE0)
     glBindTexture(GL_TEXTURE_2D, colorTexture)
-    glUniform1i(colorSamplerUnif, colorUnit)
+    glActiveTexture(GL_TEXTURE1)
+    glBindTexture(GL_TEXTURE_2D, noiseTexture)
 
-    # bind our bump texture units
-    bumpUnit = 1
-    glActiveTexture(GL_TEXTURE0 + bumpUnit)
-    glBindTexture(GL_TEXTURE_2D, bumpTexture)
-    glUniform1i(bumpSamplerUnif, bumpUnit)
+    # set the sampler to use texture units 0 and 1
+    glUniform1i(samplerColorUnif, 0)
+    glUniform1i(samplerNoiseUnif, 1)
     
+    # send our erosion threshold
+    wholetime = int(N.trunc(time*0.1))
+    fractime = time*0.1 - wholetime
+    if wholetime % 2 == 0:
+        fractime = 1.0-fractime
+    glUniform1f(thresholdUnif, fractime)    
+
     # send light direction
     light = N.array((0,0,1,0), dtype=N.float32)
     light = N.dot(Yrot(time*0.5), light)
     glUniform4fv(lightUnif, 1, light)
     
 #BUFFERS
-    # Use the tirangle data
+    # Use the triangle data
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBuffer)
 #POSITION    
+    # Tell the shader program which attribute to use for this buffer
     glEnableVertexAttribArray(positionAttrib)
+    
+    # Tell the shader program what the data in the buffer look like
     glVertexAttribPointer(positionAttrib,
                           4,
                           GL_FLOAT,
                           GL_FALSE,
                           vertexComponents*sizeOfFloat,
                           c_void_p(0))
-#NORMAL, TANGENT, BINORMAL
+#NORMAL
+    # Tell the shader program which attribute to use for this buffer
     glEnableVertexAttribArray(normalAttrib)
+
+    # Tell the shader what the data in the buffer look like
     glVertexAttribPointer(normalAttrib,
                           4,
                           GL_FLOAT,
                           GL_FALSE,
                           vertexComponents*sizeOfFloat,
                           c_void_p(4*sizeOfFloat))
-    glEnableVertexAttribArray(tangentAttrib)
-    glVertexAttribPointer(tangentAttrib,
-                          4,
-                          GL_FLOAT,
-                          GL_FALSE,
-                          vertexComponents*sizeOfFloat,
-                          c_void_p(8*sizeOfFloat))
-    glEnableVertexAttribArray(binormalAttrib)
-    glVertexAttribPointer(binormalAttrib,
-                          4,
-                          GL_FLOAT,
-                          GL_FALSE,
-                          vertexComponents*sizeOfFloat,
-                          c_void_p(12*sizeOfFloat))
 #UV coordinates
+    # Tell the shader program which attribute to use for this buffer
     glEnableVertexAttribArray(uvAttrib)
-    glVertexAttribPointer(uvAttrib,
-                          2,
-                          GL_FLOAT,
-                          GL_FALSE,
-                          vertexComponents*sizeOfFloat,
-                          c_void_p(16*sizeOfFloat))
+
+    # Tell the shader what the data in the buffer look like
+    glVertexAttribPointer(uvAttrib,                     # attrib location
+                          2,                            # num components
+                          GL_FLOAT,                     # type
+                          GL_FALSE,                     # normalize?
+                          vertexComponents*sizeOfFloat, # size of vertex data
+                          c_void_p(16*sizeOfFloat))      # initial offset
 #DRAW    
     # Use that data and the elements to draw triangles
     glDrawElements(

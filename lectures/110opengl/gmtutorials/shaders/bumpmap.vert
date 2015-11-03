@@ -14,7 +14,6 @@ out vec2 fraguv;
 out vec4 fragnormal;
 out vec4 fragtangent;
 out vec4 fragbinormal;
-out vec4 fragreflect;
 out vec4 fraglight;
 out vec4 frageye;
 
@@ -26,7 +25,8 @@ void main()
   fragnormal =  vm * normal;
   fragtangent = vm * tangent;
   fragbinormal = vm * binormal;
-  fragreflect = reflect(-fraglight, fragnormal);
+  // Now have to do this in the fragment shader
+  // fragreflect = reflect(-fraglight, fragnormal);
   fraglight =  view * light;
   vec4 worldposition  = vm * position;
   // Where is the eye in cameraspace?

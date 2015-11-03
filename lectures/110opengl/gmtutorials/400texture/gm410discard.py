@@ -1,8 +1,7 @@
 #sphere
-# normals
-# phong lighting
-# using parametric surface generator
-# change number of lat/longs
+# use two textures
+# one for noise and discard
+# don't cull backfaces for this one
 
 import os, sys
 from ctypes import c_void_p
@@ -27,7 +26,7 @@ def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
         return fp.read()
 strVertexShader = readShader("textured.vert")
-strFragmentShader = readShader("textured.frag")
+strFragmentShader = readShader("erosion.frag")
 
 def check(name, val):
     if val < 0:
@@ -38,7 +37,7 @@ def check(name, val):
 def initializeShaders():
     global theShaders, positionAttrib, normalAttrib, uvAttrib, \
            modelUnif, viewUnif, projUnif, lightUnif, \
-           samplerUnif
+           samplerColorUnif, samplerNoiseUnif, thresholdUnif
     theShaders = compileProgram(
         compileShader(strVertexShader, GL_VERTEX_SHADER),
         compileShader(strFragmentShader, GL_FRAGMENT_SHADER)
@@ -51,7 +50,9 @@ def initializeShaders():
     modelUnif = glGetUniformLocation(theShaders, "model")
     viewUnif = glGetUniformLocation(theShaders, "view")
     projUnif = glGetUniformLocation(theShaders, "projection")
-    samplerUnif = glGetUniformLocation(theShaders, "sampler")
+    samplerColorUnif = glGetUniformLocation(theShaders, "samplercolor")
+    samplerNoiseUnif = glGetUniformLocation(theShaders, "samplernoise")
+    thresholdUnif = glGetUniformLocation(theShaders, "threshold")
 
     check("positionAttrib", positionAttrib)
     check("normalAttrib", normalAttrib)
@@ -61,10 +62,12 @@ def initializeShaders():
     check("viewUnif", viewUnif)
     check("projUnif", projUnif)
     check("lightUnif", lightUnif)
-    check("samplerUnif", samplerUnif)
+    check("samplerColorUnif", samplerColorUnif)
+    check("samplerNoiseUnif", samplerNoiseUnif)
+    check("thresholdUnif", thresholdUnif)
 
 # Vertex Data, positions and normals and texture coords
-mysphere = sphere(0.75, 16, 8)
+mysphere = sphere(0.75, 32, 16)
 sphereVertices = mysphere[0]
 sphereElements = mysphere[1]
 vertexComponents = 18 # 4 position, 4 normal, 4 tangent, 4 binormal, 2 texture
@@ -104,18 +107,18 @@ def initializeVAO():
 # Must be called after we have an OpenGL context, i.e. after the pygame
 # window is created
 def init():
-    global myTexture
+    global colorTexture, noiseTexture
     initializeShaders()
     initializeVertexBuffer()
     initializeVAO()
-    glEnable(GL_CULL_FACE)
+    #glEnable(GL_CULL_FACE)
     glEnable(GL_DEPTH_TEST)
     # this has to be done here because we need an opengl context.
     # reading the file could be done without the context,
     # but loadTexture bundles reading the file and creating
     # a texture all in one.
-    myTexture = loadTexture("texture_earth_clouds.jpg")
-    #myTexture = loadTexture("grid.png")
+    colorTexture = loadTexture("texture_earth_clouds.jpg")
+    noiseTexture = loadTexture("noise.png")
 
 # Called to redraw the contents of the window
 def display(time):
@@ -173,11 +176,21 @@ def display(time):
     # that integer later in setting our sampler
     # uniform, and that way it can be a variable.
     glActiveTexture(GL_TEXTURE0)
-    glBindTexture(GL_TEXTURE_2D, myTexture)
+    glBindTexture(GL_TEXTURE_2D, colorTexture)
+    glActiveTexture(GL_TEXTURE1)
+    glBindTexture(GL_TEXTURE_2D, noiseTexture)
 
-    # set the sampler to use texture unit 0
-    glUniform1i(samplerUnif, 0)
+    # set the sampler to use texture units 0 and 1
+    glUniform1i(samplerColorUnif, 0)
+    glUniform1i(samplerNoiseUnif, 1)
     
+    # send our erosion threshold
+    wholetime = int(N.trunc(time*0.1))
+    fractime = time*0.1 - wholetime
+    if wholetime % 2 == 0:
+        fractime = 1.0-fractime
+    glUniform1f(thresholdUnif, fractime)    
+
     # send light direction
     light = N.array((0,0,1,0), dtype=N.float32)
     light = N.dot(Yrot(time*0.5), light)

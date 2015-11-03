@@ -1,7 +1,3 @@
-% latex foo.tex 
-% dvips -Poutline -G0 foo.dvi -o 
-% ps2pdf -dPDFSETTINGS#/prepress foo.ps
-%\documentclass[slidestop,xcolor=pst,dvips]{beamer}
 \documentclass[slidestop,xcolor=pst]{beamer}
 \usepackage{fancyvrb}
 
@@ -169,12 +165,22 @@ f(t) = (10\cos(t), 10\sin(t), t)
 \begin{eqnarray*}
 f(t) &=& (10\cos(t), 10\sin(t), t)\\
 \frac{df}{dt} &=& (-10\sin(t), 10\cos(t), 1)\\
-\frac{d^2f}{dt^2} &=& (-10\cos(t), -10\sin(t), 0)
+\frac{d^2f}{dt^2} &=& (-10\cos(t), -10\sin(t), 0)\\
+\frac{d^3f}{dt^3} &=& (10\sin(t), -10\cos(t), 0)
 \end{eqnarray*}
 \begin{eqnarray*}
 \frac{df}{dt}\times \frac{d^2f}{dt^2} &\propto& (\sin(t), \cos(t), 10)
 \end{eqnarray*}
 \end{columns}
+\bigskip
+\[
+\frac{df}{dt} \cdot \frac{d^2f}{dt^2}
+=
+\frac{d^2f}{dt} \cdot \frac{d^3f}{dt^3}
+=
+\frac{df}{dt} \cdot \frac{d^3f}{dt^3}
+= 0
+\]
 \end{frame}
 
 \sect{Parametric Surfaces}
@@ -336,11 +342,13 @@ $(v\tan(u),v\sec(u),v^2)$\\
 \includegraphics[scale=0.4]{images/sorcup.jpg}
 
 If $y=f(x)$ is determined by a series of points $(x_0,y_0),\ldots(x_n,y_n)$,
-then let $s\in[0,\ldots, n]$ and $t\in[0,2\pi]$, and the parametric
+then let $s\in[a,\ldots, b]$ and $t\in[0,2\pi]$, and the parametric
 surface is
-\[
-(x_s, y_s\cos(t),  y_s\sin(t))
-\]
+\begin{eqnarray*}
+  g(s,t) &=& (s, f(s)\cos(t),  f(s)\sin(t))\\
+  \frac{\partial g}{\partial s} &=& (1, f'(s)\cos(t), f'(s)\sin(t))\\
+  \frac{\partial g}{\partial t} &=& (s, -f(s)\sin(t), f(s)\cos(t)\\
+\end{eqnarray*}
 \end{frame}
 
 \sect{Tubes along 3D curves}

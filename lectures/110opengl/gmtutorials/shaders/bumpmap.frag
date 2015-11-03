@@ -1,32 +1,35 @@
 #version 330
-
+uniform int makebumps;
 uniform sampler2D colorsampler;
 uniform sampler2D bumpsampler;
 in vec4 fragnormal, fragtangent, fragbinormal, 
-  fragreflect, fraglight, frageye;
+  fraglight, frageye;
 in vec2 fraguv;
 out vec4 outputColor;
 void main()
 {
-  vec4 color = texture2D(colorsampler, fraguv);
-  vec4 bump = texture2D(bumpsampler, fraguv);
-  
-  vec4 light, reflect, normal, tangent, binormal, eye;
+  vec2 texcoords = fraguv;
+  texcoords.s *= 3.0;
+  texcoords.t *= 1.5;
+  vec4 color = texture2D(colorsampler, texcoords);
+  vec4 bump = texture2D(bumpsampler, texcoords);
   // need to normalize interpolated vectors
-  light = normalize(fraglight);
-  reflect = normalize(fragreflect);
-  normal = normalize(fragnormal);
-  tangent = normalize(fragtangent);
-  binormal = normalize(fragbinormal);
-  float x = 1.0 + binormal.x;
-  if (x > binormal.x) {
-    normal = normalize(bump.r*tangent + bump.g*binormal + bump.b*normal);
-  }
-  eye = normalize(frageye);
+  vec4 light = normalize(fraglight);
+  vec4 normal = normalize(fragnormal);
+  vec4 reflect = normalize(reflect(-light, normal));
+  vec4 tangent = normalize(fragtangent);
+  vec4 binormal = normalize(fragbinormal);
+  vec4 eye = normalize(frageye);
+  // Use MAP order, multiply first
+  if (makebumps == 1) {
+    normal = normalize((bump.r*2.0-1.0)*tangent
+			       + (bump.g*2.0-1.0)*binormal
+			       + (bump.b*2.0-1.0)*normal);
+  } 
   float ambient = 0.2;
   float diffuse = 0.8*clamp(dot(light, normal), 0.0, 1.0);
   outputColor = (ambient + diffuse) * color;
-  if (dot(light,normal) > 0.0) {
+  if (diffuse > 0.0) {
     float specular = 0.8*pow(clamp(dot(reflect, eye), 0.0, 1.0), 8);
     outputColor += vec4(specular, specular, specular, 1.0);
   }

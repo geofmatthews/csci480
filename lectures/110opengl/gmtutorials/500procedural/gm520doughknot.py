@@ -1,6 +1,8 @@
-#Tetrahedron
-# perspective camera
+#knots
+# bump mapping
+# change texture coords in shader
 
+import os,sys
 from ctypes import c_void_p
 
 from OpenGL.GL import *
@@ -10,88 +12,65 @@ import pygame
 from pygame.locals import *
 import numpy as N
 
+sys.path.insert(0, os.path.join("..","utilities"))
+from shapes import torus
+from transforms import *
+from loadtexture import loadTexture
+
 null = c_void_p(0)
 sizeOfFloat = 4
 sizeOfShort = 2
 
-strVertexShader = """
-#version 330
-in vec4 position;
-in vec4 vertexColor;
-out vec4 fragmentColor;
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
-void main()
-{
-  vec4 offset;
-  float x,y,z; 
-  if (gl_InstanceID % 2 == 0) {
-    z = 0.5;
-  } else {
-    z = -0.5;
-  }
-  if ((gl_InstanceID / 2) % 2 == 0 ) {
-    y = 0.5;
-  } else {
-    y = -0.5;
-  }
-  if ((gl_InstanceID / 4) % 2 == 1) {
-    x = 0.5;
-  } else {
-    x = -0.5;
-  }
-  offset = vec4(x,y,z,0);
-  fragmentColor = vertexColor;
-  gl_Position = projection * view * (model * position + offset);
-}
-"""
+def readShader(filename):
+    with open(os.path.join("..","shaders", filename)) as fp:
+        return fp.read()
+strVertexShader = readShader("bumpmap.vert")
+strFragmentShader = readShader("knot.frag")
 
-strFragmentShader = """
-#version 330
-in vec4 fragmentColor;
-out vec4 outputColor;
-void main()
-{
-   outputColor = fragmentColor;
-}
-"""
-
+def check(name, val):
+    if val < 0:
+        print "Warning:", name, "has value", val
+        
 # Use PyOpenLG's compile shader programs, which simplify this task.
 # Assign the compiled program to theShaders.
 def initializeShaders():
-    global theShaders, positionAttrib, colorAttrib, modelUnif, viewUnif, projUnif
+    global theShaders, positionAttrib, normalAttrib, tangentAttrib,\
+        binormalAttrib, uvAttrib, \
+        modelUnif, viewUnif, projUnif, lightUnif, \
+        colorSamplerUnif, bumpSamplerUnif
     theShaders = compileProgram(
         compileShader(strVertexShader, GL_VERTEX_SHADER),
         compileShader(strFragmentShader, GL_FRAGMENT_SHADER)
     )
     positionAttrib = glGetAttribLocation(theShaders, "position")
-    colorAttrib = glGetAttribLocation(theShaders, "vertexColor")
+    normalAttrib = glGetAttribLocation(theShaders, "normal")
+    tangentAttrib = glGetAttribLocation(theShaders, "tangent")
+    binormalAttrib = glGetAttribLocation(theShaders, "binormal")
+    uvAttrib = glGetAttribLocation(theShaders, "uv")
+    
+    lightUnif = glGetUniformLocation(theShaders, "light")
     modelUnif = glGetUniformLocation(theShaders, "model")
     viewUnif = glGetUniformLocation(theShaders, "view")
     projUnif = glGetUniformLocation(theShaders, "projection")
-    print "Attribs:", positionAttrib, colorAttrib
-    print "Uniforms:", modelUnif, viewUnif, projUnif
+    colorSamplerUnif = glGetUniformLocation(theShaders, "colorsampler")
+    bumpSamplerUnif = glGetUniformLocation(theShaders, "bumpsampler")
 
-# Vertex Data
-tetraVertices = N.array([
-    0.35, 0.5, 0.0, 1.0,
-    1.0, 0.0, 0.0, 1.0,
-    0.35, -0.5, 0.0, 1.0,
-    0.0, 1.0, 0.0, 1.0,
-    -0.35, 0.0, 0.5, 1.0,
-    0.0, 0.0, 1.0, 1.0,
-    -0.35, 0.0, -0.5, 1.0,
-    1.0, 1.0, 0.0, 1.0], dtype=N.float32)
+    check("positionAttrib", positionAttrib)
+    check("normalAttrib", normalAttrib)
+    check("tangentAttrib", tangentAttrib)
+    check("binormalAttrib", binormalAttrib)
+    check("uvAttrib", uvAttrib)
+    
+    check("modelUnif", modelUnif)
+    check("viewUnif", viewUnif)
+    check("projUnif", projUnif)
+    check("lightUnif", lightUnif)
 
-vertexComponents = 8
-
-# 3 indices into the buffer per triangle
-# use unsigned short (16 bit) integers, usually plenty
-tetraElements = N.array((0,2,1,
-                         0,1,3,
-                         0,3,2,
-                         1,2,3),dtype=N.uint16)
+# Vertex Data, positions and normals and texture coords
+mytorus = torus(0.5, 0.2, 32, 16)
+torusVertices = mytorus[0]
+torusElements = mytorus[1]
+vertexComponents = 18 # 4 position, 4 normal, 4 tangent, 4 binormal, 2 texture
 
 # Ask the graphics card to create a buffer for our vertex data
 def getFloatBuffer(arr):
@@ -108,11 +87,11 @@ def getElementBuffer(arr):
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
     return buff
 
-# Get a buffer for positions and colors
+# Get a buffers for vertices and elements
 def initializeVertexBuffer():
     global vertexBuffer, elementBuffer
-    vertexBuffer = getFloatBuffer(tetraVertices)
-    elementBuffer = getElementBuffer(tetraElements)
+    vertexBuffer = getFloatBuffer(torusVertices)
+    elementBuffer = getElementBuffer(torusElements)
 
 # Ask the graphics card to create a VAO object.
 # A VAO object stores one or more vertex buffer objects.
@@ -126,7 +105,6 @@ def initializeVAO():
 # Must be called after we have an OpenGL context, i.e. after the pygame
 # window is created
 def init():
-    global camera
     initializeShaders()
     initializeVertexBuffer()
     initializeVAO()
@@ -144,24 +122,10 @@ def display(time):
     # Set the shader program
     glUseProgram(theShaders)
 
-    # compute camera matrix
-    # Leave the objects in the +-1 cube
-    # Make the camera circle around the +-1 cube
-    
     # move the camera in positive z
-    tran = N.array(((1,0,0,0),
-                    (0,1,0,0),
-                    (0,0,1,-3),
-                    (0,0,0,1)), dtype=N.float32)
-    
-    # rotate the camera around y
-    s = N.sin(time)
-    c = N.cos(time)
-    rot = N.array(((c,0,-s,0),
-                   (0,1,0,0),
-                   (s,0,c,0),
-                   (0,0,0,1)), dtype=N.float32)
-    view = N.dot(tran, rot)
+    view = translation(0,0,-2)
+    #rotate the camera around x
+    view = N.dot(view,Xrot(45.0*N.pi/180.0))
     
     # send matrix to the graphics card
     glUniformMatrix4fv(viewUnif, 1, GL_TRUE, view)
@@ -171,72 +135,73 @@ def display(time):
     f = 100.0
     r = 0.5*n
     t = 0.5*n
-
-    # we're using row-major order, so if we're not doing any
-    # matrix manipulation here, we can lay out the matrix as
-    # a single dimensional array.  Otherwise, numpy has to know
-    # the shape of the array, so don't do this in general
-    proj = N.array((n/r, 0, 0, 0,
-                    0, n/t, 0, 0,
-                    0, 0, -(f+n)/(f-n), -2*f*n/(f-n),
-                    0, 0, -1, 0), dtype=N.float32)
+    proj = projection(n,f,r,t)
                     
     # send projection to the graphics card
     glUniformMatrix4fv(projUnif, 1, GL_TRUE, proj)
        
     # compute model rotation matrix:
-    s = N.sin(time)
-    c = N.cos(time)
-    zrot = N.array(((c,-s,0,0),
-                    (s,c,0,0),
-                    (0,0,1,0),
-                    (0,0,0,1)),dtype = N.float32)
-    yrot = N.array(((c,0,-s,0),
-                    (0,1,0,0),
-                    (s,0,c,0),
-                    (0,0,0,1)), dtype=N.float32)
-    xrot = N.array(((1,0,0,0),
-                    (0,c,-s,0),
-                    (0,s,c,0),
-                    (0,0,0,1)), dtype=N.float32)
+    xrot = Xrot(time)
+    yrot = Yrot(time)
+    zrot = Zrot(time)
+    tilt = Zrot(0.4)
     rot = N.dot(zrot, N.dot(yrot, xrot))
     # send model matrix 
     glUniformMatrix4fv(modelUnif, 1, GL_TRUE, rot)
+
+    # send light direction
+    light = N.array((0.577,0.577,0.577,0), dtype=N.float32)
+    light = N.dot(Yrot(time*0.5), light)
+    glUniform4fv(lightUnif, 1, light)
     
 #BUFFERS
     # Use the tirangle data
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBuffer)
 #POSITION    
-    # Tell the shader program which attribute to use for this buffer
     glEnableVertexAttribArray(positionAttrib)
-    
-    # Tell the shader program what the data in the buffer look like
     glVertexAttribPointer(positionAttrib,
                           4,
                           GL_FLOAT,
                           GL_FALSE,
                           vertexComponents*sizeOfFloat,
                           c_void_p(0))
-#COLOR
-    # Tell the shader program which attribute to use for this buffer
-    glEnableVertexAttribArray(colorAttrib)
-
-    # Tell the shader what the data in the buffer look like
-    glVertexAttribPointer(colorAttrib,
+#NORMAL, TANGENT, BINORMAL
+    glEnableVertexAttribArray(normalAttrib)
+    glVertexAttribPointer(normalAttrib,
                           4,
                           GL_FLOAT,
                           GL_FALSE,
                           vertexComponents*sizeOfFloat,
                           c_void_p(4*sizeOfFloat))
+    glEnableVertexAttribArray(tangentAttrib)
+    glVertexAttribPointer(tangentAttrib,
+                          4,
+                          GL_FLOAT,
+                          GL_FALSE,
+                          vertexComponents*sizeOfFloat,
+                          c_void_p(8*sizeOfFloat))
+    glEnableVertexAttribArray(binormalAttrib)
+    glVertexAttribPointer(binormalAttrib,
+                          4,
+                          GL_FLOAT,
+                          GL_FALSE,
+                          vertexComponents*sizeOfFloat,
+                          c_void_p(12*sizeOfFloat))
+#UV coordinates
+    glEnableVertexAttribArray(uvAttrib)
+    glVertexAttribPointer(uvAttrib,
+                          2,
+                          GL_FLOAT,
+                          GL_FALSE,
+                          vertexComponents*sizeOfFloat,
+                          c_void_p(16*sizeOfFloat))
 #DRAW    
     # Use that data and the elements to draw triangles
-    glDrawElementsInstanced(
-        GL_TRIANGLES, len(tetraElements)*sizeOfShort,
-        GL_UNSIGNED_SHORT, c_void_p(0),
-        8)
+    glDrawElements(
+        GL_TRIANGLES, len(torusElements)*sizeOfShort,
+        GL_UNSIGNED_SHORT, c_void_p(0))
     
-
     # Stop using the shader program
     glUseProgram(0)
 
