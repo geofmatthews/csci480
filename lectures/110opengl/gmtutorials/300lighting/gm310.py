@@ -1,8 +1,6 @@
 #sphere
 # normals
-# phong lighting
-# using parametric surface generator
-# change number of lat/longs
+# gouraud lighting
 
 from ctypes import c_void_p
 import os

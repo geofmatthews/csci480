@@ -25,8 +25,8 @@ int integerNoise(in int n)
 
 void hash(int x, int y, out float h1, out float h2)
 {
-  x = x % 8; // so it wraps on cylinders!
-  y = y % 8;
+  x = x % 8; // so it wraps on cylinders
+  y = y % 8; // (if they're the right size)
   int result1 = integerNoise(x);
   result1 = integerNoise(result1+y);
   int result2 = integerNoise(result1);
@@ -34,7 +34,10 @@ void hash(int x, int y, out float h1, out float h2)
   h2 = float(result2 % 1024)/1024.0;
 }
 
-vec4 normFromCircle(float x, float y, float radius, vec4 side, vec4 up, vec4 oldNorm) {
+vec4 normFromCircle(float x, float y,
+		    float radius,
+		    vec4 side, vec4 up,
+		    vec4 oldNorm) {
   vec4 newNorm = oldNorm;
   float halfroot2 = 0.70710678;
   float len = sqrt(x*x+y*y);
@@ -43,12 +46,16 @@ vec4 normFromCircle(float x, float y, float radius, vec4 side, vec4 up, vec4 old
     float hdist = dist/radius;
     float vdist = sqrt(1.0 - hdist*hdist);
     vec4 outVector = normalize(x*side + y*up);
-    newNorm = normalize(hdist*outVector + 1*vdist*oldNorm);
+    // emphasize norm to flatten relief:
+    newNorm = normalize(hdist*outVector + 3*vdist*oldNorm);
   }
   return newNorm;
 }
 
-vec4 normFromLine(float x, float y, float radius, vec4 side, vec4 up, vec4 trueNorm, vec4 defaultNorm){
+vec4 normFromLine(float x, float y,
+		  float radius,
+		  vec4 side, vec4 up,
+		  vec4 trueNorm, vec4 defaultNorm){
       vec4 newNorm = defaultNorm;
       float cx = 0.5*(x-y+1);
       float cy = 0.5*(y-x+1);
@@ -62,7 +69,8 @@ vec4 normFromLine(float x, float y, float radius, vec4 side, vec4 up, vec4 trueN
         vec4 outVector = normalize(side + up);
         float hdist = dist/radius;
         float vdist = sqrt(1.0 - hdist*hdist);
-        newNorm = normalize(hdist*outVector + 1*vdist*trueNorm);
+	// emphasize norm to flatten relief:
+        newNorm = normalize(hdist*outVector + 3*vdist*trueNorm);
       }
       return newNorm;
       }
@@ -87,34 +95,90 @@ vec4 newNormal(vec2 texcoord, vec4 oldNormal, vec4 binorm, vec4 tan) {
   vec4 newNorm = oldNormal;
   if (A && B) {
     if (right < threshold) {
-      newNorm = normFromCircle(x,y,lineRadius,sideVector,upVector,oldNormal);
+      newNorm = normFromCircle(x,y,
+			       lineRadius,
+			       sideVector,
+			       upVector,
+			       oldNormal);
     } else {
-      newNorm = normFromLine(x,y,lineRadius,sideVector,upVector,oldNormal,newNorm);
-      newNorm = normFromLine(x,-y,lineRadius,sideVector,-upVector,oldNormal,newNorm);
+      newNorm = normFromLine(x,y,
+			     lineRadius,
+			     sideVector,
+			     upVector,
+			     oldNormal,
+			     newNorm);
+      newNorm = normFromLine(x,-y,
+			     lineRadius,
+			     sideVector,
+			     -upVector,
+			     oldNormal,
+			     newNorm);
     }
   }
   else if (!A && B) {
     if (up < threshold) {
-      newNorm = normFromCircle(x,y,lineRadius,sideVector,upVector,oldNormal);
+      newNorm = normFromCircle(x,y,
+			       lineRadius,
+			       sideVector,
+			       upVector,
+			       oldNormal);
     } else {
-      newNorm = normFromLine(x,-y,lineRadius,sideVector,-upVector,oldNormal,newNorm);
-      newNorm = normFromLine(-x,-y,lineRadius,-sideVector,-upVector,oldNormal,newNorm);
+      newNorm = normFromLine(x,-y,
+			     lineRadius,
+			     sideVector,
+			     -upVector,
+			     oldNormal,
+			     newNorm);
+      newNorm = normFromLine(-x,-y,
+			     lineRadius,
+			     -sideVector,
+			     -upVector,
+			     oldNormal,
+			     newNorm);
     }
   }
   else if (!A && !B) {
     if (left < threshold) {
-      newNorm = normFromCircle(x,y,lineRadius,sideVector,upVector,oldNormal);
+      newNorm = normFromCircle(x,y,
+			       lineRadius,
+			       sideVector,
+			       upVector,
+			       oldNormal);
     } else {
-      newNorm = normFromLine(-x,-y,lineRadius,-sideVector,-upVector,oldNormal,newNorm);
-      newNorm = normFromLine(-x,y,lineRadius,-sideVector,upVector,oldNormal,newNorm);
+      newNorm = normFromLine(-x,-y,
+			     lineRadius,
+			     -sideVector,
+			     -upVector,
+			     oldNormal,
+			     newNorm);
+      newNorm = normFromLine(-x,y,
+			     lineRadius,
+			     -sideVector,
+			     upVector,
+			     oldNormal,
+			     newNorm);
     }
   }
   else if (A && !B) {
     if (down < threshold) {
-      newNorm = normFromCircle(x,y,lineRadius,sideVector,upVector,oldNormal);
+      newNorm = normFromCircle(x,y,
+			       lineRadius,
+			       sideVector,
+			       upVector,
+			       oldNormal);
     } else {
-      newNorm = normFromLine(-x,y,lineRadius,-sideVector,upVector,oldNormal,newNorm);
-      newNorm = normFromLine(x,y,lineRadius,sideVector,upVector,oldNormal,newNorm);
+      newNorm = normFromLine(-x,y,
+			     lineRadius,
+			     -sideVector,
+			     upVector,
+			     oldNormal,
+			     newNorm);
+      newNorm = normFromLine(x,y,
+			     lineRadius,
+			     sideVector,
+			     upVector,
+			     oldNormal,
+			     newNorm);
     }
   }
   return newNorm;
