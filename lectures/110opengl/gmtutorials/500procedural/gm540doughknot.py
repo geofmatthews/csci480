@@ -13,7 +13,7 @@ from pygame.locals import *
 import numpy as N
 
 sys.path.insert(0, os.path.join("..","utilities"))
-from shapes import torus
+from psurfaces import torus
 from transforms import *
 from loadtexture import loadTexture
 
@@ -37,7 +37,7 @@ def initializeShaders():
     global theShaders, positionAttrib, normalAttrib, tangentAttrib,\
         binormalAttrib, uvAttrib, \
         modelUnif, viewUnif, projUnif, lightUnif, \
-        colorSamplerUnif, bumpSamplerUnif
+        colorSamplerUnif, bumpSamplerUnif, scaleuvUnif
     theShaders = compileProgram(
         compileShader(strVertexShader, GL_VERTEX_SHADER),
         compileShader(strFragmentShader, GL_FRAGMENT_SHADER)
@@ -54,6 +54,7 @@ def initializeShaders():
     projUnif = glGetUniformLocation(theShaders, "projection")
     colorSamplerUnif = glGetUniformLocation(theShaders, "colorsampler")
     bumpSamplerUnif = glGetUniformLocation(theShaders, "bumpsampler")
+    scaleuvUnif = glGetUniformLocation(theShaders, "scaleuv")
 
     check("positionAttrib", positionAttrib)
     check("normalAttrib", normalAttrib)
@@ -65,6 +66,7 @@ def initializeShaders():
     check("viewUnif", viewUnif)
     check("projUnif", projUnif)
     check("lightUnif", lightUnif)
+    check("scaleuvUnif", scaleuvUnif)
 
 # Vertex Data, positions and normals and texture coords
 mytorus = torus(0.5, 0.2, 32, 16)
@@ -121,6 +123,8 @@ def display(time):
 
     # Set the shader program
     glUseProgram(theShaders)
+
+    glUniform2fv(scaleuvUnif, 1, N.array((32,8), dtype=N.float32))
 
     # move the camera in positive z
     view = translation(0,0,-2)
@@ -214,7 +218,7 @@ def main():
     time = 0.0
     while True:
         clock.tick(30)
-        time += 0.02
+        time += 0.01
         for event in pygame.event.get():
             if event.type == QUIT:
                 return

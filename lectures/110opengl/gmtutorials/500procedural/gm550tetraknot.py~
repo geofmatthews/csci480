@@ -1,4 +1,4 @@
-#torus
+#knots
 # bump mapping
 # change texture coords in shader
 
@@ -25,7 +25,7 @@ def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
         return fp.read()
 strVertexShader = readShader("bumpmap.vert")
-strFragmentShader = readShader("golfball.frag")
+strFragmentShader = readShader("knot.frag")
 
 def check(name, val):
     if val < 0:
@@ -61,12 +61,12 @@ def initializeShaders():
     check("tangentAttrib", tangentAttrib)
     check("binormalAttrib", binormalAttrib)
     check("uvAttrib", uvAttrib)
-    check("scaleuvUnif", scaleuvUnif)
     
     check("modelUnif", modelUnif)
     check("viewUnif", viewUnif)
     check("projUnif", projUnif)
     check("lightUnif", lightUnif)
+    check("scaleuvUnif", scaleuvUnif)
 
 # Vertex Data, positions and normals and texture coords
 mytorus = torus(0.5, 0.2, 32, 16)
@@ -124,7 +124,7 @@ def display(time):
     # Set the shader program
     glUseProgram(theShaders)
 
-    glUniform2fv(scaleuvUnif, 1, N.array((48,16), dtype=N.float32))
+    glUniform2fv(scaleuvUnif, 1, N.array((32,8), dtype=N.float32))
 
     # move the camera in positive z
     view = translation(0,0,-2)
@@ -218,7 +218,7 @@ def main():
     time = 0.0
     while True:
         clock.tick(30)
-        time += 0.02
+        time += 0.01
         for event in pygame.event.get():
             if event.type == QUIT:
                 return

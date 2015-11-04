@@ -4,10 +4,10 @@
 \beamer@sectionintoc {2}{Parametric Curves}{3}{0}{2}
 \beamer@sectionintoc {3}{Parametric Curves: Tangent, Normal, Binormal}{4}{0}{3}
 \beamer@sectionintoc {4}{Parametric Surfaces}{5}{0}{4}
-\beamer@sectionintoc {5}{Parametric Surfaces: Normal, Tangent, Binormal}{8}{0}{5}
+\beamer@sectionintoc {5}{Parametric Surfaces: Tangent, Bitangent, Normal}{8}{0}{5}
 \beamer@sectionintoc {6}{Parametric Surfaces: Sphere}{9}{0}{6}
-\beamer@sectionintoc {7}{Parametric Surfaces: Normal, Tangent, Binormal}{10}{0}{7}
-\beamer@sectionintoc {8}{Approximations to Tangent, Normal, Binormal}{11}{0}{8}
+\beamer@sectionintoc {7}{Parametric Surfaces: Tangent, Bitangent, Normal}{10}{0}{7}
+\beamer@sectionintoc {8}{Approximations to Tangent, Normal, Bitangent}{11}{0}{8}
 \beamer@sectionintoc {9}{Quadrics}{12}{0}{9}
 \beamer@sectionintoc {10}{Ellipsoid}{13}{0}{10}
 \beamer@sectionintoc {11}{Hyperboloid of one sheet}{14}{0}{11}

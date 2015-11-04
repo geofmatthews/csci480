@@ -6,7 +6,7 @@
 
 \begin{itemize}
 \item Assume the curve is parameterized by $f(s)$, $s\in[a,b]$
-\item Find the tangent, normal, and binormal to the curve: $t,n,b$
+\item Find the normal, tangent, and binormal to the curve: $n, t,b$
 \item The parametric surface, parameterized by $s\in[a,b]$, $t\in[0,2\pi]$:
 \[
 f(s) + \cos(t)n + \sin(t)b

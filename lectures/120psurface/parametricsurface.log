@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  3 NOV 2015 06:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.6.12)  3 NOV 2015 16:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**parametricsurface.tex
+**parametricsurface
 (./parametricsurface.tex
 LaTeX2e <2014/05/01>
 Babel <3.9l> and hyphenation patterns for 4 languages loaded.
@@ -950,12 +950,7 @@ File: images/vpythoncurveframe.png Graphic file (type png)
 Package pdftex.def Info: images/vpythoncurveframe.png used on input line 4.
 (pdftex.def)             Requested size: 153.64493pt x 146.28352pt.
 
-Overfull \hbox (14.2825pt too wide) in alignment at lines 6--11
- [][][] []
- []
-
-
-Overfull \hbox (4.3375pt too wide) in alignment at lines 12--14
+Overfull \hbox (14.2825pt too wide) in alignment at lines 6--10
  [][][] []
  []
 
@@ -1164,7 +1159,7 @@ File: images/sorcup.jpg Graphic file (type jpg)
 Package pdftex.def Info: images/sorcup.jpg used on input line 3.
 (pdftex.def)             Requested size: 84.715pt x 134.9016pt.
 )
-Overfull \vbox (10.99141pt too high) detected at line 352
+Overfull \vbox (10.99141pt too high) detected at line 342
  []
 
 [19
@@ -1195,28 +1190,28 @@ Package pdftex.def Info: images/vpythoncurveframe.png used on input line 5.
 \tf@snm=\write9
 \openout9 = `parametricsurface.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 373.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 373.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 363.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 363.
  (./parametricsurface.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 373.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 373.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 363.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 363.
 Package rerunfilecheck Info: File `parametricsurface.out' has not changed.
-(rerunfilecheck)             Checksum: F78BE024E5B9B49FAF8F50FC21A7DACA;1031.
+(rerunfilecheck)             Checksum: 50F4B3A513F9F66FFE70C6D050BBC15A;1034.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 373.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 363.
  ) 
 Here is how much of TeX's memory you used:
  17402 strings out of 494977
  326965 string characters out of 6180183
- 406368 words of memory out of 5000000
+ 404369 words of memory out of 5000000
  20115 multiletter control sequences out of 15000+600000
  14851 words of font info for 56 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 48i,14n,51p,418b,553s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,14n,51p,414b,553s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texl
@@ -1228,7 +1223,7 @@ ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/symbols/msam10.pfb>
-Output written on parametricsurface.pdf (20 pages, 803831 bytes).
+Output written on parametricsurface.pdf (20 pages, 803133 bytes).
 PDF statistics:
  690 PDF objects out of 1000 (max. 8388607)
  619 compressed objects within 7 object streams

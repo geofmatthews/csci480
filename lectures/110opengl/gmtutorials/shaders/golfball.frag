@@ -1,5 +1,5 @@
 #version 330
-
+uniform vec2 scaleuv;
 in vec4 fragnormal, fragtangent, fragbinormal, 
   fragreflect, fraglight, frageye;
 in vec2 fraguv;
@@ -16,7 +16,7 @@ void main()
   tangent = normalize(fragtangent);
   binormal = normalize(fragbinormal);
 
-  vec2 texcoords = 32*fraguv;
+  vec2 texcoords = scaleuv * fraguv;
   vec2 texfrac = (texcoords - floor(texcoords)) - vec2(0.5,0.5);
   float x = texfrac.s;
   float y = texfrac.t;

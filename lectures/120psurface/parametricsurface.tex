@@ -165,22 +165,12 @@ f(t) = (10\cos(t), 10\sin(t), t)
 \begin{eqnarray*}
 f(t) &=& (10\cos(t), 10\sin(t), t)\\
 \frac{df}{dt} &=& (-10\sin(t), 10\cos(t), 1)\\
-\frac{d^2f}{dt^2} &=& (-10\cos(t), -10\sin(t), 0)\\
-\frac{d^3f}{dt^3} &=& (10\sin(t), -10\cos(t), 0)
-\end{eqnarray*}
-\begin{eqnarray*}
-\frac{df}{dt}\times \frac{d^2f}{dt^2} &\propto& (\sin(t), \cos(t), 10)
+\frac{d^2f}{dt^2} &=& (-10\cos(t), -10\sin(t), 0)
 \end{eqnarray*}
 \end{columns}
-\bigskip
-\[
-\frac{df}{dt} \cdot \frac{d^2f}{dt^2}
-=
-\frac{d^2f}{dt} \cdot \frac{d^3f}{dt^3}
-=
-\frac{df}{dt} \cdot \frac{d^3f}{dt^3}
-= 0
-\]
+\begin{eqnarray*}
+\frac{df}{dt}\times \frac{d^2f}{dt^2} &=& (-10\sin(t), -10\cos(t), 10)
+\end{eqnarray*}
 \end{frame}
 
 \sect{Parametric Surfaces}
@@ -201,7 +191,7 @@ x^2 - y^2 - z &=& 0
 \end{columns}
 \end{frame}
 
-\sect{Parametric Surfaces: Normal, Tangent, Binormal}
+\sect{Parametric Surfaces: Tangent, Bitangent, Normal}
 \begin{columns}[c]
 \column{0.5\textwidth}
 \includegraphics[width=\textwidth]{images/vpythonpsurface.png}
@@ -237,7 +227,7 @@ x^2 + y^2 + z^2 - 1 &=& 0
 \end{columns}
 \end{frame}
 
-\sect{Parametric Surfaces: Normal, Tangent, Binormal}
+\sect{Parametric Surfaces: Tangent, Bitangent, Normal}
 \begin{columns}[c]
 \column{0.4\textwidth}
 \includegraphics[width=\textwidth]{images/vpythonpsphere.png}
@@ -258,11 +248,11 @@ f(s,t) &=& (\cos(t)\cos(s),\cos(t)\sin(s),\sin(t))\\
 \end{eqnarray*}
 \end{frame}
 
-\sect{Approximations to Tangent, Normal, Binormal}
+\sect{Approximations to Tangent, Normal, Bitangent}
 \begin{eqnarray*}
-\frac{\partial f}{\partial s} &\approx\propto&
+\frac{\partial f}{\partial s} &\approx&
 \frac{f(s+\epsilon, t) - f(s,t)}{|f(s+\epsilon, t) - f(s,t)|}\\
-\frac{\partial f}{\partial t} &\approx\propto&
+\frac{\partial f}{\partial t} &\approx&
 \frac{f(s, t+\epsilon) - f(s,t)}{|f(s, t+\epsilon) - f(s,t)|}\\
 \mbox{\it Normal} &=& \frac{\partial f}{\partial s} \times \frac{\partial f}{\partial g}
 \end{eqnarray*}
@@ -359,7 +349,7 @@ surface is
 
 \begin{itemize}
 \item Assume the curve is parameterized by $f(s)$, $s\in[a,b]$
-\item Find the tangent, normal, and binormal to the curve: $t,n,b$
+\item Find the normal, tangent, and binormal to the curve: $n, t,b$
 \item The parametric surface, parameterized by $s\in[a,b]$, $t\in[0,2\pi]$:
 \[
 f(s) + \cos(t)n + \sin(t)b

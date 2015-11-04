@@ -14,7 +14,7 @@ from pygame.locals import *
 import numpy as N
 
 sys.path.append(os.path.join("..","utilities"))
-from shapes import sphere
+from psurfaces import sphere
 from transforms import *
 from loadtexture import loadTexture
 

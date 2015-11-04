@@ -13,7 +13,7 @@ import numpy as N
 # x,y,z,1,    # position
 # x,y,z,0,    # normal
 # x,y,z,0,    # tangent
-# x,y,z,0,    # binormal = normal x tangent
+# x,y,z,0,    # bitangent = normal x tangent
 # u,v,        # texture
 # and the elements array with each quad forming two
 # triangles with correct winding
@@ -67,7 +67,6 @@ def sphereTexture(longangle, latangle):
     return [0.5*longangle/N.pi, latangle/N.pi+0.5]
 
 def sphere(radius, nlongs, nlats):
-    # remember to include the extra step in the ranges:
     twopi = 2.0*N.pi
     halfpi = 0.5*N.pi
     return pSurface(lambda s,t:spherePoint(radius,s,t),
@@ -77,6 +76,54 @@ def sphere(radius, nlongs, nlats):
                     0.0, twopi, nlongs,
                     -halfpi, halfpi, nlats)
         
+def torusPoint(majorRadius, minorRadius, s, t):
+    clong = N.cos(s)
+    slong = N.sin(s)
+    clat = N.cos(t)
+    slat = N.sin(t)
+    # find point on major circle:
+    mcp = majorRadius * N.array((clong, slong, 0.0), dtype=N.float32)
+    # find curve normal
+    n = N.array((clong, slong, 0.0), dtype=N.float32)
+    # find curve binormal
+    b = N.array((0.0, 0.0, 1.0), dtype=N.float32)
+    # find point on torus
+    p = mcp + minorRadius*clat*n + minorRadius*slat*b
+    # return homogeneous point
+    return list(p) + [1.0] 
+
+def torusNormal(s, t):
+    clong = N.cos(s)
+    slong = N.sin(s)
+    clat = N.cos(t)
+    slat = N.sin(t)
+    # find curve normal
+    n = N.array((clong, slong, 0.0), dtype=N.float32)
+    # find curve binormal
+    b = N.array((0.0, 0.0, 1.0), dtype=N.float32)
+    # find vector
+    v = clat*n + slat*b
+    v /= N.linalg.norm(v)
+    return list(v) + [0.0]
+
+def torusTangent(s, t):
+    clong = N.cos(t)
+    slong = N.sin(t)
+    v = [-slong, clong, 0.0, 0.0]
+    return v
+
+def torusTexture(s, t):
+    return [0.5*s/N.pi,0.5*t/N.pi]    
+
+def torus(majorRadius, minorRadius, nlongs, nlats):
+    twopi = 2.0*N.pi
+    return pSurface(lambda s,t:torusPoint(majorRadius, minorRadius, s, t),
+                    torusNormal,
+                    torusTangent,
+                    torusTexture,
+                    0.0, twopi, nlongs,
+                    0.0, twopi, nlats)
+
 if __name__ == "__main__":
     s = sphere(1.0, 2, 2)
     for i in range(0,len(s[0]-1),18):

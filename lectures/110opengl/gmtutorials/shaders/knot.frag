@@ -2,6 +2,8 @@
 // Use with bumpmap.vert
 //Uniforms:
 uniform int useKnot;
+uniform vec2 scaleuv;
+
 // Ins:
 in vec2 fraguv;
 in vec4 fragnormal;
@@ -23,8 +25,8 @@ int integerNoise(in int n)
 
 void hash(int x, int y, out float h1, out float h2)
 {
-  x = x % 16; // so it wraps on cylinders!
-  y = y % 16;
+  x = x % 8; // so it wraps on cylinders!
+  y = y % 8;
   int result1 = integerNoise(x);
   result1 = integerNoise(result1+y);
   int result2 = integerNoise(result1);
@@ -121,32 +123,32 @@ vec4 newNormal(vec2 texcoord, vec4 oldNormal, vec4 binorm, vec4 tan) {
 void main()
 {
   vec4 light = normalize(fraglight);
-    vec4 veinColor = vec4(0.0,0.3,0.1,1.0);
-    vec4 slabColor = vec4(0.1,0.7,0.2,1.0);
-    veinColor = vec4(0.0,0.0,0.0,1.0);
-    //slabColor = vec4(1.0,1.0,1.0,1.0);
-    vec4 lightVector;
-    vec4 reflectVector;
-    vec4 normalVector, tangentVector, binormalVector, eyeVector;
-    float intensity, specular, lambert;
-    
-    vec4 color = vec4(0.0, 1.0, 0.0, 1.0);
-    
-    lightVector = normalize(light - fragposition);
-    normalVector = normalize(fragnormal);
-    tangentVector = normalize(fragtangent);
-    binormalVector = normalize(fragbinormal);
-    
-    // perturb normal for knot texture:
-    if (useKnot == 0) {
-      normalVector = newNormal(fraguv*64, normalVector, tangentVector, binormalVector);
-    }
-    float ambient = 0.2;
-    float diffuse = 0.8*clamp(dot(lightVector, normalVector), 0.0, 1.0);
-    outputColor = (ambient + diffuse) * color;
-    if (diffuse > 0.0) {
-      float specular = 0.8*pow(clamp(dot(reflectVector, eyeVector), 0.0, 1.0), 8);
-      outputColor += vec4(specular, specular, specular, 1.0);
-    }
-    outputColor = clamp(outputColor, 0.0, 1.0);
+  vec4 veinColor = vec4(0.0,0.3,0.1,1.0);
+  vec4 slabColor = vec4(0.1,0.7,0.2,1.0);
+  veinColor = vec4(0.0,0.0,0.0,1.0);
+  //slabColor = vec4(1.0,1.0,1.0,1.0);
+  vec4 lightVector;
+  vec4 reflectVector;
+  vec4 normalVector, tangentVector, binormalVector, eyeVector;
+  float intensity, specular, lambert;
+  
+  vec4 color = vec4(0.0, 1.0, 0.0, 1.0);
+  
+  lightVector = normalize(light - fragposition);
+  normalVector = normalize(fragnormal);
+  tangentVector = normalize(fragtangent);
+  binormalVector = normalize(fragbinormal);
+  
+  // perturb normal for knot texture:
+  if (useKnot == 0) {
+    normalVector = newNormal(fraguv*scaleuv, normalVector, tangentVector, binormalVector);
+  }
+  float ambient = 0.2;
+  float diffuse = 0.8*clamp(dot(lightVector, normalVector), 0.0, 1.0);
+  outputColor = (ambient + diffuse) * color;
+  if (diffuse > 0.0) {
+    float specular = 0.8*pow(clamp(dot(reflectVector, eyeVector), 0.0, 1.0), 8);
+    outputColor += vec4(specular, specular, specular, 1.0);
+  }
+  outputColor = clamp(outputColor, 0.0, 1.0);
 }

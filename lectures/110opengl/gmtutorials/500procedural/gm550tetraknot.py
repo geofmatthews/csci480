@@ -1,6 +1,4 @@
-#torus
-# bump mapping
-# change texture coords in shader
+#knots on tetra
 
 import os,sys
 from ctypes import c_void_p
@@ -13,7 +11,7 @@ from pygame.locals import *
 import numpy as N
 
 sys.path.insert(0, os.path.join("..","utilities"))
-from psurfaces import torus
+from polyhedra import tetrahedron
 from transforms import *
 from loadtexture import loadTexture
 
@@ -25,7 +23,7 @@ def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
         return fp.read()
 strVertexShader = readShader("bumpmap.vert")
-strFragmentShader = readShader("golfball.frag")
+strFragmentShader = readShader("knot.frag")
 
 def check(name, val):
     if val < 0:
@@ -61,17 +59,17 @@ def initializeShaders():
     check("tangentAttrib", tangentAttrib)
     check("binormalAttrib", binormalAttrib)
     check("uvAttrib", uvAttrib)
-    check("scaleuvUnif", scaleuvUnif)
     
     check("modelUnif", modelUnif)
     check("viewUnif", viewUnif)
     check("projUnif", projUnif)
     check("lightUnif", lightUnif)
+    check("scaleuvUnif", scaleuvUnif)
 
 # Vertex Data, positions and normals and texture coords
-mytorus = torus(0.5, 0.2, 32, 16)
-torusVertices = mytorus[0]
-torusElements = mytorus[1]
+mytetra = tetrahedron(1.5)
+tetraVertices = mytetra[0]
+tetraElements = mytetra[1]
 vertexComponents = 18 # 4 position, 4 normal, 4 tangent, 4 binormal, 2 texture
 
 # Ask the graphics card to create a buffer for our vertex data
@@ -92,8 +90,8 @@ def getElementBuffer(arr):
 # Get a buffers for vertices and elements
 def initializeVertexBuffer():
     global vertexBuffer, elementBuffer
-    vertexBuffer = getFloatBuffer(torusVertices)
-    elementBuffer = getElementBuffer(torusElements)
+    vertexBuffer = getFloatBuffer(tetraVertices)
+    elementBuffer = getElementBuffer(tetraElements)
 
 # Ask the graphics card to create a VAO object.
 # A VAO object stores one or more vertex buffer objects.
@@ -124,7 +122,7 @@ def display(time):
     # Set the shader program
     glUseProgram(theShaders)
 
-    glUniform2fv(scaleuvUnif, 1, N.array((48,16), dtype=N.float32))
+    glUniform2fv(scaleuvUnif, 1, N.array((16,16), dtype=N.float32))
 
     # move the camera in positive z
     view = translation(0,0,-2)
@@ -203,7 +201,7 @@ def display(time):
 #DRAW    
     # Use that data and the elements to draw triangles
     glDrawElements(
-        GL_TRIANGLES, len(torusElements)*sizeOfShort,
+        GL_TRIANGLES, len(tetraElements)*sizeOfShort,
         GL_UNSIGNED_SHORT, c_void_p(0))
     
     # Stop using the shader program
@@ -218,7 +216,7 @@ def main():
     time = 0.0
     while True:
         clock.tick(30)
-        time += 0.02
+        time += 0.01
         for event in pygame.event.get():
             if event.type == QUIT:
                 return
