@@ -38,7 +38,7 @@ def initializeShaders():
     global theShaders, positionAttrib, normalAttrib, tangentAttrib,\
         binormalAttrib, uvAttrib, \
         modelUnif, viewUnif, projUnif, lightUnif, \
-        colorSamplerUnif, bumpSamplerUnif, scaleuvUnif
+        colorSamplerUnif, bumpSamplerUnif, scaleuvUnif, colorUnif
     theShaders = compileProgram(
         compileShader(strVertexShader, GL_VERTEX_SHADER),
         compileShader(strFragmentShader, GL_FRAGMENT_SHADER)
@@ -56,6 +56,7 @@ def initializeShaders():
     colorSamplerUnif = glGetUniformLocation(theShaders, "colorsampler")
     bumpSamplerUnif = glGetUniformLocation(theShaders, "bumpsampler")
     scaleuvUnif = glGetUniformLocation(theShaders, "scaleuv")
+    colorUnif = glGetUniformLocation(theShaders, "color")
 
     check("positionAttrib", positionAttrib)
     check("normalAttrib", normalAttrib)
@@ -68,6 +69,7 @@ def initializeShaders():
     check("projUnif", projUnif)
     check("lightUnif", lightUnif)
     check("scaleuvUnif", scaleuvUnif)
+    check("colorUnif", colorUnif)
 
 # Vertex Data, positions and normals and texture coords
 mysphere = sphere(0.75, 64, 32)
@@ -126,6 +128,7 @@ def display(time):
     glUseProgram(theShaders)
 
     glUniform2fv(scaleuvUnif, 1, N.array((32,16), dtype=N.float32))
+    glUniform4fv(colorUnif, 1, N.array((0.0, 1.0, 1.0, 1.0), dtype=N.float32))
 
     # move the camera in positive z
     view = translation(0,0,-2)

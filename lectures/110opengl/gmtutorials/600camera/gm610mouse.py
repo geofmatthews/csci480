@@ -37,7 +37,7 @@ def initializeShaders():
     global theShaders, positionAttrib, normalAttrib, tangentAttrib,\
         binormalAttrib, uvAttrib, \
         modelUnif, viewUnif, projUnif, lightUnif, \
-        colorSamplerUnif, bumpSamplerUnif, scaleuvUnif
+        colorSamplerUnif, bumpSamplerUnif, scaleuvUnif, colorUnif
     theShaders = compileProgram(
         compileShader(strVertexShader, GL_VERTEX_SHADER),
         compileShader(strFragmentShader, GL_FRAGMENT_SHADER)
@@ -55,6 +55,7 @@ def initializeShaders():
     colorSamplerUnif = glGetUniformLocation(theShaders, "colorsampler")
     bumpSamplerUnif = glGetUniformLocation(theShaders, "bumpsampler")
     scaleuvUnif = glGetUniformLocation(theShaders, "scaleuv")
+    colorUnif = glGetUniformLocation(theShaders, "color")
 
     check("positionAttrib", positionAttrib)
     check("normalAttrib", normalAttrib)
@@ -67,6 +68,7 @@ def initializeShaders():
     check("projUnif", projUnif)
     check("lightUnif", lightUnif)
     check("scaleuvUnif", scaleuvUnif)
+    check("colorUnif", colorUnif)
 
 # Vertex Data, positions and normals and texture coords
 mytorus = torus(0.5, 0.2, 32, 16)
@@ -115,7 +117,7 @@ def init():
 
 # Called to redraw the contents of the window
 def display(time):
-    global proj
+    global proj, cameraFrame
     # Clear the display
     glClearColor(0.0, 0.0, 0.0, 0.0)
     glClear(GL_COLOR_BUFFER_BIT)
@@ -125,6 +127,7 @@ def display(time):
     glUseProgram(theShaders)
 
     glUniform2fv(scaleuvUnif, 1, N.array((32,8), dtype=N.float32))
+    glUniform4fv(colorUnif, 1, N.array((0,1,0,1), dtype=N.float32))
 
     # moving the camera is in response to input
     # send camera view matrix to the graphics card
@@ -229,9 +232,9 @@ def main():
 
         # keys for zoom:
         if pressed[K_z]:
-            lens *= 1.05
+            lens *= 1.015
         if pressed[K_x]:
-            lens /= 1.05
+            lens /= 1.015
 
         # redo projection:
         yRatio = 1.0/lens

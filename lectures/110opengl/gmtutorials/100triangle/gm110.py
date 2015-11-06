@@ -130,12 +130,12 @@ def display():
     glEnableVertexAttribArray(positionAttrib)
     
     # Tell the shader program what the data in the buffer look like
-    glVertexAttribPointer(positionAttrib,   # attrib location
-                          vertexComponents, # elements per vertex
-                          GL_FLOAT,         # type of element
-                          GL_FALSE,         # normalize 0-256 to 0.0-1.0?
-                          0,                # stride
-                          c_void_p(0)       # offset
+    glVertexAttribPointer(positionAttrib,               # attrib location
+                          vertexComponents,             # elements per vertex
+                          GL_FLOAT,                     # type of element
+                          GL_FALSE,                     # normalize 0-256 to 0.0-1.0?
+                          vertexComponents*sizeOfFloat, # stride (can be zero if this is everything)
+                          c_void_p(0)                   # offset
                           )
     
     # Use that data to draw triangles

@@ -37,7 +37,7 @@ def initializeShaders():
     global theShaders, positionAttrib, normalAttrib, tangentAttrib,\
         binormalAttrib, uvAttrib, \
         modelUnif, viewUnif, projUnif, lightUnif, \
-        colorSamplerUnif, bumpSamplerUnif, scaleuvUnif
+        colorSamplerUnif, bumpSamplerUnif, scaleuvUnif, colorUnif
     theShaders = compileProgram(
         compileShader(strVertexShader, GL_VERTEX_SHADER),
         compileShader(strFragmentShader, GL_FRAGMENT_SHADER)
@@ -55,6 +55,7 @@ def initializeShaders():
     colorSamplerUnif = glGetUniformLocation(theShaders, "colorsampler")
     bumpSamplerUnif = glGetUniformLocation(theShaders, "bumpsampler")
     scaleuvUnif = glGetUniformLocation(theShaders, "scaleuv")
+    colorUnif = glGetUniformLocation(theShaders, "color")
 
     check("positionAttrib", positionAttrib)
     check("normalAttrib", normalAttrib)
@@ -67,6 +68,7 @@ def initializeShaders():
     check("projUnif", projUnif)
     check("lightUnif", lightUnif)
     check("scaleuvUnif", scaleuvUnif)
+    check("colorUnif", colorUnif)
 
 # Vertex Data, positions and normals and texture coords
 mytorus = torus(0.5, 0.2, 32, 16)
@@ -125,13 +127,15 @@ def display(time):
     glUseProgram(theShaders)
 
     glUniform2fv(scaleuvUnif, 1, N.array((32,8), dtype=N.float32))
+    glUniform4fv(colorUnif, 1, N.array((1.0, 0.0, 0.0, 1.0), dtype=N.float32))
 
     # move the camera in positive z
     view = translation(0,0,-2)
     #rotate the camera around x
-    view = N.dot(view,Xrot(45.0*N.pi/180.0))
+    #view = N.dot(view,Xrot(45.0*N.pi/180.0))
     # send matrix to the graphics card
     glUniformMatrix4fv(viewUnif, 1, GL_TRUE, view)
+    print view
     
     # compute projection
     n = 1.0
@@ -139,6 +143,7 @@ def display(time):
     r = 0.5*n
     t = 0.5*n
     proj = projection(n,f,r,t)
+    print proj
                     
     # send projection to the graphics card
     glUniformMatrix4fv(projUnif, 1, GL_TRUE, proj)

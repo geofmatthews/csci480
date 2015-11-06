@@ -3,6 +3,7 @@
 //Uniforms:
 uniform int useKnot;
 uniform vec2 scaleuv;
+uniform vec4 color;
 
 // Ins:
 in vec2 fraguv;
@@ -187,16 +188,10 @@ vec4 newNormal(vec2 texcoord, vec4 oldNormal, vec4 binorm, vec4 tan) {
 void main()
 {
   vec4 light = normalize(fraglight);
-  vec4 veinColor = vec4(0.0,0.3,0.1,1.0);
-  vec4 slabColor = vec4(0.1,0.7,0.2,1.0);
-  veinColor = vec4(0.0,0.0,0.0,1.0);
-  //slabColor = vec4(1.0,1.0,1.0,1.0);
   vec4 lightVector;
   vec4 reflectVector;
   vec4 normalVector, tangentVector, binormalVector, eyeVector;
   float intensity, specular, lambert;
-  
-  vec4 color = vec4(0.0, 1.0, 0.0, 1.0);
   
   lightVector = normalize(light - fragposition);
   normalVector = normalize(fragnormal);

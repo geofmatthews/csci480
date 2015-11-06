@@ -1,12 +1,12 @@
 #version 330
 uniform vec2 scaleuv;
+uniform vec4 color;
 in vec4 fragnormal, fragtangent, fragbinormal, 
   fragreflect, fraglight, frageye;
 in vec2 fraguv;
 out vec4 outputColor;
 void main()
 {
-  vec4 color = vec4(0.5, 1.0, 0.5, 1.0);
 
   vec4 light, reflect, normal, tangent, binormal, eye;
   // need to normalize interpolated vectors

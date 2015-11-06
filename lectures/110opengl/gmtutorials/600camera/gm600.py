@@ -1,6 +1,9 @@
 #camera controls
 
-import os,sys
+import sys
+import os
+sys.path.insert(0, os.path.join("..","utilities"))
+
 from ctypes import c_void_p
 
 from OpenGL.GL import *
@@ -10,7 +13,6 @@ import pygame
 from pygame.locals import *
 import numpy as N
 
-sys.path.insert(0, os.path.join("..","utilities"))
 from psurfaces import torus
 from transforms import *
 from loadtexture import loadTexture
@@ -36,7 +38,7 @@ def initializeShaders():
     global theShaders, positionAttrib, normalAttrib, tangentAttrib,\
         binormalAttrib, uvAttrib, \
         modelUnif, viewUnif, projUnif, lightUnif, \
-        colorSamplerUnif, bumpSamplerUnif, scaleuvUnif
+        colorSamplerUnif, bumpSamplerUnif, scaleuvUnif, colorUnif
     theShaders = compileProgram(
         compileShader(strVertexShader, GL_VERTEX_SHADER),
         compileShader(strFragmentShader, GL_FRAGMENT_SHADER)
@@ -54,12 +56,14 @@ def initializeShaders():
     colorSamplerUnif = glGetUniformLocation(theShaders, "colorsampler")
     bumpSamplerUnif = glGetUniformLocation(theShaders, "bumpsampler")
     scaleuvUnif = glGetUniformLocation(theShaders, "scaleuv")
+    colorUnif = glGetUniformLocation(theShaders, "color")
 
     check("positionAttrib", positionAttrib)
     check("normalAttrib", normalAttrib)
     check("tangentAttrib", tangentAttrib)
     check("binormalAttrib", binormalAttrib)
     check("uvAttrib", uvAttrib)
+    check("colorUnif", colorUnif)
     
     check("modelUnif", modelUnif)
     check("viewUnif", viewUnif)
@@ -124,13 +128,14 @@ def display(time):
     glUseProgram(theShaders)
 
     glUniform2fv(scaleuvUnif, 1, N.array((32,8), dtype=N.float32))
+    glUniform4fv(colorUnif, 1, N.array((0,1,0,1), dtype=N.float32))
 
     # moving the camera is in response to input
     # send camera view matrix to the graphics card
     glUniformMatrix4fv(viewUnif, 1, GL_TRUE, cameraFrame.view())
     
     # compute projection
-    n = 0.01
+    n = 1.0
     f = 100.0
     r = 0.5*n
     t = 0.5*n
@@ -146,7 +151,7 @@ def display(time):
 
     # send light direction
     light = N.array((0.577,0.577,0.577,0), dtype=N.float32)
-    light = N.dot(Yrot(time*0.5), light)
+    #light = N.dot(Yrot(time*0.5), light)
     glUniform4fv(lightUnif, 1, light)
     
 #BUFFERS
