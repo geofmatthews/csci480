@@ -117,7 +117,10 @@ def init():
 def display():
     
     # Clear the display
-    glClearColor(0.0, 0.0, 0.0, 0.0)
+    # Don't use black for clear color, use a distincive color
+    # so you can tell if other things are coming out black,
+    # or if the background is showing someplace it shouldn't.
+    glClearColor(0.1, 0.2, 0.4, 1.0)
     glClear(GL_COLOR_BUFFER_BIT)
 
     # Set the shader program

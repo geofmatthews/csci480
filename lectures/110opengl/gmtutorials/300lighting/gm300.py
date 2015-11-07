@@ -78,7 +78,7 @@ def getElementBuffer(arr):
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
     return buff
 
-# Get a buffers for vertices and elements
+# Get buffers for vertices and elements
 def initializeVertexBuffer():
     global vertexBuffer, elementBuffer
     vertexBuffer = getFloatBuffer(sphereVertices)

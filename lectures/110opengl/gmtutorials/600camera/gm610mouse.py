@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.join("..","utilities"))
 from psurfaces import torus
 from transforms import *
 from loadtexture import loadTexture
-from frames import CameraFrame
+from camera import CameraFrame
 
 null = c_void_p(0)
 sizeOfFloat = 4

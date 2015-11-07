@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.join("..","utilities"))
 from psurfaces import torus
 from transforms import *
 from loadtexture import loadTexture
-from frames import Camera
+from camera import Camera
 
 null = c_void_p(0)
 sizeOfFloat = 4
@@ -119,7 +119,7 @@ def init():
 def display(time):
     global proj
     # Clear the display
-    glClearColor(0.0, 0.0, 0.0, 0.0)
+    glClearColor(0.1, 0.2, 0.4, 1.0)
     glClear(GL_COLOR_BUFFER_BIT)
     glClear(GL_DEPTH_BUFFER_BIT)
 
@@ -259,8 +259,8 @@ def main():
             newx = int(x - xDisplacement*mousespeed)
             newy = int(y - yDisplacement*mousespeed)
             if (newx != x) | (newy != y):
-                camera.yaw(-xNormed * aspectRatio * rotspeed)
-                camera.pitch(-yNormed * 1 * rotspeed)
+                camera.pan(-xNormed * rotspeed)
+                camera.tilt(-yNormed * rotspeed)
                 pygame.mouse.set_pos((newx,newy))
 
         display(time)

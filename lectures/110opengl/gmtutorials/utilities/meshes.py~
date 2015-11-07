@@ -1,0 +1,9 @@
+# Classes to make constructing and drawing many objects simpler
+# We will assume that all vertex arrays have 18 components:
+# 4 floats position
+# 4 floats normal
+# 4 floats tangent ("to the right")
+# 4 floats bitangent ("up")
+# 2 floats texture coordinates
+
+class 
