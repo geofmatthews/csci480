@@ -76,8 +76,8 @@ class texturedMesh(Frame):
     """Use phong.vert and phong.frag"""
     def __init__(self, colortexture, normaltexture, vertexArray, shader):
         Frame.__init__(self)
-        self.colortexture = colortexture
-        self.normaltexture = normaltexture
+        self.colorTexture = colortexture
+        self.normalTexture = normaltexture
         self.shader = shader
         # send data to opengl context:
         vertices = vertexArray[0]
@@ -98,7 +98,8 @@ class texturedMesh(Frame):
         self.bitangentAttrib = glGetAttribLocation(shader, "bitangent")
         self.uvAttrib = glGetAttribLocation(shader, "uv")
         # find the uniform locations:
-        self.colorUnif = glGetUniformLocation(shader, "color")
+        self.colorSamplerUnif = glGetUniformLocation(shader, "colorsampler")
+        self.normalSamplerUnif = glGetUniformLocation(shader, "normalsampler")
         self.modelUnif = glGetUniformLocation(shader, "model")
         self.viewUnif = glGetUniformLocation(shader, "view")
         self.projectionUnif = glGetUniformLocation(shader, "projection")
@@ -109,7 +110,6 @@ class texturedMesh(Frame):
         glUniformMatrix4fv(self.viewUnif, 1, GL_TRUE, view)
         glUniformMatrix4fv(self.projectionUnif, 1, GL_TRUE, projection)
         glUniform4fv(self.lightUnif, 1, light)
-        glUniform4fv(self.colorUnif, 1, self.color)
         glUniformMatrix4fv(self.modelUnif, 1, GL_TRUE, self.model())
         glBindBuffer(GL_ARRAY_BUFFER, self.arrayBuffer)
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.elementBuffer)
@@ -127,6 +127,40 @@ class texturedMesh(Frame):
                               GL_FALSE,
                               vertexSize,
                               c_void_p(4*sizeOfFloat))
+        glEnableVertexAttribArray(self.tangentAttrib)
+        glVertexAttribPointer(self.tangentAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(8*sizeOfFloat))
+        glEnableVertexAttribArray(self.bitangentAttrib)
+        glVertexAttribPointer(self.bitangentAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(12*sizeOfFloat))
+        glEnableVertexAttribArray(self.uvAttrib)
+        glVertexAttribPointer(self.uvAttrib,
+                              2,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(16*sizeOfFloat))
+        # bind our color texture units
+        colorUnit = 0
+        glActiveTexture(GL_TEXTURE0 + colorUnit)
+        glBindTexture(GL_TEXTURE_2D, self.colorTexture)
+        glUniform1i(self.colorSamplerUnif, colorUnit)
+        
+        # bind our normal texture units
+        normalUnit = 1
+        glActiveTexture(GL_TEXTURE0 + normalUnit)
+        glBindTexture(GL_TEXTURE_2D, self.normalTexture)
+        glUniform1i(self.normalSamplerUnif, normalUnit)
+        
         glDrawElements(GL_TRIANGLES, self.elementSize,
                        GL_UNSIGNED_SHORT, c_void_p(0))
         glUseProgram(0)
+
