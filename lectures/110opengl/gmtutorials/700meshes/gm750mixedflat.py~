@@ -1,4 +1,4 @@
-# Long tunnel illustrating filtering
+# Lots of objects
 
 import os,sys
 
@@ -10,12 +10,12 @@ from pygame.locals import *
 import numpy as N
 
 sys.path.insert(0, os.path.join("..","utilities"))
-from specials import rectangle
+from psurfaces import torus, sphere
+from polyhedra import tetrahedron
 from transforms import *
 from loadtexture import loadTexture
 from camera import Camera
-from meshes import flatTexturedMesh
-from specials import rectangle
+from meshes import *
 
 def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
@@ -44,44 +44,45 @@ def init():
     # Add our objects
     # LIGHT
     theLight = N.array((0.577, 0.577, 0.577, 0.0),dtype=N.float32)
-    # SHADER
-    theShader = makeShader("flattextured.vert", "flattextured.frag")
-    # OBJECT
-    width, height, depth = 2,3,30
-    floorColor = loadTexture("BubbleGrip-ColorMap.png")
-    floor = flatTexturedMesh(floorColor,
-                             rectangle(width, depth),
-                             theShader,
-                             N.array((width, depth),dtype=N.float32))
-    floor.pitch(1)
-    floor.pitch(1)
-    floor.moveBack(-height*0.5)
-    ceilingColor = loadTexture("CorrugatedMetal-ColorMap.png")
-    ceiling = flatTexturedMesh(ceilingColor,
-                               rectangle(width,depth),
-                               theShader,
-                               N.array((width, depth),dtype=N.float32))
-    ceiling.pitch(-1)
-    ceiling.pitch(-1)
-    ceiling.moveBack(-height*0.5)
-    wallColor = loadTexture("AlternatingBrick-ColorMap.png")
-    wallLeft = flatTexturedMesh(wallColor,
-                                rectangle(depth, height),
-                                theShader,
-                                N.array((depth,height), dtype=N.float32))
-    wallLeft.yaw(-1)
-    wallLeft.yaw(-1)
-    wallLeft.moveBack(-width*0.5)
-    wallRight = flatTexturedMesh(wallColor,
-                                 rectangle(depth, height),
-                                 theShader,
-                                 N.array((depth,height), dtype=N.float32))
-    wallRight.yaw(1)
-    wallRight.yaw(1)
-    wallRight.moveBack(-width*0.5)
-    
-    theMeshes = [ceiling, floor, wallLeft, wallRight]
-
+    # OBJECTS
+    theMeshes = []
+    phongshader = makeShader("phongshader.vert","phongshader.frag")
+    flatshader = makeShader("flattextured.vert","flattextured.frag")
+    colorTexture = loadTexture("brickwork-texture.jpg")
+    normalTexture = loadTexture("brickwork_normal-map.jpg")
+    for i in range(100):
+        if i % 3 == 0:
+            major = N.random.random()*2
+            minor = major*0.25
+            verts = torus(major, minor, 64, 16)
+        elif i % 3 == 1:
+            radius = N.random.random()*2
+            verts = sphere(radius, 64, 32)
+        else:
+            size = N.random.random()*4
+            verts = tetrahedron(size)            
+        if i % 5 == 0:
+            newmesh = flatTexturedMesh(colorTexture,
+                                       verts,
+                                       flatshader,
+                                       N.array((0.5,0.5),dtype=N.float32))
+        else:
+            newmesh = coloredMesh(N.array((N.random.random(),
+                                           N.random.random(),
+                                           N.random.random(),
+                                           1.0), dtype=N.float32),
+                                  verts,
+                                  phongshader)
+        x = N.random.random()*20-10
+        y = N.random.random()*20-10
+        z = N.random.random()*20-10
+        newmesh.moveRight(x)
+        newmesh.moveUp(y)
+        newmesh.moveBack(z)
+        newmesh.pitch(x)
+        newmesh.yaw(y)
+        newmesh.roll(z)
+        theMeshes.append(newmesh)
     # CAMERA
     width, height = theScreen.get_size()
     aspectRatio = float(width)/float(height)
@@ -89,11 +90,10 @@ def init():
     far = 100.0
     lens = 4.0  # "longer" lenses mean more telephoto
     theCamera = Camera(lens, near, far, aspectRatio)
-    theCamera.moveBack(depth*0.5)
 
 # Called to redraw the contents of the window
 def display(time):
-    global theMeshes,  theCamera
+    global theMesh, theLight, theCamera
     # Clear the display
     glClearColor(0.1, 0.2, 0.3, 0.0)
     glClear(GL_COLOR_BUFFER_BIT)
@@ -101,9 +101,10 @@ def display(time):
 
     # Set the shader program
     for mesh in theMeshes:
+        mesh.yaw(0.01)
         mesh.display(theCamera.view(),
                      theCamera.projection(),
-                     0)
+                     N.dot(Yrot(time), theLight))
 
 def main():
     global theCamera, theScreen
@@ -137,6 +138,8 @@ def main():
 
         # arrow keys for movement:
         movespeed = 0.05
+        if pressed[K_LSHIFT]:
+            movespeed *= 4
         if pressed[K_d] | pressed[K_RIGHT]:
             theCamera.moveRight(movespeed)
         if pressed[K_a] | pressed[K_LEFT]:

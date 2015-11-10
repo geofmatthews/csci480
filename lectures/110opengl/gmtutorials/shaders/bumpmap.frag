@@ -20,7 +20,7 @@ void main()
   vec4 bitangent = normalize(fragbitangent);
   vec4 eye = normalize(frageye);
   // Use MAP order, multiply first
-  if (usenormals == 0) {
+  if (usenormals == 1) {
     normal = normalize((bump.r*2.0-1.0)*tangent
 			       + (bump.g*2.0-1.0)*bitangent
 			       + (bump.b*2.0-1.0)*normal);
