@@ -36,9 +36,9 @@ def check(name, val):
 # Assign the compiled program to theShaders.
 def initializeShaders():
     global theShaders, positionAttrib, normalAttrib, tangentAttrib,\
-        binormalAttrib, uvAttrib, \
+        bitangentAttrib, uvAttrib, \
         modelUnif, viewUnif, projUnif, lightUnif, \
-        colorSamplerUnif, bumpSamplerUnif, makeBumpUnif
+        colorSamplerUnif, normalSamplerUnif, makeBumpUnif
     theShaders = compileProgram(
         compileShader(strVertexShader, GL_VERTEX_SHADER),
         compileShader(strFragmentShader, GL_FRAGMENT_SHADER)
@@ -46,7 +46,7 @@ def initializeShaders():
     positionAttrib = glGetAttribLocation(theShaders, "position")
     normalAttrib = glGetAttribLocation(theShaders, "normal")
     tangentAttrib = glGetAttribLocation(theShaders, "tangent")
-    binormalAttrib = glGetAttribLocation(theShaders, "binormal")
+    bitangentAttrib = glGetAttribLocation(theShaders, "bitangent")
     uvAttrib = glGetAttribLocation(theShaders, "uv")
     
     lightUnif = glGetUniformLocation(theShaders, "light")
@@ -54,13 +54,13 @@ def initializeShaders():
     viewUnif = glGetUniformLocation(theShaders, "view")
     projUnif = glGetUniformLocation(theShaders, "projection")
     colorSamplerUnif = glGetUniformLocation(theShaders, "colorsampler")
-    bumpSamplerUnif = glGetUniformLocation(theShaders, "bumpsampler")
-    makeBumpUnif = glGetUniformLocation(theShaders, "makebumps")
+    normalSamplerUnif = glGetUniformLocation(theShaders, "normalsampler")
+    makeBumpUnif = glGetUniformLocation(theShaders, "usenormals")
 
     check("positionAttrib", positionAttrib)
     check("normalAttrib", normalAttrib)
     check("tangentAttrib", tangentAttrib)
-    check("binormalAttrib", binormalAttrib)
+    check("bitangentAttrib", bitangentAttrib)
     check("uvAttrib", uvAttrib)
     
     check("modelUnif", modelUnif)
@@ -68,14 +68,14 @@ def initializeShaders():
     check("projUnif", projUnif)
     check("lightUnif", lightUnif)
     check("colorSamplerUnif", colorSamplerUnif)
-    check("bumpSamplerUnif", bumpSamplerUnif)
+    check("normalSamplerUnif", normalSamplerUnif)
     check("makeBumpUnif", makeBumpUnif)
 
 # Vertex Data, positions and normals and texture coords
 mysphere = sphere(0.75, 32,16)
 sphereVertices = mysphere[0]
 sphereElements = mysphere[1]
-vertexComponents = 18 # 4 position, 4 normal, 4 tangent, 4 binormal, 2 texture
+vertexComponents = 18 # 4 position, 4 normal, 4 tangent, 4 bitangent, 2 texture
 
 # Ask the graphics card to create a buffer for our vertex data
 def getFloatBuffer(arr):
@@ -110,7 +110,7 @@ def initializeVAO():
 # Must be called after we have an OpenGL context, i.e. after the pygame
 # window is created
 def init():
-    global colorTexture, bumpTexture
+    global colorTexture, normalTexture
     initializeShaders()
     initializeVertexBuffer()
     initializeVAO()
@@ -120,9 +120,13 @@ def init():
     # reading the file could be done without the context,
     # but loadTexture bundles reading the file and creating
     # a texture all in one.
-    colorTexture = loadTexture("brickwork-texture.jpg")
-    bumpTexture = loadTexture("brickwork_normal-map.jpg")
-    #colorTexture = loadTexture("grid.png")
+    if True:
+        colorTexture = loadTexture("brickwork-texture.jpg")
+        normalTexture = loadTexture("brickwork_normal-map.jpg")
+    else:
+        colorTexture = loadTexture("moonmap4k.jpg")
+        normalTexture = loadTexture("moonnormal4k.png")
+    
 
 # Called to redraw the contents of the window
 def display(time):
@@ -177,11 +181,11 @@ def display(time):
     glBindTexture(GL_TEXTURE_2D, colorTexture)
     glUniform1i(colorSamplerUnif, colorUnit)
 
-    # bind our bump texture units
-    bumpUnit = 1
-    glActiveTexture(GL_TEXTURE0 + bumpUnit)
-    glBindTexture(GL_TEXTURE_2D, bumpTexture)
-    glUniform1i(bumpSamplerUnif, bumpUnit)
+    # bind our normal texture units
+    normalUnit = 1
+    glActiveTexture(GL_TEXTURE0 + normalUnit)
+    glBindTexture(GL_TEXTURE_2D, normalTexture)
+    glUniform1i(normalSamplerUnif, normalUnit)
     
     # send light direction
     light = N.array((0,0,1,0), dtype=N.float32)
@@ -200,7 +204,7 @@ def display(time):
                           GL_FALSE,
                           vertexComponents*sizeOfFloat,
                           c_void_p(0))
-#NORMAL, TANGENT, BINORMAL
+#NORMAL, TANGENT, BITANGENT
     glEnableVertexAttribArray(normalAttrib)
     glVertexAttribPointer(normalAttrib,
                           4,
@@ -215,8 +219,8 @@ def display(time):
                           GL_FALSE,
                           vertexComponents*sizeOfFloat,
                           c_void_p(8*sizeOfFloat))
-    glEnableVertexAttribArray(binormalAttrib)
-    glVertexAttribPointer(binormalAttrib,
+    glEnableVertexAttribArray(bitangentAttrib)
+    glVertexAttribPointer(bitangentAttrib,
                           4,
                           GL_FLOAT,
                           GL_FALSE,

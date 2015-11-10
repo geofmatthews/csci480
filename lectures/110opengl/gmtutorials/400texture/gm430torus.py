@@ -67,7 +67,7 @@ def initializeShaders():
 mytorus = torus(0.5, 0.3, 64, 16)
 torusVertices = mytorus[0]
 torusElements = mytorus[1]
-vertexComponents = 18 # 4 position, 4 normal, 4 tangent, 4 binormal, 2 texture
+vertexComponents = 18 # 4 position, 4 normal, 4 tangent, 4 bitangent, 2 texture
 print "Vertices:", len(torusVertices)/ vertexComponents
 print "Triangles:", len(torusElements)/3
 

@@ -64,7 +64,7 @@ def initializeShaders():
     check("samplerUnif", samplerUnif)
 
 # Vertex Data, positions and normals and texture coords
-mysphere = sphere(0.75, 16, 8)
+mysphere = sphere(0.75, 64, 32)
 sphereVertices = mysphere[0]
 sphereElements = mysphere[1]
 vertexComponents = 18 # 4 position, 4 normal, 4 tangent, 4 binormal, 2 texture

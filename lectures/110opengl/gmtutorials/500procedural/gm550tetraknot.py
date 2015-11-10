@@ -33,9 +33,9 @@ def check(name, val):
 # Assign the compiled program to theShaders.
 def initializeShaders():
     global theShaders, positionAttrib, normalAttrib, tangentAttrib,\
-        binormalAttrib, uvAttrib, \
+        bitangentAttrib, uvAttrib, \
         modelUnif, viewUnif, projUnif, lightUnif, \
-        colorSamplerUnif, bumpSamplerUnif, scaleuvUnif, colorUnif
+        colorSamplerUnif, normalSamplerUnif, scaleuvUnif, colorUnif
     theShaders = compileProgram(
         compileShader(strVertexShader, GL_VERTEX_SHADER),
         compileShader(strFragmentShader, GL_FRAGMENT_SHADER)
@@ -43,7 +43,7 @@ def initializeShaders():
     positionAttrib = glGetAttribLocation(theShaders, "position")
     normalAttrib = glGetAttribLocation(theShaders, "normal")
     tangentAttrib = glGetAttribLocation(theShaders, "tangent")
-    binormalAttrib = glGetAttribLocation(theShaders, "binormal")
+    bitangentAttrib = glGetAttribLocation(theShaders, "bitangent")
     uvAttrib = glGetAttribLocation(theShaders, "uv")
     
     lightUnif = glGetUniformLocation(theShaders, "light")
@@ -51,14 +51,14 @@ def initializeShaders():
     viewUnif = glGetUniformLocation(theShaders, "view")
     projUnif = glGetUniformLocation(theShaders, "projection")
     colorSamplerUnif = glGetUniformLocation(theShaders, "colorsampler")
-    bumpSamplerUnif = glGetUniformLocation(theShaders, "bumpsampler")
+    normalSamplerUnif = glGetUniformLocation(theShaders, "normalsampler")
     scaleuvUnif = glGetUniformLocation(theShaders, "scaleuv")
     colorUnif = glGetUniformLocation(theShaders, "color")
 
     check("positionAttrib", positionAttrib)
     check("normalAttrib", normalAttrib)
     check("tangentAttrib", tangentAttrib)
-    check("binormalAttrib", binormalAttrib)
+    check("bitangentAttrib", bitangentAttrib)
     check("uvAttrib", uvAttrib)
     
     check("modelUnif", modelUnif)
@@ -72,7 +72,7 @@ def initializeShaders():
 mytetra = tetrahedron(1.5)
 tetraVertices = mytetra[0]
 tetraElements = mytetra[1]
-vertexComponents = 18 # 4 position, 4 normal, 4 tangent, 4 binormal, 2 texture
+vertexComponents = 18 # 4 position, 4 normal, 4 tangent, 4 bitangent, 2 texture
 
 # Ask the graphics card to create a buffer for our vertex data
 def getFloatBuffer(arr):
@@ -124,7 +124,7 @@ def display(time):
     # Set the shader program
     glUseProgram(theShaders)
 
-    glUniform2fv(scaleuvUnif, 1, N.array((16,16), dtype=N.float32))
+    glUniform2fv(scaleuvUnif, 1, N.array((8,8), dtype=N.float32))
     glUniform4fv(colorUnif, 1, N.array((0.0, 1.0, 0.5), dtype=N.float32))
 
     # move the camera in positive z
@@ -171,7 +171,7 @@ def display(time):
                           GL_FALSE,
                           vertexComponents*sizeOfFloat,
                           c_void_p(0))
-#NORMAL, TANGENT, BINORMAL
+#NORMAL, TANGENT, BITANGENT
     glEnableVertexAttribArray(normalAttrib)
     glVertexAttribPointer(normalAttrib,
                           4,
@@ -186,8 +186,8 @@ def display(time):
                           GL_FALSE,
                           vertexComponents*sizeOfFloat,
                           c_void_p(8*sizeOfFloat))
-    glEnableVertexAttribArray(binormalAttrib)
-    glVertexAttribPointer(binormalAttrib,
+    glEnableVertexAttribArray(bitangentAttrib)
+    glVertexAttribPointer(bitangentAttrib,
                           4,
                           GL_FLOAT,
                           GL_FALSE,

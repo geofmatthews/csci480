@@ -16,7 +16,7 @@ def loadTexture(filename):
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode)
     # how to scale things
     minFilter = GL_LINEAR
-    magFilter = GL_LINEAR
+    magFilter = GL_NEAREST
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter)
     # send the data to the hardware

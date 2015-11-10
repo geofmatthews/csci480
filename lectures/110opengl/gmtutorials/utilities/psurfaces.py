@@ -19,6 +19,8 @@ import numpy as N
 # triangles with correct winding
 def pSurface(point, normal, tangent, 
              texture, smin, smax, snum, tmin, tmax, tnum):
+    snum += 1
+    tnum += 1
     verts = []
     for s in N.linspace(smin, smax, snum):
         for t in N.linspace(tmin, tmax, tnum):

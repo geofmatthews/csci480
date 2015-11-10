@@ -1,9 +1,9 @@
 #version 330
-uniform int makebumps;
+uniform int usenormals;
+uniform vec4 light;
 uniform sampler2D colorsampler;
-uniform sampler2D bumpsampler;
-in vec4 fragnormal, fragtangent, fragbinormal, 
-  fraglight, frageye;
+uniform sampler2D normalsampler;
+in vec4 fragnormal, fragtangent, fragbitangent, frageye;
 in vec2 fraguv;
 out vec4 outputColor;
 void main()
@@ -12,18 +12,17 @@ void main()
   texcoords.s *= 3.0;
   texcoords.t *= 1.5;
   vec4 color = texture2D(colorsampler, texcoords);
-  vec4 bump = texture2D(bumpsampler, texcoords);
+  vec4 bump = texture2D(normalsampler, texcoords);
   // need to normalize interpolated vectors
-  vec4 light = normalize(fraglight);
   vec4 normal = normalize(fragnormal);
   vec4 reflect = normalize(reflect(-light, normal));
   vec4 tangent = normalize(fragtangent);
-  vec4 binormal = normalize(fragbinormal);
+  vec4 bitangent = normalize(fragbitangent);
   vec4 eye = normalize(frageye);
   // Use MAP order, multiply first
-  if (makebumps == 1) {
+  if (usenormals == 1) {
     normal = normalize((bump.r*2.0-1.0)*tangent
-			       + (bump.g*2.0-1.0)*binormal
+			       + (bump.g*2.0-1.0)*bitangent
 			       + (bump.b*2.0-1.0)*normal);
   } 
   float ambient = 0.2;

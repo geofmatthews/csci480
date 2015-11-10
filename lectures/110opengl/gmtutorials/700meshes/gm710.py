@@ -46,15 +46,15 @@ def init():
     theLight = N.array((0.577, 0.577, 0.577, 0.0),dtype=N.float32)
     # OBJECTS
     theMeshes = []
-    phongshader = makeShader("phongshader.vert","phongshader.frag")
+    phongshader = makeShader("phong.vert","phong.frag")
     for i in range(100):
         if i % 3 == 0:
             major = N.random.random()*2
             minor = major*0.25
-            verts = torus(major, minor, 32, 8)
+            verts = torus(major, minor, 64, 16)
         elif i % 3 == 1:
             radius = N.random.random()*2
-            verts = sphere(radius, 32, 16)
+            verts = sphere(radius, 64, 32)
         else:
             size = N.random.random()*4
             verts = tetrahedron(size)            
@@ -92,6 +92,7 @@ def display(time):
 
     # Set the shader program
     for mesh in theMeshes:
+        mesh.yaw(0.01)
         mesh.display(theCamera.view(),
                      theCamera.projection(),
                      N.dot(Yrot(time), theLight))

@@ -1,4 +1,5 @@
 # Lots of objects
+# All objects of a given kind share a vertex buffer
 
 import os,sys
 
@@ -47,10 +48,10 @@ def init():
     # OBJECTS
     theMeshes = []
     phongshader = makeShader("phongshader.vert","phongshader.frag")
-    torusVerts = torus(2,0.5,32,8)
-    sphereVerts = sphere(2,32,16)
-    tetraVerts = tetrahedron(4)
-    for i in range(100):
+    torusVerts = torus(1,0.25,64,16)
+    sphereVerts = sphere(1,64,32)
+    tetraVerts = tetrahedron(2)
+    for i in range(300):
         if i % 3 == 0:
             verts = torusVerts
         elif i % 3 == 1:
@@ -91,6 +92,7 @@ def display(time):
 
     # Set the shader program
     for mesh in theMeshes:
+        mesh.yaw(0.01)
         mesh.display(theCamera.view(),
                      theCamera.projection(),
                      N.dot(Yrot(time), theLight))
@@ -102,7 +104,7 @@ def main():
     pygame.mouse.set_cursor(*pygame.cursors.broken_x)
 
     width, height = 1024,768
-    theScreen = pygame.display.set_mode((width, height), OPENGL|DOUBLEBUF)
+    theScreen = pygame.display.set_mode((width, height), OPENGL|DOUBLEBUF)#|FULLSCREEN)
 
     init()
     clock = pygame.time.Clock()
