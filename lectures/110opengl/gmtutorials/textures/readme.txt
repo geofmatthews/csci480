@@ -1,7 +1,13 @@
-. FREE to use this resource however you like in whatever projects you like, the only thing we'd like is some credits maybe :)
+Author
+======
 
-. Downloaded from http://www.oZone3D.Net
+This is the work of Emil Persson, aka Humus.
+http://www.humus.name
 
-. Contact us for information about any 3D realtime work ( models, scenes, animations, ... ) at info@ozone3d.net
 
-.:TzT:.
+
+License
+=======
+
+This work is licensed under a Creative Commons Attribution 3.0 Unported License.
+http://creativecommons.org/licenses/by/3.0/

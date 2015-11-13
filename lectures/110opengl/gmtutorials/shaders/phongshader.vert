@@ -18,8 +18,8 @@ void main()
   fragnormal =  view * model * normal;
   fraglight =  view * light;
   fragreflect = reflect(-fraglight, fragnormal);
-  vec4 worldposition  = view * model * position;
+  vec4 positioncamspace  = view * model * position;
   // Where is the eye in cameraspace?
-  frageye = normalize(vec4(0.0,0.0,0.0,1.0) - worldposition);
-  gl_Position = projection * worldposition;
+  frageye = normalize(vec4(0.0,0.0,0.0,1.0) - positioncamspace);
+  gl_Position = projection * positioncamspace;
 }

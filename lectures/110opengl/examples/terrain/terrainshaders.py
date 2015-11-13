@@ -1,4 +1,5 @@
 SCREEN_SIZE = (640,480)
+SCREEN_SIZE = (1024,768)
 
 import numpy as N
 

@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\title{Assignment \# 2, CSCI 480\\Fall 2015}
+
+\date{Due date: Friday, Oct 30, midnight.}
+\begin{document}
+\maketitle
+
+\begin{itemize}
+
+\item Finish the ray tracer provided on the website in the folder
+  \verb|raytracer_minimal|.  There are several sections of code marked
+  with ``{\tt pass}'' so that they will still compile, but do
+  nothing.  Finish each of these as illustrated in the lecture notes:
+  \begin{description}
+  \item[camera:] {\tt lookAt }
+  \item[light:] {\tt PointLight }
+  \item[material:] {\tt Image, Reflector }
+  \item[shape:]{\tt Plane, PlaneIntersection, Cube,
+    QuadricOfMyChoice }
+  \item[world:]{\tt MyWorld }
+  \end{description}
+
+\item You should implement a single quadric of your choice, but not
+  the ellipsoid.  You do {\em not} have to implement rotation for this
+  quadric, but you should be able to move it to random locations.
+      
+\item You should implement a {\tt MyWorld} class that illustrates all
+  of the features you implemented.
+
+\item Write modular, well-documented code.  
+
+\item Create some fascinating images.  Use your noise function, or some
+  images from it, as procedural or image textures.
+
+\item Create a {\tt main.py} file, which, when run, will open a
+  pygame window and create your most interesting image.  This will
+  save me time grading and trying to figure out the parameters I need
+  to call your function, etc.
+
+\item Zip your code and best images together (don't use tar or
+  anything else--I will be writing scripts to unzip and then run
+  {\tt main.py}) and submit to Canvas by the due date.
+
+\end{itemize}
+
+\end{document}
+

@@ -1,5 +1,5 @@
-
 #version 330
+// phong shading
 uniform vec4 color;
 in vec4 fragnormal, fragreflect, fraglight, frageye;
 out vec4 outputColor;

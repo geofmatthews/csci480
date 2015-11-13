@@ -87,7 +87,7 @@ def init():
 def main():
     global window, time, light, inc, whichTex, frame, fogEnd
     pygame.init()
-    screen = pygame.display.set_mode((640,480), OPENGL|DOUBLEBUF)#|FULLSCREEN)
+    screen = pygame.display.set_mode((1024,768), OPENGL|DOUBLEBUF)#|FULLSCREEN)
     pygame.display.set_caption('The Jade Palace')
 
     screentoggle = False
