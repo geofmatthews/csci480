@@ -1,14 +1,12 @@
 # Classes to make constructing and drawing many objects simpler
 
-# We will assume that all vertex arrays have 18 components of 32 bit floats
+# We will assume that all vertex arrays have 18 components,
 # whether or not they are all used:
 # 4 floats position
 # 4 floats normal
 # 4 floats tangent (positive s texture coordinate direction "right")
 # 4 floats bitangent (positive t texture coordinate direction "up")
 # 2 floats texture coordinates
-
-# Also assuming we're using 16 bit unsigned ints for elements
 
 sizeOfFloat = 4
 sizeOfShort = 2
@@ -18,24 +16,6 @@ from OpenGL.GL import *
 from ctypes import c_void_p
 from frames import Frame
 
-def getBuffer(arr, type):
-    buff = glGenBuffers(1)
-    glBindBuffer(type, buff)
-    glBufferData(type, arr, GL_STATIC_DRAW)
-    glBindBuffer(type, 0)
-    return buff
-
-def vertexPointer(attrib, size, components, offset):
-    if attrib >= 0:
-        sizeOfFloat = 4
-        glEnableVertexAttribArray(attrib)
-        glVertexAttribPointer(attrib,
-                              components,
-                              GL_FLOAT,
-                              GL_FALSE,
-                              size,
-                              c_void_p(offset*sizeOfFloat))
-    
 class coloredMesh(Frame):
     """Use phong.vert and phong.frag"""
     def __init__(self, color, vertexArray, shader):
@@ -46,8 +26,14 @@ class coloredMesh(Frame):
         vertices = vertexArray[0]
         elements = vertexArray[1]
         self.elementSize = len(elements)*sizeOfShort
-        self.arrayBuffer = getBuffer(vertices, GL_ARRAY_BUFFER)
-        self.elementBuffer = getBuffer(elements, GL_ELEMENT_ARRAY_BUFFER)
+        self.arrayBuffer = glGenBuffers(1)
+        glBindBuffer(GL_ARRAY_BUFFER, self.arrayBuffer)
+        glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW)
+        glBindBuffer(GL_ARRAY_BUFFER, 0)
+        self.elementBuffer = glGenBuffers(1)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.elementBuffer)
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements, GL_STATIC_DRAW)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
         # find attribute locations:
         self.positionAttrib = glGetAttribLocation(shader, "position")
         self.normalAttrib = glGetAttribLocation(shader, "normal")
@@ -68,8 +54,20 @@ class coloredMesh(Frame):
         glUniformMatrix4fv(self.modelUnif, 1, GL_TRUE, self.model())
         glBindBuffer(GL_ARRAY_BUFFER, self.arrayBuffer)
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.elementBuffer)
-        vertexPointer(self.positionAttrib, vertexSize, 4, 0)
-        vertexPointer(self.normalAttrib, vertexSize, 4, 4)
+        glEnableVertexAttribArray(self.positionAttrib)
+        glVertexAttribPointer(self.positionAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(0))
+        glEnableVertexAttribArray(self.normalAttrib)
+        glVertexAttribPointer(self.normalAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(4*sizeOfFloat))
         glDrawElements(GL_TRIANGLES, self.elementSize,
                        GL_UNSIGNED_SHORT, c_void_p(0))
         glUseProgram(0)
@@ -85,8 +83,14 @@ class coloredTextureMesh(Frame):
         vertices = vertexArray[0]
         elements = vertexArray[1]
         self.elementSize = len(elements)*sizeOfShort
-        self.arrayBuffer = getBuffer(vertices, GL_ARRAY_BUFFER)
-        self.elementBuffer = getBuffer(elements, GL_ELEMENT_ARRAY_BUFFER)
+        self.arrayBuffer = glGenBuffers(1)
+        glBindBuffer(GL_ARRAY_BUFFER, self.arrayBuffer)
+        glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW)
+        glBindBuffer(GL_ARRAY_BUFFER, 0)
+        self.elementBuffer = glGenBuffers(1)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.elementBuffer)
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements, GL_STATIC_DRAW)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
         # find attribute locations:
         self.positionAttrib = glGetAttribLocation(shader, "position")
         self.normalAttrib = glGetAttribLocation(shader, "normal")
@@ -113,11 +117,43 @@ class coloredTextureMesh(Frame):
         glBindBuffer(GL_ARRAY_BUFFER, self.arrayBuffer)
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.elementBuffer)
         glEnableVertexAttribArray(self.positionAttrib)
-        vertexPointer(self.positionAttrib, vertexSize, 4, 0)
-        vertexPointer(self.normalAttrib, vertexSize, 4, 4)
-        vertexPointer(self.tangentAttrib,vertexSize, 4, 8)
-        vertexPointer(self.bitangentAttrib,vertexSize, 4, 12)
-        vertexPointer(self.uvAttrib,vertexSize, 2, 16)
+        glVertexAttribPointer(self.positionAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(0))
+        glEnableVertexAttribArray(self.normalAttrib)
+        glVertexAttribPointer(self.normalAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(4*sizeOfFloat))
+        if self.tangentAttrib >= 0:
+            glEnableVertexAttribArray(self.tangentAttrib)
+            glVertexAttribPointer(self.tangentAttrib,
+                                  4,
+                                  GL_FLOAT,
+                                  GL_FALSE,
+                                  vertexSize,
+                                  c_void_p(8*sizeOfFloat))
+        if self.bitangentAttrib >= 0:
+            glEnableVertexAttribArray(self.bitangentAttrib)
+            glVertexAttribPointer(self.bitangentAttrib,
+                                  4,
+                                  GL_FLOAT,
+                                  GL_FALSE,
+                                  vertexSize,
+                                  c_void_p(12*sizeOfFloat))
+        if self.uvAttrib >= 0:
+            glEnableVertexAttribArray(self.uvAttrib)
+            glVertexAttribPointer(self.uvAttrib,
+                                  2,
+                                  GL_FLOAT,
+                                  GL_FALSE,
+                                  vertexSize,
+                                  c_void_p(16*sizeOfFloat))
         # bind our color texture units
         colorUnit = 0
         glActiveTexture(GL_TEXTURE0 + colorUnit)
@@ -140,8 +176,14 @@ class texturedMesh(Frame):
         vertices = vertexArray[0]
         elements = vertexArray[1]
         self.elementSize = len(elements)*sizeOfShort
-        self.arrayBuffer = getBuffer(vertices, GL_ARRAY_BUFFER)
-        self.elementBuffer = getBuffer(elements, GL_ELEMENT_ARRAY_BUFFER)
+        self.arrayBuffer = glGenBuffers(1)
+        glBindBuffer(GL_ARRAY_BUFFER, self.arrayBuffer)
+        glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW)
+        glBindBuffer(GL_ARRAY_BUFFER, 0)
+        self.elementBuffer = glGenBuffers(1)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.elementBuffer)
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements, GL_STATIC_DRAW)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
         # find attribute locations:
         self.positionAttrib = glGetAttribLocation(shader, "position")
         self.normalAttrib = glGetAttribLocation(shader, "normal")
@@ -165,24 +207,55 @@ class texturedMesh(Frame):
         glUniform4fv(self.lightUnif, 1, light)
         glUniformMatrix4fv(self.modelUnif, 1, GL_TRUE, self.model())
         glUniform1i(self.useNormalsUnif, self.useNormals)
-        # attribs
         glBindBuffer(GL_ARRAY_BUFFER, self.arrayBuffer)
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.elementBuffer)
-        vertexPointer(self.positionAttrib, vertexSize, 4, 0)
-        vertexPointer(self.normalAttrib, vertexSize, 4, 4)
-        vertexPointer(self.tangentAttrib, vertexSize, 4, 8)
-        vertexPointer(self.uvAttrib, vertexSize, 2, 16)
+        glEnableVertexAttribArray(self.positionAttrib)
+        glVertexAttribPointer(self.positionAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(0))
+        glEnableVertexAttribArray(self.normalAttrib)
+        glVertexAttribPointer(self.normalAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(4*sizeOfFloat))
+        glEnableVertexAttribArray(self.tangentAttrib)
+        glVertexAttribPointer(self.tangentAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(8*sizeOfFloat))
+        glEnableVertexAttribArray(self.bitangentAttrib)
+        glVertexAttribPointer(self.bitangentAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(12*sizeOfFloat))
+        glEnableVertexAttribArray(self.uvAttrib)
+        glVertexAttribPointer(self.uvAttrib,
+                              2,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(16*sizeOfFloat))
         # bind our color texture units
         colorUnit = 0
         glActiveTexture(GL_TEXTURE0 + colorUnit)
         glBindTexture(GL_TEXTURE_2D, self.colorTexture)
         glUniform1i(self.colorSamplerUnif, colorUnit)
+        
         # bind our normal texture units
         normalUnit = 1
         glActiveTexture(GL_TEXTURE0 + normalUnit)
         glBindTexture(GL_TEXTURE_2D, self.normalTexture)
         glUniform1i(self.normalSamplerUnif, normalUnit)
-        # draw
+        
         glDrawElements(GL_TRIANGLES, self.elementSize,
                        GL_UNSIGNED_SHORT, c_void_p(0))
         glUseProgram(0)
@@ -198,8 +271,14 @@ class flatTexturedMesh(Frame):
         vertices = vertexArray[0]
         elements = vertexArray[1]
         self.elementSize = len(elements)*sizeOfShort
-        self.arrayBuffer = getBuffer(vertices, GL_ARRAY_BUFFER)
-        self.elementBuffer = getBuffer(elements, GL_ELEMENT_ARRAY_BUFFER)
+        self.arrayBuffer = glGenBuffers(1)
+        glBindBuffer(GL_ARRAY_BUFFER, self.arrayBuffer)
+        glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW)
+        glBindBuffer(GL_ARRAY_BUFFER, 0)
+        self.elementBuffer = glGenBuffers(1)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.elementBuffer)
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements, GL_STATIC_DRAW)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
         # find attribute locations:
         self.positionAttrib = glGetAttribLocation(shader, "position")
         self.uvAttrib = glGetAttribLocation(shader, "uv")
@@ -219,17 +298,30 @@ class flatTexturedMesh(Frame):
         glUniformMatrix4fv(self.modelUnif, 1, GL_TRUE, self.model())
         glBindBuffer(GL_ARRAY_BUFFER, self.arrayBuffer)
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.elementBuffer)
-        vertexPointer(self.positionAttrib, vertexSize, 4, 0)
-        vertexPointer(self.uvAttrib, vertexSize, 2, 16)
+        glEnableVertexAttribArray(self.positionAttrib)
+        glVertexAttribPointer(self.positionAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(0))
+        glEnableVertexAttribArray(self.uvAttrib)
+        glVertexAttribPointer(self.uvAttrib,
+                              2,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(16*sizeOfFloat))
         # bind our color texture unit
         colorUnit = 0
         glActiveTexture(GL_TEXTURE0 + colorUnit)
         glBindTexture(GL_TEXTURE_2D, self.colorTexture)
         glUniform1i(self.colorSamplerUnif, colorUnit)
-        # draw
+        
         glDrawElements(GL_TRIANGLES, self.elementSize,
                        GL_UNSIGNED_SHORT, c_void_p(0))
         glUseProgram(0)
+
 
 class proceduralMesh(Frame):
     """Use bumpmap.vert and knot.frag, e.g."""
@@ -242,8 +334,14 @@ class proceduralMesh(Frame):
         vertices = vertexArray[0]
         elements = vertexArray[1]
         self.elementSize = len(elements)*sizeOfShort
-        self.arrayBuffer = getBuffer(vertices, GL_ARRAY_BUFFER)
-        self.elementBuffer = getBuffer(elements, GL_ELEMENT_ARRAY_BUFFER)
+        self.arrayBuffer = glGenBuffers(1)
+        glBindBuffer(GL_ARRAY_BUFFER, self.arrayBuffer)
+        glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW)
+        glBindBuffer(GL_ARRAY_BUFFER, 0)
+        self.elementBuffer = glGenBuffers(1)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.elementBuffer)
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements, GL_STATIC_DRAW)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
         # find attribute locations:
         self.positionAttrib = glGetAttribLocation(shader, "position")
         self.normalAttrib = glGetAttribLocation(shader, "normal")
@@ -267,14 +365,43 @@ class proceduralMesh(Frame):
         glUniform4fv(self.colorUnif, 1, self.color)
         glUniformMatrix4fv(self.modelUnif, 1, GL_TRUE, self.model())
         glUniform1f(self.scaleCoordsUnif, self.scaleCoords)
-        # attribs
         glBindBuffer(GL_ARRAY_BUFFER, self.arrayBuffer)
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.elementBuffer)
-        vertexPointer(self.positionAttrib, vertexSize, 4, 0)
-        vertexPointer(self.normalAttrib, vertexSize, 4, 4)
-        vertexPointer(self.tangentAttrib, vertexSize, 4, 8)
-        vertexPointer(self.bitangentAttrib, vertexSize, 4, 12)
-        vertexPointer(self.uvAttrib, vertexSize, 2, 16)
+        glEnableVertexAttribArray(self.positionAttrib)
+        glVertexAttribPointer(self.positionAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(0))
+        glEnableVertexAttribArray(self.normalAttrib)
+        glVertexAttribPointer(self.normalAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(4*sizeOfFloat))
+        glEnableVertexAttribArray(self.tangentAttrib)
+        glVertexAttribPointer(self.tangentAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(8*sizeOfFloat))
+        glEnableVertexAttribArray(self.bitangentAttrib)
+        glVertexAttribPointer(self.bitangentAttrib,
+                              4,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(12*sizeOfFloat))
+        glEnableVertexAttribArray(self.uvAttrib)
+        glVertexAttribPointer(self.uvAttrib,
+                              2,
+                              GL_FLOAT,
+                              GL_FALSE,
+                              vertexSize,
+                              c_void_p(16*sizeOfFloat))
         
         glDrawElements(GL_TRIANGLES, self.elementSize,
                        GL_UNSIGNED_SHORT, c_void_p(0))
