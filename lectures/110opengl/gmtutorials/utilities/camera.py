@@ -52,6 +52,14 @@ class Camera(CameraFrame):
         self.proj = projection(self.near, self.far,
                                right, top)
 
+    def onlyRotation(self):
+        rot = N.array((self.right,
+                       self.up,
+                       self.back,
+                       N.array((0.0, 0.0, 0.0, 1.0),dtype=N.float32)),
+                      dtype=N.float32)
+        return rot
+
     def projection(self):
         return self.proj
 

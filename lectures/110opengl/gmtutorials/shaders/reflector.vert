@@ -14,15 +14,13 @@ out vec4 frageye;
 
 void main()
 {
-  // We want to do the reflection in world space, so we'll
-  // Do the view transform in the fragment shader
-  fragnormal =  model * normal;
-  fraglight =  light;
+  fragnormal =   model * normal;
+  fraglight =   light;
   fragreflect = reflect(-fraglight, fragnormal);
-  vec4 positionworldspace = model * position;
+  vec4 positionworldspace =  model * position;
+  vec4 positioncameraspace = view * positionworldspace;
   // Where is the eye in worldspace?
   // This inverse is inefficient, but easier to do here
-  frageye = inverse(view) * normalize(vec4(0.0,0.0,0.0,1.0) - positionworldspace);
-  // Position is the same
-  gl_Position = projection * view * positionworldspace;
+  frageye =  inverse(view) * normalize(vec4(0.0,0.0,0.0,1.0) - positioncameraspace);
+  gl_Position = projection * positioncameraspace;
 }

@@ -96,13 +96,14 @@ void main()
   float f1, f2;
   vec4 pos1, pos2;
   float scaleCoords = 0.5;
-  float dither = 0.8;
+  float dither = 0.7;
   voronoi_f1f2_3d(positionobjectspace*scaleCoords,
 		  dither,
 		  f1, pos1,
 		  f2, pos2);
   // try f1, f2, 1-f1, f2-f1, etc.
-  float worleyfunc = f2-f1;
+  //float worleyfunc = step((f2-f1), 0.125);
+  float worleyfunc = (f2-f1);
   vec4 newcolor = clamp(color*worleyfunc, 0.0, 1.0);
   newcolor.a = 1.0;
   // to make good use of worley noise, we need the

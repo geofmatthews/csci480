@@ -1,4 +1,4 @@
-# Skybox without reflection
+# Skybox with reflection
 
 import os,sys
 
@@ -10,12 +10,13 @@ from pygame.locals import *
 import numpy as N
 
 sys.path.insert(0, os.path.join("..","utilities"))
-from psurfaces import torus
+from psurfaces import *
+from polyhedra import *
+from specials import rectangle
 from transforms import *
 from loadtexture import loadTexture
 from camera import Camera
 from meshes import *
-from specials import rectangle
 
 def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
@@ -37,23 +38,23 @@ def initializeVAO():
 # Must be called after we have an OpenGL context, i.e. after the pygame
 # window is created
 def init():
-    global theMesh, theBox, theLight, theCamera, theScreen
+    global theMeshes, theBox, theLight, theCamera, theScreen
     initializeVAO()
     glEnable(GL_CULL_FACE)
     glEnable(GL_DEPTH_TEST)
     # Add our objects
-    # OBJECT
-    theMesh = coloredMesh(N.array((0,1,1,1),dtype=N.float32),
-                          torus(1.0, 0.25, 64, 16),
-                          makeShader("phongshader.vert", "phongshader.frag")
-                          )
     # LIGHT
     # put the light in a direction to agree with the skybox
     theLight = N.array((0.707, 0.707, 0.0, 0.0),dtype=N.float32)
-    # SKYBOX
-    boxsize = 100
-    skyboxShader = makeShader("flattextured.vert","flattextured.frag")
+    # TEXTURES
     boxtex = "tg"
+    if boxtex == "fig":
+        images = ["figposx.png",
+                  "fignegx.png",
+                  "figposy.png",
+                  "fignegy.png",
+                  "figposz.png",
+                  "fignegz.png"]
     if boxtex == "tg":
         images = ["terragenposx.png",
                   "terragennegx.png",
@@ -62,77 +63,100 @@ def init():
                   "terragenposz.png",
                   "terragennegz.png"]
     if boxtex == "gg":
-        images = ["goldengateposx.jpg",
-                  "goldengatenegx.jpg",
+        # these images have X backwards from opengl
+        images = ["goldengatenegx.jpg",
+                  "goldengateposx.jpg",
                   "goldengateposy.jpg",
                   "goldengatenegy.jpg",
                   "goldengateposz.jpg",
                   "goldengatenegz.jpg"]
     if boxtex == "ll":
-        images = ["lancellottiposx.jpg",
-                  "lancellottinegx.jpg",
+        # these images have X backwards from opengl
+        images = ["lancellottinegx.jpg",
+                  "lancellottiposx.jpg",
                   "lancellottiposy.jpg",
                   "lancellottinegy.jpg",
                   "lancellottiposz.jpg",
                   "lancellottinegz.jpg"]
-    posx = flatTexturedMesh(loadTexture(images[0],
-                                        magFilter=GL_LINEAR,
-                                        wrapMode=GL_CLAMP_TO_EDGE),
+    textures = [loadTexture(img,
+                            magFilter=GL_LINEAR,
+                            wrapMode=GL_CLAMP_TO_EDGE) for img in images]
+
+    # OBJECT
+    theMeshes = []
+    for i in range(1):
+        if i%3 == 0:
+            verts = torus(3.0, 1.0, 64, 16)
+        elif i%3==1:
+            verts = tetrahedron(8.0)
+        else:
+            verts = sphere(3.0, 32, 16)
+        verts = torus(3.0, 1.0, 64, 16)
+        newmesh = reflectorMesh(textures[0],
+                                textures[1],
+                                textures[2],
+                                textures[3],
+                                textures[4],
+                                textures[5],
+                                verts,
+                                makeShader("reflector.vert",
+                                           "reflector.frag")
+                            )
+        x = N.random.random()*6-3
+        y = N.random.random()*6-3
+        z = N.random.random()*6-3
+        newmesh.moveRight(x)
+        newmesh.moveUp(y)
+        newmesh.moveBack(z)
+        theMeshes.append(newmesh)
+    # SKYBOX
+    boxsize = 100.0
+    skyboxShader = makeShader("flattextured.vert","flattextured.frag")
+    posx = flatTexturedMesh(textures[0],
+                            rectangle(boxsize,boxsize),
+                            skyboxShader,
+                            N.array((1.0,1.0),dtype=N.float32))
+    negx = flatTexturedMesh(textures[1],
+                            rectangle(boxsize,boxsize),
+                            skyboxShader,
+                            N.array((1.0,1.0),dtype=N.float32))
+    posy = flatTexturedMesh(textures[2],
+                            rectangle(boxsize,boxsize),
+                            skyboxShader,
+                            N.array((1.0,1.0),dtype=N.float32))
+    negy = flatTexturedMesh(textures[3],
+                            rectangle(boxsize,boxsize),
+                            skyboxShader,
+                            N.array((1.0,1.0),dtype=N.float32))
+    posz =  flatTexturedMesh(textures[4],
                              rectangle(boxsize,boxsize),
                              skyboxShader,
                              N.array((1.0,1.0),dtype=N.float32))
-    negx = flatTexturedMesh(loadTexture(images[1],
-                                         magFilter=GL_LINEAR,
-                                        wrapMode=GL_CLAMP_TO_EDGE),
+    negz =  flatTexturedMesh(textures[5],
                              rectangle(boxsize,boxsize),
                              skyboxShader,
                              N.array((1.0,1.0),dtype=N.float32))
-    posy = flatTexturedMesh(loadTexture(images[2],
-                                         magFilter=GL_LINEAR,
-                                        wrapMode=GL_CLAMP_TO_EDGE),
-                             rectangle(boxsize,boxsize),
-                             skyboxShader,
-                             N.array((1.0,1.0),dtype=N.float32))
-    negy = flatTexturedMesh(loadTexture(images[3],
-                                         magFilter=GL_LINEAR,
-                                        wrapMode=GL_CLAMP_TO_EDGE),
-                             rectangle(boxsize,boxsize),
-                             skyboxShader,
-                             N.array((1.0,1.0),dtype=N.float32))
-    posz =  flatTexturedMesh(loadTexture(images[4],
-                                         magFilter=GL_LINEAR,
-                                        wrapMode=GL_CLAMP_TO_EDGE),
-                             rectangle(boxsize,boxsize),
-                             skyboxShader,
-                             N.array((1.0,1.0),dtype=N.float32))
-    negz =  flatTexturedMesh(loadTexture(images[5],
-                                         magFilter=GL_LINEAR,
-                                        wrapMode=GL_CLAMP_TO_EDGE),
-                             rectangle(boxsize,boxsize),
-                             skyboxShader,
-                             N.array((1.0,1.0),dtype=N.float32))
-    # If we try to move back exactly 0.5 we can see
-    # the seams in the skybox:
+
     backDistance = -boxsize*0.5
 
-    posx.yaw(1)
-    posx.yaw(1)
+    posx.yaw(-1)
+    posx.yaw(-1)
     posx.moveBack(backDistance)
 
-    negx.yaw(-1)
-    negx.yaw(-1)
+    negx.yaw(1)
+    negx.yaw(1)
     negx.moveBack(backDistance)
 
+    for i in range(2):
+        posy.pitch(-1)
     for i in range(4):
-        posy.yaw(1)
-    posy.pitch(-1)
-    posy.pitch(-1)
+        posy.roll(1)
     posy.moveBack(backDistance)
 
+    for i in range(2):
+        negy.pitch(1)
     for i in range(4):
-        negy.yaw(1)
-    negy.pitch(1)
-    negy.pitch(1)
+        negy.roll(1)
     negy.moveBack(backDistance)
 
     for i in range(4):
@@ -154,24 +178,26 @@ def init():
 
 # Called to redraw the contents of the window
 def display(time):
-    global theMesh, theBox, theLight, theCamera
+    global theMeshes, theBox, theLight, theCamera
     # Clear the display
     glClearColor(0.1, 0.2, 0.3, 0.0)
     glClear(GL_COLOR_BUFFER_BIT)
     glClear(GL_DEPTH_BUFFER_BIT)
 
-    # display the mesh
-    meshSpeed = 0.025
-    theMesh.yaw(meshSpeed)
-    theMesh.pitch(meshSpeed)
-    theMesh.roll(meshSpeed)
-    theMesh.display(theCamera.view(),
-                     theCamera.projection(),
-                     theLight)
+    glDisable(GL_DEPTH_TEST)
     for mesh in theBox:
         mesh.display(theCamera.view(),
                      theCamera.projection(),
                      None)
+    glEnable(GL_DEPTH_TEST)
+    # display the mesh
+    meshSpeed = 0.01
+    for mesh in theMeshes:
+        mesh.moveRight(0.1)
+        mesh.yaw(-0.1)
+        mesh.display(theCamera.view(),
+                     theCamera.projection(),
+                     theLight)
 
 def main():
     global theCamera, theScreen

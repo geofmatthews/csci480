@@ -1,4 +1,6 @@
-# Using mesh objects
+# Worley noise
+# For a nice galery look at:
+# https://code.google.com/p/fractalterraingeneration/wiki/Cell_Noise
 
 import os,sys
 
@@ -44,9 +46,9 @@ def init():
     # LIGHT
     theLight = N.array((0.577, 0.577, 0.577, 0.0),dtype=N.float32)
     # OBJECT
-    theMesh = proceduralMesh(N.array((1,0,1,1),dtype=N.float32),
+    theMesh = proceduralMesh(N.array((1.0,0.5,0.25,1.0),dtype=N.float32),
                              100.0,
-                             torus(0.5, 0.2, 64, 16),
+                             torus(10.0, 4.0, 128, 32),
                              makeShader("worley.vert", "worley.frag")
                              )
     # CAMERA
@@ -56,7 +58,7 @@ def init():
     far = 100.0
     lens = 4.0  # "longer" lenses mean more telephoto
     theCamera = Camera(lens, near, far, aspectRatio)
-    theCamera.moveBack(3)
+    theCamera.moveBack(50)
 
 # Called to redraw the contents of the window
 def display(time):
@@ -66,10 +68,12 @@ def display(time):
     glClear(GL_COLOR_BUFFER_BIT)
     glClear(GL_DEPTH_BUFFER_BIT)
 
-    # Set the shader program
+    theMesh.pitch(0.01)
+    theMesh.yaw(0.01)
+    theMesh.roll(0.01)
     theMesh.display(theCamera.view(),
                     theCamera.projection(),
-                    N.dot(Yrot(time), theLight))
+                    theLight)
 
 def main():
     global theCamera, theScreen
@@ -103,6 +107,8 @@ def main():
 
         # arrow keys for movement:
         movespeed = 0.05
+        if pressed[K_LSHIFT]:
+            movespeed *= 4
         if pressed[K_d] | pressed[K_RIGHT]:
             theCamera.moveRight(movespeed)
         if pressed[K_a] | pressed[K_LEFT]:

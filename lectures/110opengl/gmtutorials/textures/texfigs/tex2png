@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+for f
+do
+echo "============";
+echo $f; 
+latex $f;
+dvips -E $(basename $f .tex).dvi -o $(basename $f .tex).eps
+convert -density 288 $(basename $f .tex).eps -background white -flatten $(basename $f .tex).png;
+done

@@ -36,6 +36,11 @@ def vertexPointer(attrib, size, components, offset):
                               size,
                               c_void_p(offset*sizeOfFloat))
     
+def bindTextureUnit(unit, texture, samplerUnif):
+    glActiveTexture(GL_TEXTURE0 + unit)
+    glBindTexture(GL_TEXTURE_2D, texture)
+    glUniform1i(samplerUnif, unit)
+
 class coloredMesh(Frame):
     """Use phong.vert and phong.frag"""
     def __init__(self, color, vertexArray, shader):
@@ -118,12 +123,9 @@ class coloredTextureMesh(Frame):
         vertexPointer(self.tangentAttrib,vertexSize, 4, 8)
         vertexPointer(self.bitangentAttrib,vertexSize, 4, 12)
         vertexPointer(self.uvAttrib,vertexSize, 2, 16)
-        # bind our color texture units
-        colorUnit = 0
-        glActiveTexture(GL_TEXTURE0 + colorUnit)
-        glBindTexture(GL_TEXTURE_2D, self.colorTexture)
-        glUniform1i(self.colorSamplerUnif, colorUnit)
-        
+        # bind our color texture unit
+        bindTextureUnit(0, self.colorTexture, self.colorSamplerUnif)
+        # draw
         glDrawElements(GL_TRIANGLES, self.elementSize,
                        GL_UNSIGNED_SHORT, c_void_p(0))
         glUseProgram(0)
@@ -172,16 +174,9 @@ class texturedMesh(Frame):
         vertexPointer(self.normalAttrib, vertexSize, 4, 4)
         vertexPointer(self.tangentAttrib, vertexSize, 4, 8)
         vertexPointer(self.uvAttrib, vertexSize, 2, 16)
-        # bind our color texture units
-        colorUnit = 0
-        glActiveTexture(GL_TEXTURE0 + colorUnit)
-        glBindTexture(GL_TEXTURE_2D, self.colorTexture)
-        glUniform1i(self.colorSamplerUnif, colorUnit)
-        # bind our normal texture units
-        normalUnit = 1
-        glActiveTexture(GL_TEXTURE0 + normalUnit)
-        glBindTexture(GL_TEXTURE_2D, self.normalTexture)
-        glUniform1i(self.normalSamplerUnif, normalUnit)
+        # bind our texture units
+        bindTextureUnit(0, self.colorTexture, self.colorSamplerUnif)
+        bindTextureUnit(1, self.normalTexture, self.normalSamplerUnif)
         # draw
         glDrawElements(GL_TRIANGLES, self.elementSize,
                        GL_UNSIGNED_SHORT, c_void_p(0))
@@ -189,9 +184,9 @@ class texturedMesh(Frame):
 
 class flatTexturedMesh(Frame):
     """Use flattextured.vert and flattextured.frag"""
-    def __init__(self, colortexture, vertexArray, shader, scaleuv):
+    def __init__(self, texture, vertexArray, shader, scaleuv):
         Frame.__init__(self)
-        self.colorTexture = colortexture
+        self.texture = texture
         self.shader = shader
         self.scaleuv = scaleuv
         # send data to opengl context:
@@ -222,10 +217,7 @@ class flatTexturedMesh(Frame):
         vertexPointer(self.positionAttrib, vertexSize, 4, 0)
         vertexPointer(self.uvAttrib, vertexSize, 2, 16)
         # bind our color texture unit
-        colorUnit = 0
-        glActiveTexture(GL_TEXTURE0 + colorUnit)
-        glBindTexture(GL_TEXTURE_2D, self.colorTexture)
-        glUniform1i(self.colorSamplerUnif, colorUnit)
+        bindTextureUnit(0, self.texture, self.colorSamplerUnif)
         # draw
         glDrawElements(GL_TRIANGLES, self.elementSize,
                        GL_UNSIGNED_SHORT, c_void_p(0))
@@ -275,6 +267,78 @@ class proceduralMesh(Frame):
         vertexPointer(self.tangentAttrib, vertexSize, 4, 8)
         vertexPointer(self.bitangentAttrib, vertexSize, 4, 12)
         vertexPointer(self.uvAttrib, vertexSize, 2, 16)
+        
+        glDrawElements(GL_TRIANGLES, self.elementSize,
+                       GL_UNSIGNED_SHORT, c_void_p(0))
+        glUseProgram(0)
+        
+
+class reflectorMesh(Frame):
+    """Use reflector.vert and reflector.frag"""
+    def __init__(self,
+                 posxTexture,
+                 negxTexture,
+                 posyTexture,
+                 negyTexture,
+                 poszTexture,
+                 negzTexture,
+                 vertexArray,
+                 shader):
+        Frame.__init__(self)
+        self.posxTexture = posxTexture
+        self.negxTexture = negxTexture
+        self.posyTexture = posyTexture
+        self.negyTexture = negyTexture
+        self.poszTexture = poszTexture
+        self.negzTexture = negzTexture
+        self.shader = shader
+        # send data to opengl context:
+        vertices = vertexArray[0]
+        elements = vertexArray[1]
+        self.elementSize = len(elements)*sizeOfShort
+        self.arrayBuffer = getBuffer(vertices, GL_ARRAY_BUFFER)
+        self.elementBuffer = getBuffer(elements, GL_ELEMENT_ARRAY_BUFFER)
+        # find attribute locations:
+        self.positionAttrib = glGetAttribLocation(shader, "position")
+        self.normalAttrib = glGetAttribLocation(shader, "normal")
+        self.tangentAttrib = glGetAttribLocation(shader, "tangent")
+        self.bitangentAttrib = glGetAttribLocation(shader, "bitangent")
+
+        # find the uniform locations:
+        self.posxUnif = glGetUniformLocation(shader, "posxsampler")
+        self.negxUnif = glGetUniformLocation(shader, "negxsampler")
+        self.posyUnif = glGetUniformLocation(shader, "posysampler")
+        self.negyUnif = glGetUniformLocation(shader, "negysampler")
+        self.poszUnif = glGetUniformLocation(shader, "poszsampler")
+        self.negzUnif = glGetUniformLocation(shader, "negzsampler")
+
+        self.modelUnif = glGetUniformLocation(shader, "model")
+        self.viewUnif = glGetUniformLocation(shader, "view")
+        self.projectionUnif = glGetUniformLocation(shader, "projection")
+        self.lightUnif = glGetUniformLocation(shader, "light")
+        self.colorUnif = glGetUniformLocation(shader, "color")
+
+    def display(self, view, projection, light):
+        glUseProgram(self.shader)
+        # uniforms
+        glUniformMatrix4fv(self.viewUnif, 1, GL_TRUE, view)
+        glUniformMatrix4fv(self.projectionUnif, 1, GL_TRUE, projection)
+        glUniform4fv(self.lightUnif, 1, light)
+        glUniformMatrix4fv(self.modelUnif, 1, GL_TRUE, self.model())
+        # attribs
+        glBindBuffer(GL_ARRAY_BUFFER, self.arrayBuffer)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.elementBuffer)
+        vertexPointer(self.positionAttrib, vertexSize, 4, 0)
+        vertexPointer(self.normalAttrib, vertexSize, 4, 4)
+        vertexPointer(self.tangentAttrib, vertexSize, 4, 8)
+        vertexPointer(self.bitangentAttrib, vertexSize, 4, 12)
+        # bind all those texture units
+        bindTextureUnit(0, self.posxTexture, self.posxUnif)
+        bindTextureUnit(1, self.negxTexture, self.negxUnif)
+        bindTextureUnit(2, self.posyTexture, self.posyUnif)
+        bindTextureUnit(3, self.negyTexture, self.negyUnif)
+        bindTextureUnit(4, self.poszTexture, self.poszUnif)
+        bindTextureUnit(5, self.negzTexture, self.negzUnif)
         
         glDrawElements(GL_TRIANGLES, self.elementSize,
                        GL_UNSIGNED_SHORT, c_void_p(0))

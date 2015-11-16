@@ -84,7 +84,7 @@ class Frame():
      
     # using offsets instead of rotation angles guarantees
     # we don't have rotations more than 90 degrees,
-    # to Gram-Schmidt will always work.
+    # so Gram-Schmidt will always work.
     # It also seems a bit more intuitive, and helps figuring
     # out the correct angle for a mouse movement on screen.        
     def pitch(self, displacement):

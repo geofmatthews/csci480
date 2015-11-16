@@ -1,0 +1,17 @@
+\documentclass{article}
+\usepackage{xcolor}
+\pagestyle{empty}
+\begin{document}
+\pagecolor{green!20}
+\huge \bf
+\[
+\begin{array}{ccccc}
+  && +Z && \\
+  &&\Uparrow && \\
++X & \Leftarrow & -Y & \Rightarrow & -X \\
+  &&\Downarrow && \\
+&& -Z && 
+\end{array}
+\]
+\end{document}
+

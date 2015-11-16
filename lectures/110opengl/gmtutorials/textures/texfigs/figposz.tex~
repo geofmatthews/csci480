@@ -1,0 +1,15 @@
+\documentclass{article}
+\pagestyle{empty}
+\begin{document}
+\huge \bf
+\[
+\begin{array}{ccccc}
+  && +Y && \\
+  &&\Uparrow && \\
++X & \Leftarrow & +Z & \Rightarrow & -X \\
+  &&\Downarrow && \\
+&& -Y && 
+\end{array}
+\]
+\end{document}
+
