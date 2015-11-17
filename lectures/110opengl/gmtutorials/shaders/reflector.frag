@@ -65,12 +65,13 @@ void main()
   reflect = normalize(fragreflect);
   normal = normalize(fragnormal);
   eye = normalize(frageye);
-  float ambient = 0.4;
-  float diffuse = 0.6*clamp(dot(light, normal), 0.0, 1.0);
+  // perfect reflectors aren't really diffusely shaded much
+  float ambient = 0.8;
+  float diffuse = 0.2*clamp(dot(light, normal), 0.0, 1.0);
   color = texColor(normal, eye);
   outputColor = (ambient + diffuse) * color;
   if (dot(light,normal) > 0.0) {
-    float specular = 0.4*pow(clamp(dot(reflect, eye), 0.0, 1.0), 8);
+    float specular = 0.1*pow(clamp(dot(reflect, eye), 0.0, 1.0), 8);
     outputColor += vec4(specular, specular, specular, 1.0);
   }
   outputColor = clamp(outputColor, 0.0, 1.0);

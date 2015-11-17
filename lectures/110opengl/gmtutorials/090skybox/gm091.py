@@ -17,11 +17,12 @@ import numpy as N
 sys.path.insert(0, os.path.join("..","utilities"))
 from psurfaces import *
 from polyhedra import *
+from specials import rectangle
+from obj import readOBJ
 from transforms import *
 from loadtexture import loadTexture
 from camera import Camera
 from meshes import *
-from specials import rectangle
 
 def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
@@ -51,22 +52,26 @@ def init():
     # OBJECTS
     theMeshes = []
     phongshader = makeShader("phong.vert","phong.frag")
-    for i in range(100):
-        if i % 3 == 0:
+    for i in range(16):
+        if i % 4 == 0:
             major = N.random.random()*2
             minor = major*0.25
-            verts = torus(major, minor, 64, 16)
-        elif i % 3 == 1:
+            verts,elements = torus(major, minor, 64, 16)
+        elif i % 4 == 1:
             radius = N.random.random()*2
-            verts = sphere(radius, 64, 32)
+            verts,elements = sphere(radius, 64, 32)
+        elif i % 4 == 2:
+            verts,elements = readOBJ("suzanne.obj")
         else:
             size = N.random.random()*4
-            verts = tetrahedron(size)            
+            verts,elements = tetrahedron(size)            
         newmesh = coloredMesh(N.array((N.random.random(),
                                        N.random.random(),
                                        N.random.random(),
                                        1.0), dtype=N.float32),
-                              verts,
+                              getArrayBuffer(verts),
+                              getElementBuffer(elements),
+                              len(elements),
                               phongshader)
         x = N.random.random()*20-10
         y = N.random.random()*20-10
@@ -129,29 +134,44 @@ def init():
     # SKYBOX
     boxsize = 1.0
     skyboxShader = makeShader("flattextured.vert","flattextured.frag")
-
+    verts,elements = rectangle(boxsize,boxsize)
+    vertBuff = getArrayBuffer(verts)
+    elemBuff = getElementBuffer(elements)
+    numElem = len(elements)
     posx = flatTexturedMesh(theTextures[0][0],
-                            rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElem,
                             skyboxShader,
                             N.array((1.0,1.0),dtype=N.float32))
     negx = flatTexturedMesh(theTextures[0][1],
-                            rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElem,
                             skyboxShader,
                             N.array((1.0,1.0),dtype=N.float32))
     posy = flatTexturedMesh(theTextures[0][2],
-                            rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElem,
                             skyboxShader,
                             N.array((1.0,1.0),dtype=N.float32))
     negy = flatTexturedMesh(theTextures[0][3],
-                            rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElem,
                             skyboxShader,
                             N.array((1.0,1.0),dtype=N.float32))
     posz =  flatTexturedMesh(theTextures[0][4],
-                             rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElem,
                              skyboxShader,
                              N.array((1.0,1.0),dtype=N.float32))
     negz =  flatTexturedMesh(theTextures[0][5],
-                             rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElem,
                              skyboxShader,
                              N.array((1.0,1.0),dtype=N.float32))
 

@@ -48,8 +48,11 @@ def init():
     glEnable(GL_DEPTH_TEST)
     # Add our objects
     # OBJECT
+    verts,elements = torus(1.0, 0.25, 64, 16)
     theMesh = coloredMesh(N.array((0,1,1,1),dtype=N.float32),
-                          torus(1.0, 0.25, 64, 16),
+                          getArrayBuffer(verts),
+                          getElementBuffer(elements),
+                          len(elements),
                           makeShader("phongshader.vert", "phongshader.frag")
                           )
     # LIGHT
@@ -103,28 +106,44 @@ def init():
     # SKYBOX
     boxsize = 1000.0
     skyboxShader = makeShader("flattextured.vert","flattextured.frag")
+    verts,elements = rectangle(boxsize, boxsize)
+    vertBuff = getArrayBuffer(verts)
+    elemBuff = getElementBuffer(elements)
+    numElems = len(elements)
     posx = flatTexturedMesh(theTextures[0][0],
-                            rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElems,
                             skyboxShader,
                             N.array((1.0,1.0),dtype=N.float32))
     negx = flatTexturedMesh(theTextures[0][1],
-                            rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElems,
                             skyboxShader,
                             N.array((1.0,1.0),dtype=N.float32))
     posy = flatTexturedMesh(theTextures[0][2],
-                            rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElems,
                             skyboxShader,
                             N.array((1.0,1.0),dtype=N.float32))
     negy = flatTexturedMesh(theTextures[0][3],
-                            rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElems,
                             skyboxShader,
                             N.array((1.0,1.0),dtype=N.float32))
     posz =  flatTexturedMesh(theTextures[0][4],
-                             rectangle(boxsize,boxsize),
+                             vertBuff,
+                             elemBuff,
+                             numElems,
                              skyboxShader,
                              N.array((1.0,1.0),dtype=N.float32))
     negz =  flatTexturedMesh(theTextures[0][5],
-                             rectangle(boxsize,boxsize),
+                            vertBuff,
+                             elemBuff,
+                             numElems,
                              skyboxShader,
                              N.array((1.0,1.0),dtype=N.float32))
 

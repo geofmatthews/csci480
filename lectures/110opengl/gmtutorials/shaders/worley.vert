@@ -17,12 +17,14 @@ out vec4 frageye;
 out vec4 fragposition;
 out vec4 positionworldspace;
 out vec4 positionobjectspace;
+out vec4 positioncameraspace;
 
 void main()
 {
   fraguv = uv;
   positionobjectspace = position;
   positionworldspace = model * position;
+  positioncameraspace = view * model * position;
   // Let's do the lighting calculations in camera space
   mat4 vm = view * model;
   fragnormal =  vm * normal;

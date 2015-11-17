@@ -1,4 +1,4 @@
-# Using mesh objects
+# Lots of objects
 
 import os,sys
 
@@ -10,11 +10,13 @@ from pygame.locals import *
 import numpy as N
 
 sys.path.insert(0, os.path.join("..","utilities"))
-from psurfaces import torus
+from psurfaces import torus, sphere
+from polyhedra import tetrahedron
+from obj import readOBJ
 from transforms import *
 from loadtexture import loadTexture
 from camera import Camera
-from meshes import coloredMesh
+from meshes import *
 
 def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
@@ -36,18 +38,48 @@ def initializeVAO():
 # Must be called after we have an OpenGL context, i.e. after the pygame
 # window is created
 def init():
-    global theMesh, theLight, theCamera, theScreen
+    global theMeshes, theLight, theCamera, theScreen
     initializeVAO()
     glEnable(GL_CULL_FACE)
     glEnable(GL_DEPTH_TEST)
     # Add our objects
     # LIGHT
     theLight = N.array((0.577, 0.577, 0.577, 0.0),dtype=N.float32)
-    # OBJECT
-    theMesh = coloredMesh(N.array((0,1,1,1),dtype=N.float32),
-                          torus(0.5, 0.2, 64, 16),
-                          makeShader("phongshader.vert", "phongshader.frag")
-                          )
+    # OBJECTS
+    theMeshes = []
+    phongshader = makeShader("phong.vert","phong.frag")
+    suzanne = readOBJ("suzanne.obj")
+    for i in range(100):
+        if i % 4 == 0:
+            major = N.random.random()*2
+            minor = major*0.25
+            verts,elements = torus(major, minor, 64, 16)
+        elif i % 4 == 1:
+            radius = N.random.random()*2
+            verts,elements = sphere(radius, 64, 32)
+        elif i % 4 == 2:
+            verts,elements = suzanne
+        else:
+            size = N.random.random()*4
+            verts,elements = tetrahedron(size)            
+        newmesh = coloredMesh(N.array((N.random.random(),
+                                       N.random.random(),
+                                       N.random.random(),
+                                       1.0), dtype=N.float32),
+                              getArrayBuffer(verts),
+                              getElementBuffer(elements),
+                              len(elements),
+                              phongshader)
+        x = N.random.random()*20-10
+        y = N.random.random()*20-10
+        z = N.random.random()*20-10
+        newmesh.moveRight(x)
+        newmesh.moveUp(y)
+        newmesh.moveBack(z)
+        newmesh.pitch(x)
+        newmesh.yaw(y)
+        newmesh.roll(z)
+        theMeshes.append(newmesh)
     # CAMERA
     width, height = theScreen.get_size()
     aspectRatio = float(width)/float(height)
@@ -55,7 +87,6 @@ def init():
     far = 100.0
     lens = 4.0  # "longer" lenses mean more telephoto
     theCamera = Camera(lens, near, far, aspectRatio)
-    theCamera.moveBack(3)
 
 # Called to redraw the contents of the window
 def display(time):
@@ -66,9 +97,11 @@ def display(time):
     glClear(GL_DEPTH_BUFFER_BIT)
 
     # Set the shader program
-    theMesh.display(theCamera.view(),
-                    theCamera.projection(),
-                    N.dot(Yrot(time), theLight))
+    for mesh in theMeshes:
+        mesh.yaw(0.01)
+        mesh.display(theCamera.view(),
+                     theCamera.projection(),
+                     N.dot(Yrot(time), theLight))
 
 def main():
     global theCamera, theScreen
@@ -102,6 +135,8 @@ def main():
 
         # arrow keys for movement:
         movespeed = 0.05
+        if pressed[K_LSHIFT]:
+            movespeed *= 4
         if pressed[K_d] | pressed[K_RIGHT]:
             theCamera.moveRight(movespeed)
         if pressed[K_a] | pressed[K_LEFT]:

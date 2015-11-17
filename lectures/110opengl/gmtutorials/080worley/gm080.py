@@ -1,4 +1,9 @@
 # Worley noise
+# Try changing the worley function
+# Change from objectspace to worldspace to cameraspace
+# For castles, use worldspace so all parts appear to be made
+# from the same stones.
+#
 # For a nice galery look at:
 # https://code.google.com/p/fractalterraingeneration/wiki/Cell_Noise
 
@@ -46,9 +51,12 @@ def init():
     # LIGHT
     theLight = N.array((0.577, 0.577, 0.577, 0.0),dtype=N.float32)
     # OBJECT
+    verts,elements = torus(10.0, 4.0, 128, 32)
     theMesh = proceduralMesh(N.array((1.0,0.5,0.25,1.0),dtype=N.float32),
                              100.0,
-                             torus(10.0, 4.0, 128, 32),
+                             getArrayBuffer(verts),
+                             getElementBuffer(elements),
+                             len(elements),
                              makeShader("worley.vert", "worley.frag")
                              )
     # CAMERA
@@ -68,9 +76,10 @@ def display(time):
     glClear(GL_COLOR_BUFFER_BIT)
     glClear(GL_DEPTH_BUFFER_BIT)
 
-    theMesh.pitch(0.01)
-    theMesh.yaw(0.01)
-    theMesh.roll(0.01)
+    meshspeed = 0.005
+    theMesh.pitch(meshspeed)
+    theMesh.yaw(meshspeed)
+    theMesh.roll(meshspeed)
     theMesh.display(theCamera.view(),
                     theCamera.projection(),
                     theLight)

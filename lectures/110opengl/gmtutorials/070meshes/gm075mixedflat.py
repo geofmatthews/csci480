@@ -12,6 +12,7 @@ import numpy as N
 sys.path.insert(0, os.path.join("..","utilities"))
 from psurfaces import torus, sphere
 from polyhedra import tetrahedron
+from obj import readOBJ
 from transforms import *
 from loadtexture import loadTexture
 from camera import Camera
@@ -63,7 +64,9 @@ def init():
             verts = tetrahedron(size)            
         if i % 5 == 0:
             newmesh = flatTexturedMesh(colorTexture,
-                                       verts,
+                                       getArrayBuffer(verts[0]),
+                                       getElementBuffer(verts[1]),
+                                       len(verts[1]),
                                        flatshader,
                                        N.array((0.5,0.5),dtype=N.float32))
         else:
@@ -71,7 +74,9 @@ def init():
                                            N.random.random(),
                                            N.random.random(),
                                            1.0), dtype=N.float32),
-                                  verts,
+                                  getArrayBuffer(verts[0]),
+                                  getElementBuffer(verts[1]),
+                                  len(verts[1]),
                                   phongshader)
         x = N.random.random()*20-10
         y = N.random.random()*20-10
@@ -104,7 +109,7 @@ def display(time):
         mesh.yaw(0.01)
         mesh.display(theCamera.view(),
                      theCamera.projection(),
-                     N.dot(Yrot(time), theLight))
+                     0)
 
 def main():
     global theCamera, theScreen

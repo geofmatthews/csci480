@@ -1,5 +1,5 @@
-# Long tunnel illustrating filtering
-# change magfilter to look at pixels close up.
+# Lots of objects
+# All objects of a given kind share a vertex buffer
 
 import os,sys
 
@@ -11,12 +11,13 @@ from pygame.locals import *
 import numpy as N
 
 sys.path.insert(0, os.path.join("..","utilities"))
-from specials import rectangle
+from psurfaces import torus, sphere
+from polyhedra import tetrahedron
+from obj import readOBJ
 from transforms import *
-from loadtexture import *
+from loadtexture import loadTexture
 from camera import Camera
-from meshes import flatTexturedMesh
-from specials import rectangle
+from meshes import *
 
 def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
@@ -34,69 +35,63 @@ def initializeVAO():
     vaoArray = glGenVertexArrays(n)
     glBindVertexArray( vaoArray )
 
-def makeObjects(minFilter, magFilter, width, height, depth, useAniso):
-    global theShader
-    floorColor = loadTexture("KirksEntry-ColorMap.png",
-                             minFilter,magFilter,useAniso=useAniso)
-    floor = flatTexturedMesh(floorColor,
-                             rectangle(width, depth),
-                             theShader,
-                             N.array((width, depth),dtype=N.float32))
-    floor.pitch(1)
-    floor.pitch(1)
-    floor.moveBack(-height*0.5)
-    ceilingColor = loadTexture("BorntoShine-ColorMap.png",
-                               minFilter,magFilter,useAniso=useAniso)
-    ceiling = flatTexturedMesh(ceilingColor,
-                               rectangle(width,depth),
-                               theShader,
-                               N.array((width, depth),dtype=N.float32))
-    ceiling.pitch(-1)
-    ceiling.pitch(-1)
-    ceiling.moveBack(-height*0.5)
-    wallColor = loadTexture("AlternatingBrick-ColorMap.png",
-                            minFilter,magFilter,useAniso=useAniso)
-    wallLeft = flatTexturedMesh(wallColor,
-                                rectangle(depth, height),
-                                theShader,
-                                N.array((depth,height), dtype=N.float32))
-    wallLeft.yaw(-1)
-    wallLeft.yaw(-1)
-    wallLeft.moveBack(-width*0.5)
-    wallRight = flatTexturedMesh(wallColor,
-                                 rectangle(depth, height),
-                                 theShader,
-                                 N.array((depth,height), dtype=N.float32))
-    wallRight.yaw(1)
-    wallRight.yaw(1)
-    wallRight.moveBack(-width*0.5)
-
-    return [ceiling, floor, wallLeft, wallRight]
-    
+# Called once at application start-up.
+# Must be called after we have an OpenGL context, i.e. after the pygame
+# window is created
 def init():
-    global theMeshes, theLight, theCamera, theScreen, theShader
+    global theMeshes, theLight, theCamera, theScreen
     initializeVAO()
     glEnable(GL_CULL_FACE)
     glEnable(GL_DEPTH_TEST)
     # Add our objects
     # LIGHT
     theLight = N.array((0.577, 0.577, 0.577, 0.0),dtype=N.float32)
-    # SHADER
-    theShader = makeShader("flattextured.vert", "flattextured.frag")
-    # OBJECT
-    width, height, depth = 3,3,100
-    magFilter = GL_NEAREST
-    theMeshes = [makeObjects(x,magFilter,width,height,depth,
-                             useAniso=y)
-                 for y in (False, True)
-                 for x in (GL_NEAREST,
-                           GL_LINEAR,
-                           GL_NEAREST_MIPMAP_NEAREST,
-                           GL_LINEAR_MIPMAP_NEAREST,
-                           GL_NEAREST_MIPMAP_LINEAR,
-                           GL_LINEAR_MIPMAP_LINEAR)
-    ]
-
+    # OBJECTS
+    theMeshes = []
+    phongshader = makeShader("phongshader.vert","phongshader.frag")
+    verts, elements = torus(1,0.25,64,16)
+    torusVerts = getArrayBuffer(verts)
+    torusElements = getElementBuffer(elements)
+    torusNum = len(elements)
+    verts, elements = sphere(1,64,32)
+    sphereVerts = getArrayBuffer(verts)
+    sphereElements = getArrayBuffer(elements)
+    sphereNum = len(elements)
+    verts, elements = tetrahedron(2)
+    tetraVerts = getArrayBuffer(verts)
+    tetraElements = getElementBuffer(elements)
+    tetraNum = len(elements)
+    verts, elements = readOBJ("suzanne.obj")
+    suzanneVerts = getArrayBuffer(verts)
+    suzanneElements = getElementBuffer(elements)
+    suzanneNum = len(elements)
+    for i in range(32):
+        if i % 4 == 0:
+            verts, elements, num = torusVerts, torusElements, torusNum
+        elif i % 4 == 1:
+            verts,elements, num = sphereVerts, sphereElements, torusNum
+        elif i % 4 == 2:
+            verts, elements, num = suzanneVerts, suzanneElements, torusNum
+        else:
+            verts, elements = tetraVerts, tetraElements
+        newmesh = coloredMesh(N.array((N.random.random(),
+                                       N.random.random(),
+                                       N.random.random(),
+                                       1.0), dtype=N.float32),
+                              verts,
+                              elements,
+                              num,
+                              phongshader)
+        x = N.random.random()*20-10
+        y = N.random.random()*20-10
+        z = N.random.random()*20-10
+        newmesh.moveRight(x)
+        newmesh.moveUp(y)
+        newmesh.moveBack(z)
+        newmesh.pitch(x)
+        newmesh.yaw(y)
+        newmesh.roll(z)
+        theMeshes.append(newmesh)
     # CAMERA
     width, height = theScreen.get_size()
     aspectRatio = float(width)/float(height)
@@ -104,35 +99,34 @@ def init():
     far = 100.0
     lens = 4.0  # "longer" lenses mean more telephoto
     theCamera = Camera(lens, near, far, aspectRatio)
-    theCamera.moveBack(depth*0.5)
 
 # Called to redraw the contents of the window
 def display(time):
-    global theMeshes,  theCamera, whichFilter
+    global theMesh, theLight, theCamera
     # Clear the display
     glClearColor(0.1, 0.2, 0.3, 0.0)
     glClear(GL_COLOR_BUFFER_BIT)
     glClear(GL_DEPTH_BUFFER_BIT)
 
     # Set the shader program
-    for mesh in theMeshes[whichFilter]:
+    for mesh in theMeshes:
+        mesh.yaw(0.01)
         mesh.display(theCamera.view(),
                      theCamera.projection(),
-                     0)
+                     N.dot(Yrot(time), theLight))
 
 def main():
-    global theCamera, theScreen, whichFilter
+    global theCamera, theScreen
     
     pygame.init()
     pygame.mouse.set_cursor(*pygame.cursors.broken_x)
 
     width, height = 1024,768
-    theScreen = pygame.display.set_mode((width, height), OPENGL|DOUBLEBUF)
+    theScreen = pygame.display.set_mode((width, height), OPENGL|DOUBLEBUF)#|FULLSCREEN)
 
     init()
     clock = pygame.time.Clock()
     time = 0.0
-    whichFilter = 0
     while True:
         clock.tick(30)
         time += 0.01
@@ -142,17 +136,6 @@ def main():
                 return
             if event.type == KEYUP and event.key == K_ESCAPE:
                 return
-            if event.type == KEYDOWN and event.key == K_SPACE:
-                whichFilter = (whichFilter + 1) % 12
-                print[(x,y)
-                      for y in ("","ANISOTROPIC")
-                      for x in ("GL_NEAREST",
-                                "GL_LINEAR",
-                                "GL_NEAREST_MIPMAP_NEAREST",
-                                "GL_LINEAR_MIPMAP_NEAREST",
-                                "GL_NEAREST_MIPMAP_LINEAR",
-                                "GL_LINEAR_MIPMAP_LINEAR")
-                      ][whichFilter]
         # Polling input is better for a real time camera
         pressed = pygame.key.get_pressed()
 
@@ -164,6 +147,8 @@ def main():
 
         # arrow keys for movement:
         movespeed = 0.05
+        if pressed[K_LSHIFT]:
+            movespeed *= 4
         if pressed[K_d] | pressed[K_RIGHT]:
             theCamera.moveRight(movespeed)
         if pressed[K_a] | pressed[K_LEFT]:

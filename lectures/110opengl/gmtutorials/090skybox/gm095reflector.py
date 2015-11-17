@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.join("..","utilities"))
 from psurfaces import *
 from polyhedra import *
 from specials import rectangle
+from obj import readOBJ
 from transforms import *
 from loadtexture import loadTexture
 from camera import Camera
@@ -38,7 +39,7 @@ def initializeVAO():
 # Must be called after we have an OpenGL context, i.e. after the pygame
 # window is created
 def init():
-    global theMesh, theBox, theLight, theCamera, theScreen, theTextures
+    global theMeshes, theBox, theLight, theCamera, theScreen, theTextures
     initializeVAO()
     glEnable(GL_CULL_FACE)
     glEnable(GL_DEPTH_TEST)
@@ -92,44 +93,110 @@ def init():
                          for img in images] )
     
 
-    # OBJECT
-    verts = torus(3.0, 1.0, 64, 16)
-    theMesh = reflectorMesh(theTextures[0][0],
-                            theTextures[0][1],
-                            theTextures[0][2],
-                            theTextures[0][3],
-                            theTextures[0][4],
-                            theTextures[0][5],
-                            verts,
-                            makeShader("reflector.vert",
-                                       "reflector.frag")
-                        )
+    # OBJECTS
+    theMeshes = []
+    verts,elements = torus(2.0, 0.5, 64, 16)
+    theMeshes.append(
+        reflectorMesh(theTextures[0][0],
+                      theTextures[0][1],
+                      theTextures[0][2],
+                      theTextures[0][3],
+                      theTextures[0][4],
+                      theTextures[0][5],
+                      getArrayBuffer(verts),
+                      getElementBuffer(elements),
+                      len(elements),
+                      makeShader("reflector.vert",
+                                 "reflector.frag")
+                  )
+    )
+    verts,elements = sphere(2.0, 64, 32)
+    theMeshes.append(
+        reflectorMesh(theTextures[0][0],
+                      theTextures[0][1],
+                      theTextures[0][2],
+                      theTextures[0][3],
+                      theTextures[0][4],
+                      theTextures[0][5],
+                      getArrayBuffer(verts),
+                      getElementBuffer(elements),
+                      len(elements),
+                      makeShader("reflector.vert",
+                                 "reflector.frag")
+                  )
+    )
+    verts,elements = tetrahedron(4.0)
+    theMeshes.append(
+        reflectorMesh(theTextures[0][0],
+                      theTextures[0][1],
+                      theTextures[0][2],
+                      theTextures[0][3],
+                      theTextures[0][4],
+                      theTextures[0][5],
+                      getArrayBuffer(verts),
+                      getElementBuffer(elements),
+                      len(elements),
+                      makeShader("reflector.vert",
+                                 "reflector.frag")
+                  )
+    )
+    verts,elements = readOBJ("suzanne.obj")
+    theMeshes.append(
+        reflectorMesh(theTextures[0][0],
+                      theTextures[0][1],
+                      theTextures[0][2],
+                      theTextures[0][3],
+                      theTextures[0][4],
+                      theTextures[0][5],
+                      getArrayBuffer(verts),
+                      getElementBuffer(elements),
+                      len(elements),
+                      makeShader("reflector.vert",
+                                 "reflector.frag")
+                  )
+    )
 
     # SKYBOX
     boxsize = 100.0
     skyboxShader = makeShader("flattextured.vert","flattextured.frag")
+    verts,elements = rectangle(boxsize, boxsize)
+    vertBuff = getArrayBuffer(verts)
+    elemBuff = getElementBuffer(elements)
+    numElems = len(elements)
     posx = flatTexturedMesh(theTextures[0][0],
-                            rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElems,
                             skyboxShader,
                             N.array((1.0,1.0),dtype=N.float32))
     negx = flatTexturedMesh(theTextures[0][1],
-                            rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElems,
                             skyboxShader,
                             N.array((1.0,1.0),dtype=N.float32))
     posy = flatTexturedMesh(theTextures[0][2],
-                            rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElems,
                             skyboxShader,
                             N.array((1.0,1.0),dtype=N.float32))
     negy = flatTexturedMesh(theTextures[0][3],
-                            rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElems,
                             skyboxShader,
                             N.array((1.0,1.0),dtype=N.float32))
     posz =  flatTexturedMesh(theTextures[0][4],
-                             rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElems,
                              skyboxShader,
                              N.array((1.0,1.0),dtype=N.float32))
     negz =  flatTexturedMesh(theTextures[0][5],
-                             rectangle(boxsize,boxsize),
+                            vertBuff,
+                            elemBuff,
+                            numElems,
                              skyboxShader,
                              N.array((1.0,1.0),dtype=N.float32))
 
@@ -170,7 +237,7 @@ def init():
 
 # Called to redraw the contents of the window
 def display(time):
-    global theMesh, theBox, theLight, theCamera
+    global theMeshes, theBox, theLight, theCamera, whichMesh
     # Clear the display
     glClearColor(0.1, 0.2, 0.3, 0.0)
     glClear(GL_COLOR_BUFFER_BIT)
@@ -184,15 +251,20 @@ def display(time):
     glEnable(GL_DEPTH_TEST)
     # display the mesh
     meshspeed = 0.01
-    theMesh.pitch(meshspeed)
-    theMesh.yaw(meshspeed)
-    theMesh.roll(meshspeed)
+    theMesh = theMeshes[whichMesh]
+    if whichMesh == 1:  # sphere
+        theMesh.moveRight(meshspeed*4)
+        theMesh.yaw(meshspeed*4)
+    else:
+        theMesh.pitch(meshspeed)
+        theMesh.yaw(meshspeed)
+        theMesh.roll(meshspeed)
     theMesh.display(theCamera.view(),
                     theCamera.projection(),
                     theLight)
 
 def main():
-    global theCamera, theScreen, theMeshes, theTextures, theMesh, theBox
+    global theCamera, theScreen, theMeshes, theTextures, theBox, whichMesh
     
     pygame.init()
     pygame.mouse.set_cursor(*pygame.cursors.broken_x)
@@ -203,6 +275,7 @@ def main():
     init()
     clock = pygame.time.Clock()
     whichTexture = 0
+    whichMesh = 0
     time = 0.0
     while True:
         clock.tick(30)
@@ -219,12 +292,16 @@ def main():
                 for i,mesh in enumerate(theBox):
                     mesh.texture = theTextures[whichTexture][i]
                 # change texture on object, too
-                theMesh.posxTexture = theTextures[whichTexture][0]
-                theMesh.negxTexture = theTextures[whichTexture][1]
-                theMesh.posyTexture = theTextures[whichTexture][2]
-                theMesh.negyTexture = theTextures[whichTexture][3]
-                theMesh.poszTexture = theTextures[whichTexture][4]
-                theMesh.negzTexture = theTextures[whichTexture][5]
+                for theMesh in theMeshes:
+                    theMesh.posxTexture = theTextures[whichTexture][0]
+                    theMesh.negxTexture = theTextures[whichTexture][1]
+                    theMesh.posyTexture = theTextures[whichTexture][2]
+                    theMesh.negyTexture = theTextures[whichTexture][3]
+                    theMesh.poszTexture = theTextures[whichTexture][4]
+                    theMesh.negzTexture = theTextures[whichTexture][5]
+            if event.type == KEYDOWN and event.key == K_RALT:
+                whichMesh += 1
+                whichMesh %= 4
 
         # Polling input is better for a real time camera
         pressed = pygame.key.get_pressed()

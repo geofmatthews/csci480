@@ -21,6 +21,6 @@ void main()
   vec4 positioncameraspace = view * positionworldspace;
   // Where is the eye in worldspace?
   // This inverse is inefficient, but easier to do here
-  frageye =  inverse(view) * normalize(vec4(0.0,0.0,0.0,1.0) - positioncameraspace);
+  frageye =  normalize((inverse(view) * vec4(0.0,0.0,0.0,1.0)) - positionworldspace);
   gl_Position = projection * positioncameraspace;
 }

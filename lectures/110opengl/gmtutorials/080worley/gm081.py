@@ -1,4 +1,5 @@
-# Lots of objects
+# Worley noise
+# Two objects (not moving) so the continuous texture can be seen in world space
 
 import os,sys
 
@@ -10,12 +11,11 @@ from pygame.locals import *
 import numpy as N
 
 sys.path.insert(0, os.path.join("..","utilities"))
-from psurfaces import torus, sphere
-from polyhedra import tetrahedron
+from psurfaces import *
 from transforms import *
 from loadtexture import loadTexture
 from camera import Camera
-from meshes import texturedMesh
+from meshes import *
 
 def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
@@ -45,35 +45,25 @@ def init():
     # LIGHT
     theLight = N.array((0.577, 0.577, 0.577, 0.0),dtype=N.float32)
     # OBJECTS
-    theMeshes = []
-    bumpshader = makeShader("bumpmap.vert","bumpmap.frag")
-    colorTexture = loadTexture("brickwork-texture.jpg")
-    normalTexture = loadTexture("brickwork_normal-map.jpg")
-    for i in range(100):
-        if i % 3 == 0:
-            major = N.random.random()*2
-            minor = major*0.25
-            verts = torus(major, minor, 64, 16)
-        elif i % 3 == 1:
-            radius = N.random.random()*2
-            verts = sphere(radius, 64, 32)
-        else:
-            size = N.random.random()*4
-            verts = tetrahedron(size)            
-        newmesh = texturedMesh(colorTexture,
-                               normalTexture,
-                               verts,
-                               bumpshader)
-        x = N.random.random()*20-10
-        y = N.random.random()*20-10
-        z = N.random.random()*20-10
-        newmesh.moveRight(x)
-        newmesh.moveUp(y)
-        newmesh.moveBack(z)
-        newmesh.pitch(x)
-        newmesh.yaw(y)
-        newmesh.roll(z)
-        theMeshes.append(newmesh)
+    worleyShader = makeShader("worley.vert", "worley.frag")
+    torusVerts, torusElements = torus(10.0, 4.0, 128, 32)
+    sphereVerts, sphereElements = sphere(8.0, 128, 32)
+    theMeshes = [proceduralMesh(N.array((1.0,0.5,0.25,1.0),dtype=N.float32),
+                                100.0,
+                                getArrayBuffer(torusVerts),
+                                getElementBuffer(torusElements),
+                                len(torusElements),
+                                worleyShader
+                            ),
+                 proceduralMesh(N.array((1.0,0.5,0.25,1.0),dtype=N.float32),
+                                100.0,
+                                getArrayBuffer(sphereVerts),
+                                getArrayBuffer(sphereElements),
+                                len(sphereElements),
+                                worleyShader
+                            )]
+    theMeshes[1].moveUp(-10.0)
+                 
     # CAMERA
     width, height = theScreen.get_size()
     aspectRatio = float(width)/float(height)
@@ -81,22 +71,25 @@ def init():
     far = 100.0
     lens = 4.0  # "longer" lenses mean more telephoto
     theCamera = Camera(lens, near, far, aspectRatio)
+    theCamera.moveBack(50)
 
 # Called to redraw the contents of the window
 def display(time):
-    global theMesh, theLight, theCamera
+    global theMeshes, theLight, theCamera
     # Clear the display
     glClearColor(0.1, 0.2, 0.3, 0.0)
     glClear(GL_COLOR_BUFFER_BIT)
     glClear(GL_DEPTH_BUFFER_BIT)
 
-    # Set the shader program
-    for mesh in theMeshes:
-        mesh.yaw(0.01)
-        mesh.display(theCamera.view(),
-                     theCamera.projection(),
-                     N.dot(Yrot(time), theLight))
-
+    meshspeed = 0.0
+    for theMesh in theMeshes:
+        theMesh.pitch(meshspeed)
+        theMesh.yaw(meshspeed)
+        theMesh.roll(meshspeed)
+        theMesh.display(theCamera.view(),
+                        theCamera.projection(),
+                        theLight)
+        
 def main():
     global theCamera, theScreen
     

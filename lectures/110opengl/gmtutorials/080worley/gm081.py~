@@ -1,4 +1,5 @@
-# Using mesh objects
+# Worley noise
+# Two objects (not moving) so the continuous texture can be seen in world space
 
 import os,sys
 
@@ -10,11 +11,11 @@ from pygame.locals import *
 import numpy as N
 
 sys.path.insert(0, os.path.join("..","utilities"))
-from psurfaces import torus
+from psurfaces import *
 from transforms import *
 from loadtexture import loadTexture
 from camera import Camera
-from meshes import coloredMesh
+from meshes import *
 
 def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
@@ -36,18 +37,27 @@ def initializeVAO():
 # Must be called after we have an OpenGL context, i.e. after the pygame
 # window is created
 def init():
-    global theMesh, theLight, theCamera, theScreen
+    global theMeshes, theLight, theCamera, theScreen
     initializeVAO()
     glEnable(GL_CULL_FACE)
     glEnable(GL_DEPTH_TEST)
     # Add our objects
     # LIGHT
     theLight = N.array((0.577, 0.577, 0.577, 0.0),dtype=N.float32)
-    # OBJECT
-    theMesh = coloredMesh(N.array((0,1,1,1),dtype=N.float32),
-                          torus(0.5, 0.2, 64, 16),
-                          makeShader("phongshader.vert", "phongshader.frag")
-                          )
+    # OBJECTS
+    worleyShader = makeShader("worley.vert", "worley.frag")
+    theMeshes = [proceduralMesh(N.array((1.0,0.5,0.25,1.0),dtype=N.float32),
+                                100.0,
+                                torus(10.0, 4.0, 128, 32),
+                                worleyShader
+                            ),
+                 proceduralMesh(N.array((1.0,0.5,0.25,1.0),dtype=N.float32),
+                                100.0,
+                                sphere(8.0, 128, 32),
+                                worleyShader
+                            )]
+    theMeshes[1].moveUp(-10.0)
+                 
     # CAMERA
     width, height = theScreen.get_size()
     aspectRatio = float(width)/float(height)
@@ -55,21 +65,25 @@ def init():
     far = 100.0
     lens = 4.0  # "longer" lenses mean more telephoto
     theCamera = Camera(lens, near, far, aspectRatio)
-    theCamera.moveBack(3)
+    theCamera.moveBack(50)
 
 # Called to redraw the contents of the window
 def display(time):
-    global theMesh, theLight, theCamera
+    global theMeshes, theLight, theCamera
     # Clear the display
     glClearColor(0.1, 0.2, 0.3, 0.0)
     glClear(GL_COLOR_BUFFER_BIT)
     glClear(GL_DEPTH_BUFFER_BIT)
 
-    # Set the shader program
-    theMesh.display(theCamera.view(),
-                    theCamera.projection(),
-                    N.dot(Yrot(time), theLight))
-
+    meshspeed = 0.0
+    for theMesh in theMeshes:
+        theMesh.pitch(meshspeed)
+        theMesh.yaw(meshspeed)
+        theMesh.roll(meshspeed)
+        theMesh.display(theCamera.view(),
+                        theCamera.projection(),
+                        theLight)
+        
 def main():
     global theCamera, theScreen
     
@@ -102,6 +116,8 @@ def main():
 
         # arrow keys for movement:
         movespeed = 0.05
+        if pressed[K_LSHIFT]:
+            movespeed *= 4
         if pressed[K_d] | pressed[K_RIGHT]:
             theCamera.moveRight(movespeed)
         if pressed[K_a] | pressed[K_LEFT]:

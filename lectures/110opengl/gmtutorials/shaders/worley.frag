@@ -14,6 +14,7 @@ in vec4 fragbitangent;
 in vec4 fragposition;
 in vec4 positionworldspace;
 in vec4 positionobjectspace;
+in vec4 positioncameraspace;
 in vec4 frageye;
 
 // Outs:
@@ -75,11 +76,11 @@ void voronoi_f1f2_3d(vec4 p, float jitter,
 }
 
 vec4 phong(vec4 color, vec4 normal, vec4 eye, vec4 reflect, vec4 light) {
-  float ambient = 0.2;
-  float diffuse = 0.8*clamp(dot(light, normal), 0.0, 1.0);
+  float ambient = 0.4;
+  float diffuse = 0.6*clamp(dot(light, normal), 0.0, 1.0);
   vec4 phongColor = (ambient + diffuse) * color;
   if (diffuse > 0.0) {
-    float specular = 0.8*pow(clamp(dot(reflect, eye), 0.0, 1.0), 8);
+    float specular = 0.4*pow(clamp(dot(reflect, eye), 0.0, 1.0), 8);
     phongColor += vec4(specular, specular, specular, 1.0);
   }
   return clamp(phongColor, 0.0, 1.0);
@@ -95,19 +96,26 @@ void main()
 
   float f1, f2;
   vec4 pos1, pos2;
-  float scaleCoords = 0.5;
-  float dither = 0.7;
+  float scaleCoords = 0.25;
+  float dither = 0.2;
   voronoi_f1f2_3d(positionobjectspace*scaleCoords,
 		  dither,
 		  f1, pos1,
 		  f2, pos2);
   // try f1, f2, 1-f1, f2-f1, etc.
-  //float worleyfunc = step((f2-f1), 0.125);
-  float worleyfunc = (f2-f1);
+  float worleyfunc = step((f2-f1), 0.0125);
+  //float worleyfunc = (f2-f1);
   vec4 newcolor = clamp(color*worleyfunc, 0.0, 1.0);
   newcolor.a = 1.0;
-  // to make good use of worley noise, we need the
-  // bumpmapping vectors, hence this
+
+  // alternatively, we can color with just cell noise
+  if (0==1) {
+    float noise = cellnoise(pos1);
+    newcolor = vec4(noise, noise, noise, 1.0);
+  }
+
+  // to make good use of worley noise, we may need the
+  // bumpmapping vectors and texture coords, hence this
   // hack to keep stuff from being optimized away:
   if (f1 > 1.0e10) {
     newcolor = newcolor+normal+tangent+bitangent+reflect+eye;

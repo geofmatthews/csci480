@@ -25,12 +25,6 @@ def getBuffer(arr, type):
     glBindBuffer(type, 0)
     return buff
 
-def getArrayBuffer(verts):
-    return getBuffer(verts, GL_ARRAY_BUFFER)
-
-def getElementBuffer(elements):
-    return getBuffer(elements, GL_ELEMENT_ARRAY_BUFFER)
-
 def vertexPointer(attrib, size, components, offset):
     if attrib >= 0:
         sizeOfFloat = 4
@@ -49,19 +43,16 @@ def bindTextureUnit(unit, texture, samplerUnif):
 
 class coloredMesh(Frame):
     """Use phong.vert and phong.frag"""
-    def __init__(self,
-                 color,
-                 arrayBuffer,
-                 elementBuffer,
-                 numElements,
-                 shader):
+    def __init__(self, color, vertexArray, shader):
         Frame.__init__(self)
         self.color = color
         self.shader = shader
         # send data to opengl context:
-        self.elementSize = numElements*sizeOfShort
-        self.arrayBuffer = arrayBuffer
-        self.elementBuffer = elementBuffer
+        vertices = vertexArray[0]
+        elements = vertexArray[1]
+        self.elementSize = len(elements)*sizeOfShort
+        self.arrayBuffer = getBuffer(vertices, GL_ARRAY_BUFFER)
+        self.elementBuffer = getBuffer(elements, GL_ELEMENT_ARRAY_BUFFER)
         # find attribute locations:
         self.positionAttrib = glGetAttribLocation(shader, "position")
         self.normalAttrib = glGetAttribLocation(shader, "normal")
@@ -90,20 +81,17 @@ class coloredMesh(Frame):
 
 class coloredTextureMesh(Frame):
     """Use textured.vert and textured.frag"""
-    def __init__(self,
-                 colortexture,
-                 arrayBuffer,
-                 elementBuffer,
-                 numElements,
-                 shader):
+    def __init__(self, colortexture, vertexArray, shader):
         Frame.__init__(self)
         self.useNormals = 1
         self.colorTexture = colortexture
         self.shader = shader
         # send data to opengl context:
-        self.elementSize = numElements*sizeOfShort
-        self.arrayBuffer = arrayBuffer
-        self.elementBuffer = elementBuffer
+        vertices = vertexArray[0]
+        elements = vertexArray[1]
+        self.elementSize = len(elements)*sizeOfShort
+        self.arrayBuffer = getBuffer(vertices, GL_ARRAY_BUFFER)
+        self.elementBuffer = getBuffer(elements, GL_ELEMENT_ARRAY_BUFFER)
         # find attribute locations:
         self.positionAttrib = glGetAttribLocation(shader, "position")
         self.normalAttrib = glGetAttribLocation(shader, "normal")
@@ -144,22 +132,18 @@ class coloredTextureMesh(Frame):
 
 class texturedMesh(Frame):
     """Use textured.vert and textured.frag"""
-    def __init__(self,
-                 colortexture,
-                 normaltexture,
-                 arrayBuffer,
-                 elementBuffer,
-                 numElements,
-                 shader):
+    def __init__(self, colortexture, normaltexture, vertexArray, shader):
         Frame.__init__(self)
         self.useNormals = 1
         self.colorTexture = colortexture
         self.normalTexture = normaltexture
         self.shader = shader
         # send data to opengl context:
-        self.elementSize = numElements*sizeOfShort
-        self.arrayBuffer = arrayBuffer
-        self.elementBuffer = elementBuffer
+        vertices = vertexArray[0]
+        elements = vertexArray[1]
+        self.elementSize = len(elements)*sizeOfShort
+        self.arrayBuffer = getBuffer(vertices, GL_ARRAY_BUFFER)
+        self.elementBuffer = getBuffer(elements, GL_ELEMENT_ARRAY_BUFFER)
         # find attribute locations:
         self.positionAttrib = glGetAttribLocation(shader, "position")
         self.normalAttrib = glGetAttribLocation(shader, "normal")
@@ -200,21 +184,17 @@ class texturedMesh(Frame):
 
 class flatTexturedMesh(Frame):
     """Use flattextured.vert and flattextured.frag"""
-    def __init__(self,
-                 texture,
-                 arrayBuffer,
-                 elementBuffer,
-                 numElements,
-                 shader,
-                 scaleuv):
+    def __init__(self, texture, vertexArray, shader, scaleuv):
         Frame.__init__(self)
         self.texture = texture
         self.shader = shader
         self.scaleuv = scaleuv
         # send data to opengl context:
-        self.elementSize = numElements*sizeOfShort
-        self.arrayBuffer = arrayBuffer
-        self.elementBuffer = elementBuffer
+        vertices = vertexArray[0]
+        elements = vertexArray[1]
+        self.elementSize = len(elements)*sizeOfShort
+        self.arrayBuffer = getBuffer(vertices, GL_ARRAY_BUFFER)
+        self.elementBuffer = getBuffer(elements, GL_ELEMENT_ARRAY_BUFFER)
         # find attribute locations:
         self.positionAttrib = glGetAttribLocation(shader, "position")
         self.uvAttrib = glGetAttribLocation(shader, "uv")
@@ -245,21 +225,17 @@ class flatTexturedMesh(Frame):
 
 class proceduralMesh(Frame):
     """Use bumpmap.vert and knot.frag, e.g."""
-    def __init__(self,
-                 color,
-                 scaleCoords,
-                 arrayBuffer,
-                 elementBuffer,
-                 numElements,
-                 shader):
+    def __init__(self, color, scaleCoords, vertexArray, shader):
         Frame.__init__(self)
         self.color = color
         self.scaleCoords = scaleCoords
         self.shader = shader
         # send data to opengl context:
-        self.elementSize = numElements*sizeOfShort
-        self.arrayBuffer = arrayBuffer
-        self.elementBuffer = elementBuffer
+        vertices = vertexArray[0]
+        elements = vertexArray[1]
+        self.elementSize = len(elements)*sizeOfShort
+        self.arrayBuffer = getBuffer(vertices, GL_ARRAY_BUFFER)
+        self.elementBuffer = getBuffer(elements, GL_ELEMENT_ARRAY_BUFFER)
         # find attribute locations:
         self.positionAttrib = glGetAttribLocation(shader, "position")
         self.normalAttrib = glGetAttribLocation(shader, "normal")
@@ -306,9 +282,7 @@ class reflectorMesh(Frame):
                  negyTexture,
                  poszTexture,
                  negzTexture,
-                 arrayBuffer,
-                 elementBuffer,
-                 numElements,
+                 vertexArray,
                  shader):
         Frame.__init__(self)
         self.posxTexture = posxTexture
@@ -319,9 +293,11 @@ class reflectorMesh(Frame):
         self.negzTexture = negzTexture
         self.shader = shader
         # send data to opengl context:
-        self.elementSize = numElements*sizeOfShort
-        self.arrayBuffer = arrayBuffer
-        self.elementBuffer = elementBuffer
+        vertices = vertexArray[0]
+        elements = vertexArray[1]
+        self.elementSize = len(elements)*sizeOfShort
+        self.arrayBuffer = getBuffer(vertices, GL_ARRAY_BUFFER)
+        self.elementBuffer = getBuffer(elements, GL_ELEMENT_ARRAY_BUFFER)
         # find attribute locations:
         self.positionAttrib = glGetAttribLocation(shader, "position")
         self.normalAttrib = glGetAttribLocation(shader, "normal")
