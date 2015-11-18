@@ -253,12 +253,12 @@ def display(time):
     meshspeed = 0.01
     theMesh = theMeshes[whichMesh]
     if whichMesh == 1:  # sphere
-        theMesh.moveRight(meshspeed*4)
-        theMesh.yaw(meshspeed*4)
+        theMesh.moveRight(meshspeed*10)
+        theMesh.yaw(meshspeed*10)
     else:
         theMesh.pitch(meshspeed)
-        theMesh.yaw(meshspeed)
-        theMesh.roll(meshspeed)
+        theMesh.yaw(meshspeed*1.1)
+        theMesh.roll(meshspeed*1.2)
     theMesh.display(theCamera.view(),
                     theCamera.projection(),
                     theLight)
