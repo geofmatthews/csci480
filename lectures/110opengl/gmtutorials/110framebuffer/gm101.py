@@ -46,7 +46,7 @@ def init():
     glEnable(GL_DEPTH_TEST)
     # Add our objects
     # LIGHT
-    theLight = N.array((0.577, 0.577, 0.577, 0.0),dtype=N.float32)
+    theLight = N.array((-0.577, 0.577, 0.577, 0.0),dtype=N.float32)
     # OBJECTS
     verts, elements = readOBJ("suzanne.obj")
     arrayBuffer = getArrayBuffer(verts)

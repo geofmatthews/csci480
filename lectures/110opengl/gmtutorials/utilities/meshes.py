@@ -207,11 +207,13 @@ class flatTexturedMesh(Frame):
                  elementBuffer,
                  numElements,
                  shader,
-                 scaleuv= N.array((1,1),dtype=N.float32)):
+                 scaleuv= N.array((1,1),dtype=N.float32),
+                 fade = 1.0):
         Frame.__init__(self)
         self.texture = texture
         self.shader = shader
         self.scaleuv = scaleuv
+        self.fade = fade
         # send data to opengl context:
         self.elementSize = numElements*sizeOfShort
         self.arrayBuffer = arrayBuffer
@@ -225,10 +227,12 @@ class flatTexturedMesh(Frame):
         self.modelUnif = glGetUniformLocation(shader, "model")
         self.viewUnif = glGetUniformLocation(shader, "view")
         self.projectionUnif = glGetUniformLocation(shader, "projection")
+        self.fadeUnif = glGetUniformLocation(shader, "fade")
 
     def display(self, view, projection, light):
         glUseProgram(self.shader)
         # uniforms
+        glUniform1f(self.fadeUnif, self.fade)
         glUniform2fv(self.scaleuvUnif, 1, self.scaleuv)
         glUniformMatrix4fv(self.viewUnif, 1, GL_TRUE, view)
         glUniformMatrix4fv(self.projectionUnif, 1, GL_TRUE, projection)

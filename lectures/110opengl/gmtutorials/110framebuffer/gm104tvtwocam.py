@@ -1,6 +1,5 @@
 # Using framebuffers to make a reflection
-# Now we render the second camera into a framebuffer,
-# and use that to texture the mirror.
+# two cameras with same aspect ratio, space switches between cameras
 
 import os,sys
 
@@ -77,7 +76,7 @@ def init():
 
     # Add our objects
     # LIGHT
-    theLight = N.array((0.577, 0.577, 0.577, 0.0),dtype=N.float32)
+    theLight = N.array((-0.577, 0.577, 0.577, 0.0),dtype=N.float32)
     # OBJECTS
     verts, elements = readOBJ("suzanne.obj")
     arrayBuffer = getArrayBuffer(verts)
@@ -90,43 +89,45 @@ def init():
                           numElements,
                           phongShader
                           )
-    verts, elements = rectangle(2,2)
+    width, height = theScreen.get_size()
+    aspectRatio = float(width)/float(height)
+    verts, elements = rectangle(2*aspectRatio,2)
     arrayBuffer = getArrayBuffer(verts)
     elementBuffer = getElementBuffer(elements)
     numElements = len(elements)
-    texturedShader = makeShader("textured.vert", "textured.frag")
+    texturedShader = makeShader("flattextured.vert", "flattextured.frag")
     texture = loadTexture("grid.png")
-    theTV = coloredTextureMesh(texture,
-                                    arrayBuffer,
-                                    elementBuffer,
-                                    numElements,
-                                    texturedShader)
-
+    theTV = flatTexturedMesh(texture,
+                             arrayBuffer,
+                             elementBuffer,
+                             numElements,
+                             texturedShader,
+                             fade=0.9)
+    
     theTV.moveRight(2)
+    theTV.yaw(-1)
     
     # CAMERA
-    width, height = theScreen.get_size()
-    aspectRatio = float(width)/float(height)
     near = 0.01
     far = 100.0
     lens = 4.0  # "longer" lenses mean more telephoto
     theCamera = Camera(lens, near, far, aspectRatio)
     theCamera.moveBack(10)
 
-    # MIRROR CAMERA
-    theTVCamera = Camera(lens, near, far, 1.0)
+    # TV CAMERA
+    theTVCamera = Camera(lens, near, far, float(width)/float(height))
     theTVCamera.yaw(-0.5)
     theTVCamera.moveBack(10)
 
 # Called to redraw the contents of the window
 def display(time):
     global theMesh, theTV, theLight, theCamera, \
-    theTVCamera, theFramebuffer, theScreen
+    theTVCamera, theFramebuffer, theScreen, whichCamera, whichTVCamera
     
     # do stuff in the scene:
     theMesh.yaw(0.01)
     
-    # first draw the mirror camera to our framebuffer texture
+    # first draw the tv camera to our framebuffer texture
 
     # bind to our framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, theFramebuffer)
@@ -138,12 +139,16 @@ def display(time):
     glClear(GL_COLOR_BUFFER_BIT)
     glClear(GL_DEPTH_BUFFER_BIT)
 
-    view = theTVCamera.view()
-    proj = theTVCamera.projection()
+    if whichTVCamera == 0:
+        view = theTVCamera.view()
+        proj = theTVCamera.projection()
+    else:
+        view = theCamera.view()
+        proj = theCamera.projection()
     theMesh.display(view, proj, theLight)
     theTV.display(view, proj, theLight)
 
-    # now set the texture of our mirror to the rendered texture
+    # now set the texture of our tv to the rendered texture
     theTV.texture = theFramebuffer
 
     # now draw the regular camera to the default framebuffer
@@ -156,13 +161,18 @@ def display(time):
     glClear(GL_COLOR_BUFFER_BIT)
     glClear(GL_DEPTH_BUFFER_BIT)
 
-    view = theCamera.view()
-    proj = theCamera.projection()
+    if whichCamera == 0:
+        view = theCamera.view()
+        proj = theCamera.projection()
+    else:
+        view = theTVCamera.view()
+        proj = theTVCamera.projection()
+
     theMesh.display(view, proj, theLight)
     theTV.display(view, proj, theLight)
 
 def main():
-    global theCamera, theScreen, whichCamera
+    global theCamera, theScreen, whichCamera, whichTVCamera
     
     pygame.init()
     pygame.mouse.set_cursor(*pygame.cursors.broken_x)
@@ -173,6 +183,8 @@ def main():
     init()
     clock = pygame.time.Clock()
     time = 0.0
+    whichCamera = 0
+    whichTVCamera = 0
     while True:
         clock.tick(30)
         time += 0.01
@@ -182,6 +194,13 @@ def main():
                 return
             if event.type == KEYUP and event.key == K_ESCAPE:
                 return
+            if event.type == KEYDOWN and event.key == K_SPACE:
+                whichCamera += 1
+                whichCamera %= 2
+            if event.type == KEYDOWN and event.key == K_LALT:
+                whichTVCamera += 1
+                whichTVCamera %= 2
+            
         # Polling input is better for a real time camera
         pressed = pygame.key.get_pressed()
 
