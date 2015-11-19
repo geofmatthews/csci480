@@ -15,6 +15,7 @@ sizeOfShort = 2
 vertexSize = 18*sizeOfFloat
 
 from OpenGL.GL import *
+import numpy as N
 from ctypes import c_void_p
 from frames import Frame
 
@@ -98,7 +99,7 @@ class coloredTextureMesh(Frame):
                  shader):
         Frame.__init__(self)
         self.useNormals = 1
-        self.colorTexture = colortexture
+        self.texture = colortexture
         self.shader = shader
         # send data to opengl context:
         self.elementSize = numElements*sizeOfShort
@@ -136,7 +137,7 @@ class coloredTextureMesh(Frame):
         vertexPointer(self.bitangentAttrib,vertexSize, 4, 12)
         vertexPointer(self.uvAttrib,vertexSize, 2, 16)
         # bind our color texture unit
-        bindTextureUnit(0, self.colorTexture, self.colorSamplerUnif)
+        bindTextureUnit(0, self.texture, self.colorSamplerUnif)
         # draw
         glDrawElements(GL_TRIANGLES, self.elementSize,
                        GL_UNSIGNED_SHORT, c_void_p(0))
@@ -206,7 +207,7 @@ class flatTexturedMesh(Frame):
                  elementBuffer,
                  numElements,
                  shader,
-                 scaleuv):
+                 scaleuv= N.array((1,1),dtype=N.float32)):
         Frame.__init__(self)
         self.texture = texture
         self.shader = shader
