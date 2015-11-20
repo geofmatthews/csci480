@@ -1,3 +1,8 @@
+# Create a framebuffer with color buffer and depth buffer,
+# for multipass rendering effects.
+# Some of this could be reused in multiple framebuffers,
+# e.g. the depth buffer,
+# but for simplicity we make each one separate.
 
 from OpenGL.GL import *
 from ctypes import c_void_p

@@ -68,7 +68,7 @@ def init():
     far = 100.0
     lens = 4.0  # "longer" lenses mean more telephoto
     theCamera = Camera(lens, near, far, aspectRatio)
-    theCamera.moveBack(8)
+    theCamera.moveBack(6)
 
 # Called to redraw the contents of the window
 def display(time):
@@ -76,9 +76,9 @@ def display(time):
         theScreen, resolution
     
     # do stuff in the scene:
-    meshSpeed = 0.05
-    theMesh.yaw(meshSpeed)
-    theMesh.moveRight(meshSpeed)
+    meshSpeed = 0.6
+    meshTime = 2.0*N.pi*time/meshSpeed
+    theMesh.moveRight(meshSpeed*N.cos(meshTime))
     
     # draw the regular camera to the default framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, 0)
@@ -101,7 +101,7 @@ def main():
     pygame.init()
     pygame.mouse.set_cursor(*pygame.cursors.broken_x)
 
-    width, height = 1024,768
+    width, height = 1024,194
     theScreen = pygame.display.set_mode((width, height), OPENGL|DOUBLEBUF)
 
     init()
@@ -141,22 +141,22 @@ def main():
         if pressed[K_s] | pressed[K_DOWN]:
             theCamera.moveBack(movespeed)
 
-        # mouse for rotation
-        rotspeed = 0.1
-        mousespeed = 0.5*rotspeed
-        x,y = pygame.mouse.get_pos()
-        if (x > 0) & (y > 0):
-            xDisplacement = x - 0.5*width
-            yDisplacement = y - 0.5*height
-            # normalize:
-            xNormed = xDisplacement/width
-            yNormed = -yDisplacement/height
-            newx = int(x - xDisplacement*mousespeed)
-            newy = int(y - yDisplacement*mousespeed)
-            if (newx != x) | (newy != y):
-                theCamera.pan(-xNormed * rotspeed)
-                theCamera.tilt(-yNormed * rotspeed)
-                pygame.mouse.set_pos((newx,newy))
+#        # mouse for rotation
+#        rotspeed = 0.1
+#        mousespeed = 0.5*rotspeed
+#        x,y = pygame.mouse.get_pos()
+#        if (x > 0) & (y > 0):
+#            xDisplacement = x - 0.5*width
+#            yDisplacement = y - 0.5*height
+#            # normalize:
+#            xNormed = xDisplacement/width
+#            yNormed = -yDisplacement/height
+#            newx = int(x - xDisplacement*mousespeed)
+#            newy = int(y - yDisplacement*mousespeed)
+#            if (newx != x) | (newy != y):
+#                theCamera.pan(-xNormed * rotspeed)
+#                theCamera.tilt(-yNormed * rotspeed)
+#                pygame.mouse.set_pos((newx,newy))
 
         display(time)
         pygame.display.flip()

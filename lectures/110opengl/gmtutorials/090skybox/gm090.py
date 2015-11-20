@@ -104,7 +104,7 @@ def init():
                          for img in images] )
     
     # SKYBOX
-    boxsize = 1000.0
+    boxsize = 100.0
     skyboxShader = makeShader("flattextured.vert","flattextured.frag")
     verts,elements = rectangle(boxsize, boxsize)
     vertBuff = getArrayBuffer(verts)
@@ -243,7 +243,7 @@ def main():
             theCamera.zoomOut(1.015)
 
         # arrow keys for movement:
-        movespeed = 0.05
+        movespeed = 0.1
         if pressed[K_LSHIFT]:
             movespeed *= 4
         if pressed[K_d] | pressed[K_RIGHT]:

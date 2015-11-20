@@ -1,4 +1,5 @@
-# Skybox with reflection
+# Skybox with reflection of more objects using 6 cameras
+# and framebuffers for the reflector's textures
 
 import os,sys
 
@@ -14,10 +15,12 @@ from psurfaces import *
 from polyhedra import *
 from specials import rectangle
 from obj import readOBJ
+from randomobjects import makeObjects
 from transforms import *
 from loadtexture import loadTexture
 from camera import Camera
 from meshes import *
+from framebuffer import getFramebuffer
 
 def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
@@ -39,14 +42,32 @@ def initializeVAO():
 # Must be called after we have an OpenGL context, i.e. after the pygame
 # window is created
 def init():
-    global theMeshes, theBox, theLight, theCamera, theScreen, theTextures
+    global theMeshes, theBox, theLight, theCamera, theScreen, theTextures,\
+        nonReflectors, theFramebuffers
     initializeVAO()
     glEnable(GL_CULL_FACE)
     glEnable(GL_DEPTH_TEST)
+    # REFLECTOR CAMERAS AND FRAMEBUFFERS
+    theFramebuffers = [getFramebuffer(512) for x in range(6)]
+    theCameras = [Camera(1.0, 0.01, 1000.0, 1.0) for x in range(6)]
+    # X
+    theCameras[0].postTransform = Yrot(-0.5*N.pi)
+    theCameras[1].postTransform = Yrot(+0.5*N.pi)
+    # Y
+    theCameras[2].postTransform = Xrot(+0.5*N.pi)
+    theCameras[3].postTransform = Xrot(-0.5*N.pi)
+    # Z
+    theCameras[4].postTransform = Yrot(N.pi)
+    # negZ camera already pointed
+
     # LIGHT
     # put the light in a direction to agree with the skybox
     theLight = N.array((0.707, 0.707, 0.0, 0.0),dtype=N.float32)
     # we need the textures to define our reflecting objects
+
+    # NONREFLECTING OBJECTS
+    nonReflectors = makeObjects(32)
+
     # TEXTURES
     theTextures = []
     images = ["figposx.png",
@@ -93,9 +114,9 @@ def init():
                          for img in images] )
     
 
-    # OBJECTS
+    # REFLECTING OBJECTS
     theMeshes = []
-    verts,elements = torus(2.0, 0.5, 64, 16)
+    verts,elements = torus(2.0, 0.75, 64, 16)
     theMeshes.append(
         reflectorMesh(theTextures[0][0],
                       theTextures[0][1],
@@ -237,7 +258,8 @@ def init():
 
 # Called to redraw the contents of the window
 def display(time):
-    global theMeshes, theBox, theLight, theCamera, whichMesh
+    global theMeshes, theBox, theLight, theCamera, whichMesh, \
+        nonReflectors, theFramebuffers
     # Clear the display
     glClearColor(0.1, 0.2, 0.3, 0.0)
     glClear(GL_COLOR_BUFFER_BIT)
@@ -249,6 +271,16 @@ def display(time):
                      theCamera.projection(),
                      None)
     glEnable(GL_DEPTH_TEST)
+    # display nonreflectors
+    for nr in nonReflectors:
+        x,y,z,w = nr.position*time*0.5
+        nr.postTransform =  N.dot(Zrot(z),
+                                  N.dot(Yrot(y),
+                                        Xrot(x)))
+
+        nr.display(theCamera.view(),
+                   theCamera.projection(),
+                   theLight)
     # display the mesh
     meshspeed = 0.01
     theMesh = theMeshes[whichMesh]

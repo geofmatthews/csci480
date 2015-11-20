@@ -46,6 +46,11 @@ def init():
     glEnable(GL_DEPTH_TEST)
 
     # FRAMEBUFFER
+    # We use framebuffers of size 512x512.
+    # This is an advantage over copying the framebuffer to
+    # pixelbuffers, which would then all 
+    # be the size of the screen, generally bigger than
+    # needed.
     # create a frame buffer and bind to it
     theFramebuffer = glGenFramebuffers(1)
     glBindFramebuffer(GL_FRAMEBUFFER, theFramebuffer)

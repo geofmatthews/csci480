@@ -153,8 +153,11 @@ def display(time):
     
     # do stuff in the scene:
     for theMesh in theMeshes:
-        theMesh.yaw(0.01)
-    
+        x,y,z,w = theMesh.position*time
+        theMesh.postTransform =  N.dot(Zrot(z),
+                                       N.dot(Yrot(y),
+                                             Xrot(x)))
+
     # first draw the tv cameras
 
     for i,fb in enumerate((theFramebuffer, theFramebuffer2)):

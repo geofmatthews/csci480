@@ -1,9 +1,6 @@
 # Skybox without reflection
-# Note that it doesn't make a difference how big
-# the box is, except for the depth buffer.
-# If you turn off the depth test for the box, it
-# can be any size, so long as you render it first (why?)
-# and the camera stays in the box.
+# Box stays centered on the camera by not using the view transform
+# on the box.
 
 import os,sys
 
@@ -272,7 +269,7 @@ def main():
             theCamera.zoomOut(1.015)
 
         # arrow keys for movement:
-        movespeed = 0.05
+        movespeed = 0.1
         if pressed[K_LSHIFT]:
             movespeed *= 4
         if pressed[K_d] | pressed[K_RIGHT]:

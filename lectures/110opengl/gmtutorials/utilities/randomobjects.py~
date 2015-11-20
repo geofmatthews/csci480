@@ -1,0 +1,18 @@
+
+import os,sys
+
+from OpenGL.GL import *
+from OpenGL.GL.shaders import compileShader, compileProgram
+
+import pygame
+from pygame.locals import *
+import numpy as N
+
+sys.path.insert(0, os.path.join("..","utilities"))
+from psurfaces import torus, sphere
+from polyhedra import tetrahedron
+from obj import readOBJ
+from transforms import *
+from loadtexture import loadTexture
+from camera import Camera
+from meshes import *

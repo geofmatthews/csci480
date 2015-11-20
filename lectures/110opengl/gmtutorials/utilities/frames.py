@@ -10,7 +10,8 @@ class Frame():
         self.right = N.array((1,0,0,0), dtype=N.float32)    # x
         self.up = N.array((0,1,0,0), dtype=N.float32)       # y
         self.back = N.array((0,0,1,0), dtype=N.float32)     # z
-                                  
+        self.postTransform = N.identity(4, dtype=N.float32)
+        
     def __str__(self):
         return str(self.transform()) + "\n" + str(self.inverseTransform())
 
@@ -19,10 +20,11 @@ class Frame():
     # affects the translation.
     
     def transform(self):
-        return N.transpose(N.array((self.right,
-                                    self.up,
-                                    self.back,
-                                    self.position),dtype=N.float32))
+        return N.dot(self.postTransform,
+                     N.transpose(N.array((self.right,
+                                          self.up,
+                                          self.back,
+                                          self.position),dtype=N.float32)))
 
     def inverseTransform(self):
         rot = N.array((self.right,
