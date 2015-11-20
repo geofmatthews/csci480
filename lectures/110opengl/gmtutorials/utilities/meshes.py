@@ -373,3 +373,67 @@ class reflectorMesh(Frame):
                        GL_UNSIGNED_SHORT, c_void_p(0))
         glUseProgram(0)
         
+
+
+
+class motionblurMesh(Frame):
+    """Use flattextured.vert and motionblur.frag"""
+    def __init__(self,
+                 textures,
+                 arrayBuffer,
+                 elementBuffer,
+                 numElements,
+                 shader,
+                 scaleuv= N.array((1,1),dtype=N.float32),
+                 fade = 1.0):
+        Frame.__init__(self)
+        self.textures = textures
+        self.shader = shader
+        self.scaleuv = scaleuv
+        self.fade = fade
+        # send data to opengl context:
+        self.elementSize = numElements*sizeOfShort
+        self.arrayBuffer = arrayBuffer
+        self.elementBuffer = elementBuffer
+        # find attribute locations:
+        self.positionAttrib = glGetAttribLocation(shader, "position")
+        self.uvAttrib = glGetAttribLocation(shader, "uv")
+        # find the uniform locations:
+        self.s0Unif = glGetUniformLocation(shader, "s0")
+        self.s1Unif = glGetUniformLocation(shader, "s1")
+        self.s2Unif = glGetUniformLocation(shader, "s2")
+        self.s3Unif = glGetUniformLocation(shader, "s3")
+        self.s4Unif = glGetUniformLocation(shader, "s4")
+        self.s5Unif = glGetUniformLocation(shader, "s5")
+        self.s6Unif = glGetUniformLocation(shader, "s6")
+        self.s7Unif = glGetUniformLocation(shader, "s7")
+        self.scaleuvUnif = glGetUniformLocation(shader, "scaleuv")
+        self.modelUnif = glGetUniformLocation(shader, "model")
+        self.viewUnif = glGetUniformLocation(shader, "view")
+        self.projectionUnif = glGetUniformLocation(shader, "projection")
+
+    def display(self, view, projection, light):
+        glUseProgram(self.shader)
+        # uniforms
+        glUniform2fv(self.scaleuvUnif, 1, self.scaleuv)
+        glUniformMatrix4fv(self.viewUnif, 1, GL_TRUE, view)
+        glUniformMatrix4fv(self.projectionUnif, 1, GL_TRUE, projection)
+        glUniformMatrix4fv(self.modelUnif, 1, GL_TRUE, self.model())
+        glBindBuffer(GL_ARRAY_BUFFER, self.arrayBuffer)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.elementBuffer)
+        vertexPointer(self.positionAttrib, vertexSize, 4, 0)
+        vertexPointer(self.uvAttrib, vertexSize, 2, 16)
+        # bind our color texture units
+        bindTextureUnit(0, self.textures[0], self.s0Unif)
+        bindTextureUnit(1, self.textures[1], self.s1Unif)
+        bindTextureUnit(2, self.textures[2], self.s2Unif)
+        bindTextureUnit(3, self.textures[3], self.s3Unif)
+        bindTextureUnit(4, self.textures[4], self.s4Unif)
+        bindTextureUnit(5, self.textures[5], self.s5Unif)
+        bindTextureUnit(6, self.textures[6], self.s6Unif)
+        bindTextureUnit(7, self.textures[7], self.s7Unif)
+        # draw
+        glDrawElements(GL_TRIANGLES, self.elementSize,
+                       GL_UNSIGNED_SHORT, c_void_p(0))
+        glUseProgram(0)
+

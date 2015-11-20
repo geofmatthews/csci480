@@ -1,0 +1,37 @@
+
+from OpenGL.GL import *
+from ctypes import c_void_p
+
+def getFramebuffer(resolution = 512):
+    # create a frame buffer and bind to it
+    theFramebuffer = glGenFramebuffers(1)
+    glBindFramebuffer(GL_FRAMEBUFFER, theFramebuffer)
+    # create a texture to render into and bind to it
+    theRenderedTexture = glGenTextures(1)
+    glBindTexture(GL_TEXTURE_2D, theRenderedTexture)
+    # fill with empty pixels (the last "0")
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
+                 resolution, resolution, 0, GL_RGB,
+                 GL_UNSIGNED_BYTE, c_void_p(0))
+    # filtering, needed
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+    # now create a depth buffer and bind to it
+    theDepthBuffer = glGenRenderbuffers(1)
+    glBindRenderbuffer(GL_RENDERBUFFER, theDepthBuffer)
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT,
+                          resolution, resolution)
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
+                              GL_RENDERBUFFER, theDepthBuffer)
+    # finally, configure our framebuffer
+    glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                         theRenderedTexture, 0)
+    theDrawBuffers = [GL_COLOR_ATTACHMENT0]
+    glDrawBuffers(1, theDrawBuffers)
+    # check errors, necessary with pyopengl?
+    if glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE:
+        raise StandardError("Frame buffer status no good.")
+    return theFramebuffer
+    
+    
+    
