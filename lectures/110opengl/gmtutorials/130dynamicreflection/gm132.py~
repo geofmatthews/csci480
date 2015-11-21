@@ -1,5 +1,5 @@
 # Skybox with reflection of more objects using 6 cameras
-# display routine parameterized by framebuffer
+# and framebuffers for the reflector's textures
 
 import os,sys
 
@@ -42,8 +42,7 @@ def initializeVAO():
 # Must be called after we have an OpenGL context, i.e. after the pygame
 # window is created
 def init():
-    global theMeshes, theBox, theLight, theCamera, theCameras, \
-        theScreen, theTextures,\
+    global theMeshes, theBox, theLight, theCamera, theScreen, theTextures,\
         nonReflectors, theFramebuffers
     initializeVAO()
     glEnable(GL_CULL_FACE)
@@ -260,32 +259,12 @@ def init():
 
 # Called to redraw the contents of the window
 def display(time):
-    global theScreen, theCamera, theFramebuffers, theCameras, \
-        theMeshes, whichMesh
-    # do stuff in the scene
-    for nr in nonReflectors:
-        x,y,z,w = nr.position*time*0.5
-        nr.postTransform =  N.dot(Zrot(z),
-                                  N.dot(Yrot(y),
-                                        Xrot(x)))
-    meshspeed = 0.01
-    theMesh = theMeshes[whichMesh]
-    if whichMesh == 1:  # sphere
-        theMesh.moveRight(meshspeed*10)
-        theMesh.yaw(meshspeed*10)
-    else:
-        theMesh.pitch(meshspeed)
-        theMesh.yaw(meshspeed*1.1)
-        theMesh.roll(meshspeed*1.2)
-    # display the scene
+    global theScreen, theCamera
     width,height = theScreen.get_size()
     displayFB(time, 0, width, height, theCamera)
 
 # Here we parameterize the display routine with a framebuffer
 # and a camera
-# We also must separate the actions of the scene from the
-# drawing of the scene, so we do the actions only once,
-# no matter how many times we draw the scene.
 def displayFB(time, framebuffer, width, height, camera):
     global theMeshes, theBox, theLight, theCamera, whichMesh, \
         nonReflectors, theFramebuffers
@@ -306,10 +285,22 @@ def displayFB(time, framebuffer, width, height, camera):
     glEnable(GL_DEPTH_TEST)
     # display nonreflectors
     for nr in nonReflectors:
+        x,y,z,w = nr.position*time*0.5
+        nr.postTransform =  N.dot(Zrot(z),
+                                  N.dot(Yrot(y),
+                                        Xrot(x)))
+
         nr.display(view, proj, theLight)
     # display the mesh
     meshspeed = 0.01
     theMesh = theMeshes[whichMesh]
+    if whichMesh == 1:  # sphere
+        theMesh.moveRight(meshspeed*10)
+        theMesh.yaw(meshspeed*10)
+    else:
+        theMesh.pitch(meshspeed)
+        theMesh.yaw(meshspeed*1.1)
+        theMesh.roll(meshspeed*1.2)
     theMesh.display(view, proj, theLight)
 
 def main():

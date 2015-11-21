@@ -1,5 +1,6 @@
 # Skybox with reflection of more objects using 6 cameras
-# display routine parameterized by framebuffer
+# and framebuffers for the reflector's textures
+# Note the self-reflections on the OUTSIDE of the torus.
 
 import os,sys
 
@@ -52,13 +53,20 @@ def init():
     theFramebuffers = [getFramebuffer(512) for x in range(6)]
     theCameras = [Camera(1.0, 0.01, 1000.0, 1.0) for x in range(6)]
     # X
-    theCameras[0].postTransform = Yrot(-0.5*N.pi)
-    theCameras[1].postTransform = Yrot(+0.5*N.pi)
+    theCameras[0].yaw(-1)
+    theCameras[0].yaw(-1)
+    theCameras[1].yaw(+1)
+    theCameras[1].yaw(+1)
     # Y
-    theCameras[2].postTransform = Xrot(+0.5*N.pi)
-    theCameras[3].postTransform = Xrot(-0.5*N.pi)
+    theCameras[2].pitch(-1)
+    theCameras[2].pitch(-1)
+    theCameras[3].pitch(+1)
+    theCameras[3].pitch(+1)
     # Z
-    theCameras[4].postTransform = Yrot(N.pi)
+    theCameras[4].yaw(1)
+    theCameras[4].yaw(1)
+    theCameras[4].yaw(1)
+    theCameras[4].yaw(1)
     # negZ camera already pointed
 
     # LIGHT
@@ -277,15 +285,25 @@ def display(time):
         theMesh.pitch(meshspeed)
         theMesh.yaw(meshspeed*1.1)
         theMesh.roll(meshspeed*1.2)
-    # display the scene
+
+    # draw our six reflected images
+    for fb in range (6):
+        displayFB(time,
+                  theFramebuffers[fb], 512, 512,
+                  theCameras[fb])
+    # copy the textures to the reflector object
+    theMesh.posxTexture = theFramebuffers[0]
+    theMesh.negxTexture = theFramebuffers[1]
+    theMesh.posyTexture = theFramebuffers[2]
+    theMesh.negyTexture = theFramebuffers[3]
+    theMesh.poszTexture = theFramebuffers[4]
+    theMesh.negzTexture = theFramebuffers[5]
+    # draw the scene
     width,height = theScreen.get_size()
     displayFB(time, 0, width, height, theCamera)
 
 # Here we parameterize the display routine with a framebuffer
 # and a camera
-# We also must separate the actions of the scene from the
-# drawing of the scene, so we do the actions only once,
-# no matter how many times we draw the scene.
 def displayFB(time, framebuffer, width, height, camera):
     global theMeshes, theBox, theLight, theCamera, whichMesh, \
         nonReflectors, theFramebuffers
@@ -308,9 +326,7 @@ def displayFB(time, framebuffer, width, height, camera):
     for nr in nonReflectors:
         nr.display(view, proj, theLight)
     # display the mesh
-    meshspeed = 0.01
-    theMesh = theMeshes[whichMesh]
-    theMesh.display(view, proj, theLight)
+    theMeshes[whichMesh].display(view, proj, theLight)
 
 def main():
     global theCamera, theScreen, theMeshes, theTextures, theBox, whichMesh
