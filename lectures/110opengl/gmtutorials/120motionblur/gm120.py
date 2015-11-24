@@ -1,6 +1,10 @@
 # Using framebuffers to make motion blur.
 # This one sets up the scene with NO blur,
-# but rapid movement in the middle.
+# but draws to a texture, which is then shown
+# on a single square in NDC.
+# try changing the resolution.
+# also try changing the framebuffer.py object to use linear
+# instead of nearest filtering
 
 import os,sys
 
@@ -20,6 +24,7 @@ from transforms import *
 from loadtexture import loadTexture
 from camera import Camera
 from meshes import *
+from framebuffer import getFramebuffer
 
 def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
@@ -42,10 +47,30 @@ def initializeVAO():
 # window is created
 def init():
     global theMesh,  theLight, theCamera, \
-           theScreen,    resolution
+           theScreen,  theFramebuffers, \
+           theSquare, resolution
     initializeVAO()
     glEnable(GL_CULL_FACE)
     glEnable(GL_DEPTH_TEST)
+
+    # FRAMEBUFFER
+    # create a frame buffer and bind to it
+    resolution = 512
+    numBuffers = 1
+    theFramebuffers = [getFramebuffer(resolution) for i in range(numBuffers)]
+
+    # SQUARE IN NDC
+    verts, elements = rectangle(2,2)
+    arrayBuffer = getArrayBuffer(verts)
+    elementBuffer = getElementBuffer(elements)
+    numElements = len(elements)
+    flatShader = makeShader("flattextured.vert", "flattextured.frag")
+    texture = loadTexture("grid.png")
+    theSquare = flatTexturedMesh(texture,
+                                 arrayBuffer,
+                                 elementBuffer,
+                                 numElements,
+                                 flatShader)
 
     # Add our object
     # LIGHT
@@ -74,27 +99,47 @@ def init():
 # Called to redraw the contents of the window
 def display(time):
     global theMesh,  theLight, theCamera, \
+        theFramebuffers, theSquare, \
         theScreen, resolution
     
-    # do stuff in the scene:
+    # do stuff in the scene
     meshSpeed = 0.6
-    meshTime = 2.0*N.pi*time/meshSpeed
-    theMesh.moveRight(meshSpeed*N.cos(meshTime))
-    
-    # draw the regular camera to the default framebuffer
+    #meshTime = 2.0*N.pi*time/meshSpeed
+    #theMesh.moveRight(meshSpeed*N.cos(meshTime))
+    theMesh.yaw(0.01)
+
+    # bind to our framebuffer
+    for fb in range(1):
+        glBindFramebuffer(GL_FRAMEBUFFER, theFramebuffers[fb])
+        width, height = theScreen.get_size()
+        #glViewport(0,0,width,height)
+        glViewport(0,0,resolution,resolution)
+
+        # draw
+        # Clear the display
+        glClearColor(0.1, 0.2, 0.3, 0.0)
+        glClear(GL_COLOR_BUFFER_BIT)
+        glClear(GL_DEPTH_BUFFER_BIT)
+
+        view = theCamera.view()
+        proj = theCamera.projection()
+
+        theMesh.display(view, proj, theLight)
+
+        # now send our texture to the square
+        theSquare.texture = theFramebuffers[fb]
+
+    # now bind the the default framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, 0)
-    width, height = theScreen.get_size()
+    width,height = theScreen.get_size()
     glViewport(0,0,width,height)
-    # draw
-    # Clear the display
+    # now draw just the square
     glClearColor(0.1, 0.2, 0.3, 0.0)
     glClear(GL_COLOR_BUFFER_BIT)
     glClear(GL_DEPTH_BUFFER_BIT)
 
-    view = theCamera.view()
-    proj = theCamera.projection()
-
-    theMesh.display(view, proj, theLight)
+    id = N.identity(4, dtype=N.float32)
+    theSquare.display(id, id, 0)    
 
 def main():
     global theCamera, theScreen
@@ -102,7 +147,7 @@ def main():
     pygame.init()
     pygame.mouse.set_cursor(*pygame.cursors.broken_x)
 
-    width, height = 1024,194
+    width, height = 1024,768
     theScreen = pygame.display.set_mode((width, height), OPENGL|DOUBLEBUF)
 
     init()

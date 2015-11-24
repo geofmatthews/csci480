@@ -337,7 +337,7 @@ def main():
     pygame.mouse.set_cursor(*pygame.cursors.broken_x)
 
     width, height = 1024,768
-    theScreen = pygame.display.set_mode((width, height), OPENGL|DOUBLEBUF)
+    theScreen = pygame.display.set_mode((width, height), OPENGL|DOUBLEBUF)#|FULLSCREEN)
 
     init()
     clock = pygame.time.Clock()

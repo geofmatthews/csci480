@@ -1,10 +1,7 @@
 # Using framebuffers to make motion blur.
 # This one sets up the scene with NO blur,
 # but draws to a texture, which is then shown
-# on a single square in NDC.
-# try changing the resolution.
-# also try changing the framebuffer.py object to use linear
-# instead of nearest filtering
+# on a single rectangle.
 
 import os,sys
 

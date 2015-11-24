@@ -2,6 +2,7 @@
 # Use multiple framebuffers to render scene at different times,
 # then blend them all with the motionblur.frag shader,
 # used by the motionblurMesh object
+# Essentially real time image processing.
 # try changing the speed, and the size of the blur steps
 
 import os,sys
