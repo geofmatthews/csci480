@@ -1,5 +1,6 @@
 # Using framebuffers to make a tv monitor.
-# Now set up a second camera.  Space shifts between the two cameras.
+# Now we render the second camera into a framebuffer,
+# and use that to texture the tv monitor.
 
 import os,sys
 
@@ -17,6 +18,7 @@ from transforms import *
 from loadtexture import loadTexture
 from camera import Camera
 from meshes import *
+from framebuffer import getFramebuffer
 
 def readShader(filename):
     with open(os.path.join("..","shaders", filename)) as fp:
@@ -38,13 +40,18 @@ def initializeVAO():
 # Must be called after we have an OpenGL context, i.e. after the pygame
 # window is created
 def init():
-    global theMesh, theTV, theLight, theCamera, theScreen, theTVCamera
+    global theMesh, theTV, theLight, theCamera, \
+           theScreen, theTVCamera, theFramebuffers
     initializeVAO()
     glEnable(GL_CULL_FACE)
     glEnable(GL_DEPTH_TEST)
+
+    # FRAMEBUFFERS
+    theFramebuffers = [getFramebuffer(512) for x in range(2)]
+
     # Add our objects
     # LIGHT
-    theLight = N.array((-0.577, 0.577, 0.577, 0.0),dtype=N.float32)
+    theLight = N.array((0.577, 0.577, 0.577, 0.0),dtype=N.float32)
     # OBJECTS
     verts, elements = readOBJ("suzanne.obj")
     arrayBuffer = getArrayBuffer(verts)
@@ -67,11 +74,12 @@ def init():
                              arrayBuffer,
                              elementBuffer,
                              numElements,
-                             texturedShader)
+                             texturedShader,
+                             fade=0.9)
 
     theTV.moveRight(2)
     theTV.yaw(-1)
-    
+
     # CAMERA
     width, height = theScreen.get_size()
     aspectRatio = float(width)/float(height)
@@ -88,8 +96,37 @@ def init():
 
 # Called to redraw the contents of the window
 def display(time):
-    global theMesh, theTV, theLight, theCamera, theTVCamera, whichCamera
+    global theMesh, theTV, theLight, theCamera, \
+    theTVCamera, theFramebuffers, theScreen, whichCamera
     
+    # do stuff in the scene:
+    theMesh.yaw(0.01)
+    
+    # first draw the tv camera to our framebuffer texture
+
+    for i in range(2):
+        fb = theFramebuffers[i]
+        # bind to our framebuffer
+        glBindFramebuffer(GL_FRAMEBUFFER, fb)
+        # draw on the whole framebuffer
+        glViewport(0,0,512,512)
+        # draw
+        # Clear the display
+        glClearColor(0.1, 0.2, 0.3, 0.0)
+        glClear(GL_COLOR_BUFFER_BIT)
+        glClear(GL_DEPTH_BUFFER_BIT)
+        view = theTVCamera.view()
+        proj = theTVCamera.projection()
+        theMesh.display(view, proj, theLight)
+        theTV.display(view, proj, theLight)
+        # now set the texture of our tv to the rendered texture
+        theTV.texture = fb
+
+    # now draw the regular camera to the default framebuffer
+    glBindFramebuffer(GL_FRAMEBUFFER, 0)
+    width, height = theScreen.get_size()
+    glViewport(0,0,width,height)
+    # draw
     # Clear the display
     glClearColor(0.1, 0.2, 0.3, 0.0)
     glClear(GL_COLOR_BUFFER_BIT)
@@ -102,7 +139,6 @@ def display(time):
         view = theTVCamera.view()
         proj = theTVCamera.projection()
         
-    theMesh.yaw(0.01)
     theMesh.display(view, proj, theLight)
     theTV.display(view, proj, theLight)
 
@@ -131,6 +167,7 @@ def main():
             if event.type == KEYDOWN and event.key == K_SPACE:
                 whichCamera += 1
                 whichCamera %= 2
+            
         # Polling input is better for a real time camera
         pressed = pygame.key.get_pressed()
 
@@ -141,7 +178,7 @@ def main():
             theCamera.zoomOut(1.015)
 
         # arrow keys for movement:
-        movespeed = 0.05
+        movespeed = 0.1
         if pressed[K_LSHIFT]:
             movespeed *= 4
         if pressed[K_d] | pressed[K_RIGHT]:
