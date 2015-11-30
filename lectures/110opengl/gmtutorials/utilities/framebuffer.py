@@ -29,6 +29,12 @@ def getFramebuffer(resolution = 512):
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
                               GL_RENDERBUFFER, theDepthBuffer)
     # finally, configure our framebuffer
+    # GL_COLOR_ATTACHMENT0 means we get colors from the default
+    # output of the fragment shader (no shader changes needed)
+    # with other color attachment points, a single shader
+    # could render to different framebuffers in a single pass
+    # query GL_MAX_COLOR_ATTACHMENTS to see how many are
+    # supported by your graphics card
     glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                          theRenderedTexture, 0)
     theDrawBuffers = [GL_COLOR_ATTACHMENT0]
